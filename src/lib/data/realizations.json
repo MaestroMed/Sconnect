@@ -1,0 +1,140 @@
+{
+  "realizations": [
+    {
+      "id": "1",
+      "title": "Rénovation complète appartement haussmannien",
+      "type": "Appartement",
+      "location": "Paris 8e",
+      "category": "electricite",
+      "serviceType": "Rénovation",
+      "description": "Rénovation complète de l'installation électrique d'un appartement de 120m² avec mise aux normes et domotique.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "featured": true
+    },
+    {
+      "id": "2",
+      "title": "Installation tableau électrique triphasé",
+      "type": "Local commercial",
+      "location": "Clichy",
+      "category": "electricite",
+      "serviceType": "Installation",
+      "description": "Installation d'un tableau électrique triphasé pour un restaurant avec circuits spécialisés cuisine.",
+      "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop",
+      "featured": true
+    },
+    {
+      "id": "3",
+      "title": "Système de contrôle d'accès entreprise",
+      "type": "Bureaux",
+      "location": "La Défense",
+      "category": "controle-acces",
+      "serviceType": "Installation",
+      "description": "Installation complète d'un système de badges et vidéophonie pour 50 collaborateurs.",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop",
+      "featured": true
+    },
+    {
+      "id": "4",
+      "title": "Blindage porte d'entrée villa",
+      "type": "Maison",
+      "location": "Neuilly-sur-Seine",
+      "category": "serrurerie",
+      "serviceType": "Installation",
+      "description": "Pose d'un bloc-porte blindé A2P BP2 avec serrure 5 points et vidéophone intégré.",
+      "image": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop",
+      "featured": true
+    },
+    {
+      "id": "5",
+      "title": "Interphonie copropriété 24 lots",
+      "type": "Copropriété",
+      "location": "Levallois-Perret",
+      "category": "controle-acces",
+      "serviceType": "Rénovation",
+      "description": "Remplacement complet de l'interphonie avec passage en vidéophonie couleur.",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+      "featured": true
+    },
+    {
+      "id": "6",
+      "title": "Dépannage serrure 3 points bloquée",
+      "type": "Appartement",
+      "location": "Paris 17e",
+      "category": "serrurerie",
+      "serviceType": "Dépannage",
+      "description": "Ouverture sans dégât et remplacement du cylindre défaillant en urgence.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "7",
+      "title": "Vidéosurveillance commerce",
+      "type": "Commerce",
+      "location": "Asnières",
+      "category": "controle-acces",
+      "serviceType": "Installation",
+      "description": "Installation de 8 caméras HD avec enregistreur et accès smartphone.",
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "8",
+      "title": "Mise aux normes tableau électrique",
+      "type": "Appartement",
+      "location": "Colombes",
+      "category": "electricite",
+      "serviceType": "Mise aux normes",
+      "description": "Remplacement tableau à fusibles par un tableau aux normes NF C 15-100.",
+      "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "9",
+      "title": "Borne de recharge Tesla",
+      "type": "Maison",
+      "location": "Saint-Cloud",
+      "category": "electricite",
+      "serviceType": "Installation",
+      "description": "Installation d'une borne de recharge 22kW avec adaptation du tableau électrique.",
+      "image": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "10",
+      "title": "Changement serrure après cambriolage",
+      "type": "Appartement",
+      "location": "Clichy",
+      "category": "serrurerie",
+      "serviceType": "Dépannage",
+      "description": "Remplacement en urgence par une serrure A2P** avec cylindre haute sécurité.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "11",
+      "title": "Badges et digicode résidence",
+      "type": "Copropriété",
+      "location": "Boulogne",
+      "category": "controle-acces",
+      "serviceType": "Installation",
+      "description": "Système de contrôle d'accès combiné badges + digicode pour 36 appartements.",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop",
+      "featured": false
+    },
+    {
+      "id": "12",
+      "title": "Dépannage court-circuit urgent",
+      "type": "Commerce",
+      "location": "Paris 9e",
+      "category": "electricite",
+      "serviceType": "Dépannage",
+      "description": "Intervention de nuit pour localiser et réparer un court-circuit dans une boutique.",
+      "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop",
+      "featured": false
+    }
+  ]
+}
+
+
+
+

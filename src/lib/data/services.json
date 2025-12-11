@@ -1,0 +1,193 @@
+{
+  "categories": [
+    {
+      "id": "electricite",
+      "name": "Électricité",
+      "slug": "electricite",
+      "icon": "zap",
+      "color": "primary",
+      "shortDescription": "Installation, rénovation et dépannage électrique pour particuliers et professionnels.",
+      "services": [
+        {
+          "id": "installation-renovation",
+          "name": "Installation & Rénovation",
+          "slug": "installation-renovation",
+          "icon": "zap",
+          "description": "Création de réseaux électriques complets, poses de prises, éclairages et tableaux neufs pour habitations et locaux professionnels.",
+          "fullDescription": "Que vous construisiez neuf ou rénoviez votre bien, nos électriciens qualifiés réalisent des installations aux normes, durables et adaptées à vos besoins. Du simple ajout de prises à la refonte complète de votre réseau électrique.",
+          "prestations": [
+            {"title": "Installation neuve", "items": ["Création de réseau électrique complet", "Installation de tableaux électriques", "Pose de prises et interrupteurs", "Mise en place de circuits spécialisés", "Raccordement au réseau ENEDIS"]},
+            {"title": "Rénovation électrique", "items": ["Remplacement de l'installation existante", "Modernisation du tableau électrique", "Passage en encastré ou apparent", "Ajout de circuits supplémentaires", "Upgrade de puissance"]},
+            {"title": "Éclairage", "items": ["Éclairage intérieur LED", "Spots encastrés et appliques", "Éclairage extérieur et jardin", "Variateurs et détecteurs de présence", "Éclairage architectural"]},
+            {"title": "Équipements spécifiques", "items": ["Bornes de recharge véhicules électriques", "Alimentation piscine et spa", "Circuits cuisine professionnelle", "Prises USB et multimédia", "Volets roulants électriques"]}
+          ],
+          "faqs": [
+            {"question": "Combien coûte une installation électrique complète ?", "answer": "Le prix dépend de la surface, du nombre de points lumineux et de prises, et du niveau de finition souhaité. Comptez entre 80€ et 150€/m² pour une installation standard. Nous établissons un devis détaillé gratuit après visite."},
+            {"question": "Faut-il refaire toute l'électricité lors d'une rénovation ?", "answer": "Pas nécessairement. Après diagnostic, nous pouvons déterminer si une rénovation partielle suffit ou si une refonte totale est préférable pour votre sécurité et vos besoins futurs."},
+            {"question": "Combien de temps dure une installation électrique ?", "answer": "Pour un appartement de 60-80m², comptez 3 à 5 jours ouvrés pour une installation complète. Une rénovation partielle peut se faire en 1 à 2 jours."}
+          ]
+        },
+        {
+          "id": "mise-aux-normes",
+          "name": "Mise aux Normes",
+          "slug": "mise-aux-normes",
+          "icon": "fileCheck",
+          "description": "Mise en conformité de vos installations selon la norme NF C 15-100. Diagnostics et remise à niveau de votre sécurité électrique.",
+          "fullDescription": "Votre installation électrique a plus de 15 ans ? Elle n'est probablement plus aux normes actuelles. Nous réalisons le diagnostic, les travaux de mise en conformité et vous accompagnons jusqu'à l'obtention du certificat Consuel.",
+          "prestations": [
+            {"title": "Diagnostic électrique", "items": ["Contrôle visuel de l'installation", "Tests des protections différentielles", "Vérification de la mise à la terre", "Mesure de l'isolement des circuits", "Rapport détaillé avec préconisations"]},
+            {"title": "Mise en conformité tableau", "items": ["Remplacement du tableau électrique", "Installation disjoncteurs divisionnaires", "Mise en place interrupteurs différentiels", "Étiquetage et repérage des circuits", "Certificat de conformité Consuel"]},
+            {"title": "Protections", "items": ["Interrupteurs différentiels 30mA", "Disjoncteurs calibrés", "Parafoudre", "Coupe-circuit d'urgence", "Protection des personnes et des biens"]}
+          ],
+          "faqs": [
+            {"question": "Comment savoir si mon installation est aux normes ?", "answer": "Un diagnostic électrique par un professionnel permet de vérifier la conformité. Les signes d'alerte : tableau avec fusibles, pas de différentiel 30mA, prises sans terre, fils anciens."},
+            {"question": "La mise aux normes est-elle obligatoire ?", "answer": "Elle est obligatoire lors de la vente d'un logement de plus de 15 ans et pour la location. Elle est fortement recommandée pour votre sécurité dans tous les cas."}
+          ]
+        },
+        {
+          "id": "depannage-electrique",
+          "name": "Dépannage Électrique",
+          "slug": "depannage-electrique",
+          "icon": "alertTriangle",
+          "description": "Intervention rapide 24h/24, 7j/7 pour tous vos problèmes électriques : pannes, courts-circuits, disjoncteurs.",
+          "fullDescription": "Panne de courant, court-circuit, disjoncteur qui saute ? Nos électriciens interviennent en urgence 24h/24, 7j/7. Diagnostic rapide et réparation immédiate pour rétablir votre confort électrique en toute sécurité.",
+          "prestations": [
+            {"title": "Pannes courantes", "items": ["Disjoncteur qui saute", "Panne générale de courant", "Coupure partielle de l'installation", "Problème de tableau électrique", "Fusibles qui sautent"]},
+            {"title": "Urgences électriques", "items": ["Court-circuit", "Odeur de brûlé", "Étincelles aux prises", "Fils dénudés ou endommagés", "Mise en sécurité"]}
+          ],
+          "faqs": [
+            {"question": "En combien de temps intervenez-vous ?", "answer": "Pour les urgences, nous nous engageons sur une intervention sous 2 heures maximum dans notre zone de couverture. Nous sommes disponibles 24h/24, 7j/7."},
+            {"question": "Mon disjoncteur saute sans arrêt, que faire ?", "answer": "C'est généralement le signe d'une surcharge ou d'un défaut d'isolement. En attendant notre intervention, essayez de débrancher les appareils récemment connectés."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "controle-acces",
+      "name": "Contrôle d'accès",
+      "slug": "controle-acces",
+      "icon": "keyRound",
+      "color": "accent",
+      "shortDescription": "Systèmes de contrôle d'accès, interphonie, vidéophonie et badges pour sécuriser vos locaux.",
+      "services": [
+        {
+          "id": "interphonie-videophonie",
+          "name": "Interphonie & Vidéophonie",
+          "slug": "interphonie-videophonie",
+          "icon": "video",
+          "description": "Installation et dépannage d'interphones et vidéophones pour particuliers, copropriétés et entreprises.",
+          "fullDescription": "Sécurisez l'entrée de votre bâtiment avec nos solutions d'interphonie et vidéophonie. Du simple interphone audio au système vidéo connecté avec ouverture à distance, nous installons et dépannons tous types de systèmes.",
+          "prestations": [
+            {"title": "Interphonie", "items": ["Interphone audio individuel", "Interphone collectif copropriété", "Platine de rue antivandale", "Combinés intérieurs", "Remplacement système existant"]},
+            {"title": "Vidéophonie", "items": ["Visiophone couleur HD", "Écran tactile", "Mémoire d'images", "Vision nocturne infrarouge", "Connexion smartphone"]},
+            {"title": "Accessoires", "items": ["Gâches électriques", "Ventouses électromagnétiques", "Boutons poussoirs", "Badges et télécommandes", "Claviers à code"]}
+          ],
+          "faqs": [
+            {"question": "Peut-on installer un visiophone dans une copropriété ?", "answer": "Oui, nous installons des systèmes vidéo pour copropriétés avec platine de rue commune et moniteurs individuels dans chaque appartement."},
+            {"question": "Mon interphone ne fonctionne plus, que faire ?", "answer": "Nous intervenons rapidement pour diagnostiquer et réparer votre interphone. Souvent, il s'agit d'un problème de combiné ou de câblage facilement réparable."}
+          ]
+        },
+        {
+          "id": "badges-digicodes",
+          "name": "Badges & Digicodes",
+          "slug": "badges-digicodes",
+          "icon": "creditCard",
+          "description": "Installation de systèmes de contrôle d'accès par badges, digicodes et lecteurs biométriques.",
+          "fullDescription": "Contrôlez et tracez les accès à vos locaux avec nos solutions de badges et digicodes. Idéal pour les entreprises, copropriétés et résidences sécurisées.",
+          "prestations": [
+            {"title": "Systèmes à badges", "items": ["Lecteurs de badges RFID", "Badges de proximité", "Gestion multi-sites", "Historique des passages", "Programmation horaires"]},
+            {"title": "Digicodes", "items": ["Claviers à code rétroéclairés", "Codes temporaires visiteurs", "Changement de code facile", "Antivandale extérieur", "Intégration interphone"]},
+            {"title": "Solutions avancées", "items": ["Lecteurs biométriques", "Reconnaissance faciale", "Contrôle d'accès connecté", "Application smartphone", "Intégration alarme"]}
+          ],
+          "faqs": [
+            {"question": "Quelle est la différence entre badge et digicode ?", "answer": "Le badge est personnel et permet de tracer les accès individuels. Le digicode est un code partagé, plus simple mais moins sécurisé. Nous recommandons souvent une combinaison des deux."},
+            {"question": "Peut-on gérer les accès à distance ?", "answer": "Oui, nos systèmes connectés permettent de gérer les accès depuis votre smartphone : attribution de badges, codes temporaires, historique en temps réel."}
+          ]
+        },
+        {
+          "id": "videosurveillance",
+          "name": "Vidéosurveillance",
+          "slug": "videosurveillance",
+          "icon": "camera",
+          "description": "Installation de caméras de surveillance IP, enregistreurs et systèmes de vidéoprotection.",
+          "fullDescription": "Protégez vos biens et vos proches avec nos solutions de vidéosurveillance. Caméras HD, vision nocturne, accès à distance sur smartphone : nous concevons le système adapté à vos besoins.",
+          "prestations": [
+            {"title": "Caméras", "items": ["Caméras dôme intérieures", "Caméras bullet extérieures", "Caméras PTZ motorisées", "Vision nocturne infrarouge", "Résolution 4K/HD"]},
+            {"title": "Enregistrement", "items": ["Enregistreurs NVR/DVR", "Stockage cloud sécurisé", "Détection de mouvement", "Alertes smartphone", "Relecture facile"]},
+            {"title": "Installation", "items": ["Étude personnalisée", "Câblage propre et discret", "Paramétrage complet", "Formation utilisateur", "Maintenance préventive"]}
+          ],
+          "faqs": [
+            {"question": "Ai-je le droit d'installer des caméras chez moi ?", "answer": "Oui, vous pouvez filmer votre propriété privée. Les caméras ne doivent pas filmer la voie publique ni les propriétés voisines. Nous vous conseillons sur le placement optimal."},
+            {"question": "Puis-je voir mes caméras sur mon téléphone ?", "answer": "Oui, toutes nos installations permettent un accès à distance via application smartphone. Vous pouvez voir en direct et recevoir des alertes de mouvement."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serrurerie",
+      "name": "Serrurerie",
+      "slug": "serrurerie",
+      "icon": "lock",
+      "color": "green",
+      "shortDescription": "Ouverture de portes, remplacement de serrures, blindage et sécurisation de vos accès.",
+      "services": [
+        {
+          "id": "ouverture-porte",
+          "name": "Ouverture de Porte",
+          "slug": "ouverture-porte",
+          "icon": "doorOpen",
+          "description": "Ouverture de porte claquée, fermée à clé ou bloquée. Intervention rapide 24h/24, 7j/7.",
+          "fullDescription": "Porte claquée, clés perdues ou volées, serrure bloquée ? Nos serruriers interviennent en urgence 24h/24 pour vous permettre de rentrer chez vous. Ouverture sans dégât dans 95% des cas.",
+          "prestations": [
+            {"title": "Ouvertures d'urgence", "items": ["Porte claquée (clés à l'intérieur)", "Porte fermée à clé (perte/vol)", "Serrure bloquée ou cassée", "Clé cassée dans la serrure", "Porte blindée"]},
+            {"title": "Techniques utilisées", "items": ["Ouverture fine sans dégât", "Crochetage professionnel", "By-pass et techniques douces", "Perçage en dernier recours", "Remplacement serrure si nécessaire"]},
+            {"title": "Tous types de portes", "items": ["Portes d'appartement", "Portes de maison", "Portes de cave/garage", "Portes de bureau", "Coffres-forts"]}
+          ],
+          "faqs": [
+            {"question": "Combien coûte une ouverture de porte ?", "answer": "Le tarif dépend du type de serrure et de l'heure d'intervention. Comptez entre 80€ et 150€ en journée. Nous vous donnons le prix exact avant intervention."},
+            {"question": "Allez-vous abîmer ma porte ?", "answer": "Dans 95% des cas, nous ouvrons sans aucun dégât grâce à nos techniques professionnelles. Si un perçage est nécessaire, nous vous prévenons avant et remplaçons la serrure."},
+            {"question": "Intervenez-vous la nuit et le week-end ?", "answer": "Oui, notre service d'urgence fonctionne 24h/24, 7j/7, y compris les jours fériés. Un serrurier est toujours disponible."}
+          ]
+        },
+        {
+          "id": "remplacement-serrure",
+          "name": "Remplacement de Serrure",
+          "slug": "remplacement-serrure",
+          "icon": "keyRound",
+          "description": "Changement de serrure, cylindre et verrou. Serrures haute sécurité certifiées A2P.",
+          "fullDescription": "Après un cambriolage, une perte de clés ou simplement pour renforcer votre sécurité, nous remplaçons votre serrure par un modèle adapté. Large choix de marques certifiées A2P.",
+          "prestations": [
+            {"title": "Types de serrures", "items": ["Serrures à cylindre européen", "Serrures multipoints (3, 5, 7 points)", "Serrures carénées", "Serrures connectées", "Verrous et targettes"]},
+            {"title": "Certifications", "items": ["Serrures A2P* (5 min résistance)", "Serrures A2P** (10 min résistance)", "Serrures A2P*** (15 min résistance)", "Cylindres haute sécurité", "Clés protégées et brevetées"]},
+            {"title": "Marques installées", "items": ["Fichet", "Vachette", "Bricard", "Pollux", "Mul-T-Lock"]}
+          ],
+          "faqs": [
+            {"question": "Qu'est-ce qu'une serrure A2P ?", "answer": "A2P est une certification qui garantit la résistance à l'effraction. Plus il y a d'étoiles (1 à 3), plus la serrure résiste longtemps. Certaines assurances l'exigent."},
+            {"question": "Dois-je changer toute la serrure ou juste le cylindre ?", "answer": "Souvent, le changement du cylindre suffit et coûte moins cher. Nous évaluons l'état de votre serrure et vous conseillons la meilleure option."}
+          ]
+        },
+        {
+          "id": "blindage-porte",
+          "name": "Blindage de Porte",
+          "slug": "blindage-porte",
+          "icon": "shield",
+          "description": "Blindage de porte existante ou pose de bloc-porte blindé. Sécurisation certifiée A2P BP.",
+          "fullDescription": "Le blindage de porte est la meilleure protection contre les effractions. Nous proposons le blindage de votre porte existante ou la pose d'un bloc-porte blindé certifié.",
+          "prestations": [
+            {"title": "Blindage de porte", "items": ["Tôle d'acier sur porte existante", "Encadrement métallique", "Paumelles renforcées", "Serrure multipoints", "Cornières anti-pinces"]},
+            {"title": "Bloc-porte blindé", "items": ["Porte blindée complète", "Certifié A2P BP1, BP2 ou BP3", "Sur mesure ou standard", "Large choix de finitions", "Isolation thermique et phonique"]},
+            {"title": "Options", "items": ["Judas optique grand angle", "Entrebâilleur", "Barre de pivot", "Poignée blindée", "Cylindre haute sécurité"]}
+          ],
+          "faqs": [
+            {"question": "Blindage ou bloc-porte blindé ?", "answer": "Le blindage renforce votre porte existante, c'est moins cher mais moins performant. Le bloc-porte blindé remplace entièrement votre porte pour une sécurité maximale."},
+            {"question": "Combien de temps dure l'installation ?", "answer": "Un blindage se fait en une demi-journée. Un bloc-porte blindé nécessite une journée complète pour une pose soignée."}
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+
+

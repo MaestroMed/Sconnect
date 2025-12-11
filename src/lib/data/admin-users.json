@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@sconnect-france.fr",
+      "password": "$2b$10$tVMBlR2EoCSREW07rQyiHuozglh0I5XwbLijlpOlNqx5I2jLz/cde",
+      "name": "Administrateur",
+      "role": "admin",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}

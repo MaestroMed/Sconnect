@@ -1,0 +1,129 @@
+{
+  "testimonials": [
+    {
+      "id": "1",
+      "name": "Marie L.",
+      "rating": 5,
+      "text": "Intervention rapide et efficace pour une panne générale en soirée. L'électricien était très professionnel et a pris le temps de m'expliquer le problème. Prix correct et travail propre. Je recommande vivement !",
+      "service": "Dépannage électrique",
+      "category": "electricite",
+      "location": "Clichy",
+      "date": "2024-11-15",
+      "verified": true
+    },
+    {
+      "id": "2",
+      "name": "Jean-Pierre D.",
+      "rating": 5,
+      "text": "Rénovation complète de l'électricité de notre appartement. Travail impeccable, respect des délais et équipe très sympathique. Le devis était clair et sans surprise.",
+      "service": "Rénovation électrique",
+      "category": "electricite",
+      "location": "Levallois-Perret",
+      "date": "2024-11-10",
+      "verified": true
+    },
+    {
+      "id": "3",
+      "name": "Sophie M.",
+      "rating": 5,
+      "text": "Porte claquée un dimanche soir, intervention en moins d'une heure ! Le serrurier a ouvert sans aucun dégât et m'a même conseillé sur la sécurité de ma serrure. Très pro.",
+      "service": "Ouverture de porte",
+      "category": "serrurerie",
+      "location": "Neuilly-sur-Seine",
+      "date": "2024-10-28",
+      "verified": true
+    },
+    {
+      "id": "4",
+      "name": "Restaurant Le Gourmet",
+      "rating": 5,
+      "text": "S Connect France a installé notre système de vidéosurveillance et de contrôle d'accès. Installation propre, formation complète de l'équipe. Un vrai partenaire de confiance.",
+      "service": "Vidéosurveillance",
+      "category": "controle-acces",
+      "location": "Paris 17e",
+      "date": "2024-10-15",
+      "verified": true
+    },
+    {
+      "id": "5",
+      "name": "Thomas R.",
+      "rating": 5,
+      "text": "Blindage de ma porte d'entrée après une tentative d'effraction. Travail de qualité, porte comme neuve avec une sécurité renforcée. Je me sens enfin en sécurité.",
+      "service": "Blindage de porte",
+      "category": "serrurerie",
+      "location": "Asnières",
+      "date": "2024-09-20",
+      "verified": true
+    },
+    {
+      "id": "6",
+      "name": "Copropriété Les Tilleuls",
+      "rating": 5,
+      "text": "Remplacement de l'interphonie de notre résidence de 32 lots. Le chantier a été bien organisé, les résidents informés, et le résultat est parfait. Merci à toute l'équipe.",
+      "service": "Interphonie",
+      "category": "controle-acces",
+      "location": "Clichy",
+      "date": "2024-09-05",
+      "verified": true
+    },
+    {
+      "id": "7",
+      "name": "Caroline B.",
+      "rating": 4,
+      "text": "Installation d'une borne de recharge pour ma voiture électrique. Bon travail, délai respecté. Juste un peu de retard le jour de l'intervention mais résultat impeccable.",
+      "service": "Installation électrique",
+      "category": "electricite",
+      "location": "Saint-Cloud",
+      "date": "2024-08-22",
+      "verified": true
+    },
+    {
+      "id": "8",
+      "name": "Marc V.",
+      "rating": 5,
+      "text": "Changement de serrure suite à une perte de clés. Le technicien m'a bien conseillé sur le choix d'une serrure A2P. Installation rapide et soignée. Très satisfait.",
+      "service": "Remplacement serrure",
+      "category": "serrurerie",
+      "location": "Paris 8e",
+      "date": "2024-08-10",
+      "verified": true
+    },
+    {
+      "id": "9",
+      "name": "Entreprise ABC",
+      "rating": 5,
+      "text": "Système de badges pour nos 50 employés. La solution proposée est parfaite, on peut tout gérer depuis une interface web. Support réactif en cas de question.",
+      "service": "Badges & Digicodes",
+      "category": "controle-acces",
+      "location": "La Défense",
+      "date": "2024-07-28",
+      "verified": true
+    },
+    {
+      "id": "10",
+      "name": "Nathalie P.",
+      "rating": 5,
+      "text": "Mise aux normes de mon installation électrique avant la vente de mon appartement. Diagnostic complet, travaux réalisés rapidement. J'ai pu vendre sereinement.",
+      "service": "Mise aux normes",
+      "category": "electricite",
+      "location": "Colombes",
+      "date": "2024-07-15",
+      "verified": true
+    }
+  ],
+  "stats": {
+    "totalReviews": 127,
+    "averageRating": 4.9,
+    "distribution": {
+      "5": 112,
+      "4": 11,
+      "3": 3,
+      "2": 1,
+      "1": 0
+    }
+  }
+}
+
+
+
+

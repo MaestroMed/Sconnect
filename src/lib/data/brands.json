@@ -1,0 +1,104 @@
+{
+  "brands": [
+    {
+      "id": "1",
+      "name": "Schneider Electric",
+      "category": "electricite",
+      "description": "Leader mondial de la gestion de l'énergie et des automatismes.",
+      "logo": "/brands/schneider.svg",
+      "website": "https://www.se.com"
+    },
+    {
+      "id": "2",
+      "name": "Legrand",
+      "category": "electricite",
+      "description": "Spécialiste mondial des infrastructures électriques et numériques du bâtiment.",
+      "logo": "/brands/legrand.svg",
+      "website": "https://www.legrand.fr"
+    },
+    {
+      "id": "3",
+      "name": "Hager",
+      "category": "electricite",
+      "description": "Solutions pour la distribution d'énergie et la gestion technique du bâtiment.",
+      "logo": "/brands/hager.svg",
+      "website": "https://www.hager.fr"
+    },
+    {
+      "id": "4",
+      "name": "Fichet",
+      "category": "serrurerie",
+      "description": "Expert français de la sécurité depuis 1825. Serrures et portes blindées haute sécurité.",
+      "logo": "/brands/fichet.svg",
+      "website": "https://www.fichet.fr"
+    },
+    {
+      "id": "5",
+      "name": "Vachette",
+      "category": "serrurerie",
+      "description": "Fabricant français de serrures et cylindres depuis 1864.",
+      "logo": "/brands/vachette.svg",
+      "website": "https://www.vachette.fr"
+    },
+    {
+      "id": "6",
+      "name": "Bricard",
+      "category": "serrurerie",
+      "description": "Marque historique française de serrurerie, référence en cylindres haute sécurité.",
+      "logo": "/brands/bricard.svg",
+      "website": "https://www.bricard.fr"
+    },
+    {
+      "id": "7",
+      "name": "Aiphone",
+      "category": "controle-acces",
+      "description": "Leader mondial de l'interphonie et de la vidéophonie professionnelle.",
+      "logo": "/brands/aiphone.svg",
+      "website": "https://www.aiphone.fr"
+    },
+    {
+      "id": "8",
+      "name": "Dahua",
+      "category": "controle-acces",
+      "description": "Solutions de vidéosurveillance et contrôle d'accès innovantes.",
+      "logo": "/brands/dahua.svg",
+      "website": "https://www.dahuasecurity.com"
+    },
+    {
+      "id": "9",
+      "name": "Hikvision",
+      "category": "controle-acces",
+      "description": "Fournisseur mondial de produits et solutions de sécurité.",
+      "logo": "/brands/hikvision.svg",
+      "website": "https://www.hikvision.com"
+    },
+    {
+      "id": "10",
+      "name": "CDVI",
+      "category": "controle-acces",
+      "description": "Fabricant français de systèmes de contrôle d'accès électroniques.",
+      "logo": "/brands/cdvi.svg",
+      "website": "https://www.cdvi.com"
+    },
+    {
+      "id": "11",
+      "name": "Mul-T-Lock",
+      "category": "serrurerie",
+      "description": "Cylindres haute sécurité et systèmes de clés brevetées.",
+      "logo": "/brands/multlock.svg",
+      "website": "https://www.mul-t-lock.com"
+    },
+    {
+      "id": "12",
+      "name": "ABB",
+      "category": "electricite",
+      "description": "Leader en technologies d'électrification et d'automatisation.",
+      "logo": "/brands/abb.svg",
+      "website": "https://www.abb.com"
+    }
+  ]
+}
+
+
+
+
