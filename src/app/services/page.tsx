@@ -95,7 +95,7 @@ export default function ServicesPage() {
         <div className="container-custom">
           <div className="space-y-16">
             {categories.map((category, categoryIndex) => {
-              const colorClasses = {
+              const colorMap = {
                 primary: {
                   bg: "bg-primary-500",
                   light: "bg-primary-50",
@@ -117,7 +117,8 @@ export default function ServicesPage() {
                   text: "text-green-600",
                   hover: "hover:border-green-400",
                 },
-              }[category.color];
+              };
+              const colorClasses = colorMap[category.color as keyof typeof colorMap] || colorMap.primary;
 
               return (
                 <motion.div

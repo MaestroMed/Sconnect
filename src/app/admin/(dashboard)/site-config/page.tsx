@@ -81,12 +81,11 @@ export default function SiteConfigPage() {
     
     const keys = path.split(".");
     const newConfig = { ...config };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let obj: any = newConfig;
+    let obj = newConfig as Record<string, unknown>;
     
     for (let i = 0; i < keys.length - 1; i++) {
-      obj[keys[i]] = { ...obj[keys[i]] };
-      obj = obj[keys[i]];
+      obj[keys[i]] = { ...(obj[keys[i]] as Record<string, unknown>) };
+      obj = obj[keys[i]] as Record<string, unknown>;
     }
     obj[keys[keys.length - 1]] = value;
     
