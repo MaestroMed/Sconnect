@@ -52,11 +52,19 @@ export default function FileUpload({
       const validFiles: File[] = [];
       for (let i = 0; i < newFiles.length; i++) {
         const file = newFiles[i];
-        const validationError = validateFile(file);
-        if (validationError) {
-          setError(validationError);
+        
+        // Inline validation
+        if (file.size > maxSizeMB * 1024 * 1024) {
+          setError(`${file.name} dépasse la taille maximale de ${maxSizeMB}MB`);
           return;
         }
+        const extension = "." + file.name.split(".").pop()?.toLowerCase();
+        const allowedExtensions = acceptedTypes.split(",").map((t) => t.trim().toLowerCase());
+        if (!allowedExtensions.includes(extension)) {
+          setError(`${file.name} n'est pas un type de fichier autorisé`);
+          return;
+        }
+        
         validFiles.push(file);
       }
 

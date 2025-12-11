@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import {
   Send,
   Loader2,
@@ -153,9 +154,9 @@ export default function DemandeForm({ type }: DemandeFormProps) {
           Nous avons bien reçu votre demande de {type === "devis" ? "devis" : "d'intervention"}.
           Notre équipe vous contactera dans les plus brefs délais.
         </p>
-        <a href="/" className="btn-primary">
+        <Link href="/" className="btn-primary">
           Retour à l&apos;accueil
-        </a>
+        </Link>
       </motion.div>
     );
   }
