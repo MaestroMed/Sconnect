@@ -34,9 +34,21 @@ export async function createServerSupabaseClient() {
 
 // For API routes and server actions
 export function createServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!url || !key) {
+    console.error('Supabase config missing:', { 
+      hasUrl: !!url, 
+      hasKey: !!key,
+      urlPrefix: url?.substring(0, 30) 
+    })
+    throw new Error(`Supabase configuration missing: URL=${!!url}, KEY=${!!key}`)
+  }
+  
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    url,
+    key,
     {
       cookies: {
         get() { return undefined },

@@ -88,17 +88,26 @@ export default function HomepageAdminPage() {
         body: formData
       })
 
-      if (res.ok) {
-        const { url } = await res.json()
-        setData(prev => prev ? { ...prev, [field]: url } : null)
+      const responseText = await res.text()
+      console.log('Upload response:', res.status, responseText)
+      
+      let data
+      try {
+        data = JSON.parse(responseText)
+      } catch {
+        setMessage({ type: 'error', text: `Erreur serveur: ${responseText.substring(0, 200)}` })
+        return
+      }
+
+      if (res.ok && data.url) {
+        setData(prev => prev ? { ...prev, [field]: data.url } : null)
         setMessage({ type: 'success', text: '✅ Image uploadée ! Cliquez sur "Enregistrer" pour sauvegarder.' })
       } else {
-        const errorData = await res.json()
-        setMessage({ type: 'error', text: `Erreur upload: ${errorData.error || 'Erreur inconnue'}` })
+        setMessage({ type: 'error', text: `Erreur upload: ${data.error || 'Erreur inconnue'}` })
       }
-    } catch (error) {
-      console.error('Upload error:', error)
-      setMessage({ type: 'error', text: 'Erreur lors de l\'upload. Vérifiez que le bucket Supabase existe.' })
+    } catch (error: any) {
+      console.error('Upload network error:', error)
+      setMessage({ type: 'error', text: `Erreur réseau: ${error?.message || 'Connexion échouée'}` })
     }
   }
 
