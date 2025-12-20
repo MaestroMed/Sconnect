@@ -1,15 +1,16 @@
-import { getSiteConfig, getHomepage, getTestimonials, getRealizations, getBrands } from "@/lib/data-service";
+import { getSiteConfig, getHomepage, getTestimonials, getRealizations, getBrands } from "@/lib/data-adapter";
 import HomePageClient from "@/components/home/HomePageClient";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0; // Disable cache to always fetch fresh data
 
-export default function Home() {
-  // Récupérer les données du back-office
-  const siteConfig = getSiteConfig();
-  const homepage = getHomepage();
-  const { testimonials } = getTestimonials();
-  const { realizations } = getRealizations();
-  const { brands } = getBrands();
+export default async function Home() {
+  // Récupérer les données du back-office (Supabase en prod, JSON en dev)
+  const siteConfig = await getSiteConfig();
+  const homepage = await getHomepage();
+  const { testimonials } = await getTestimonials();
+  const { realizations } = await getRealizations();
+  const { brands } = await getBrands();
 
   // Transformer les données pour le client
   const clientTestimonials = testimonials.map((t) => ({
