@@ -27,6 +27,8 @@ const defaultConfig: SiteConfigData = {
     linkedin: "",
     instagram: "",
   },
+  logoUrl: "",
+  logoDarkUrl: "",
 };
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -49,6 +51,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
             address: data.address || defaultConfig.address,
             hours: data.hours || defaultConfig.hours,
             social: data.social || defaultConfig.social,
+            logoUrl: data.logoUrl || defaultConfig.logoUrl,
+            logoDarkUrl: data.logoDarkUrl || defaultConfig.logoDarkUrl,
           });
         }
       })

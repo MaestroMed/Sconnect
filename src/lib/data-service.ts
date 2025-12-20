@@ -48,6 +48,8 @@ export interface SiteConfig {
     satisfactionRate: number;
   };
   zones: string[];
+  logoUrl?: string;
+  logoDarkUrl?: string;
 }
 
 export function getSiteConfig(): SiteConfig {

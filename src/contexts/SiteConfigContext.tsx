@@ -23,6 +23,8 @@ export interface SiteConfigData {
     linkedin: string;
     instagram: string;
   };
+  logoUrl?: string;
+  logoDarkUrl?: string;
 }
 
 const SiteConfigContext = createContext<SiteConfigData | null>(null);
@@ -65,6 +67,8 @@ export function useSiteConfig() {
         linkedin: "",
         instagram: "",
       },
+      logoUrl: "",
+      logoDarkUrl: "",
     };
   }
   return context;

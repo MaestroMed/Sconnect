@@ -49,6 +49,8 @@ function transformSiteConfig(row: Awaited<ReturnType<typeof supabaseService.getS
       satisfactionRate: row.stats_satisfaction,
     },
     zones: row.zones || [],
+    logoUrl: row.logo_url || '',
+    logoDarkUrl: row.logo_dark_url || '',
   }
 }
 

@@ -33,10 +33,13 @@ async function saveLocally(file: File, folder: string): Promise<string> {
 }
 
 export async function POST(request: NextRequest) {
+  console.log('Upload request received')
+  
   // Verify authentication
   const user = await getAuthenticatedUser()
   if (!user) {
-    return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    console.log('Upload rejected: not authenticated')
+    return NextResponse.json({ error: 'Non autorisé - veuillez vous reconnecter' }, { status: 401 })
   }
 
   try {
@@ -48,52 +51,70 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Aucun fichier fourni' }, { status: 400 })
     }
 
+    console.log('File received:', { name: file.name, type: file.type, size: file.size, folder })
+
     // Validate file type
     if (!file.type.startsWith('image/')) {
       return NextResponse.json({ error: 'Le fichier doit être une image' }, { status: 400 })
     }
 
-    // Validate file size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: 'Le fichier ne doit pas dépasser 10MB' }, { status: 400 })
+    // Validate file size (max 5MB for Vercel)
+    if (file.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: 'Le fichier ne doit pas dépasser 5MB' }, { status: 400 })
     }
 
-    let publicUrl: string
+    // Read file content into buffer before any async operations
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    const extension = file.name.split('.').pop() || 'png'
+    const contentType = file.type
 
-    // Try Supabase Storage first if configured
+    // Try Supabase Storage if configured
     if (isSupabaseConfigured()) {
       try {
-        console.log('Attempting Supabase upload to folder:', folder)
-        const { uploadImageFromFormData } = await import('@/lib/supabase/storage')
-        const url = await uploadImageFromFormData(formData, folder as any)
+        console.log('Uploading to Supabase Storage...')
+        const { createServiceClient } = await import('@/lib/supabase/server')
+        const supabase = createServiceClient()
         
-        if (url) {
-          console.log('Supabase upload successful:', url)
-          publicUrl = url
-          return NextResponse.json({ url: publicUrl })
+        const uniqueFilename = `${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`
+        const filePath = `${folder}/${uniqueFilename}`
+        
+        const { error } = await supabase.storage
+          .from('sconnectfrance')
+          .upload(filePath, buffer, {
+            contentType,
+            upsert: true
+          })
+        
+        if (error) {
+          console.error('Supabase upload error:', error)
+          return NextResponse.json({ 
+            error: `Supabase: ${error.message}` 
+          }, { status: 500 })
         }
+        
+        const { data: { publicUrl } } = supabase.storage
+          .from('sconnectfrance')
+          .getPublicUrl(filePath)
+        
+        console.log('Upload successful:', publicUrl)
+        return NextResponse.json({ url: publicUrl })
       } catch (supabaseError: any) {
-        console.error('Supabase Storage error:', supabaseError?.message || supabaseError)
-        // Return the actual error to help debug
+        console.error('Supabase error:', supabaseError)
         return NextResponse.json({ 
-          error: `Supabase Storage: ${supabaseError?.message || 'Erreur inconnue'}` 
+          error: `Supabase: ${supabaseError?.message || 'Erreur inconnue'}` 
         }, { status: 500 })
       }
     }
 
-    // Fallback to local storage
-    // Re-get file from formData since it may have been consumed
-    const localFile = formData.get('file') as File
-    if (!localFile) {
-      // If formData was consumed, use the original file reference
-      publicUrl = await saveLocally(file, folder)
-    } else {
-      publicUrl = await saveLocally(localFile, folder)
-    }
-
-    return NextResponse.json({ url: publicUrl })
-  } catch (error) {
+    // Fallback: return error since local storage doesn't work on Vercel
+    return NextResponse.json({ 
+      error: 'Supabase Storage non configuré' 
+    }, { status: 500 })
+  } catch (error: any) {
     console.error('Upload error:', error)
-    return NextResponse.json({ error: 'Erreur serveur lors de l\'upload' }, { status: 500 })
+    return NextResponse.json({ 
+      error: `Erreur serveur: ${error?.message || 'Erreur inconnue'}` 
+    }, { status: 500 })
   }
 }
