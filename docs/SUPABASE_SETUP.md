@@ -236,3 +236,5 @@ Pour le déploiement sur Vercel, ajoutez ces variables dans les settings du proj
 3. `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Clé publique Supabase
 4. `SUPABASE_SERVICE_ROLE_KEY` - Clé de service Supabase (secret)
 
+
+

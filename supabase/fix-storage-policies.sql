@@ -41,3 +41,5 @@ WITH CHECK (bucket_id = 'sconnectfrance');
 
 SELECT 'Storage policies updated for sconnectfrance bucket!' as status;
 
+
+

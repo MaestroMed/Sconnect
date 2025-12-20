@@ -108,3 +108,5 @@ SELECT 'realizations', COUNT(*) FROM realizations
 UNION ALL
 SELECT 'brands', COUNT(*) FROM brands;
 
+
+

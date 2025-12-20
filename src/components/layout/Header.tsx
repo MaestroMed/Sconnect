@@ -115,23 +115,21 @@ export default function Header() {
                   className="h-12 w-auto object-contain"
                 />
               ) : (
-                <>
-                  <div className="relative">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-electric-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-xl group-hover:shadow-primary-500/30 transition-all duration-300">
-                      <Zap className="w-7 h-7 text-white" />
-                    </div>
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent-400 rounded-full animate-pulse" />
+                <div className="relative">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-electric-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-xl group-hover:shadow-primary-500/30 transition-all duration-300">
+                    <Zap className="w-7 h-7 text-white" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="font-display font-bold text-xl text-dark-900">
-                      S Connect
-                    </span>
-                    <span className="text-xs text-primary-600 font-medium tracking-wide">
-                      FRANCE
-                    </span>
-                  </div>
-                </>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent-400 rounded-full animate-pulse" />
+                </div>
               )}
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-xl text-dark-900">
+                  S Connect
+                </span>
+                <span className="text-xs text-primary-600 font-medium tracking-wide">
+                  FRANCE
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}

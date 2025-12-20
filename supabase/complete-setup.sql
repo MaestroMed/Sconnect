@@ -250,3 +250,5 @@ UNION ALL SELECT 'testimonials', COUNT(*) FROM testimonials
 UNION ALL SELECT 'realizations', COUNT(*) FROM realizations
 UNION ALL SELECT 'brands', COUNT(*) FROM brands;
 
+
+

@@ -29,3 +29,5 @@ USING (bucket_id = 'sconnectfrance');
 
 SELECT 'Storage policies created for bucket sconnectfrance!' as status;
 
+
+
