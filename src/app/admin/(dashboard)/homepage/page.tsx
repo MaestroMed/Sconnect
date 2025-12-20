@@ -80,6 +80,8 @@ export default function HomepageAdminPage() {
     formData.append('file', file)
     formData.append('folder', 'hero')
 
+    setMessage({ type: 'success', text: 'Upload en cours...' })
+
     try {
       const res = await fetch('/api/admin/upload', {
         method: 'POST',
@@ -89,9 +91,14 @@ export default function HomepageAdminPage() {
       if (res.ok) {
         const { url } = await res.json()
         setData(prev => prev ? { ...prev, [field]: url } : null)
+        setMessage({ type: 'success', text: '✅ Image uploadée ! Cliquez sur "Enregistrer" pour sauvegarder.' })
+      } else {
+        const errorData = await res.json()
+        setMessage({ type: 'error', text: `Erreur upload: ${errorData.error || 'Erreur inconnue'}` })
       }
     } catch (error) {
       console.error('Upload error:', error)
+      setMessage({ type: 'error', text: 'Erreur lors de l\'upload. Vérifiez que le bucket Supabase existe.' })
     }
   }
 
