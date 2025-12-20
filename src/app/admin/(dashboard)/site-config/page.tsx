@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Save, Loader2, CheckCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Save, Loader2, CheckCircle, Upload, Image as ImageIcon, X } from "lucide-react";
 
 interface SiteConfig {
   siteName: string;
@@ -35,6 +35,8 @@ interface SiteConfig {
     satisfactionRate: number;
   };
   zones: string[];
+  logoUrl?: string;
+  logoDarkUrl?: string;
 }
 
 export default function SiteConfigPage() {
@@ -43,6 +45,10 @@ export default function SiteConfigPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [zonesText, setZonesText] = useState("");
+  const [uploading, setUploading] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
+  const logoDarkInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchConfig();
@@ -69,6 +75,8 @@ export default function SiteConfigPage() {
         seo: data.seo || { title: '', description: '', keywords: '' },
         stats: data.stats || { interventionsPerYear: 0, yearsExperience: 0, satisfactionRate: 0 },
         zones: data.zones || [],
+        logoUrl: data.logoUrl || '',
+        logoDarkUrl: data.logoDarkUrl || '',
       };
       
       setConfig(configWithDefaults);
@@ -116,6 +124,37 @@ export default function SiteConfigPage() {
     setConfig(newConfig);
   };
 
+  const handleLogoUpload = async (file: File, field: 'logoUrl' | 'logoDarkUrl') => {
+    if (!config) return;
+    
+    setUploading(field);
+    setUploadError(null);
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('folder', 'logos');
+    
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const data = await res.json();
+      
+      if (res.ok && data.url) {
+        setConfig({ ...config, [field]: data.url });
+      } else {
+        setUploadError(data.error || 'Erreur lors de l\'upload');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadError('Erreur réseau');
+    } finally {
+      setUploading(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -150,6 +189,127 @@ export default function SiteConfigPage() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
+        {/* Logo & Branding */}
+        <div className="bg-white rounded-xl p-6 shadow-sm lg:col-span-2">
+          <h2 className="text-lg font-semibold text-dark-900 mb-4">
+            Logo & Identité visuelle
+          </h2>
+          {uploadError && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+              {uploadError}
+            </div>
+          )}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Logo principal */}
+            <div>
+              <label className="block text-sm font-medium text-dark-700 mb-2">
+                Logo principal (fond clair)
+              </label>
+              <div className="border-2 border-dashed border-dark-200 rounded-lg p-4 text-center hover:border-primary-500 transition-colors">
+                {config.logoUrl ? (
+                  <div className="relative inline-block">
+                    <img 
+                      src={config.logoUrl} 
+                      alt="Logo" 
+                      className="max-h-20 mx-auto object-contain"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setConfig({ ...config, logoUrl: '' })}
+                      className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="py-4">
+                    <ImageIcon className="w-10 h-10 mx-auto text-dark-300 mb-2" />
+                    <p className="text-sm text-dark-500">Aucun logo</p>
+                  </div>
+                )}
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleLogoUpload(file, 'logoUrl');
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => logoInputRef.current?.click()}
+                  disabled={uploading === 'logoUrl'}
+                  className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50"
+                >
+                  {uploading === 'logoUrl' ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Upload className="w-4 h-4" />
+                  )}
+                  {uploading === 'logoUrl' ? 'Upload...' : 'Télécharger'}
+                </button>
+              </div>
+              <p className="text-xs text-dark-400 mt-2">Format: PNG ou SVG transparent, max 5MB</p>
+            </div>
+
+            {/* Logo fond sombre */}
+            <div>
+              <label className="block text-sm font-medium text-dark-700 mb-2">
+                Logo variante (fond sombre) - optionnel
+              </label>
+              <div className="border-2 border-dashed border-dark-200 rounded-lg p-4 text-center hover:border-primary-500 transition-colors bg-dark-800">
+                {config.logoDarkUrl ? (
+                  <div className="relative inline-block">
+                    <img 
+                      src={config.logoDarkUrl} 
+                      alt="Logo dark" 
+                      className="max-h-20 mx-auto object-contain"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setConfig({ ...config, logoDarkUrl: '' })}
+                      className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="py-4">
+                    <ImageIcon className="w-10 h-10 mx-auto text-dark-500 mb-2" />
+                    <p className="text-sm text-dark-400">Aucun logo</p>
+                  </div>
+                )}
+                <input
+                  ref={logoDarkInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleLogoUpload(file, 'logoDarkUrl');
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => logoDarkInputRef.current?.click()}
+                  disabled={uploading === 'logoDarkUrl'}
+                  className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-white text-dark-900 rounded-lg hover:bg-dark-100 disabled:opacity-50"
+                >
+                  {uploading === 'logoDarkUrl' ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Upload className="w-4 h-4" />
+                  )}
+                  {uploading === 'logoDarkUrl' ? 'Upload...' : 'Télécharger'}
+                </button>
+              </div>
+              <p className="text-xs text-dark-400 mt-2">Version blanche/claire pour footer</p>
+            </div>
+          </div>
+        </div>
+
         {/* General Info */}
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-dark-900 mb-4">

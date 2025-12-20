@@ -95,6 +95,9 @@ function transformSiteConfigForUpdate(updates: Partial<JsonSiteConfig>): Record<
     if (updates.stats.satisfactionRate !== undefined) result.stats_satisfaction = updates.stats.satisfactionRate
   }
   
+  if (updates.logoUrl !== undefined) result.logo_url = updates.logoUrl
+  if (updates.logoDarkUrl !== undefined) result.logo_dark_url = updates.logoDarkUrl
+  
   return result
 }
 
