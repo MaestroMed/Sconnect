@@ -71,6 +71,8 @@ export async function uploadImageFromFormData(
   const arrayBuffer = await file.arrayBuffer()
   const buffer = Buffer.from(arrayBuffer)
   
+  console.log('Uploading to Supabase Storage:', { filePath, contentType: file.type, size: buffer.length })
+  
   const { error } = await supabase.storage
     .from('sconnectfrance')
     .upload(filePath, buffer, {
@@ -79,8 +81,8 @@ export async function uploadImageFromFormData(
     })
   
   if (error) {
-    console.error('Error uploading image:', error)
-    return null
+    console.error('Error uploading image to Supabase:', error.message, error)
+    throw new Error(`Supabase Storage Error: ${error.message}`)
   }
   
   // Get public URL

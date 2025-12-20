@@ -63,15 +63,21 @@ export async function POST(request: NextRequest) {
     // Try Supabase Storage first if configured
     if (isSupabaseConfigured()) {
       try {
+        console.log('Attempting Supabase upload to folder:', folder)
         const { uploadImageFromFormData } = await import('@/lib/supabase/storage')
         const url = await uploadImageFromFormData(formData, folder as any)
         
         if (url) {
+          console.log('Supabase upload successful:', url)
           publicUrl = url
           return NextResponse.json({ url: publicUrl })
         }
-      } catch (supabaseError) {
-        console.warn('Supabase Storage failed, falling back to local storage:', supabaseError)
+      } catch (supabaseError: any) {
+        console.error('Supabase Storage error:', supabaseError?.message || supabaseError)
+        // Return the actual error to help debug
+        return NextResponse.json({ 
+          error: `Supabase Storage: ${supabaseError?.message || 'Erreur inconnue'}` 
+        }, { status: 500 })
       }
     }
 
