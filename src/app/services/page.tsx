@@ -10,12 +10,12 @@ import {
   ChevronRight,
   Phone,
   Video,
-  Camera,
   CreditCard,
   DoorOpen,
   Shield,
   FileCheck,
   AlertTriangle,
+  Wrench,
 } from "lucide-react";
 
 const categories = [
@@ -38,11 +38,10 @@ const categories = [
     slug: "controle-acces",
     icon: KeyRound,
     color: "accent",
-    description: "Interphonie, vidéophonie, badges, digicodes et vidéosurveillance pour sécuriser vos locaux.",
+    description: "Interphonie, vidéophonie, badges et digicodes pour sécuriser vos locaux.",
     services: [
       { name: "Interphonie & Vidéophonie", slug: "interphonie-videophonie", icon: Video },
       { name: "Badges & Digicodes", slug: "badges-digicodes", icon: CreditCard },
-      { name: "Vidéosurveillance", slug: "videosurveillance", icon: Camera },
     ],
   },
   {
@@ -56,6 +55,19 @@ const categories = [
       { name: "Ouverture de Porte", slug: "ouverture-porte", icon: DoorOpen },
       { name: "Remplacement de Serrure", slug: "remplacement-serrure", icon: KeyRound },
       { name: "Blindage de Porte", slug: "blindage-porte", icon: Shield },
+    ],
+  },
+  {
+    id: "metallerie",
+    name: "Métallerie",
+    slug: "metallerie",
+    icon: Wrench,
+    color: "orange",
+    description: "Fabrication sur mesure de portails, portes et structures métalliques.",
+    services: [
+      { name: "Fabrication de Portails", slug: "fabrication-portail", icon: Wrench },
+      { name: "Fabrication de Portes", slug: "fabrication-porte", icon: DoorOpen },
+      { name: "Structures Métalliques", slug: "structure-metallique", icon: Shield },
     ],
   },
 ];
@@ -79,12 +91,12 @@ export default function ServicesPage() {
               Nos Services
             </span>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-              3 expertises pour{" "}
-              <span className="gradient-text">votre sécurité</span>
+              4 expertises pour{" "}
+              <span className="gradient-text">votre habitat</span>
             </h1>
             <p className="text-xl text-dark-300 max-w-3xl mx-auto">
-              Électricité, contrôle d&apos;accès et serrurerie : une offre complète pour
-              sécuriser, équiper et dépanner vos locaux en Île-de-France.
+              Électricité, contrôle d&apos;accès, serrurerie et métallerie : une offre complète pour
+              sécuriser, équiper et embellir vos locaux en Île-de-France.
             </p>
           </motion.div>
         </div>
@@ -116,6 +128,13 @@ export default function ServicesPage() {
                   border: "border-green-200",
                   text: "text-green-600",
                   hover: "hover:border-green-400",
+                },
+                orange: {
+                  bg: "bg-orange-500",
+                  light: "bg-orange-50",
+                  border: "border-orange-200",
+                  text: "text-orange-600",
+                  hover: "hover:border-orange-400",
                 },
               };
               const colorClasses = colorMap[category.color as keyof typeof colorMap] || colorMap.primary;

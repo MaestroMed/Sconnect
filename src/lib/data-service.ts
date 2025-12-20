@@ -297,6 +297,86 @@ export function deleteBrand(id: string): boolean {
   return true;
 }
 
+// Homepage
+export interface HomepageData {
+  id: string;
+  hero_title: string;
+  hero_subtitle: string;
+  hero_cta_primary: string;
+  hero_cta_secondary: string;
+  hero_image_url: string | null;
+  hero_video_url: string | null;
+  about_title: string;
+  about_description: string;
+  about_features: Array<{ icon: string; title: string; description: string }>;
+  services_title: string;
+  services_subtitle: string;
+  stats_title: string;
+  testimonials_title: string;
+  testimonials_subtitle: string;
+  cta_title: string;
+  cta_subtitle: string;
+  cta_button: string;
+  brands_title: string;
+  brands_subtitle: string;
+}
+
+export function getHomepage(): HomepageData {
+  return readJsonFile<HomepageData>('homepage.json');
+}
+
+export function updateHomepage(updates: Partial<HomepageData>): HomepageData {
+  const currentData = getHomepage();
+  const newData = { ...currentData, ...updates };
+  writeJsonFile('homepage.json', newData);
+  return newData;
+}
+
+// Media
+export interface MediaData {
+  logo: string;
+  logo_white: string;
+  favicon: string;
+  hero_image: string;
+  og_image: string;
+  partners: Array<{ id: string; name: string; logo: string }>;
+}
+
+export function getMedia(): MediaData {
+  return readJsonFile<MediaData>('media.json');
+}
+
+export function updateMedia(updates: Partial<MediaData>): MediaData {
+  const currentData = getMedia();
+  const newData = { ...currentData, ...updates };
+  writeJsonFile('media.json', newData);
+  return newData;
+}
+
+// Admin Users
+export interface AdminUser {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+  createdAt: string;
+}
+
+interface AdminUsersData {
+  users: AdminUser[];
+}
+
+export function getAdminUser(email: string): AdminUser | null {
+  const data = readJsonFile<AdminUsersData>('admin-users.json');
+  return data.users.find(u => u.email === email) || null;
+}
+
+export function getAdminUserById(id: string): AdminUser | null {
+  const data = readJsonFile<AdminUsersData>('admin-users.json');
+  return data.users.find(u => u.id === id) || null;
+}
+
 
 
 

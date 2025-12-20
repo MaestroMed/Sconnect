@@ -13,6 +13,7 @@ import {
   Clock,
   AlertTriangle,
 } from "lucide-react";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
   {
@@ -24,7 +25,7 @@ const services = [
   {
     name: "Contrôle d'accès",
     href: "/services/controle-acces",
-    description: "Interphonie, badges et vidéosurveillance",
+    description: "Interphonie, badges et digicodes",
     color: "accent",
   },
   {
@@ -32,6 +33,12 @@ const services = [
     href: "/services/serrurerie",
     description: "Ouverture, remplacement et blindage",
     color: "green",
+  },
+  {
+    name: "Métallerie",
+    href: "/services/metallerie",
+    description: "Portails, portes et structures métalliques",
+    color: "orange",
   },
 ];
 
@@ -49,6 +56,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const pathname = usePathname();
+  const siteConfig = useSiteConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,20 +87,20 @@ export default function Header() {
             </span>
           </div>
           <a
-            href="tel:+33100000000"
+            href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
             className="flex items-center gap-2 hover:text-accent-400 transition-colors"
           >
             <Phone className="w-4 h-4" />
-            <span className="font-semibold">01 XX XX XX XX</span>
+            <span className="font-semibold">{siteConfig.phone}</span>
           </a>
         </div>
       </div>
 
       {/* Main Header */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg shadow-dark-900/5"
+            ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-dark-900/10 border-b border-white/20"
             : "bg-white"
         }`}
       >
@@ -163,7 +171,7 @@ export default function Header() {
                           onMouseLeave={() => setIsServicesOpen(false)}
                           className="absolute top-full left-0 pt-2"
                         >
-                          <div className="bg-white rounded-2xl shadow-xl shadow-dark-900/10 border border-dark-100 p-4 w-80">
+                          <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-dark-900/15 border border-white/50 p-4 w-80">
                             <div className="space-y-1">
                               {services.map((service) => (
                                 <Link
@@ -290,11 +298,11 @@ export default function Header() {
 
                 <div className="pt-4 mt-4 border-t border-dark-100 space-y-3">
                   <a
-                    href="tel:+33100000000"
+                    href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                     className="flex items-center justify-center gap-2 text-dark-700 font-semibold"
                   >
                     <Phone className="w-5 h-5 text-primary-600" />
-                    01 XX XX XX XX
+                    {siteConfig.phone}
                   </a>
                   <div className="grid grid-cols-2 gap-3">
                     <Link

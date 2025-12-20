@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { KeyRound, Video, CreditCard, Camera, ChevronRight, Phone } from "lucide-react";
+import { KeyRound, Video, CreditCard, ChevronRight, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contrôle d'accès | Interphonie, Badges & Vidéosurveillance",
-  description: "Installation de systèmes de contrôle d'accès à Clichy et Île-de-France : interphonie, vidéophonie, badges, digicodes et vidéosurveillance. Devis gratuit.",
+  title: "Contrôle d'accès | Interphonie & Badges",
+  description: "Installation de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes. Devis gratuit.",
 };
 
 const services = [
@@ -19,12 +19,6 @@ const services = [
     slug: "badges-digicodes",
     icon: CreditCard,
     description: "Installation de systèmes de contrôle d'accès par badges, digicodes et lecteurs biométriques.",
-  },
-  {
-    name: "Vidéosurveillance",
-    slug: "videosurveillance",
-    icon: Camera,
-    description: "Installation de caméras de surveillance IP, enregistreurs et systèmes de vidéoprotection.",
   },
 ];
 
@@ -43,7 +37,7 @@ export default function ControleAccesPage() {
               Contrôle d&apos;accès
             </h1>
             <p className="text-xl text-dark-300 leading-relaxed">
-              Interphonie, vidéophonie, badges, digicodes et vidéosurveillance pour sécuriser vos locaux en Île-de-France.
+              Interphonie, vidéophonie, badges et digicodes pour sécuriser vos locaux en Île-de-France.
             </p>
           </div>
         </div>
@@ -52,7 +46,7 @@ export default function ControleAccesPage() {
       {/* Services */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {services.map((service) => (
               <Link
                 key={service.slug}

@@ -37,7 +37,7 @@ const values = [
     icon: Clock,
     title: "Réactivité",
     description:
-      "Intervention rapide, respect des délais. Nous comprenons l'urgence de vos besoins électriques.",
+      "Intervention rapide, respect des délais. Nous comprenons l'urgence de vos besoins.",
   },
   {
     icon: Target,
@@ -49,40 +49,34 @@ const values = [
 
 const timeline = [
   {
-    year: "2009",
+    year: "2021",
     title: "Création de S Connect France",
     description:
-      "Fondation de l'entreprise à Clichy avec une équipe de 2 électriciens passionnés.",
+      "Fondation de l'entreprise en Île-de-France avec une équipe de professionnels passionnés.",
   },
   {
-    year: "2012",
-    title: "Certification Qualifelec",
+    year: "2022",
+    title: "Expansion des services",
     description:
-      "Obtention de la qualification professionnelle, gage de notre expertise.",
+      "Ajout des services de contrôle d'accès et serrurerie à notre offre.",
   },
   {
-    year: "2015",
-    title: "Expansion régionale",
-    description:
-      "Extension de notre zone d'intervention à l'ensemble des Hauts-de-Seine.",
-  },
-  {
-    year: "2018",
-    title: "Certification RGE",
-    description:
-      "Qualification pour les travaux de rénovation énergétique, ouvrant droit aux aides de l'État.",
-  },
-  {
-    year: "2021",
+    year: "2023",
     title: "Qualification IRVE",
     description:
       "Certification pour l'installation de bornes de recharge véhicules électriques.",
   },
   {
     year: "2024",
-    title: "15 ans d'excellence",
+    title: "Métallerie sur mesure",
     description:
-      "Plus de 25 000 interventions réalisées, une équipe de 12 techniciens qualifiés.",
+      "Lancement de notre atelier métallerie : portails, portes et structures.",
+  },
+  {
+    year: "2025",
+    title: "3000+ interventions",
+    description:
+      "Cap des 3000 interventions annuelles franchi, une équipe de techniciens qualifiés.",
   },
 ];
 
@@ -110,12 +104,12 @@ const certifications = [
 ];
 
 const reasons = [
-  "Plus de 15 ans d'expérience en électricité",
-  "Équipe de 12 techniciens qualifiés et formés",
+  "Une entreprise dynamique créée en 2021",
+  "4 métiers : électricité, contrôle d'accès, serrurerie, métallerie",
   "Intervention rapide, sous 2h pour les urgences",
   "Devis gratuit et détaillé, sans engagement",
   "Garantie décennale sur tous nos travaux",
-  "Certifications Qualifelec, RGE et IRVE",
+  "Certification IRVE pour bornes de recharge",
   "Disponibilité 24h/24, 7j/7 pour les urgences",
   "Matériel de grandes marques (Schneider, Legrand)",
 ];
@@ -142,21 +136,21 @@ export default function PresentationPage() {
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
                 Votre partenaire{" "}
-                <span className="gradient-text">électricité</span> de confiance
+                <span className="gradient-text">multi-services</span> de confiance
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed mb-8">
-                Depuis 2009, S Connect France accompagne les particuliers et
-                professionnels d&apos;Île-de-France dans tous leurs projets
-                électriques. Notre engagement : qualité, sécurité et satisfaction.
+                Depuis 2021, S Connect France accompagne les particuliers et
+                professionnels d&apos;Île-de-France dans tous leurs projets : 
+                électricité, contrôle d&apos;accès, serrurerie et métallerie.
               </p>
               <div className="flex flex-wrap gap-6 text-dark-400">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-primary-500" />
-                  <span>Depuis 2009</span>
+                  <span>Depuis 2021</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-accent-500" />
-                  <span>12 techniciens</span>
+                  <span>Équipe qualifiée</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-green-500" />
@@ -189,8 +183,8 @@ export default function PresentationPage() {
         <div className="container-custom">
           <SectionTitle
             badge="Notre Histoire"
-            title="15 ans au service de votre électricité"
-            subtitle="De notre création à aujourd'hui, découvrez les étapes clés de notre développement."
+            title="Une entreprise en pleine croissance"
+            subtitle="De notre création en 2021 à aujourd'hui, découvrez les étapes clés de notre développement."
           />
 
           <div className="relative">
@@ -421,7 +415,7 @@ export default function PresentationPage() {
               Prêt à travailler avec nous ?
             </h2>
             <p className="text-xl text-dark-300 mb-10 max-w-2xl mx-auto">
-              Contactez-nous pour discuter de votre projet électrique.
+              Contactez-nous pour discuter de votre projet.
               Devis gratuit et sans engagement.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

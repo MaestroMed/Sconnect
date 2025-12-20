@@ -1,0 +1,38 @@
+{
+  "id": "1",
+  "hero_title": "Entretenir votre habitat, c'est préserver votre bien-être.",
+  "hero_subtitle": "Votre expert multi-services en Île-de-France depuis 2021. Intervention rapide 24h/24, travail soigné et tarifs transparents.",
+  "hero_cta_primary": "Demander un devis gratuit",
+  "hero_cta_secondary": "Urgence 24h/24",
+  "hero_image_url": "/images/hero-homepage.jpg",
+  "hero_video_url": null,
+  "about_title": "Votre partenaire multi-services de confiance",
+  "about_description": "Depuis 2021, S Connect France accompagne les particuliers et professionnels d'Île-de-France dans tous leurs projets : électricité, contrôle d'accès, serrurerie et métallerie.",
+  "about_features": [
+    {
+      "icon": "Shield",
+      "title": "Garantie Décennale",
+      "description": "Vos travaux sont protégés pendant 10 ans."
+    },
+    {
+      "icon": "Zap",
+      "title": "Certification IRVE",
+      "description": "Installation de bornes de recharge pour véhicules électriques."
+    },
+    {
+      "icon": "Clock",
+      "title": "Intervention 24h/24",
+      "description": "Disponibles pour les urgences à toute heure."
+    }
+  ],
+  "services_title": "Nos expertises",
+  "services_subtitle": "4 métiers pour répondre à tous vos besoins",
+  "stats_title": "S Connect France en chiffres",
+  "testimonials_title": "Ce que nos clients disent",
+  "testimonials_subtitle": "Découvrez les avis de ceux qui nous font confiance",
+  "cta_title": "Besoin d'un devis ou d'une intervention ?",
+  "cta_subtitle": "Contactez-nous pour un devis gratuit ou une intervention rapide.",
+  "cta_button": "Demander un devis",
+  "brands_title": "Ils nous font confiance",
+  "brands_subtitle": "Nos partenaires et clients"
+}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, Loader2, X, Save } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Pencil, Trash2, Loader2, X, Save, Upload, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 
 interface Realization {
@@ -13,6 +13,8 @@ interface Realization {
   serviceType: string;
   description: string;
   image: string;
+  imageBefore?: string;
+  imageAfter?: string;
   featured: boolean;
 }
 
@@ -20,6 +22,7 @@ const categories = [
   { value: "electricite", label: "Électricité" },
   { value: "controle-acces", label: "Contrôle d'accès" },
   { value: "serrurerie", label: "Serrurerie" },
+  { value: "metallerie", label: "Métallerie" },
 ];
 
 const serviceTypes = ["Installation", "Rénovation", "Dépannage", "Mise aux normes"];
@@ -40,6 +43,11 @@ export default function RealizationsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Realization | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState<string | null>(null);
+
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const beforeInputRef = useRef<HTMLInputElement>(null);
+  const afterInputRef = useRef<HTMLInputElement>(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -49,6 +57,8 @@ export default function RealizationsPage() {
     serviceType: "",
     description: "",
     image: "",
+    imageBefore: "",
+    imageAfter: "",
     featured: false,
   });
 
@@ -57,10 +67,41 @@ export default function RealizationsPage() {
   }, []);
 
   const fetchRealizations = async () => {
-    const res = await fetch("/api/admin/realizations");
-    const data = await res.json();
-    setRealizations(data.realizations);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/admin/realizations");
+      if (!res.ok) throw new Error('Erreur lors du chargement');
+      const data = await res.json();
+      setRealizations(Array.isArray(data) ? data : data.realizations || []);
+    } catch (error) {
+      console.error('Error fetching realizations:', error);
+      setRealizations([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpload = async (file: File, field: 'image' | 'imageBefore' | 'imageAfter') => {
+    setUploading(field);
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('folder', 'realizations');
+
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (res.ok) {
+        const { url } = await res.json();
+        setForm(prev => ({ ...prev, [field]: url }));
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(null);
+    }
   };
 
   const openModal = (realization?: Realization) => {
@@ -74,6 +115,8 @@ export default function RealizationsPage() {
         serviceType: realization.serviceType,
         description: realization.description,
         image: realization.image,
+        imageBefore: realization.imageBefore || "",
+        imageAfter: realization.imageAfter || "",
         featured: realization.featured,
       });
     } else {
@@ -86,6 +129,8 @@ export default function RealizationsPage() {
         serviceType: "",
         description: "",
         image: "",
+        imageBefore: "",
+        imageAfter: "",
         featured: false,
       });
     }
@@ -125,6 +170,64 @@ export default function RealizationsPage() {
     await fetchRealizations();
   };
 
+  const ImageUploadButton = ({ 
+    field, 
+    inputRef, 
+    value, 
+    label 
+  }: { 
+    field: 'image' | 'imageBefore' | 'imageAfter';
+    inputRef: React.RefObject<HTMLInputElement | null>;
+    value: string;
+    label: string;
+  }) => (
+    <div className="space-y-2">
+      <label className="block text-sm font-medium text-dark-700">{label}</label>
+      <div 
+        onClick={() => inputRef.current?.click()}
+        className={`
+          relative border-2 border-dashed rounded-lg p-4 cursor-pointer transition-colors
+          ${value ? 'border-green-400 bg-green-50' : 'border-dark-300 hover:border-primary-500'}
+        `}
+      >
+        {uploading === field ? (
+          <div className="flex items-center justify-center h-20">
+            <Loader2 className="w-6 h-6 animate-spin text-primary-500" />
+          </div>
+        ) : value ? (
+          <div className="relative h-20">
+            <Image src={value} alt={label} fill className="object-contain" unoptimized />
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setForm(prev => ({ ...prev, [field]: '' }));
+              }}
+              className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-20 text-dark-400">
+            <Upload className="w-6 h-6 mb-1" />
+            <span className="text-xs">Cliquez pour sélectionner</span>
+          </div>
+        )}
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) handleUpload(file, field);
+        }}
+      />
+    </div>
+  );
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -138,7 +241,7 @@ export default function RealizationsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-dark-900">Réalisations</h1>
-          <p className="text-dark-500">Gérez vos projets et chantiers</p>
+          <p className="text-dark-500">Gérez vos projets et chantiers avec photos avant/après</p>
         </div>
         <button
           onClick={() => openModal()}
@@ -153,7 +256,7 @@ export default function RealizationsPage() {
         {realizations.map((r) => (
           <div key={r.id} className="bg-white rounded-xl shadow-sm overflow-hidden">
             <div className="relative h-48">
-              <Image src={r.image} alt={r.title} fill className="object-cover" />
+              <Image src={r.image} alt={r.title} fill className="object-cover" unoptimized />
               {r.featured && (
                 <span className="absolute top-2 left-2 px-2 py-1 bg-accent-500 text-white text-xs font-semibold rounded">
                   À la une
@@ -162,6 +265,12 @@ export default function RealizationsPage() {
               <span className="absolute top-2 right-2 px-2 py-1 bg-dark-900/70 text-white text-xs rounded">
                 {categories.find((c) => c.value === r.category)?.label}
               </span>
+              {(r.imageBefore || r.imageAfter) && (
+                <span className="absolute bottom-2 left-2 px-2 py-1 bg-primary-600 text-white text-xs rounded flex items-center gap-1">
+                  <ImageIcon className="w-3 h-3" />
+                  Avant/Après
+                </span>
+              )}
             </div>
             <div className="p-4">
               <h3 className="font-semibold text-dark-900 mb-1">{r.title}</h3>
@@ -190,8 +299,8 @@ export default function RealizationsPage() {
       {/* Modal */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b">
+          <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b sticky top-0 bg-white z-10">
               <h2 className="text-lg font-semibold">
                 {editing ? "Modifier la réalisation" : "Nouvelle réalisation"}
               </h2>
@@ -289,19 +398,38 @@ export default function RealizationsPage() {
                   className="w-full px-4 py-2 border border-dark-200 rounded-lg bg-white text-dark-900"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-dark-700 mb-1">
-                  URL de l&apos;image
-                </label>
-                <input
-                  type="url"
+
+              {/* Image principale */}
+              <div className="border-t pt-4">
+                <h3 className="text-sm font-semibold text-dark-900 mb-3">📷 Image principale</h3>
+                <ImageUploadButton
+                  field="image"
+                  inputRef={imageInputRef}
                   value={form.image}
-                  onChange={(e) => setForm({ ...form, image: e.target.value })}
-                  className="w-full px-4 py-2 border border-dark-200 rounded-lg bg-white text-dark-900"
-                  placeholder="https://..."
+                  label="Image de couverture"
                 />
               </div>
-              <div className="flex items-center gap-2">
+              
+              {/* Photos Avant/Après */}
+              <div className="border-t pt-4">
+                <h3 className="text-sm font-semibold text-dark-900 mb-3">📸 Photos Avant/Après (optionnel)</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <ImageUploadButton
+                    field="imageBefore"
+                    inputRef={beforeInputRef}
+                    value={form.imageBefore}
+                    label="Photo AVANT"
+                  />
+                  <ImageUploadButton
+                    field="imageAfter"
+                    inputRef={afterInputRef}
+                    value={form.imageAfter}
+                    label="Photo APRÈS"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 border-t pt-4">
                 <input
                   type="checkbox"
                   id="featured"
@@ -310,11 +438,11 @@ export default function RealizationsPage() {
                   className="w-4 h-4 text-primary-600 rounded"
                 />
                 <label htmlFor="featured" className="text-sm text-dark-700">
-                  Mettre à la une
+                  Mettre à la une sur la page d&apos;accueil
                 </label>
               </div>
             </div>
-            <div className="flex justify-end gap-3 p-4 border-t">
+            <div className="flex justify-end gap-3 p-4 border-t sticky bottom-0 bg-white">
               <button
                 onClick={closeModal}
                 className="px-4 py-2 text-dark-600 hover:bg-dark-100 rounded-lg transition-colors"
@@ -323,7 +451,7 @@ export default function RealizationsPage() {
               </button>
               <button
                 onClick={handleSave}
-                disabled={saving}
+                disabled={saving || !form.title || !form.image}
                 className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50"
               >
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
@@ -336,6 +464,3 @@ export default function RealizationsPage() {
     </div>
   );
 }
-
-
-

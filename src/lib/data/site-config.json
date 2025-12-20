@@ -1,8 +1,8 @@
 {
   "siteName": "S Connect France",
-  "siteTagline": "Électricité • Contrôle d'accès • Serrurerie",
-  "phone": "01 XX XX XX XX",
-  "phoneEmergency": "01 XX XX XX XX",
+  "siteTagline": "Électricité • Contrôle d'accès • Serrurerie • Métallerie",
+  "phone": "01 23 45 67 89",
+  "phoneEmergency": "01 23 45 67 89",
   "email": "contact@sconnect-france.fr",
   "address": {
     "street": "XX Rue de XXX",
@@ -25,13 +25,18 @@
     "keywords": "électricien, serrurier, contrôle accès, Clichy, Paris, Île-de-France, dépannage"
   },
   "stats": {
-    "interventionsPerYear": 2500,
-    "yearsExperience": 15,
+    "interventionsPerYear": 3000,
+    "yearsExperience": 4,
     "satisfactionRate": 98
   },
-  "zones": ["Clichy", "Levallois-Perret", "Neuilly-sur-Seine", "Asnières", "Paris", "La Défense", "Hauts-de-Seine", "Île-de-France"]
+  "zones": [
+    "Clichy",
+    "Levallois-Perret",
+    "Neuilly-sur-Seine",
+    "Asnières",
+    "Paris",
+    "La Défense",
+    "Hauts-de-Seine",
+    "Île-de-France"
+  ]
 }
-
-
-
-

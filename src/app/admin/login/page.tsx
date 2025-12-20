@@ -118,10 +118,7 @@ export default function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-sm text-dark-500">
-            Identifiants par défaut :<br />
-            <code className="bg-dark-100 px-2 py-0.5 rounded">admin@sconnect-france.fr</code>
-            <br />
-            <code className="bg-dark-100 px-2 py-0.5 rounded">admin123</code>
+            Contactez l&apos;administrateur si vous avez oublié vos identifiants.
           </p>
         </div>
       </div>

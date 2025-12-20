@@ -13,12 +13,16 @@ import {
   LogOut,
   Menu,
   X,
+  Home,
+  Upload,
 } from "lucide-react";
 import { useState } from "react";
 
 const menuItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/homepage", label: "Page d'accueil", icon: Home },
   { href: "/admin/site-config", label: "Configuration", icon: Settings },
+  { href: "/admin/media", label: "Médias & Logo", icon: Upload },
   { href: "/admin/services", label: "Services", icon: Wrench },
   { href: "/admin/realizations", label: "Réalisations", icon: Image },
   { href: "/admin/testimonials", label: "Témoignages", icon: MessageSquare },

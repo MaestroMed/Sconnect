@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Zap,
@@ -13,11 +15,13 @@ import {
   Award,
   AlertTriangle,
 } from "lucide-react";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
   { name: "Électricité", href: "/services/electricite" },
   { name: "Contrôle d'accès", href: "/services/controle-acces" },
   { name: "Serrurerie", href: "/services/serrurerie" },
+  { name: "Métallerie", href: "/services/metallerie" },
 ];
 
 const quickLinks = [
@@ -36,6 +40,8 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const siteConfig = useSiteConfig();
+  
   return (
     <footer className="bg-dark-900 text-white">
       {/* CTA Section */}
@@ -44,10 +50,10 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="text-center lg:text-left">
               <h3 className="text-2xl md:text-3xl font-display font-bold mb-2">
-                Besoin d&apos;un électricien professionnel ?
+                Besoin d&apos;un professionnel ?
               </h3>
               <p className="text-primary-100 text-lg">
-                Intervention rapide sur Clichy et toute l&apos;Île-de-France
+                Intervention rapide en Île-de-France • Garantie décennale • Certifié IRVE
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -84,32 +90,54 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-dark-300 mb-6 leading-relaxed">
-              Expert en installation électrique depuis plus de 10 ans. 
-              Intervention rapide, travail soigné et prix transparents sur 
-              Clichy et toute l&apos;Île-de-France.
+              Expert en électricité, contrôle d&apos;accès, serrurerie et métallerie depuis 2021. 
+              Intervention rapide, travail soigné et prix transparents en Île-de-France.
             </p>
+            {/* Certifications */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-lg">
+                <Shield className="w-4 h-4 text-green-400" />
+                <span className="text-xs text-green-300 font-medium">Garantie Décennale</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-electric-500/10 border border-electric-500/30 rounded-lg">
+                <Award className="w-4 h-4 text-electric-400" />
+                <span className="text-xs text-electric-300 font-medium">IRVE</span>
+              </div>
+            </div>
             <div className="flex items-center gap-4">
-              <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
+              {siteConfig.social.facebook && (
+                <a
+                  href={siteConfig.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.linkedin && (
+                <a
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.instagram && (
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -155,40 +183,40 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+33100000000"
+                  href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
                   className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors"
                 >
                   <Phone className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                   <div>
                     <span className="block font-semibold text-white">
-                      01 XX XX XX XX
+                      {siteConfig.phone}
                     </span>
-                    <span className="text-sm">Urgences 24h/24</span>
+                    <span className="text-sm">{siteConfig.hours.emergency}</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:contact@sconnect-france.fr"
+                  href={`mailto:${siteConfig.email}`}
                   className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors"
                 >
                   <Mail className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
-                  <span>contact@sconnect-france.fr</span>
+                  <span>{siteConfig.email}</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-dark-300">
                 <MapPin className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                 <span>
-                  XX Rue de XXX
+                  {siteConfig.address.street}
                   <br />
-                  92110 Clichy
+                  {siteConfig.address.postalCode} {siteConfig.address.city}
                 </span>
               </li>
               <li className="flex items-start gap-3 text-dark-300">
                 <Clock className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                 <div>
-                  <span className="block">Lun-Ven: 8h - 19h</span>
-                  <span>Samedi: 9h - 17h</span>
+                  <span className="block">{siteConfig.hours.weekdays}</span>
+                  <span>{siteConfig.hours.saturday}</span>
                 </div>
               </li>
             </ul>

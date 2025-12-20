@@ -49,11 +49,35 @@ export default function SiteConfigPage() {
   }, []);
 
   const fetchConfig = async () => {
-    const res = await fetch("/api/admin/site-config");
-    const data = await res.json();
-    setConfig(data);
-    setZonesText(data.zones.join(", "));
-    setLoading(false);
+    try {
+      const res = await fetch("/api/admin/site-config");
+      if (!res.ok) {
+        throw new Error('Erreur lors du chargement');
+      }
+      const data = await res.json();
+      
+      // Ensure nested objects exist with defaults
+      const configWithDefaults: SiteConfig = {
+        siteName: data.siteName || '',
+        siteTagline: data.siteTagline || '',
+        phone: data.phone || '',
+        phoneEmergency: data.phoneEmergency || '',
+        email: data.email || '',
+        address: data.address || { street: '', postalCode: '', city: '' },
+        hours: data.hours || { weekdays: '', saturday: '', emergency: '' },
+        social: data.social || { facebook: '', linkedin: '', instagram: '' },
+        seo: data.seo || { title: '', description: '', keywords: '' },
+        stats: data.stats || { interventionsPerYear: 0, yearsExperience: 0, satisfactionRate: 0 },
+        zones: data.zones || [],
+      };
+      
+      setConfig(configWithDefaults);
+      setZonesText(configWithDefaults.zones.join(", "));
+    } catch (error) {
+      console.error('Error fetching config:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSave = async () => {
