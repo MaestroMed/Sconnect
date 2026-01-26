@@ -51,10 +51,25 @@ export default function ContactPage() {
     setSubmitStatus("loading");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Erreur lors de l\'envoi');
+      }
+
       setSubmitStatus("success");
       setFormState({ nom: "", email: "", objet: "", message: "" });
-    } catch {
+      setErrors({});
+    } catch (error) {
+      console.error('Erreur:', error);
       setSubmitStatus("error");
     }
   };

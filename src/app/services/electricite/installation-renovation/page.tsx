@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Installation & Rénovation Électrique | S Connect France",
-  description: "Installation et rénovation électrique complète à Clichy et Île-de-France. Création de réseaux, tableaux électriques, éclairage, prises. Devis gratuit.",
+  title: "Installation & Rénovation Électrique | S'Connect",
+  description: "Installation et rénovation électrique complète en Île-de-France. Création de réseaux, tableaux électriques, éclairage LED, prises, bornes de recharge. Devis gratuit, intervention rapide.",
+  keywords: ["installation électrique", "rénovation électrique", "tableau électrique", "éclairage LED", "borne recharge", "électricien installation", "mise en service électrique"],
+  openGraph: {
+    title: "Installation & Rénovation Électrique | S'Connect",
+    description: "Installation et rénovation électrique complète : réseaux, tableaux, éclairage. Intervention en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const prestations = [

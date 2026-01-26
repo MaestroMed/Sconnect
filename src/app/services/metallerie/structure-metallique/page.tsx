@@ -3,8 +3,14 @@ import Link from "next/link";
 import { Shield, ChevronRight, Phone, Check, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Structures Métalliques | Garde-corps, Escaliers, Verrières",
-  description: "Conception et réalisation de structures métalliques en Île-de-France : garde-corps, escaliers, verrières, pergolas. Devis gratuit.",
+  title: "Structures Métalliques | Garde-corps, Escaliers, Verrières | S'Connect",
+  description: "Conception et réalisation de structures métalliques en Île-de-France : garde-corps, escaliers métalliques, verrières, pergolas, charpentes. Fabrication sur mesure. Devis gratuit.",
+  keywords: ["structure métallique", "garde-corps", "escalier métallique", "verrière", "pergola", "charpente métallique", "ferronnerie art"],
+  openGraph: {
+    title: "Structures Métalliques Sur Mesure | S'Connect",
+    description: "Garde-corps, escaliers, verrières et structures métalliques personnalisées en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const features = [
@@ -126,6 +132,8 @@ export default function StructureMetalliquePage() {
     </>
   );
 }
+
+
 
 
 

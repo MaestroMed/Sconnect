@@ -252,3 +252,5 @@ UNION ALL SELECT 'brands', COUNT(*) FROM brands;
 
 
 
+
+

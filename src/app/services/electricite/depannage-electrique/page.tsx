@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Dépannage Électrique Urgent 24h/24 | S Connect France",
-  description: "Dépannage électrique urgent 24h/24, 7j/7 à Clichy et Île-de-France. Intervention sous 2h. Panne, court-circuit, disjoncteur.",
+  title: "Dépannage Électrique Urgent 24h/24 | S'Connect",
+  description: "Dépannage électrique urgent 24h/24, 7j/7 en Île-de-France. Intervention rapide sous 2h : panne de courant, court-circuit, disjoncteur qui saute. Électricien disponible jour et nuit.",
+  keywords: ["dépannage électrique", "électricien urgence", "panne électrique", "court-circuit", "disjoncteur qui saute", "dépannage 24h", "urgence électrique"],
+  openGraph: {
+    title: "Dépannage Électrique Urgent 24h/24 | S'Connect",
+    description: "Dépannage électrique d'urgence en Île-de-France. Intervention rapide 24h/24, 7j/7.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const prestations = [

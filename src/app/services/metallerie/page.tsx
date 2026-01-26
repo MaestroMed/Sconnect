@@ -3,8 +3,26 @@ import Link from "next/link";
 import { Wrench, ChevronRight, Phone, DoorOpen, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Métallerie | Fabrication Portails, Portes & Structures",
-  description: "Services de métallerie en Île-de-France : fabrication de portails sur mesure, portes métalliques et structures en acier. Devis gratuit.",
+  title: "Métallerie | Fabrication Portails, Portes & Structures Métalliques | S'Connect",
+  description: "Métallerie professionnelle en Île-de-France : fabrication sur mesure de portails, portes métalliques, garde-corps et structures en acier. Devis gratuit, pose incluse.",
+  keywords: [
+    "métallerie",
+    "fabrication portail",
+    "porte métallique",
+    "structure acier",
+    "garde-corps",
+    "métallerie Île-de-France",
+    "portail sur mesure",
+    "ferronnerie",
+    "menuiserie métallique",
+    "soudure acier",
+  ],
+  openGraph: {
+    title: "Métallerie | Portails & Structures sur Mesure | S'Connect",
+    description: "Fabrication et pose de portails, portes métalliques et structures en acier. Travail sur mesure en Île-de-France.",
+    images: ["/og-image.jpg"],
+    type: "website",
+  },
 };
 
 const services = [
@@ -125,6 +143,8 @@ export default function MetalleriePage() {
     </>
   );
 }
+
+
 
 
 

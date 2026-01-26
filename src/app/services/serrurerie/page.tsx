@@ -3,8 +3,26 @@ import Link from "next/link";
 import { Lock, DoorOpen, KeyRound, Shield, ChevronRight, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Serrurerie | Ouverture, Remplacement & Blindage",
-  description: "Services de serrurerie à Clichy et Île-de-France : ouverture de porte 24h/24, remplacement de serrure, blindage de porte. Intervention rapide.",
+  title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S'Connect",
+  description: "Services de serrurerie professionnelle en Île-de-France : ouverture de porte 24h/24, remplacement de serrure, blindage de porte. Intervention rapide, devis gratuit. Serrurier certifié.",
+  keywords: [
+    "serrurier",
+    "ouverture porte",
+    "serrurerie Île-de-France",
+    "serrurier Paris",
+    "remplacement serrure",
+    "blindage porte",
+    "serrurier 24h",
+    "porte claquée",
+    "clé cassée",
+    "serrure bloquée",
+  ],
+  openGraph: {
+    title: "Serrurerie 24h/24 | Ouverture & Blindage | S'Connect",
+    description: "Intervention rapide en serrurerie : ouverture de porte, remplacement de serrure, blindage. Disponible 24h/24.",
+    images: ["/og-image.jpg"],
+    type: "website",
+  },
 };
 
 const services = [

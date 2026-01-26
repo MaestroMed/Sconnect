@@ -3,8 +3,14 @@ import Link from "next/link";
 import { DoorOpen, ChevronRight, Phone, Check, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Fabrication de Portes Métalliques | Portes Sur Mesure",
-  description: "Fabrication de portes métalliques sur mesure en Île-de-France : portes d'entrée, de garage, techniques et coupe-feu. Devis gratuit.",
+  title: "Fabrication de Portes Métalliques Sur Mesure | S'Connect",
+  description: "Fabrication et pose de portes métalliques sur mesure en Île-de-France : portes d'entrée, de garage, techniques et coupe-feu en acier. Conception personnalisée. Devis gratuit.",
+  keywords: ["porte métallique", "fabrication porte acier", "porte sur mesure", "porte garage métallique", "porte coupe-feu", "porte technique"],
+  openGraph: {
+    title: "Fabrication de Portes Métalliques | S'Connect",
+    description: "Portes métalliques sur mesure : entrée, garage, coupe-feu. Fabrication et pose en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const features = [
@@ -127,6 +133,8 @@ export default function FabricationPortePage() {
     </>
   );
 }
+
+
 
 
 

@@ -3,8 +3,14 @@ import Link from "next/link";
 import { Wrench, ChevronRight, Phone, Check, ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Fabrication de Portails | Portails Sur Mesure",
-  description: "Fabrication de portails sur mesure en Île-de-France : portails coulissants, battants, motorisés en acier, aluminium ou fer forgé. Devis gratuit.",
+  title: "Fabrication de Portails Sur Mesure | Portails Coulissants & Battants | S'Connect",
+  description: "Fabrication et installation de portails sur mesure en Île-de-France : portails coulissants, battants, motorisés en acier, aluminium ou fer forgé. Conception, fabrication, pose. Devis gratuit.",
+  keywords: ["fabrication portail", "portail sur mesure", "portail coulissant", "portail battant", "portail motorisé", "portail acier", "portail fer forgé"],
+  openGraph: {
+    title: "Fabrication de Portails Sur Mesure | S'Connect",
+    description: "Conception et fabrication de portails personnalisés. Métallerie en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const features = [
@@ -153,6 +159,8 @@ export default function FabricationPortailPage() {
     </>
   );
 }
+
+
 
 
 

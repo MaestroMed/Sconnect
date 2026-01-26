@@ -43,3 +43,5 @@ SELECT 'Storage policies updated for sconnectfrance bucket!' as status;
 
 
 
+
+

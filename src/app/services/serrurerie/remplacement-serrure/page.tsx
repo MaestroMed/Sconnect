@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Remplacement de Serrure | Serrures A2P | S Connect France",
-  description: "Changement de serrure à Clichy et Île-de-France. Serrures haute sécurité certifiées A2P. Fichet, Vachette, Bricard. Devis gratuit.",
+  title: "Remplacement de Serrure | Pose & Installation | S'Connect",
+  description: "Remplacement et installation de serrures en Île-de-France. Serrures certifiées A2P, multipoints, haute sécurité. Devis gratuit, pose rapide par serrurier professionnel.",
+  keywords: ["remplacement serrure", "pose serrure", "serrure A2P", "serrure multipoints", "changement serrure", "serrure sécurité", "installation serrure"],
+  openGraph: {
+    title: "Remplacement de Serrure | S'Connect",
+    description: "Installation et remplacement de serrures certifiées. Intervention rapide en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const prestations = [

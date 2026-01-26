@@ -124,15 +124,63 @@ export default function DemandeForm({ type }: DemandeFormProps) {
     setSubmitStatus("loading");
 
     try {
-      // Simuler l'envoi
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Préparer les données selon le type de demande
+      const apiEndpoint = type === "devis" ? "/api/devis" : "/api/intervention";
+      
+      // Mapper les données du formulaire au format attendu par l'API
+      const requestData = type === "devis" ? {
+        civilite: data.civilite,
+        nom: data.nom,
+        prenom: data.prenom,
+        email: data.email,
+        telephone: data.telephone,
+        adresse: data.adresseIntervention.numeroRue,
+        codePostal: data.adresseIntervention.codePostal,
+        ville: data.adresseIntervention.ville,
+        typeBatiment: data.adresseIntervention.typeBatiment,
+        services: data.services || [],
+        delai: data.urgence === "urgence" ? "Urgent (moins de 48h)" : "Sous 1 semaine",
+        description: data.description || "",
+        budget: data.budgetEstime,
+      } : {
+        civilite: data.civilite,
+        nom: data.nom,
+        prenom: data.prenom,
+        email: data.email,
+        telephone: data.telephone,
+        adresse: data.adresseIntervention.numeroRue,
+        codePostal: data.adresseIntervention.codePostal,
+        ville: data.adresseIntervention.ville,
+        typeBatiment: data.adresseIntervention.typeBatiment,
+        typeIntervention: data.services?.[0] || "Intervention urgente",
+        description: data.description || "",
+        disponibilite: data.urgence === "urgence" ? "Immédiatement" : "Selon disponibilités",
+      };
 
-      // En production, envoyer à l'API
-      console.log("Form data:", data);
-      console.log("Files:", files);
+      // Envoyer à l'API
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Erreur lors de l\'envoi');
+      }
+
+      // TODO: Upload files if any (voir étape upload d'images)
+      if (files.length > 0) {
+        console.log('Files à uploader:', files);
+        // L'upload de fichiers sera implémenté dans la phase d'optimisation
+      }
 
       setSubmitStatus("success");
-    } catch {
+    } catch (error) {
+      console.error('Erreur:', error);
       setSubmitStatus("error");
     }
   };

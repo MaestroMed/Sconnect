@@ -3,8 +3,26 @@ import Link from "next/link";
 import { KeyRound, Video, CreditCard, ChevronRight, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contrôle d'accès | Interphonie & Badges",
-  description: "Installation de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes. Devis gratuit.",
+  title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S'Connect",
+  description: "Installation professionnelle de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes pour immeubles, entreprises et particuliers. Devis gratuit.",
+  keywords: [
+    "contrôle accès",
+    "interphonie",
+    "vidéophonie",
+    "badges",
+    "digicodes",
+    "contrôle accès Île-de-France",
+    "interphone Paris",
+    "installation interphone",
+    "système accès",
+    "sécurité immeuble",
+  ],
+  openGraph: {
+    title: "Contrôle d'Accès | Interphonie & Badges | S'Connect",
+    description: "Installation de systèmes de contrôle d'accès : interphonie, badges, digicodes. Intervention rapide en Île-de-France.",
+    images: ["/og-image.jpg"],
+    type: "website",
+  },
 };
 
 const services = [

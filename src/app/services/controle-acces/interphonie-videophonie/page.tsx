@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Interphonie & Vidéophonie | S Connect France",
-  description: "Installation et dépannage d'interphones et vidéophones à Clichy et Île-de-France. Copropriétés, particuliers, entreprises. Devis gratuit.",
+  title: "Interphonie & Vidéophonie | Installation & Dépannage | S'Connect",
+  description: "Installation et dépannage d'interphones et vidéophones en Île-de-France. Systèmes audio et vidéo pour copropriétés, particuliers, entreprises. Devis gratuit, intervention rapide.",
+  keywords: ["interphone", "vidéophone", "interphonie", "vidéophonie", "installation interphone", "dépannage interphone", "interphone copropriété", "visiophone"],
+  openGraph: {
+    title: "Interphonie & Vidéophonie | S'Connect",
+    description: "Installation et dépannage d'interphones et vidéophones. Intervention en Île-de-France.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 const prestations = [
