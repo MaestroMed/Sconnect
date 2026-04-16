@@ -185,6 +185,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Pages légales (basse priorité mais indexables)
+  const legalPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/mentions-legales`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/politique-confidentialite`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/cookies`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/conditions-generales`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ];
+
   return [
     ...mainPages,
     ...electricitePages,
@@ -192,5 +220,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serrureriePages,
     ...metalleriePages,
     ...blogPages,
+    ...legalPages,
   ];
 }

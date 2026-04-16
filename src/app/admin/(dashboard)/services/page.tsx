@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Save, Loader2, CheckCircle, ChevronDown, ChevronUp, Edit2, Plus, Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface ServicePrestation {
   title: string
@@ -75,13 +76,15 @@ export default function ServicesAdminPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-
-      if (res.ok) {
-        setSaved(true)
-        setTimeout(() => setSaved(false), 3000)
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setSaved(true)
+      toast.success('Services enregistrés')
+      setTimeout(() => setSaved(false), 3000)
     } catch (error) {
       console.error('Error saving services:', error)
+      toast.error('Enregistrement impossible', {
+        description: error instanceof Error ? error.message : 'Erreur inconnue',
+      })
     } finally {
       setSaving(false)
     }

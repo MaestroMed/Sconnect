@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, Loader2, X, Save, ExternalLink } from "lucide-react";
+import { toast } from "sonner";
 
 interface Brand {
   id: string;
@@ -74,30 +75,37 @@ export default function BrandsPage() {
 
   const handleSave = async () => {
     setSaving(true);
-
-    if (editing) {
-      await fetch("/api/admin/brands", {
-        method: "PUT",
+    try {
+      const res = await fetch("/api/admin/brands", {
+        method: editing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editing.id, ...form }),
+        body: JSON.stringify(editing ? { id: editing.id, ...form } : form),
       });
-    } else {
-      await fetch("/api/admin/brands", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchBrands();
+      toast.success(editing ? "Marque mise à jour" : "Marque ajoutée");
+      closeModal();
+    } catch (error) {
+      toast.error("Enregistrement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
       });
+    } finally {
+      setSaving(false);
     }
-
-    await fetchBrands();
-    setSaving(false);
-    closeModal();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Supprimer cette marque ?")) return;
-    await fetch(`/api/admin/brands?id=${id}`, { method: "DELETE" });
-    await fetchBrands();
+    try {
+      const res = await fetch(`/api/admin/brands?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchBrands();
+      toast.success("Marque supprimée");
+    } catch (error) {
+      toast.error("Suppression impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
   };
 
   if (loading) {

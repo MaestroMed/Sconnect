@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Plus, Pencil, Trash2, Loader2, X, Save, Upload, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 interface Realization {
   id: string;
@@ -144,30 +145,37 @@ export default function RealizationsPage() {
 
   const handleSave = async () => {
     setSaving(true);
-
-    if (editing) {
-      await fetch("/api/admin/realizations", {
-        method: "PUT",
+    try {
+      const res = await fetch("/api/admin/realizations", {
+        method: editing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editing.id, ...form }),
+        body: JSON.stringify(editing ? { id: editing.id, ...form } : form),
       });
-    } else {
-      await fetch("/api/admin/realizations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchRealizations();
+      toast.success(editing ? "Réalisation mise à jour" : "Réalisation ajoutée");
+      closeModal();
+    } catch (error) {
+      toast.error("Enregistrement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
       });
+    } finally {
+      setSaving(false);
     }
-
-    await fetchRealizations();
-    setSaving(false);
-    closeModal();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Supprimer cette réalisation ?")) return;
-    await fetch(`/api/admin/realizations?id=${id}`, { method: "DELETE" });
-    await fetchRealizations();
+    try {
+      const res = await fetch(`/api/admin/realizations?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchRealizations();
+      toast.success("Réalisation supprimée");
+    } catch (error) {
+      toast.error("Suppression impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
   };
 
   const ImageUploadButton = ({ 

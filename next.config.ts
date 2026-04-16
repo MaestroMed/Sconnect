@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -115,16 +116,34 @@ const nextConfig: NextConfig = {
   // Redirections
   async redirects() {
     return [
-      // Redirection www vers non-www (ou inverse selon votre config)
-      // {
-      //   source: '/:path*',
-      //   has: [{ type: 'host', value: 'www.sconnectfrance.fr' }],
-      //   destination: 'https://sconnectfrance.fr/:path*',
-      //   permanent: true,
-      // },
-    ]
+      // Legacy legal slug
+      {
+        source: '/confidentialite',
+        destination: '/politique-confidentialite',
+        permanent: true,
+      },
+    ];
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+// Only wire the Sentry build plugin when a DSN AND org/project are provided.
+// This keeps `npm run build` unchanged locally & in CI without secrets.
+const shouldUseSentry = Boolean(
+  process.env.SENTRY_DSN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
+);
+
+const composed = shouldUseSentry
+  ? withSentryConfig(nextConfig, {
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      silent: !process.env.CI,
+      widenClientFileUpload: true,
+      sourcemaps: { disable: false },
+      disableLogger: true,
+      reactComponentAnnotation: { enabled: false },
+    })
+  : nextConfig;
+
+export default withBundleAnalyzer(composed);
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Save, Eye, Upload, Image as ImageIcon, Type, MessageSquare, BarChart3, Star, Megaphone, Building2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface HomepageData {
   id: string
@@ -62,14 +63,13 @@ export default function HomepageAdminPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
-
-      if (res.ok) {
-        setMessage({ type: 'success', text: 'Modifications enregistrées avec succès !' })
-      } else {
-        setMessage({ type: 'error', text: 'Erreur lors de la sauvegarde' })
-      }
-    } catch {
-      setMessage({ type: 'error', text: 'Erreur de connexion' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setMessage({ type: 'success', text: 'Modifications enregistrées avec succès !' })
+      toast.success('Page d\'accueil enregistrée')
+    } catch (error) {
+      const description = error instanceof Error ? error.message : 'Erreur de connexion'
+      setMessage({ type: 'error', text: description })
+      toast.error('Enregistrement impossible', { description })
     } finally {
       setSaving(false)
     }

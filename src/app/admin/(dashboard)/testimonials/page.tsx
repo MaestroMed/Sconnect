@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, Loader2, X, Save, Star } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { Plus, Pencil, Trash2, Loader2, X, Save, Star, BadgeCheck } from "lucide-react";
+import { toast } from "sonner";
+import type { ColumnDef } from "@tanstack/react-table";
+import { DataTable } from "@/components/admin/DataTable";
 
 interface Testimonial {
   id: string;
@@ -86,31 +89,121 @@ export default function TestimonialsPage() {
 
   const handleSave = async () => {
     setSaving(true);
-
-    if (editing) {
-      await fetch("/api/admin/testimonials", {
-        method: "PUT",
+    try {
+      const res = await fetch("/api/admin/testimonials", {
+        method: editing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editing.id, ...form }),
+        body: JSON.stringify(editing ? { id: editing.id, ...form } : form),
       });
-    } else {
-      await fetch("/api/admin/testimonials", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchTestimonials();
+      toast.success(editing ? "Témoignage mis à jour" : "Témoignage ajouté");
+      closeModal();
+    } catch (error) {
+      toast.error("Enregistrement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
       });
+    } finally {
+      setSaving(false);
     }
-
-    await fetchTestimonials();
-    setSaving(false);
-    closeModal();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Supprimer ce témoignage ?")) return;
-    await fetch(`/api/admin/testimonials?id=${id}`, { method: "DELETE" });
-    await fetchTestimonials();
+    try {
+      const res = await fetch(`/api/admin/testimonials?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchTestimonials();
+      toast.success("Témoignage supprimé");
+    } catch (error) {
+      toast.error("Suppression impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
   };
+
+  const columns = useMemo<ColumnDef<Testimonial>[]>(
+    () => [
+      {
+        accessorKey: "name",
+        header: "Client",
+        cell: ({ row }) => {
+          const t = row.original;
+          return (
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <p className="font-medium text-foreground truncate">{t.name}</p>
+                {t.verified && (
+                  <BadgeCheck className="h-4 w-4 text-primary-600 dark:text-primary-300" aria-label="Vérifié" />
+                )}
+              </div>
+              <p className="text-xs text-foreground-muted line-clamp-1">{t.text}</p>
+            </div>
+          );
+        },
+      },
+      {
+        accessorKey: "rating",
+        header: "Note",
+        cell: ({ row }) => (
+          <div className="flex items-center gap-0.5">
+            {Array.from({ length: row.original.rating }).map((_, i) => (
+              <Star key={i} className="h-4 w-4 text-accent-400 fill-accent-400" />
+            ))}
+          </div>
+        ),
+      },
+      {
+        accessorKey: "service",
+        header: "Service",
+        cell: ({ row }) => (
+          <span className="text-sm text-foreground-muted">{row.original.service}</span>
+        ),
+      },
+      {
+        accessorKey: "location",
+        header: "Ville",
+        cell: ({ row }) => (
+          <span className="text-sm text-foreground-muted">{row.original.location}</span>
+        ),
+      },
+      {
+        accessorKey: "date",
+        header: "Date",
+        cell: ({ row }) =>
+          row.original.date ? (
+            <span className="text-sm text-foreground-muted">
+              {new Date(row.original.date).toLocaleDateString("fr-FR")}
+            </span>
+          ) : null,
+      },
+      {
+        id: "actions",
+        header: () => <span className="sr-only">Actions</span>,
+        enableSorting: false,
+        cell: ({ row }) => (
+          <div className="flex justify-end gap-1">
+            <button
+              onClick={() => openModal(row.original)}
+              className="p-2 text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-primary-500/10 rounded-lg transition-colors"
+              aria-label="Modifier"
+            >
+              <Pencil className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => handleDelete(row.original.id)}
+              className="p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10 rounded-lg transition-colors"
+              aria-label="Supprimer"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        ),
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   if (loading) {
     return (
@@ -124,72 +217,26 @@ export default function TestimonialsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-dark-900">Témoignages</h1>
-          <p className="text-dark-500">Gérez les avis de vos clients</p>
+          <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            Témoignages
+          </h1>
+          <p className="text-foreground-muted">Gérez les avis de vos clients</p>
         </div>
         <button
           onClick={() => openModal()}
-          className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/25"
         >
           <Plus className="w-5 h-5" />
           Ajouter
         </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-dark-50">
-            <tr>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-dark-700">Client</th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-dark-700">Note</th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-dark-700 hidden md:table-cell">Service</th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-dark-700 hidden lg:table-cell">Ville</th>
-              <th className="px-4 py-3 text-right text-sm font-semibold text-dark-700">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-dark-100">
-            {testimonials.map((t) => (
-              <tr key={t.id} className="hover:bg-dark-50">
-                <td className="px-4 py-3">
-                  <div>
-                    <p className="font-medium text-dark-900">{t.name}</p>
-                    <p className="text-sm text-dark-500 line-clamp-1">{t.text}</p>
-                  </div>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    ))}
-                  </div>
-                </td>
-                <td className="px-4 py-3 hidden md:table-cell">
-                  <span className="text-sm text-dark-600">{t.service}</span>
-                </td>
-                <td className="px-4 py-3 hidden lg:table-cell">
-                  <span className="text-sm text-dark-600">{t.location}</span>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex justify-end gap-2">
-                    <button
-                      onClick={() => openModal(t)}
-                      className="p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-                    >
-                      <Pencil className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(t.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DataTable
+        columns={columns}
+        data={testimonials}
+        searchPlaceholder="Rechercher par client, service, ville…"
+        emptyMessage="Aucun témoignage pour le moment."
+      />
 
       {/* Modal */}
       {modalOpen && (
