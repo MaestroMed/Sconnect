@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { KeyRound, Video, CreditCard, ChevronRight, Phone } from "lucide-react";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S'Connect",
@@ -47,6 +48,12 @@ export default function ControleAccesPage() {
       <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-accent-950 py-20 md:py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-20" />
         <div className="container-custom relative z-10">
+          <div className="mb-6">
+            <Breadcrumbs
+              items={[{ label: "Services", href: "/services" }, { label: "Contrôle d'accès" }]}
+              light
+            />
+          </div>
           <div className="max-w-3xl">
             <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-accent-500/25">
               <KeyRound className="w-8 h-8 text-white" />
