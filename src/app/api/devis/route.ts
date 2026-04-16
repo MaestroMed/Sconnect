@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendDevisEmail } from '@/lib/email';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 
 // Schema de validation (réutilise le schema existant)
 const devisSchema = z.object({
@@ -20,6 +21,11 @@ const devisSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const id = getClientIdentifier(request, '/api/devis');
+  const limit = rateLimit({ identifier: id, limit: 3, windowMs: 10 * 60_000 });
+  const limited = rateLimitResponse(limit);
+  if (limited) return limited;
+
   try {
     // Parse et valide les données
     const body = await request.json();

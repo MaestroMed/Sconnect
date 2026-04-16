@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendContactEmail } from '@/lib/email';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 
 // Schema de validation
 const contactSchema = z.object({
@@ -11,6 +12,12 @@ const contactSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 5 requests / 10 min per IP
+  const id = getClientIdentifier(request, '/api/contact');
+  const limit = rateLimit({ identifier: id, limit: 5, windowMs: 10 * 60_000 });
+  const limited = rateLimitResponse(limit);
+  if (limited) return limited;
+
   try {
     // Parse et valide les données
     const body = await request.json();

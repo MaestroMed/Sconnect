@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import MetaThemeColor from "@/components/theme/MetaThemeColor";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -270,6 +271,7 @@ export default function RootLayout({
           Aller au contenu
         </a>
         <ThemeProvider>
+          <MetaThemeColor />
           {children}
           <Toaster
             position="top-right"

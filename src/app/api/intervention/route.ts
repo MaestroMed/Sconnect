@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendInterventionEmail } from '@/lib/email';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 
 // Schema de validation pour intervention urgente
 const interventionSchema = z.object({
@@ -19,6 +20,12 @@ const interventionSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  // Higher limit than devis since this is urgent
+  const id = getClientIdentifier(request, '/api/intervention');
+  const limit = rateLimit({ identifier: id, limit: 5, windowMs: 10 * 60_000 });
+  const limited = rateLimitResponse(limit);
+  if (limited) return limited;
+
   try {
     // Parse et valide les données
     const body = await request.json();

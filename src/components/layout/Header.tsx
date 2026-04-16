@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -109,10 +110,13 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               {siteConfig.logoUrl ? (
-                <img 
-                  src={siteConfig.logoUrl} 
+                <Image
+                  src={siteConfig.logoUrl}
                   alt={siteConfig.siteName}
+                  width={120}
+                  height={48}
                   className="h-12 w-auto object-contain"
+                  priority
                 />
               ) : (
                 <div className="relative">
