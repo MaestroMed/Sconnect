@@ -225,6 +225,14 @@
     pointer-events: none;
   }
 
+  /* Article body (MDX-rendered blog posts) */
+  .prose-article {
+    @apply text-lg text-foreground leading-relaxed;
+  }
+  .prose-article > :first-child {
+    @apply mt-0;
+  }
+
   /* 3D tilt (driven by useTilt hook) */
   .tilt-root {
     transform-style: preserve-3d;
