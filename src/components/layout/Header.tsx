@@ -15,6 +15,7 @@ import {
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import AvailabilityBadge from "@/components/ui/AvailabilityBadge";
+import DesktopNav from "@/components/layout/DesktopNav";
 
 const services = [
   {
@@ -130,86 +131,9 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => (
-                <div key={item.name} className="relative group">
-                  {item.hasDropdown ? (
-                    <button
-                      onMouseEnter={() => setIsServicesOpen(true)}
-                      onMouseLeave={() => setIsServicesOpen(false)}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                        pathname.startsWith("/services")
-                          ? "text-primary-600 bg-primary-50 dark:text-primary-300 dark:bg-primary-500/10"
-                          : "text-foreground hover:text-primary-600 hover:bg-primary-50 dark:hover:text-primary-300 dark:hover:bg-primary-500/10"
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isServicesOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                        pathname === item.href
-                          ? "text-primary-600 bg-primary-50 dark:text-primary-300 dark:bg-primary-500/10"
-                          : "text-foreground hover:text-primary-600 hover:bg-primary-50 dark:hover:text-primary-300 dark:hover:bg-primary-500/10"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-
-                  {/* Services Dropdown */}
-                  {item.hasDropdown && (
-                    <AnimatePresence>
-                      {isServicesOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          onMouseEnter={() => setIsServicesOpen(true)}
-                          onMouseLeave={() => setIsServicesOpen(false)}
-                          className="absolute top-full left-0 pt-2"
-                        >
-                          <div className="bg-surface-elevated/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-dark-900/15 dark:shadow-black/50 border border-border p-4 w-80">
-                            <div className="space-y-1">
-                              {services.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  href={service.href}
-                                  className="block p-3 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors group/item"
-                                >
-                                  <div className="font-semibold text-foreground group-hover/item:text-primary-600 dark:group-hover/item:text-primary-300 transition-colors">
-                                    {service.name}
-                                  </div>
-                                  <div className="text-sm text-foreground-muted">
-                                    {service.description}
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="mt-4 pt-4 border-t border-border">
-                              <Link
-                                href="/services"
-                                className="flex items-center justify-center gap-2 text-primary-600 dark:text-primary-300 font-semibold hover:text-primary-700 transition-colors"
-                              >
-                                Tous nos services
-                                <ChevronDown className="w-4 h-4 -rotate-90" />
-                              </Link>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
-                </div>
-              ))}
+            {/* Desktop Navigation (Radix) */}
+            <div className="hidden lg:flex">
+              <DesktopNav navigation={navigation} services={services} />
             </div>
 
             {/* CTA Buttons */}
