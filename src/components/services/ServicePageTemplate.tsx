@@ -20,6 +20,12 @@ import {
   generateFAQSchema,
   injectSchema,
 } from "@/lib/structured-data";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/primitives/Accordion";
 
 // Mapping des icônes par nom
 const iconMap = {
@@ -193,29 +199,32 @@ export default function ServicePageTemplate({
             </h2>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={faq.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-500/15 flex items-center justify-center shrink-0">
-                    <HelpCircle className="w-5 h-5 text-primary-600 dark:text-primary-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-foreground mb-2">
-                      {faq.question}
-                    </h3>
-                    <p className="text-foreground-muted leading-relaxed">{faq.answer}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={faq.question}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem value={`faq-${index}`}>
+                    <AccordionTrigger>
+                      <span className="flex items-center gap-3">
+                        <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-500/15 dark:text-primary-300">
+                          <HelpCircle className="h-4 w-4" />
+                        </span>
+                        {faq.question}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="pl-11">{faq.answer}</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

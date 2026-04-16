@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
+import type { WeeklySchedule } from "@/lib/availability";
 
 export interface SiteConfigData {
   siteName: string;
@@ -18,6 +19,7 @@ export interface SiteConfigData {
     saturday: string;
     emergency: string;
   };
+  schedule?: WeeklySchedule;
   social: {
     facebook: string;
     linkedin: string;

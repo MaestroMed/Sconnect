@@ -221,7 +221,7 @@ export default function Footer() {
                 </div>
               </li>
               <li>
-                <AvailabilityBadge variant="dark" />
+                <AvailabilityBadge variant="dark" schedule={siteConfig.schedule} />
               </li>
             </ul>
           </div>

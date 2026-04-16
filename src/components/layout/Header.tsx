@@ -81,7 +81,7 @@ export default function Header() {
       <div className="bg-dark-900 dark:bg-dark-950 text-white py-2 hidden md:block border-b border-dark-800/60">
         <div className="container-custom flex justify-between items-center text-sm">
           <div className="flex items-center gap-4">
-            <AvailabilityBadge variant="dark" />
+            <AvailabilityBadge variant="dark" schedule={siteConfig.schedule} />
             <span className="flex items-center gap-2 text-white/70">
               <AlertTriangle className="w-4 h-4 text-accent-400" />
               Urgences 24h/24
@@ -184,7 +184,7 @@ export default function Header() {
             >
               <div className="container-custom py-4 space-y-2">
                 <div className="flex justify-center py-2">
-                  <AvailabilityBadge />
+                  <AvailabilityBadge schedule={siteConfig.schedule} />
                 </div>
                 {navigation.map((item) => (
                   <div key={item.name}>
