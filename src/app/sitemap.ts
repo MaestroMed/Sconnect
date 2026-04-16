@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getRealizations } from "@/lib/data-service";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -20,6 +21,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     })),
   ];
+
+  const { realizations } = getRealizations();
+  const realizationPages: MetadataRoute.Sitemap = realizations.map((r) => ({
+    url: `${baseUrl}/realisations/${r.id}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: r.featured ? 0.7 : 0.6,
+  }));
 
   // Pages principales
   const mainPages: MetadataRoute.Sitemap = [
@@ -220,6 +229,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serrureriePages,
     ...metalleriePages,
     ...blogPages,
+    ...realizationPages,
     ...legalPages,
   ];
 }

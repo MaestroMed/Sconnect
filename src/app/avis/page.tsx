@@ -188,11 +188,11 @@ export default function AvisPage() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-3xl p-8 shadow-2xl"
+              className="bg-surface-elevated rounded-3xl p-8 shadow-2xl border border-border"
             >
               <div className="flex items-center gap-6 mb-6">
                 <div className="text-center">
-                  <div className="font-display font-bold text-5xl text-dark-900">
+                  <div className="font-display font-bold text-5xl text-foreground">
                     {stats.average}
                   </div>
                   <div className="flex gap-1 mt-2">
@@ -204,12 +204,12 @@ export default function AvisPage() {
                     ))}
                   </div>
                 </div>
-                <div className="h-16 w-px bg-dark-200" />
+                <div className="h-16 w-px bg-border" />
                 <div>
-                  <div className="font-bold text-2xl text-dark-900">
+                  <div className="font-bold text-2xl text-foreground">
                     {stats.total} avis
                   </div>
-                  <div className="text-dark-500">clients vérifiés</div>
+                  <div className="text-foreground-muted">clients vérifiés</div>
                 </div>
               </div>
 
@@ -217,10 +217,10 @@ export default function AvisPage() {
                 {stats.distribution.map((item) => (
                   <div key={item.stars} className="flex items-center gap-3">
                     <div className="flex items-center gap-1 w-16">
-                      <span className="text-sm text-dark-600">{item.stars}</span>
+                      <span className="text-sm text-foreground-muted">{item.stars}</span>
                       <Star className="w-4 h-4 text-accent-400 fill-accent-400" />
                     </div>
-                    <div className="flex-1 h-2 bg-dark-100 rounded-full overflow-hidden">
+                    <div className="flex-1 h-2 bg-surface-muted rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${item.percentage}%` }}
@@ -228,7 +228,7 @@ export default function AvisPage() {
                         className="h-full bg-gradient-to-r from-primary-500 to-electric-500 rounded-full"
                       />
                     </div>
-                    <span className="text-sm text-dark-500 w-12 text-right">
+                    <span className="text-sm text-foreground-muted w-12 text-right">
                       {item.count}
                     </span>
                   </div>
@@ -240,7 +240,7 @@ export default function AvisPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           {/* Filter */}
           <motion.div
@@ -259,7 +259,7 @@ export default function AvisPage() {
                 className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${
                   activeFilter === filter
                     ? "bg-primary-600 text-white shadow-lg shadow-primary-500/25"
-                    : "bg-dark-100 text-dark-600 hover:bg-dark-200"
+                    : "bg-surface-muted text-foreground-muted hover:bg-surface-elevated border border-border"
                 }`}
               >
                 {filter}
@@ -279,7 +279,7 @@ export default function AvisPage() {
                 className="card p-6"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <Quote className="w-10 h-10 text-primary-100" />
+                  <Quote className="w-10 h-10 text-primary-200 dark:text-primary-500/40" />
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -287,29 +287,29 @@ export default function AvisPage() {
                         className={`w-4 h-4 ${
                           i < testimonial.rating
                             ? "text-accent-400 fill-accent-400"
-                            : "text-dark-200"
+                            : "text-border"
                         }`}
                       />
                     ))}
                   </div>
                 </div>
-                <p className="text-dark-700 leading-relaxed mb-6">
+                <p className="text-foreground leading-relaxed mb-6">
                   {testimonial.text}
                 </p>
-                <div className="pt-4 border-t border-dark-100">
+                <div className="pt-4 border-t border-border">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="font-semibold text-dark-900">
+                        <p className="font-semibold text-foreground">
                           {testimonial.name}
                         </p>
                         {testimonial.verified && (
-                          <span className="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                          <span className="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-500/10 px-2 py-0.5 rounded-full">
                             Vérifié
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-dark-500">
+                      <p className="text-sm text-foreground-muted">
                         {testimonial.location} • {testimonial.date}
                       </p>
                     </div>
@@ -340,7 +340,7 @@ export default function AvisPage() {
           )}
 
           {filteredTestimonials.length === 0 && (
-            <p className="text-center text-dark-500 py-12">
+            <p className="text-center text-foreground-muted py-12">
               Aucun avis dans cette catégorie pour le moment.
             </p>
           )}

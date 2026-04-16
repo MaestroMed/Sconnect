@@ -130,6 +130,8 @@ export interface Realization {
   serviceType: string;
   description: string;
   image: string;
+  imageBefore?: string;
+  imageAfter?: string;
   featured: boolean;
 }
 
