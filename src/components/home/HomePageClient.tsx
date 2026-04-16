@@ -344,12 +344,12 @@ export default function HomePageClient({
                   href={category.href}
                   className={`block p-6 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${
                     category.color === "primary"
-                      ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-white"
+                      ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-surface dark:border-primary-500/30 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted"
                       : category.color === "accent"
-                      ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-white"
+                      ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-surface dark:border-accent-500/30 dark:hover:border-accent-400 dark:from-accent-500/10 dark:to-surface-muted"
                       : category.color === "orange"
-                      ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-white"
-                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-white"
+                      ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-surface dark:border-orange-500/30 dark:hover:border-orange-400 dark:from-orange-500/10 dark:to-surface-muted"
+                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-surface dark:border-green-500/30 dark:hover:border-green-400 dark:from-green-500/10 dark:to-surface-muted"
                   }`}
                 >
                   <div
@@ -365,19 +365,19 @@ export default function HomePageClient({
                   >
                     <category.icon className="w-7 h-7" />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">
                     {category.title}
                   </h3>
-                  <p className="text-dark-600 text-sm mb-4">{category.description}</p>
+                  <p className="text-foreground-muted text-sm mb-4">{category.description}</p>
                   <span
                     className={`inline-flex items-center gap-2 font-semibold text-sm ${
                       category.color === "primary"
-                        ? "text-primary-600"
+                        ? "text-primary-600 dark:text-primary-300"
                         : category.color === "accent"
-                        ? "text-accent-600"
+                        ? "text-accent-600 dark:text-accent-300"
                         : category.color === "orange"
-                        ? "text-orange-600"
-                        : "text-green-600"
+                        ? "text-orange-600 dark:text-orange-300"
+                        : "text-green-600 dark:text-green-300"
                     }`}
                   >
                     Découvrir

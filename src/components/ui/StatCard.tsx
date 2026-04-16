@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface StatCardProps {
@@ -24,9 +24,15 @@ export default function StatCard({
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (!isInView) return;
+
+    if (reduce) {
+      setCount(value);
+      return;
+    }
 
     const duration = 2000;
     const steps = 60;
@@ -45,14 +51,14 @@ export default function StatCard({
     }, stepDuration);
 
     return () => clearInterval(timer);
-  }, [isInView, value]);
+  }, [isInView, value, reduce]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
       className="text-center group"
     >

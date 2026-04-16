@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, ArrowUpRight } from "lucide-react";
 
 interface RealizationCardProps {
@@ -32,12 +32,14 @@ export default function RealizationCard({
   image,
   index = 0,
 }: RealizationCardProps) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      viewport={{ once: true }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      whileHover={reduce ? undefined : { y: -4 }}
     >
       <Link href={`/realisations/${id}`} className="block group">
         <div className="card overflow-hidden">
@@ -53,20 +55,20 @@ export default function RealizationCard({
               <span
                 className={`${
                   categoryColors[category] || "bg-dark-600"
-                } text-white text-sm font-semibold px-3 py-1 rounded-full`}
+                } text-white text-sm font-semibold px-3 py-1 rounded-full shadow-lg`}
               >
                 {category}
               </span>
             </div>
-            <div className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+            <div className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
               <ArrowUpRight className="w-5 h-5 text-primary-600" />
             </div>
           </div>
           <div className="p-5">
-            <h3 className="font-display font-bold text-lg text-dark-900 mb-2 group-hover:text-primary-600 transition-colors">
+            <h3 className="font-display font-bold text-lg text-foreground mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-300 transition-colors">
               {title}
             </h3>
-            <div className="flex items-center justify-between text-sm text-dark-500">
+            <div className="flex items-center justify-between text-sm text-foreground-muted">
               <span>{type}</span>
               <span className="flex items-center gap-1">
                 <MapPin className="w-4 h-4" />
