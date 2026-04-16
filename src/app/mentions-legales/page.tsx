@@ -38,16 +38,16 @@ export default function MentionsLegalesPage() {
       </section>
 
       {/* Contenu */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom max-w-4xl">
           <div className="prose prose-lg max-w-none">
             {/* Éditeur du site */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <Building2 className="w-6 h-6 text-primary-600" />
-                <h2 className="text-2xl font-bold text-dark-900 m-0">Éditeur du site</h2>
+                <h2 className="text-2xl font-bold text-foreground m-0">Éditeur du site</h2>
               </div>
-              <div className="bg-dark-50 p-6 rounded-xl">
+              <div className="bg-surface-muted p-6 rounded-xl">
                 <p className="mb-2"><strong>Raison sociale :</strong> S'Connect</p>
                 <p className="mb-2"><strong>Forme juridique :</strong> [À COMPLÉTER - SARL, SAS, etc.]</p>
                 <p className="mb-2"><strong>Capital social :</strong> [À COMPLÉTER]</p>
@@ -62,15 +62,15 @@ export default function MentionsLegalesPage() {
 
             {/* Directeur de publication */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Directeur de la publication</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Directeur de la publication</h2>
               <p><strong>Nom :</strong> [À COMPLÉTER]</p>
               <p><strong>Fonction :</strong> [À COMPLÉTER - Gérant, Président, etc.]</p>
             </div>
 
             {/* Hébergement */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Hébergement du site</h2>
-              <div className="bg-dark-50 p-6 rounded-xl">
+              <h2 className="text-2xl font-bold text-foreground mb-4">Hébergement du site</h2>
+              <div className="bg-surface-muted p-6 rounded-xl">
                 <p className="mb-2"><strong>Hébergeur :</strong> Vercel Inc.</p>
                 <p className="mb-2"><strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, USA</p>
                 <p className="mb-0"><strong>Site web :</strong> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-700">vercel.com</a></p>
@@ -81,7 +81,7 @@ export default function MentionsLegalesPage() {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <Shield className="w-6 h-6 text-primary-600" />
-                <h2 className="text-2xl font-bold text-dark-900 m-0">Propriété intellectuelle</h2>
+                <h2 className="text-2xl font-bold text-foreground m-0">Propriété intellectuelle</h2>
               </div>
               <p>
                 L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle.
@@ -94,7 +94,7 @@ export default function MentionsLegalesPage() {
 
             {/* Données personnelles */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Protection des données personnelles</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Protection des données personnelles</h2>
               <p>
                 Conformément à la loi "Informatique et Libertés" du 6 janvier 1978 modifiée et au Règlement Général sur la Protection des Données (RGPD),
                 vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données personnelles.
@@ -109,7 +109,7 @@ export default function MentionsLegalesPage() {
 
             {/* Cookies */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Cookies</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Cookies</h2>
               <p>
                 Ce site utilise des cookies pour améliorer l'expérience utilisateur et réaliser des statistiques de visite.
                 Pour plus d'informations sur les cookies et leur gestion, consultez notre <Link href="/cookies" className="text-primary-600 hover:text-primary-700 font-semibold">politique cookies</Link>.
@@ -118,7 +118,7 @@ export default function MentionsLegalesPage() {
 
             {/* Responsabilité */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Limitation de responsabilité</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Limitation de responsabilité</h2>
               <p>
                 Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement remis à jour,
                 mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes.
@@ -132,13 +132,13 @@ export default function MentionsLegalesPage() {
 
             {/* Crédits */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Crédits</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Crédits</h2>
               <p className="mb-2"><strong>Conception et développement :</strong> [À COMPLÉTER]</p>
               <p className="mb-0"><strong>Crédits photos :</strong> [À COMPLÉTER si applicable]</p>
             </div>
 
             {/* Date MAJ */}
-            <div className="text-sm text-dark-500 border-t border-dark-200 pt-6 mt-12">
+            <div className="text-sm text-foreground-muted border-t border-border pt-6 mt-12">
               <p>Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
           </div>

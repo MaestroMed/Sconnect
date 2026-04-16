@@ -117,7 +117,7 @@ export default function MarquesPage() {
       </section>
 
       {/* Brands Grid */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Marques"
@@ -137,20 +137,20 @@ export default function MarquesPage() {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="font-display font-bold text-2xl text-dark-900">
+                    <h3 className="font-display font-bold text-2xl text-foreground">
                       {brand.name}
                     </h3>
                     <span className="text-sm text-primary-600 font-medium">
                       {brand.category}
                     </span>
                   </div>
-                  <div className="w-16 h-16 bg-dark-100 rounded-xl flex items-center justify-center">
-                    <span className="text-xl font-bold text-dark-400">
+                  <div className="w-16 h-16 bg-surface-muted rounded-xl flex items-center justify-center">
+                    <span className="text-xl font-bold text-foreground-muted">
                       {brand.name.charAt(0)}
                     </span>
                   </div>
                 </div>
-                <p className="text-dark-600 mb-6 leading-relaxed">
+                <p className="text-foreground-muted mb-6 leading-relaxed">
                   {brand.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -170,7 +170,7 @@ export default function MarquesPage() {
       </section>
 
       {/* Pourquoi ces marques */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Notre Engagement"
@@ -210,10 +210,10 @@ export default function MarquesPage() {
                 <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-500/25">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {item.title}
                 </h3>
-                <p className="text-dark-600">{item.description}</p>
+                <p className="text-foreground-muted">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -221,7 +221,7 @@ export default function MarquesPage() {
       </section>
 
       {/* Certifications */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Certifications"
@@ -242,10 +242,10 @@ export default function MarquesPage() {
                 <div className="w-20 h-20 mx-auto bg-primary-100 rounded-full flex items-center justify-center mb-6">
                   <cert.icon className="w-10 h-10 text-primary-600" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
+                <h3 className="font-display font-bold text-xl text-foreground mb-2">
                   {cert.name}
                 </h3>
-                <p className="text-dark-600">{cert.description}</p>
+                <p className="text-foreground-muted">{cert.description}</p>
               </motion.div>
             ))}
           </div>

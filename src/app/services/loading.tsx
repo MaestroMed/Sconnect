@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 
 export default function ServicesLoading() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       {/* Hero Skeleton */}
       <div className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-28">
         <div className="container-custom">
@@ -20,7 +20,7 @@ export default function ServicesLoading() {
           <div className="grid md:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-64 bg-dark-100 rounded-2xl" />
+                <div className="h-64 bg-surface-muted rounded-2xl" />
               </div>
             ))}
           </div>
@@ -29,7 +29,7 @@ export default function ServicesLoading() {
 
       {/* Loading indicator */}
       <div className="fixed bottom-8 right-8">
-        <div className="bg-white rounded-full shadow-xl p-4">
+        <div className="bg-surface rounded-full shadow-xl p-4">
           <Loader2 className="w-6 h-6 text-primary-600 animate-spin" />
         </div>
       </div>

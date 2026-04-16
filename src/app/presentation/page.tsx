@@ -179,7 +179,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Notre histoire */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Notre Histoire"
@@ -215,10 +215,10 @@ export default function PresentationPage() {
                     <span className="inline-block px-3 py-1 bg-primary-100 text-primary-700 font-bold rounded-full text-sm mb-2">
                       {item.year}
                     </span>
-                    <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
+                    <h3 className="font-display font-bold text-xl text-foreground mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-dark-600">{item.description}</p>
+                    <p className="text-foreground-muted">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -228,7 +228,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Nos valeurs */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Valeurs"
@@ -249,10 +249,10 @@ export default function PresentationPage() {
                 <div className="w-14 h-14 mx-auto bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-500/25">
                   <value.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {value.title}
                 </h3>
-                <p className="text-dark-600">{value.description}</p>
+                <p className="text-foreground-muted">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -260,7 +260,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Certifications */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Certifications"
@@ -281,10 +281,10 @@ export default function PresentationPage() {
                 <div className="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center mb-4">
                   <cert.icon className="w-8 h-8 text-primary-600" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-1">
+                <h3 className="font-display font-bold text-lg text-foreground mb-1">
                   {cert.name}
                 </h3>
-                <p className="text-sm text-dark-500">{cert.description}</p>
+                <p className="text-sm text-foreground-muted">{cert.description}</p>
               </motion.div>
             ))}
           </div>
@@ -320,7 +320,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Zone d'intervention */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -332,16 +332,16 @@ export default function PresentationPage() {
               <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700">
                 Zone d&apos;intervention
               </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
                 Basés à Clichy, nous rayonnons sur toute l&apos;Île-de-France
               </h2>
-              <p className="text-lg text-dark-600 mb-6 leading-relaxed">
+              <p className="text-lg text-foreground-muted mb-6 leading-relaxed">
                 Notre siège est situé à Clichy (92110), au cœur des Hauts-de-Seine.
                 Nous intervenons rapidement dans tout le département et au-delà,
                 couvrant l&apos;ensemble de la région parisienne.
               </p>
               <div className="space-y-3 mb-8">
-                <p className="font-semibold text-dark-900">
+                <p className="font-semibold text-foreground">
                   Secteurs d&apos;intervention prioritaires :
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -359,7 +359,7 @@ export default function PresentationPage() {
                   ].map((city) => (
                     <span
                       key={city}
-                      className="px-3 py-1 bg-dark-100 rounded-full text-dark-700 text-sm"
+                      className="px-3 py-1 bg-surface-muted rounded-full text-foreground text-sm border border-border"
                     >
                       {city}
                     </span>
@@ -423,7 +423,7 @@ export default function PresentationPage() {
                 Demander un devis
                 <ChevronRight className="w-5 h-5" />
               </Link>
-              <Link href="/contact" className="btn-outline btn-lg text-white border-white hover:bg-white hover:text-dark-900">
+              <Link href="/contact" className="btn-outline btn-lg text-white border-white hover:bg-white hover:text-foreground">
                 Nous contacter
               </Link>
             </div>

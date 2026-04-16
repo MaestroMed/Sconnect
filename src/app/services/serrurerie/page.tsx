@@ -68,7 +68,7 @@ export default function SerrureriePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -80,10 +80,10 @@ export default function SerrureriePage() {
                 <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-6">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {service.name}
                 </h3>
-                <p className="text-dark-600 mb-4">{service.description}</p>
+                <p className="text-foreground-muted mb-4">{service.description}</p>
                 <span className="inline-flex items-center gap-2 text-green-600 font-semibold group-hover:gap-3 transition-all">
                   Découvrir
                   <ChevronRight className="w-4 h-4" />
@@ -102,7 +102,7 @@ export default function SerrureriePage() {
             <p className="text-green-100">Intervention rapide 24h/24, 7j/7.</p>
           </div>
           <div className="flex gap-4">
-            <Link href="/demande-intervention" className="btn bg-white text-green-600 hover:bg-green-50">
+            <Link href="/demande-intervention" className="btn bg-surface text-green-600 hover:bg-green-50">
               Intervention urgente
             </Link>
             <a href="tel:+33100000000" className="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">

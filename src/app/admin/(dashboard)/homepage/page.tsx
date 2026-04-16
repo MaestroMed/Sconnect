@@ -139,7 +139,7 @@ export default function HomepageAdminPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-display font-bold text-white">Page d&apos;accueil</h1>
-          <p className="text-dark-400 mt-1">Gérez le contenu de la page d&apos;accueil</p>
+          <p className="text-foreground-muted/80 mt-1">Gérez le contenu de la page d&apos;accueil</p>
         </div>
         <div className="flex items-center gap-3">
           <a
@@ -177,7 +177,7 @@ export default function HomepageAdminPage() {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
               activeTab === tab.id
                 ? 'bg-electric-500 text-white'
-                : 'text-dark-400 hover:text-white hover:bg-dark-700'
+                : 'text-foreground-muted/80 hover:text-white hover:bg-dark-700'
             }`}
           >
             <tab.icon className="w-4 h-4" />
@@ -202,7 +202,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.hero_title}
                   onChange={e => setData({ ...data, hero_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               
@@ -212,7 +212,7 @@ export default function HomepageAdminPage() {
                   value={data.hero_subtitle}
                   onChange={e => setData({ ...data, hero_subtitle: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               
@@ -223,7 +223,7 @@ export default function HomepageAdminPage() {
                     type="text"
                     value={data.hero_cta_primary}
                     onChange={e => setData({ ...data, hero_cta_primary: e.target.value })}
-                    className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -232,7 +232,7 @@ export default function HomepageAdminPage() {
                     type="text"
                     value={data.hero_cta_secondary}
                     onChange={e => setData({ ...data, hero_cta_secondary: e.target.value })}
-                    className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -245,7 +245,7 @@ export default function HomepageAdminPage() {
                       <img src={data.hero_image_url} alt="Hero" className="w-full h-full object-cover" />
                     </div>
                   ) : (
-                    <div className="w-48 h-32 rounded-lg bg-dark-700 flex items-center justify-center text-dark-400">
+                    <div className="w-48 h-32 rounded-lg bg-dark-700 flex items-center justify-center text-foreground-muted/80">
                       <ImageIcon className="w-8 h-8" />
                     </div>
                   )}
@@ -272,7 +272,7 @@ export default function HomepageAdminPage() {
                   value={data.hero_video_url || ''}
                   onChange={e => setData({ ...data, hero_video_url: e.target.value || null })}
                   placeholder="https://youtube.com/embed/..."
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -296,7 +296,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.about_title}
                   onChange={e => setData({ ...data, about_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               
@@ -306,7 +306,7 @@ export default function HomepageAdminPage() {
                   value={data.about_description}
                   onChange={e => setData({ ...data, about_description: e.target.value })}
                   rows={4}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
 
@@ -323,9 +323,9 @@ export default function HomepageAdminPage() {
                     }
                   }}
                   rows={8}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent font-mono text-sm"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent font-mono text-sm"
                 />
-                <p className="text-dark-500 text-xs mt-1">Format: [{`{"icon": "Shield", "title": "...", "description": "..."}`}]</p>
+                <p className="text-foreground-muted text-xs mt-1">Format: [{`{"icon": "Shield", "title": "...", "description": "..."}`}]</p>
               </div>
             </div>
           </div>
@@ -348,7 +348,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.services_title}
                   onChange={e => setData({ ...data, services_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -357,7 +357,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.services_subtitle}
                   onChange={e => setData({ ...data, services_subtitle: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -375,7 +375,7 @@ export default function HomepageAdminPage() {
                 type="text"
                 value={data.stats_title}
                 onChange={e => setData({ ...data, stats_title: e.target.value })}
-                className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -393,7 +393,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.testimonials_title}
                   onChange={e => setData({ ...data, testimonials_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -402,7 +402,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.testimonials_subtitle}
                   onChange={e => setData({ ...data, testimonials_subtitle: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -421,7 +421,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.cta_title}
                   onChange={e => setData({ ...data, cta_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -430,7 +430,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.cta_subtitle}
                   onChange={e => setData({ ...data, cta_subtitle: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -439,7 +439,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.cta_button}
                   onChange={e => setData({ ...data, cta_button: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -458,7 +458,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.brands_title}
                   onChange={e => setData({ ...data, brands_title: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -467,7 +467,7 @@ export default function HomepageAdminPage() {
                   type="text"
                   value={data.brands_subtitle}
                   onChange={e => setData({ ...data, brands_subtitle: e.target.value })}
-                  className="w-full px-4 py-3 bg-white text-dark-900 border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-surface text-foreground border border-dark-600 rounded-lg focus:ring-2 focus:ring-electric-500 focus:border-transparent"
                 />
               </div>
             </div>

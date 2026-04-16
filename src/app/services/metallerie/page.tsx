@@ -69,7 +69,7 @@ export default function MetalleriePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -81,10 +81,10 @@ export default function MetalleriePage() {
                 <div className="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center mb-6">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {service.name}
                 </h3>
-                <p className="text-dark-600 mb-4">{service.description}</p>
+                <p className="text-foreground-muted mb-4">{service.description}</p>
                 <span className="inline-flex items-center gap-2 text-orange-600 font-semibold group-hover:gap-3 transition-all">
                   Découvrir
                   <ChevronRight className="w-4 h-4" />
@@ -96,13 +96,13 @@ export default function MetalleriePage() {
       </section>
 
       {/* Avantages */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-4">
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-4">
               Pourquoi choisir notre métallerie ?
             </h2>
-            <p className="text-dark-600 max-w-2xl mx-auto">
+            <p className="text-foreground-muted max-w-2xl mx-auto">
               Un savoir-faire artisanal combiné aux techniques modernes pour des réalisations sur mesure et durables.
             </p>
           </div>
@@ -113,9 +113,9 @@ export default function MetalleriePage() {
               { title: "Durabilité", description: "Des ouvrages conçus pour durer des décennies" },
               { title: "Installation", description: "Pose professionnelle par nos équipes" },
             ].map((item) => (
-              <div key={item.title} className="text-center p-6 bg-white rounded-xl shadow-sm">
-                <h3 className="font-semibold text-dark-900 mb-2">{item.title}</h3>
-                <p className="text-dark-600 text-sm">{item.description}</p>
+              <div key={item.title} className="text-center p-6 bg-surface rounded-xl shadow-sm">
+                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-foreground-muted text-sm">{item.description}</p>
               </div>
             ))}
           </div>

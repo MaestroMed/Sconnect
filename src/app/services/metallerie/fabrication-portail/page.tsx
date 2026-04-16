@@ -71,14 +71,14 @@ export default function FabricationPortailPage() {
       </section>
 
       {/* Features */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
                 Nos prestations portails
               </h2>
-              <p className="text-dark-600 mb-8 leading-relaxed">
+              <p className="text-foreground-muted mb-8 leading-relaxed">
                 Nous concevons et fabriquons des portails sur mesure adaptés à votre habitat et à votre style. 
                 Du design à l&apos;installation, nous vous accompagnons à chaque étape.
               </p>
@@ -88,18 +88,18 @@ export default function FabricationPortailPage() {
                     <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <Check className="w-4 h-4 text-orange-600" />
                     </div>
-                    <span className="text-dark-700">{feature}</span>
+                    <span className="text-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8">
-              <h3 className="font-semibold text-dark-900 mb-4">Types de portails</h3>
+              <h3 className="font-semibold text-foreground mb-4">Types de portails</h3>
               <div className="space-y-4">
                 {types.map((type) => (
-                  <div key={type.name} className="bg-white rounded-xl p-4 shadow-sm">
-                    <h4 className="font-semibold text-dark-900">{type.name}</h4>
-                    <p className="text-dark-600 text-sm mt-1">{type.description}</p>
+                  <div key={type.name} className="bg-surface rounded-xl p-4 shadow-sm">
+                    <h4 className="font-semibold text-foreground">{type.name}</h4>
+                    <p className="text-foreground-muted text-sm mt-1">{type.description}</p>
                   </div>
                 ))}
               </div>
@@ -109,9 +109,9 @@ export default function FabricationPortailPage() {
       </section>
 
       {/* Process */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
-          <h2 className="font-display font-bold text-3xl text-dark-900 mb-12 text-center">
+          <h2 className="font-display font-bold text-3xl text-foreground mb-12 text-center">
             Notre processus
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
@@ -122,12 +122,12 @@ export default function FabricationPortailPage() {
               { step: "4", title: "Installation", description: "Pose par nos équipes qualifiées" },
             ].map((item) => (
               <div key={item.step} className="relative">
-                <div className="bg-white rounded-xl p-6 shadow-sm h-full">
+                <div className="bg-surface rounded-xl p-6 shadow-sm h-full">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-4">
                     {item.step}
                   </div>
-                  <h3 className="font-semibold text-dark-900 mb-2">{item.title}</h3>
-                  <p className="text-dark-600 text-sm">{item.description}</p>
+                  <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-foreground-muted text-sm">{item.description}</p>
                 </div>
               </div>
             ))}

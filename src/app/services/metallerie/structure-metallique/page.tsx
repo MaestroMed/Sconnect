@@ -71,14 +71,14 @@ export default function StructureMetalliquePage() {
       </section>
 
       {/* Features */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
                 Nos réalisations structurelles
               </h2>
-              <p className="text-dark-600 mb-8 leading-relaxed">
+              <p className="text-foreground-muted mb-8 leading-relaxed">
                 De la conception à la pose, nous réalisons tous types de structures métalliques. 
                 Chaque projet est unique et fabriqué sur mesure dans notre atelier.
               </p>
@@ -88,18 +88,18 @@ export default function StructureMetalliquePage() {
                     <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <Check className="w-4 h-4 text-orange-600" />
                     </div>
-                    <span className="text-dark-700">{feature}</span>
+                    <span className="text-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8">
-              <h3 className="font-semibold text-dark-900 mb-4">Types de structures</h3>
+              <h3 className="font-semibold text-foreground mb-4">Types de structures</h3>
               <div className="space-y-4">
                 {types.map((type) => (
-                  <div key={type.name} className="bg-white rounded-xl p-4 shadow-sm">
-                    <h4 className="font-semibold text-dark-900">{type.name}</h4>
-                    <p className="text-dark-600 text-sm mt-1">{type.description}</p>
+                  <div key={type.name} className="bg-surface rounded-xl p-4 shadow-sm">
+                    <h4 className="font-semibold text-foreground">{type.name}</h4>
+                    <p className="text-foreground-muted text-sm mt-1">{type.description}</p>
                   </div>
                 ))}
               </div>

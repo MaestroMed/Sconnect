@@ -50,7 +50,7 @@ export default function ElectricitePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -62,10 +62,10 @@ export default function ElectricitePage() {
                 <div className="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center mb-6">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {service.name}
                 </h3>
-                <p className="text-dark-600 mb-4">{service.description}</p>
+                <p className="text-foreground-muted mb-4">{service.description}</p>
                 <span className="inline-flex items-center gap-2 text-primary-600 font-semibold group-hover:gap-3 transition-all">
                   Découvrir
                   <ChevronRight className="w-4 h-4" />

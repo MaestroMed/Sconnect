@@ -33,7 +33,7 @@ export default function PolitiqueConfidentialitePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom max-w-4xl">
           <div className="prose prose-lg max-w-none">
             <div className="bg-primary-50 border-l-4 border-primary-600 p-6 rounded-r-xl mb-12">
@@ -47,7 +47,7 @@ export default function PolitiqueConfidentialitePage() {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <Database className="w-6 h-6 text-primary-600" />
-                <h2 className="text-2xl font-bold text-dark-900 m-0">Responsable du traitement</h2>
+                <h2 className="text-2xl font-bold text-foreground m-0">Responsable du traitement</h2>
               </div>
               <p><strong>S'Connect</strong></p>
               <p>Email : <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a></p>
@@ -55,7 +55,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Données collectées */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Données personnelles collectées</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Données personnelles collectées</h2>
               <p>Nous collectons uniquement les données nécessaires :</p>
               <ul>
                 <li><strong>Identité :</strong> civilité, nom, prénom</li>
@@ -67,7 +67,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Finalités */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Finalités du traitement</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Finalités du traitement</h2>
               <p>Vos données sont utilisées pour :</p>
               <ul>
                 <li>Traiter vos demandes de devis et d'intervention</li>
@@ -80,7 +80,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Base légale */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Base légale</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Base légale</h2>
               <p>Le traitement de vos données repose sur :</p>
               <ul>
                 <li><strong>L'exécution d'un contrat :</strong> traitement de vos demandes de devis/intervention</li>
@@ -91,7 +91,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Destinataires */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Destinataires des données</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Destinataires des données</h2>
               <p>Vos données sont accessibles uniquement à :</p>
               <ul>
                 <li>Notre équipe interne (techniciens, commerciaux)</li>
@@ -102,7 +102,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Durée de conservation */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Durée de conservation</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Durée de conservation</h2>
               <ul>
                 <li><strong>Demandes de devis/contact :</strong> 3 ans à compter de votre dernier contact</li>
                 <li><strong>Contrats/factures :</strong> 10 ans (obligation légale)</li>
@@ -114,7 +114,7 @@ export default function PolitiqueConfidentialitePage() {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <Eye className="w-6 h-6 text-primary-600" />
-                <h2 className="text-2xl font-bold text-dark-900 m-0">Vos droits</h2>
+                <h2 className="text-2xl font-bold text-foreground m-0">Vos droits</h2>
               </div>
               <p>Conformément au RGPD, vous disposez des droits suivants :</p>
               <ul>
@@ -138,7 +138,7 @@ export default function PolitiqueConfidentialitePage() {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <Lock className="w-6 h-6 text-primary-600" />
-                <h2 className="text-2xl font-bold text-dark-900 m-0">Sécurité des données</h2>
+                <h2 className="text-2xl font-bold text-foreground m-0">Sécurité des données</h2>
               </div>
               <p>Nous mettons en œuvre toutes les mesures techniques et organisationnelles appropriées pour protéger vos données :</p>
               <ul>
@@ -152,7 +152,7 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Cookies */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Cookies et traceurs</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Cookies et traceurs</h2>
               <p>
                 Pour en savoir plus sur les cookies utilisés sur ce site, consultez notre <Link href="/cookies" className="text-primary-600 hover:text-primary-700 font-semibold">politique cookies</Link>.
               </p>
@@ -160,14 +160,14 @@ export default function PolitiqueConfidentialitePage() {
 
             {/* Modifications */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-dark-900 mb-4">Modifications de la politique</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-4">Modifications de la politique</h2>
               <p>
                 Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment.
                 Toute modification sera publiée sur cette page avec une nouvelle date de mise à jour.
               </p>
             </div>
 
-            <div className="text-sm text-dark-500 border-t border-dark-200 pt-6 mt-12">
+            <div className="text-sm text-foreground-muted border-t border-border pt-6 mt-12">
               <p>Dernière mise à jour : {new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
           </div>

@@ -103,7 +103,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Categories */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="space-y-16">
             {categories.map((category, categoryIndex) => {
@@ -152,10 +152,10 @@ export default function ServicesPage() {
                       <category.icon className="w-10 h-10 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h2 className="font-display font-bold text-3xl text-dark-900 mb-2">
+                      <h2 className="font-display font-bold text-3xl text-foreground mb-2">
                         {category.name}
                       </h2>
-                      <p className="text-lg text-dark-600">{category.description}</p>
+                      <p className="text-lg text-foreground-muted">{category.description}</p>
                     </div>
                     <Link
                       href={`/services/${category.slug}`}
@@ -182,7 +182,7 @@ export default function ServicesPage() {
                           <div className={`w-12 h-12 rounded-xl ${colorClasses.bg} text-white flex items-center justify-center mb-4`}>
                             <service.icon className="w-6 h-6" />
                           </div>
-                          <h3 className="font-semibold text-lg text-dark-900 mb-2">
+                          <h3 className="font-semibold text-lg text-foreground mb-2">
                             {service.name}
                           </h3>
                           <span className={`inline-flex items-center gap-1 text-sm font-medium ${colorClasses.text}`}>
