@@ -140,8 +140,8 @@ export default function DemandeForm({ type }: DemandeFormProps) {
         typeBatiment: data.adresseIntervention.typeBatiment,
         services: data.services || [],
         delai: data.urgence === "urgence" ? "Urgent (moins de 48h)" : "Sous 1 semaine",
-        description: data.description || "",
-        budget: data.budgetEstime,
+        description: data.message || "",
+        budget: undefined,
       } : {
         civilite: data.civilite,
         nom: data.nom,
@@ -153,7 +153,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
         ville: data.adresseIntervention.ville,
         typeBatiment: data.adresseIntervention.typeBatiment,
         typeIntervention: data.services?.[0] || "Intervention urgente",
-        description: data.description || "",
+        description: data.message || "",
         disponibilite: data.urgence === "urgence" ? "Immédiatement" : "Selon disponibilités",
       };
 

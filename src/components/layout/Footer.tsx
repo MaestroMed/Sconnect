@@ -16,6 +16,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
+import AvailabilityBadge from "@/components/ui/AvailabilityBadge";
 
 const services = [
   { name: "Électricité", href: "/services/electricite" },
@@ -218,6 +219,9 @@ export default function Footer() {
                   <span className="block">{siteConfig.hours.weekdays}</span>
                   <span>{siteConfig.hours.saturday}</span>
                 </div>
+              </li>
+              <li>
+                <AvailabilityBadge variant="dark" />
               </li>
             </ul>
           </div>

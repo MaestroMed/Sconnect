@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -95,7 +96,7 @@ export default function RootLayout({
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
   
   return (
-    <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`}>
+    <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -262,7 +263,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        {children}
+        <a href="#main" className="skip-link">
+          Aller au contenu
+        </a>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

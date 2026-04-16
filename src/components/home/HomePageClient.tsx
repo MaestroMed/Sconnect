@@ -29,6 +29,8 @@ import EngagementCard from "@/components/ui/EngagementCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
+import AnimatedMesh from "@/components/ui/AnimatedMesh";
+import Marquee from "@/components/ui/Marquee";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -193,10 +195,9 @@ export default function HomePageClient({
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">
+        <AnimatedMesh variant="dark" />
         <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay" aria-hidden="true" />
 
         <div className="container-custom relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -314,15 +315,15 @@ export default function HomePageClient({
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-0 left-0 right-0 text-surface">
           <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 100V60C240 20 480 0 720 0C960 0 1200 20 1440 60V100H0Z" fill="white" />
+            <path d="M0 100V60C240 20 480 0 720 0C960 0 1200 20 1440 60V100H0Z" fill="currentColor" />
           </svg>
         </div>
       </section>
 
       {/* 4 Métiers Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Métiers"
@@ -390,7 +391,7 @@ export default function HomePageClient({
       </section>
 
       {/* Services Section */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Services"
@@ -444,7 +445,7 @@ export default function HomePageClient({
       </section>
 
       {/* Engagements Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Engagements"
@@ -461,7 +462,7 @@ export default function HomePageClient({
       </section>
 
       {/* Realizations Section */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Réalisations"
@@ -491,7 +492,7 @@ export default function HomePageClient({
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-50 to-electric-50">
+      <section className="section-padding bg-gradient-to-br from-primary-50 to-electric-50 dark:from-dark-900 dark:to-primary-950">
         <div className="container-custom">
           <SectionTitle
             badge="Avis Clients"
@@ -521,7 +522,7 @@ export default function HomePageClient({
       </section>
 
       {/* Ils nous font confiance Section */}
-      <section className="py-16 bg-white border-t border-b border-dark-100">
+      <section className="py-16 bg-surface border-t border-b border-border">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -530,36 +531,29 @@ export default function HomePageClient({
             viewport={{ once: true }}
             className="text-center mb-8"
           >
-            <h3 className="font-display font-bold text-2xl text-dark-900 mb-2">
+            <h3 className="font-display font-bold text-2xl text-foreground mb-2">
               {homepage.brands_title}
             </h3>
-            <p className="text-dark-500 font-medium">
+            <p className="text-foreground-muted font-medium">
               {homepage.brands_subtitle}
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-            {brands.map((brand, index) => (
-              <motion.div
-                key={brand.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="w-28 h-12 relative grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                  {brand.logo && brand.logo.startsWith('/') ? (
+          <Marquee speed={45} className="py-4">
+            {brands.map((brand) => (
+              <div key={brand.id} className="group">
+                <div className="w-32 h-14 relative grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                  {brand.logo && brand.logo.startsWith("/") ? (
                     <Image src={brand.logo} alt={brand.name} fill className="object-contain" />
                   ) : (
-                    <span className="text-xl font-bold text-dark-400 group-hover:text-primary-600 transition-colors">
+                    <span className="text-xl font-bold text-foreground-muted group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {brand.name.split(" ")[0]}
                     </span>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </Marquee>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -580,7 +574,7 @@ export default function HomePageClient({
       </section>
 
       {/* Zone d'intervention */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -589,13 +583,13 @@ export default function HomePageClient({
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700">
+              <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700 dark:bg-primary-500/15 dark:text-primary-300">
                 Zone d&apos;intervention
               </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
                 Nous intervenons à Clichy et dans toute l&apos;Île-de-France
               </h2>
-              <p className="text-lg text-dark-600 mb-8 leading-relaxed">
+              <p className="text-lg text-foreground-muted mb-8 leading-relaxed">
                 Basés à Clichy (92110), nous intervenons rapidement dans les Hauts-de-Seine
                 et toute la région parisienne. Particuliers ou professionnels, nous nous
                 déplaçons pour tous vos besoins en électricité, contrôle d&apos;accès et serrurerie.
@@ -608,9 +602,9 @@ export default function HomePageClient({
                   { icon: Users, text: "Copropriétés" },
                   { icon: Building2, text: "Collectivités" },
                 ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-3 text-dark-700">
-                    <div className="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-primary-600" />
+                  <div key={item.text} className="flex items-center gap-3 text-foreground">
+                    <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-500/15 flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-primary-600 dark:text-primary-300" />
                     </div>
                     <span className="font-medium">{item.text}</span>
                   </div>
