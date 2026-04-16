@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Plus, Pencil, Trash2, Loader2, X, Save, Upload, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
+import { SortableGrid } from "@/components/admin/SortableGrid";
 
 interface Realization {
   id: string;
@@ -178,6 +179,25 @@ export default function RealizationsPage() {
     }
   };
 
+  const handleReorder = async (ordered: Realization[]) => {
+    const previous = realizations;
+    setRealizations(ordered);
+    try {
+      const res = await fetch("/api/admin/realizations/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: ordered.map((r) => r.id) }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      toast.success("Ordre mis à jour");
+    } catch (error) {
+      setRealizations(previous);
+      toast.error("Réordonnancement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
+  };
+
   const ImageUploadButton = ({ 
     field, 
     inputRef, 
@@ -260,13 +280,15 @@ export default function RealizationsPage() {
         </button>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {realizations.map((r) => (
-          <div key={r.id} className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <SortableGrid
+        items={realizations}
+        onReorder={handleReorder}
+        renderItem={(r) => (
+          <div className="rounded-xl border border-border bg-surface-elevated shadow-sm overflow-hidden">
             <div className="relative h-48">
               <Image src={r.image} alt={r.title} fill className="object-cover" unoptimized />
               {r.featured && (
-                <span className="absolute top-2 left-2 px-2 py-1 bg-accent-500 text-white text-xs font-semibold rounded">
+                <span className="absolute top-2 right-20 px-2 py-1 bg-accent-500 text-white text-xs font-semibold rounded">
                   À la une
                 </span>
               )}
@@ -281,28 +303,30 @@ export default function RealizationsPage() {
               )}
             </div>
             <div className="p-4">
-              <h3 className="font-semibold text-dark-900 mb-1">{r.title}</h3>
-              <p className="text-sm text-dark-500 mb-3">
+              <h3 className="font-semibold text-foreground mb-1">{r.title}</h3>
+              <p className="text-sm text-foreground-muted mb-3">
                 {r.type} • {r.location}
               </p>
-              <div className="flex justify-end gap-2">
+              <div className="flex justify-end gap-1">
                 <button
                   onClick={() => openModal(r)}
-                  className="p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                  className="p-2 text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-primary-500/10 rounded-lg transition-colors"
+                  aria-label="Modifier"
                 >
                   <Pencil className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleDelete(r.id)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10 rounded-lg transition-colors"
+                  aria-label="Supprimer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        )}
+      />
 
       {/* Modal */}
       {modalOpen && (

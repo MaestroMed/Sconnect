@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import MetaThemeColor from "@/components/theme/MetaThemeColor";
+import { getTestimonials } from "@/lib/data-service";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -98,7 +99,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
-  
+
+  // Compute aggregate rating from real testimonials (falls back to 5.0 / 0
+  // when the dataset is empty — in which case we omit the schema to avoid
+  // publishing a 0-review aggregate that Google would flag)
+  const testimonialsData = getTestimonials();
+  const verifiedReviews = testimonialsData.testimonials.filter(
+    (t) => t.verified !== false && typeof t.rating === "number",
+  );
+  const ratingSum = verifiedReviews.reduce((acc, t) => acc + t.rating, 0);
+  const reviewCount = verifiedReviews.length;
+  const ratingValue = reviewCount > 0 ? (ratingSum / reviewCount).toFixed(1) : null;
+
   return (
     <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
@@ -238,13 +250,17 @@ export default function RootLayout({
                   },
                 ],
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                reviewCount: "127",
-                bestRating: "5",
-                worstRating: "1",
-              },
+              ...(ratingValue && reviewCount > 0
+                ? {
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue,
+                      reviewCount: String(reviewCount),
+                      bestRating: "5",
+                      worstRating: "1",
+                    },
+                  }
+                : {}),
             }),
           }}
         />
