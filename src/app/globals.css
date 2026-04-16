@@ -224,6 +224,20 @@
     will-change: transform;
     pointer-events: none;
   }
+
+  /* 3D tilt (driven by useTilt hook) */
+  .tilt-root {
+    transform-style: preserve-3d;
+    perspective: var(--tilt-perspective, 1000px);
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+  }
+  .tilt-inner {
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-scale, 1));
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
 }
 
 @layer utilities {

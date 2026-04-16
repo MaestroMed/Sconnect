@@ -31,6 +31,7 @@ import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import AnimatedMesh from "@/components/ui/AnimatedMesh";
 import Marquee from "@/components/ui/Marquee";
+import HeroImage from "@/components/home/HeroImage";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -261,57 +262,7 @@ export default function HomePageClient({
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <div className="relative w-full aspect-square max-w-lg mx-auto">
-                <div className="absolute inset-0 rounded-3xl overflow-hidden border-4 border-dark-800 shadow-2xl">
-                  <Image
-                    src={heroImage}
-                    alt="Technicien professionnel au travail"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 to-transparent" />
-                </div>
-
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center">
-                      <Clock className="w-6 h-6 text-accent-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-dark-900">24h/24</p>
-                      <p className="text-sm text-dark-500">Urgences</p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
-                      <Users className="w-6 h-6 text-primary-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-dark-900">{siteConfig.stats.interventionsPerYear}+</p>
-                      <p className="text-sm text-dark-500">Clients/an</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+            <HeroImage src={heroImage} interventionsPerYear={siteConfig.stats.interventionsPerYear} />
           </div>
         </div>
 
@@ -331,61 +282,92 @@ export default function HomePageClient({
             subtitle="Électricité, contrôle d'accès, serrurerie et métallerie : une offre complète pour sécuriser et équiper vos locaux."
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.href}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  href={category.href}
-                  className={`block p-6 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${
-                    category.color === "primary"
-                      ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-surface dark:border-primary-500/30 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted"
-                      : category.color === "accent"
-                      ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-surface dark:border-accent-500/30 dark:hover:border-accent-400 dark:from-accent-500/10 dark:to-surface-muted"
-                      : category.color === "orange"
+          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-4 md:gap-6">
+            {categories.map((category, index) => {
+              // Bento spans: first tile is larger, others fill the rest
+              const spanClass =
+                index === 0
+                  ? "md:col-span-3 md:row-span-2"
+                  : index === 1
+                    ? "md:col-span-3"
+                    : "md:col-span-2";
+              const colorClasses =
+                category.color === "primary"
+                  ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-surface dark:border-primary-500/30 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted"
+                  : category.color === "accent"
+                    ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-surface dark:border-accent-500/30 dark:hover:border-accent-400 dark:from-accent-500/10 dark:to-surface-muted"
+                    : category.color === "orange"
                       ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-surface dark:border-orange-500/30 dark:hover:border-orange-400 dark:from-orange-500/10 dark:to-surface-muted"
-                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-surface dark:border-green-500/30 dark:hover:border-green-400 dark:from-green-500/10 dark:to-surface-muted"
-                  }`}
+                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-surface dark:border-green-500/30 dark:hover:border-green-400 dark:from-green-500/10 dark:to-surface-muted";
+              const iconBg =
+                category.color === "primary"
+                  ? "bg-primary-500"
+                  : category.color === "accent"
+                    ? "bg-accent-500"
+                    : category.color === "orange"
+                      ? "bg-orange-500"
+                      : "bg-green-500";
+              const accentText =
+                category.color === "primary"
+                  ? "text-primary-600 dark:text-primary-300"
+                  : category.color === "accent"
+                    ? "text-accent-600 dark:text-accent-300"
+                    : category.color === "orange"
+                      ? "text-orange-600 dark:text-orange-300"
+                      : "text-green-600 dark:text-green-300";
+
+              return (
+                <motion.div
+                  key={category.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  whileHover={{ y: -4 }}
+                  className={spanClass}
                 >
-                  <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${
-                      category.color === "primary"
-                        ? "bg-primary-500 text-white"
-                        : category.color === "accent"
-                        ? "bg-accent-500 text-white"
-                        : category.color === "orange"
-                        ? "bg-orange-500 text-white"
-                        : "bg-green-500 text-white"
-                    }`}
+                  <Link
+                    href={category.href}
+                    className={`relative overflow-hidden block p-6 md:p-8 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${colorClasses}`}
                   >
-                    <category.icon className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-display font-bold text-xl text-foreground mb-2">
-                    {category.title}
-                  </h3>
-                  <p className="text-foreground-muted text-sm mb-4">{category.description}</p>
-                  <span
-                    className={`inline-flex items-center gap-2 font-semibold text-sm ${
-                      category.color === "primary"
-                        ? "text-primary-600 dark:text-primary-300"
-                        : category.color === "accent"
-                        ? "text-accent-600 dark:text-accent-300"
-                        : category.color === "orange"
-                        ? "text-orange-600 dark:text-orange-300"
-                        : "text-green-600 dark:text-green-300"
-                    }`}
-                  >
-                    Découvrir
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
+                    {/* Decorative chevron accent for feature tile */}
+                    {index === 0 && (
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-br from-primary-500/20 to-electric-500/10 blur-2xl"
+                      />
+                    )}
+                    <div className="relative flex h-full flex-col">
+                      <div
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg text-white ${iconBg}`}
+                      >
+                        <category.icon className="w-7 h-7" />
+                      </div>
+                      <h3
+                        className={`font-display font-bold ${
+                          index === 0 ? "text-2xl md:text-3xl" : "text-xl"
+                        } text-foreground mb-2`}
+                      >
+                        {category.title}
+                      </h3>
+                      <p
+                        className={`text-foreground-muted mb-4 ${
+                          index === 0 ? "text-base md:text-lg max-w-md" : "text-sm"
+                        }`}
+                      >
+                        {category.description}
+                      </p>
+                      <span
+                        className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${accentText}`}
+                      >
+                        Découvrir
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -656,10 +638,23 @@ export default function HomePageClient({
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary-700 via-primary-600 to-electric-600 relative overflow-hidden">
+      <section className="relative overflow-hidden py-20">
+        {/* Animated aurora background */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-60 mix-blend-overlay"
+          style={{
+            background:
+              "conic-gradient(from 0deg at 50% 50%, rgba(245,158,11,0.15), transparent 20%, transparent 50%, rgba(14,165,233,0.25), transparent 80%, rgba(245,158,11,0.15))",
+          }}
+        />
         <div className="absolute inset-0 bg-grid opacity-10" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/15 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10 text-center">
           <motion.div
