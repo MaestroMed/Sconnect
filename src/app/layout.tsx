@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
@@ -266,7 +269,20 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Aller au contenu
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              className:
+                "!bg-surface-elevated !text-foreground !border !border-border !shadow-xl",
+            }}
+            closeButton
+            richColors
+          />
+        </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

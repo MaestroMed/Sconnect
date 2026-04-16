@@ -5,12 +5,24 @@
 
 import { Resend } from 'resend';
 
-// Initialize Resend avec la clé API
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email de l'entreprise (à configurer)
 const FROM_EMAIL = process.env.EMAIL_FROM || 'contact@sconnectfrance.fr';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'contact@sconnectfrance.fr';
+
+// Lazy-init Resend so missing API key at build time doesn't crash
+// the static analysis / page data collection phase.
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (_resend) return _resend;
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error(
+      'RESEND_API_KEY is not configured. Add it to your environment variables.',
+    );
+  }
+  _resend = new Resend(key);
+  return _resend;
+}
 
 export interface SendEmailOptions {
   to: string | string[];
@@ -24,7 +36,7 @@ export interface SendEmailOptions {
  */
 export async function sendEmail(options: SendEmailOptions) {
   try {
-    const data = await resend.emails.send({
+    const data = await getResend().emails.send({
       from: FROM_EMAIL,
       to: options.to,
       subject: options.subject,

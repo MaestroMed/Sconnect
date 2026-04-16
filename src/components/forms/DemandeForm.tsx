@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import Link from "next/link";
 import {
   Send,
@@ -179,9 +180,15 @@ export default function DemandeForm({ type }: DemandeFormProps) {
       }
 
       setSubmitStatus("success");
+      toast.success(
+        type === "devis" ? "Devis envoyé avec succès" : "Demande d'intervention envoyée",
+        { description: "Nous vous recontactons dans les plus brefs délais." },
+      );
     } catch (error) {
       console.error('Erreur:', error);
       setSubmitStatus("error");
+      const message = error instanceof Error ? error.message : "Une erreur est survenue";
+      toast.error("Envoi impossible", { description: message });
     }
   };
 
