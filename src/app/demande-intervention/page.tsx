@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { AlertTriangle, Phone, Clock, Zap } from "lucide-react";
 import DemandeForm from "@/components/forms/DemandeForm";
+import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Demande d'Intervention Urgente",
@@ -30,10 +31,12 @@ export default function DemandeInterventionPage() {
   return (
     <>
       {/* Hero - Plus impactant pour urgence */}
-      <section className="bg-gradient-to-br from-accent-600 via-accent-500 to-orange-500 py-16 md:py-20 relative overflow-hidden">
+      <section className="relative bg-gradient-to-br from-accent-600 via-accent-500 to-orange-500 py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%] bg-gradient-to-br from-accent-600 via-orange-500 to-rose-500 opacity-60" />
         <div className="absolute inset-0 bg-grid opacity-10" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-red-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/15 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-red-500/30 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <NoiseOverlay opacity={0.06} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">

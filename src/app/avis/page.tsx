@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Star, ChevronRight, Phone, Quote, Filter, TrendingUp } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
 
 const stats = {
   average: 4.9,
@@ -157,10 +158,10 @@ export default function AvisPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-20 md:py-28 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -169,13 +170,13 @@ export default function AvisPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
-                <Star className="w-4 h-4 fill-primary-400" />
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
+                <Star className="w-4 h-4 fill-primary-300" />
                 Avis Clients
               </span>
-              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Ce que disent{" "}
-                <span className="gradient-text">nos clients</span>
+                <span className="gradient-text-living">nos clients</span>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 La satisfaction de nos clients est notre meilleure publicité.
@@ -348,15 +349,20 @@ export default function AvisPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary-700 via-primary-600 to-electric-600">
-        <div className="container-custom text-center">
+      <section className="relative py-24 bg-dark-950 overflow-hidden">
+        <div className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700" />
+        <GradientVeil variant="brand" className="opacity-60" />
+        <ParticlesLite variant="white" />
+        <div className="absolute inset-0 bg-grid opacity-10" />
+        <NoiseOverlay opacity={0.06} />
+        <div className="container-custom relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-6">
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
               Rejoignez nos clients satisfaits
             </h2>
             <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
@@ -370,7 +376,7 @@ export default function AvisPage() {
               </Link>
               <a
                 href="tel:+33100000000"
-                className="btn bg-white/10 text-white hover:bg-white/20 btn-lg border border-white/20"
+                className="btn glass-panel text-white hover:bg-white/15 btn-lg"
               >
                 <Phone className="w-5 h-5" />
                 01 XX XX XX XX

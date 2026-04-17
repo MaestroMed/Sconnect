@@ -15,6 +15,7 @@ import {
   ChevronRight,
   AlertTriangle,
 } from "lucide-react";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -77,10 +78,10 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-20 md:py-28 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
@@ -89,12 +90,12 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
                 <Mail className="w-4 h-4" />
                 Contact
               </span>
-              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-                Contactez-nous
+              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+                <span className="gradient-text-living">Contactez-nous</span>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 Une question, un projet, un besoin de conseil ? Notre équipe est

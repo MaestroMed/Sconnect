@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 import RealizationCard from "@/components/ui/RealizationCard";
 import Reveal from "@/components/ui/Reveal";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 const CATEGORY_LABELS: Record<string, string> = {
   electricite: "Électricité",
@@ -94,10 +95,10 @@ export default async function RealizationDetailPage({
       />
 
       {/* Hero */}
-      <header className="relative bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/25 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <header className="relative bg-dark-950 text-white overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10 py-12 md:py-16">
           <div className="mb-6">

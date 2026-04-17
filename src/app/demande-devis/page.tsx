@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { FileText, Phone, Clock, Shield } from "lucide-react";
 import DemandeForm from "@/components/forms/DemandeForm";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Demande de Devis Gratuit",
@@ -30,20 +31,20 @@ export default function DemandeDevisPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-16 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-16 md:py-20 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
               <FileText className="w-4 h-4" />
               Devis Gratuit
             </span>
-            <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-6 leading-tight">
               Demandez votre{" "}
-              <span className="gradient-text">devis gratuit</span>
+              <span className="gradient-text-living">devis gratuit</span>
             </h1>
             <p className="text-xl text-dark-300 leading-relaxed mb-8">
               Remplissez le formulaire ci-dessous et recevez un devis détaillé

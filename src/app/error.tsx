@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import * as Sentry from "@sentry/nextjs";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 export default function Error({
   error,
@@ -21,8 +22,10 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 px-4 py-16">
-      <div className="max-w-md w-full text-center">
+    <div className="relative min-h-[80vh] flex items-center justify-center bg-dark-950 px-4 py-16 overflow-hidden">
+      <AuroraBackdrop intensity="soft" />
+      <NoiseOverlay opacity={0.05} />
+      <div className="max-w-md w-full text-center relative z-10">
         <div className="w-20 h-20 mx-auto bg-accent-500/10 backdrop-blur-lg border border-accent-500/20 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-accent-500/20">
           <AlertTriangle className="w-10 h-10 text-accent-400" aria-hidden="true" />
         </div>
