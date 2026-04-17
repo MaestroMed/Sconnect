@@ -16,14 +16,15 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MDXComponents from "@/components/blog/MDXComponents";
 
 export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 type Params = { slug: string };
 
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return buildMetadata({ title: "Article introuvable", path: `/actualites/${slug}` });
   return buildMetadata({
     title: post.frontmatter.title,
@@ -39,10 +40,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 
 export default async function ArticlePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(slug, 3);
+  const related = await getRelatedPosts(slug, 3);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 
   const articleSchema = {

@@ -23,13 +23,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
   const config = getSiteConfig();
   const realizations = getRealizations();
   const testimonials = getTestimonials();
   const brands = getBrands();
   const services = getServices();
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   const totalServices = services.categories.reduce(
     (sum, cat) => sum + cat.services.length,

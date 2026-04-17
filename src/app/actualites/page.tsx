@@ -15,8 +15,8 @@ export const metadata = buildMetadata({
   category: "Actualités",
 });
 
-export default function ActualitesPage() {
-  const posts = getAllPosts();
+export default async function ActualitesPage() {
+  const posts = await getAllPosts();
   const [featured, ...rest] = posts;
 
   return (

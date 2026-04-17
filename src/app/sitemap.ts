@@ -2,11 +2,11 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { getRealizations } from "@/lib/data-service";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
   const now = new Date();
 
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const blogPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/actualites`,
