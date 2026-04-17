@@ -29,7 +29,10 @@ export default function BlindagePortePage() {
       title="Blindage de Porte"
       subtitle="Protection A2P BP"
       description="Le blindage de porte est la meilleure protection contre les effractions. Nous proposons le blindage de votre porte existante ou la pose d'un bloc-porte blindé certifié."
-      iconName="zap"
+      iconName="shield"
+      category="serrurerie"
+      imageSlug="serrurerie-blindage"
+      parentCategory={{ label: "Serrurerie", href: "/services/serrurerie" }}
       prestations={prestations}
       faqs={faqs}
     />

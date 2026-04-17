@@ -1,6 +1,9 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Wrench, ChevronRight, Phone, Check, ArrowLeft } from "lucide-react";
+import { Wrench, ChevronRight, Phone, Check, ArrowLeft, Sparkles } from "lucide-react";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
+import { image } from "@/lib/image-manifest";
 
 export const metadata: Metadata = {
   title: "Fabrication de Portails Sur Mesure | Portails Coulissants & Battants | S'Connect",
@@ -42,30 +45,67 @@ const types = [
 ];
 
 export default function FabricationPortailPage() {
+  const hero = image("metallerie-portail");
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-orange-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
+      <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <div className="absolute top-1/4 -left-32 w-[30rem] h-[30rem] rounded-full blur-3xl animate-drift bg-orange-500/30" />
+        <div className="absolute bottom-0 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl animate-drift-reverse bg-rose-500/25" />
+        <NoiseOverlay opacity={0.05} />
+
         <div className="container-custom relative z-10">
-          <Link 
-            href="/services/metallerie" 
-            className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 mb-6 transition-colors"
+          <Link
+            href="/services/metallerie"
+            className="inline-flex items-center gap-2 text-orange-300 hover:text-orange-200 mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour à Métallerie
           </Link>
-          <div className="max-w-3xl">
-            <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/25">
-              <Wrench className="w-8 h-8 text-white" />
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] items-center">
+            <div className="max-w-2xl">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-orange-500/30">
+                <Wrench className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
+                Fabrication de Portails
+              </h1>
+              <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
+                Sur mesure, Île-de-France
+              </p>
+              <p className="text-lg text-dark-300 leading-relaxed">
+                Des portails sur mesure conçus et fabriqués selon vos envies.
+                Qualité artisanale et installation professionnelle.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/demande-devis" className="btn-primary">
+                  Devis gratuit
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-              Fabrication de Portails
-            </h1>
-            <p className="text-xl text-dark-300 leading-relaxed">
-              Des portails sur mesure conçus et fabriqués selon vos envies. 
-              Qualité artisanale et installation professionnelle en Île-de-France.
-            </p>
+            <div className="relative hidden lg:block">
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                <Image
+                  src={hero.webp}
+                  alt={hero.alt}
+                  fill
+                  sizes="(max-width: 1024px) 0px, 42vw"
+                  className="object-cover"
+                  placeholder="blur"
+                  blurDataURL={hero.blurDataURL}
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-dark-950/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 gradient-veil-warm opacity-30 mix-blend-overlay" />
+                <div className="absolute top-4 right-4 glass-panel rounded-xl px-4 py-2.5 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-white" />
+                  <span className="text-sm font-semibold text-white">Garantie 10 ans</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -136,20 +176,23 @@ export default function FabricationPortailPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-orange-600">
-        <div className="container-custom text-center">
-          <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-4">
+      <section className="relative py-20 bg-gradient-to-r from-orange-700 via-orange-600 to-rose-600 overflow-hidden">
+        <NoiseOverlay opacity={0.05} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <div className="container-custom relative z-10 text-center">
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-4">
             Votre projet de portail sur mesure
           </h2>
-          <p className="text-orange-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-orange-50 mb-8 max-w-2xl mx-auto text-lg">
             Contactez-nous pour un devis gratuit. Nous nous déplaçons pour prendre les mesures et vous conseiller.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/demande-devis" className="btn-white">
+            <Link href="/demande-devis" className="btn-white btn-lg">
               Demander un devis gratuit
               <ChevronRight className="w-5 h-5" />
             </Link>
-            <a href="tel:+33100000000" className="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">
+            <a href="tel:+33100000000" className="btn glass-panel text-white hover:bg-white/15 btn-lg">
               <Phone className="w-5 h-5" />
               01 XX XX XX XX
             </a>

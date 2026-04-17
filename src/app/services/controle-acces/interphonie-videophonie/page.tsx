@@ -29,7 +29,10 @@ export default function InterphoneVideophoniePage() {
       title="Interphonie & Vidéophonie"
       subtitle="Contrôle d'accès"
       description="Sécurisez l'entrée de votre bâtiment avec nos solutions d'interphonie et vidéophonie. Du simple interphone audio au système vidéo connecté avec ouverture à distance."
-      iconName="zap"
+      iconName="video"
+      category="acces"
+      imageSlug="acces-interphone"
+      parentCategory={{ label: "Contrôle d'accès", href: "/services/controle-acces" }}
       prestations={prestations}
       faqs={faqs}
     />

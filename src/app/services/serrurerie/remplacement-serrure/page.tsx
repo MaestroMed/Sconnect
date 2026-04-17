@@ -29,7 +29,10 @@ export default function RemplacementSerrurePage() {
       title="Remplacement de Serrure"
       subtitle="Haute sécurité A2P"
       description="Après un cambriolage, une perte de clés ou pour renforcer votre sécurité, nous remplaçons votre serrure par un modèle adapté. Large choix de marques certifiées."
-      iconName="zap"
+      iconName="keyRound"
+      category="serrurerie"
+      imageSlug="serrurerie-serrure"
+      parentCategory={{ label: "Serrurerie", href: "/services/serrurerie" }}
       prestations={prestations}
       faqs={faqs}
     />

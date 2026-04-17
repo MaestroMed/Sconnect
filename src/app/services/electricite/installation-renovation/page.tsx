@@ -32,6 +32,9 @@ export default function InstallationRenovationPage() {
       subtitle="Électrique"
       description="Que vous construisiez neuf ou rénoviez votre bien, nos électriciens qualifiés réalisent des installations aux normes, durables et adaptées à vos besoins."
       iconName="zap"
+      category="electricite"
+      imageSlug="electricite-installation"
+      parentCategory={{ label: "Électricité", href: "/services/electricite" }}
       prestations={prestations}
       faqs={faqs}
     />

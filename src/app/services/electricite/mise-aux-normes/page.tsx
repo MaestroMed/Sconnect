@@ -31,6 +31,9 @@ export default function MiseAuxNormesPage() {
       subtitle="Conformité NF C 15-100"
       description="Votre installation électrique a plus de 15 ans ? Elle n'est probablement plus aux normes actuelles. Nous réalisons le diagnostic et les travaux de mise en conformité."
       iconName="fileCheck"
+      category="electricite"
+      imageSlug="electricite-borne-irve"
+      parentCategory={{ label: "Électricité", href: "/services/electricite" }}
       prestations={prestations}
       faqs={faqs}
     />

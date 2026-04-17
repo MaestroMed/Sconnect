@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Lock, DoorOpen, KeyRound, Shield, ChevronRight, Phone } from "lucide-react";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import CategoryLandingHero from "@/components/services/CategoryLandingHero";
+import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S'Connect",
@@ -50,29 +51,15 @@ const services = [
 export default function SerrureriePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-green-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="container-custom relative z-10">
-          <div className="mb-6">
-            <Breadcrumbs
-              items={[{ label: "Services", href: "/services" }, { label: "Serrurerie" }]}
-              light
-            />
-          </div>
-          <div className="max-w-3xl">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-500/25">
-              <Lock className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-              Serrurerie
-            </h1>
-            <p className="text-xl text-dark-300 leading-relaxed">
-              Ouverture de porte, remplacement de serrure, blindage et sécurisation de vos accès en Île-de-France.
-            </p>
-          </div>
-        </div>
-      </section>
+      <CategoryLandingHero
+        category="serrurerie"
+        title="Serrurerie"
+        subtitle="Ouverture, blindage, sécurisation"
+        description="Ouverture de porte, remplacement de serrure, blindage et sécurisation de vos accès en Île-de-France."
+        icon="lock"
+        imageSlug="serrurerie-ouverture"
+        breadcrumbLabel="Serrurerie"
+      />
 
       {/* Services */}
       <section className="section-padding bg-surface">
@@ -82,16 +69,16 @@ export default function SerrureriePage() {
               <Link
                 key={service.slug}
                 href={`/services/serrurerie/${service.slug}`}
-                className="group block p-8 rounded-2xl border-2 border-green-100 hover:border-green-400 bg-gradient-to-br from-green-50 to-white transition-all hover:shadow-xl"
+                className="group block p-8 rounded-2xl border-2 border-emerald-100 hover:border-emerald-400 bg-gradient-to-br from-emerald-50 to-white dark:border-emerald-500/25 dark:hover:border-emerald-400 dark:from-emerald-500/10 dark:to-surface-muted transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-6">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/25 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {service.name}
                 </h3>
                 <p className="text-foreground-muted mb-4">{service.description}</p>
-                <span className="inline-flex items-center gap-2 text-green-600 font-semibold group-hover:gap-3 transition-all">
+                <span className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-300 font-semibold group-hover:gap-3 transition-all">
                   Découvrir
                   <ChevronRight className="w-4 h-4" />
                 </span>
@@ -102,17 +89,21 @@ export default function SerrureriePage() {
       </section>
 
       {/* Emergency CTA */}
-      <section className="py-16 bg-green-500">
-        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-6">
+      <section className="relative py-20 bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 overflow-hidden">
+        <NoiseOverlay opacity={0.05} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
-            <h2 className="font-display font-bold text-2xl mb-2">Porte claquée ? Urgence serrurerie ?</h2>
-            <p className="text-green-100">Intervention rapide 24h/24, 7j/7.</p>
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">Porte claquée ? Urgence serrurerie ?</h2>
+            <p className="text-emerald-100 text-lg">Intervention rapide 24h/24, 7j/7.</p>
           </div>
           <div className="flex gap-4">
-            <Link href="/demande-intervention" className="btn bg-surface text-green-600 hover:bg-green-50">
+            <Link href="/demande-intervention" className="btn-white btn-lg">
               Intervention urgente
+              <ChevronRight className="w-5 h-5" />
             </Link>
-            <a href="tel:+33100000000" className="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">
+            <a href="tel:+33100000000" className="btn glass-panel text-white hover:bg-white/15 btn-lg">
               <Phone className="w-5 h-5" />
               01 XX XX XX XX
             </a>
