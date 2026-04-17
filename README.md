@@ -109,9 +109,37 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 
 # Sécurité
 JWT_SECRET=your_very_secure_secret
+
+# Vérification moteurs de recherche (optionnel)
+GOOGLE_SITE_VERIFICATION=
+BING_SITE_VERIFICATION=
+
+# Mode maintenance (rewrite tout le public vers /maintenance)
+MAINTENANCE_MODE=false
+
+# Sentry (optionnel — monitoring)
+SENTRY_DSN=
+SENTRY_ORG=
+SENTRY_PROJECT=
+SENTRY_AUTH_TOKEN=
 ```
 
 Voir `env.example.txt` pour la liste complète.
+
+### Déploiement Vercel
+
+1. **Connecter le repo GitHub** au projet Vercel.
+2. **Configurer les secrets** dans Project Settings → Environment Variables (Production + Preview) :
+   - **Critiques** : `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_EMAIL`, `JWT_SECRET` (≥32 chars random)
+   - **Recommandés** : `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_PHONE_EMERGENCY`, `NEXT_PUBLIC_GA_ID`
+   - **Optionnels** : `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`, `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`, `WHATSAPP_NUMBER`, `MAINTENANCE_MODE`, `BREVO_API_KEY`, `RESEND_AUDIENCE_ID`
+3. **Préparer Supabase** : créer le projet, exécuter `supabase/schema.sql` puis `supabase/storage-policies.sql`, puis `npm run db:seed` pour peupler les tables initiales.
+4. **Premier admin** : si la table `admin_users` est vide, définir `ADMIN_BOOTSTRAP_EMAIL` + `ADMIN_BOOTSTRAP_PASSWORD_HASH` (bcrypt) dans les env vars Vercel pour permettre la première connexion.
+5. **Déployer** : `git push` sur la branche principale déclenche le build automatique.
+6. **Post-déploiement** :
+   - Soumettre le sitemap (`/sitemap.xml`) à Google Search Console + Bing Webmaster Tools.
+   - Vérifier les Speed Insights et Web Vitals dans le dashboard Vercel.
+   - Tester `/admin/login`, le formulaire `/demande-devis`, et la newsletter.
 
 ## 📚 Documentation
 
