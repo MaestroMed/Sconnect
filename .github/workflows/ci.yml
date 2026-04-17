@@ -66,6 +66,12 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://sconnectfrance.fr
+          # Optional Sentry source-map upload — only triggers when all four
+          # secrets are set on the repository. See README "Déploiement Vercel".
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
   e2e:
     name: Playwright E2E
