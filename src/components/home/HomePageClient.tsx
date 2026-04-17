@@ -29,9 +29,10 @@ import EngagementCard from "@/components/ui/EngagementCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import AnimatedMesh from "@/components/ui/AnimatedMesh";
 import Marquee from "@/components/ui/Marquee";
 import HeroImage from "@/components/home/HeroImage";
+import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
+import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -189,16 +190,18 @@ export default function HomePageClient({
   const displayedRealizations = realizations.slice(0, 6);
   const displayedZones = siteConfig.zones.slice(0, 6);
 
-  // Hero image avec fallback
-  const heroImage = homepage.hero_image_url || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=800&fit=crop";
+  // Hero image: admin-overridden URL, or local manifest, or fallback slug
+  const heroManifest = imageOrNull("hero-electricien");
+  const heroImage = homepage.hero_image_url || heroManifest?.webp || "/images/hero/hero-electricien.webp";
+  const zoneImg = imageOrNull("zone-paris");
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">
-        <AnimatedMesh variant="dark" />
+        <AuroraBackdrop intensity="strong" />
         <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay" aria-hidden="true" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -214,7 +217,7 @@ export default function HomePageClient({
 
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 {homepage.hero_title.split(",")[0]},{" "}
-                <span className="gradient-text">{homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}</span>
+                <span className="gradient-text-living">{homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}</span>
               </h1>
 
               <p className="text-xl text-dark-300 mb-8 leading-relaxed">
@@ -326,45 +329,53 @@ export default function HomePageClient({
                   whileHover={{ y: -4 }}
                   className={spanClass}
                 >
-                  <Link
-                    href={category.href}
-                    className={`relative overflow-hidden block p-6 md:p-8 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${colorClasses}`}
-                  >
-                    {/* Decorative chevron accent for feature tile */}
-                    {index === 0 && (
+                  <Spotlight className="h-full rounded-2xl">
+                    <Link
+                      href={category.href}
+                      className={`relative overflow-hidden block p-6 md:p-8 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${colorClasses}`}
+                    >
+                      {/* Decorative orb accent — bigger on feature tile */}
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-br from-primary-500/20 to-electric-500/10 blur-2xl"
+                        className={`pointer-events-none absolute -right-20 -bottom-20 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100 ${
+                          category.color === "primary"
+                            ? "bg-primary-500/20"
+                            : category.color === "accent"
+                              ? "bg-accent-500/20"
+                              : category.color === "orange"
+                                ? "bg-orange-500/20"
+                                : "bg-green-500/20"
+                        } ${index === 0 ? "h-72 w-72 opacity-70" : "h-48 w-48 opacity-40"}`}
                       />
-                    )}
-                    <div className="relative flex h-full flex-col">
-                      <div
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg text-white ${iconBg}`}
-                      >
-                        <category.icon className="w-7 h-7" />
+                      <div className="relative z-10 flex h-full flex-col">
+                        <div
+                          className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg text-white magnetic group-hover:scale-110 group-hover:rotate-3 ${iconBg}`}
+                        >
+                          <category.icon className="w-7 h-7" />
+                        </div>
+                        <h3
+                          className={`font-display font-bold ${
+                            index === 0 ? "text-2xl md:text-3xl" : "text-xl"
+                          } text-foreground mb-2`}
+                        >
+                          {category.title}
+                        </h3>
+                        <p
+                          className={`text-foreground-muted mb-4 ${
+                            index === 0 ? "text-base md:text-lg max-w-md" : "text-sm"
+                          }`}
+                        >
+                          {category.description}
+                        </p>
+                        <span
+                          className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${accentText}`}
+                        >
+                          Découvrir
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
                       </div>
-                      <h3
-                        className={`font-display font-bold ${
-                          index === 0 ? "text-2xl md:text-3xl" : "text-xl"
-                        } text-foreground mb-2`}
-                      >
-                        {category.title}
-                      </h3>
-                      <p
-                        className={`text-foreground-muted mb-4 ${
-                          index === 0 ? "text-base md:text-lg max-w-md" : "text-sm"
-                        }`}
-                      >
-                        {category.description}
-                      </p>
-                      <span
-                        className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${accentText}`}
-                      >
-                        Découvrir
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </div>
-                  </Link>
+                    </Link>
+                  </Spotlight>
                 </motion.div>
               );
             })}
@@ -405,8 +416,10 @@ export default function HomePageClient({
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-violet-500/15 rounded-full blur-3xl animate-orb-float" />
+        <NoiseOverlay opacity={0.04} />
 
         <div className="container-custom relative z-10">
           <SectionTitle
@@ -427,8 +440,9 @@ export default function HomePageClient({
       </section>
 
       {/* Engagements Section */}
-      <section className="section-padding bg-surface">
-        <div className="container-custom">
+      <section className="relative section-padding bg-surface overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary-50/30 to-transparent dark:via-primary-950/30" />
+        <div className="container-custom relative z-10">
           <SectionTitle
             badge="Nos Engagements"
             title="Pourquoi nous faire confiance ?"
@@ -474,8 +488,10 @@ export default function HomePageClient({
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-50 to-electric-50 dark:from-dark-900 dark:to-primary-950">
-        <div className="container-custom">
+      <section className="relative section-padding bg-gradient-to-br from-primary-50 to-electric-50 dark:from-dark-900 dark:to-primary-950 overflow-hidden">
+        <div className="pointer-events-none absolute -top-40 right-[-10%] w-[30rem] h-[30rem] bg-primary-400/20 dark:bg-primary-500/15 rounded-full blur-3xl animate-orb-float" />
+        <div className="pointer-events-none absolute bottom-0 left-[-10%] w-[28rem] h-[28rem] bg-electric-400/20 dark:bg-violet-500/15 rounded-full blur-3xl animate-drift" />
+        <div className="container-custom relative z-10">
           <SectionTitle
             badge="Avis Clients"
             title="Ils nous font confiance"
@@ -611,23 +627,31 @@ export default function HomePageClient({
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
+              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative group">
                 <Image
-                  src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=800&fit=crop"
-                  alt="Paris et Île-de-France"
+                  src={zoneImg?.webp || "/images/zones/zone-paris.webp"}
+                  alt={zoneImg?.alt || "Paris et Île-de-France"}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.06]"
+                  placeholder={zoneImg ? "blur" : undefined}
+                  blurDataURL={zoneImg?.blurDataURL}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/20 to-transparent" />
+                <div className="absolute inset-0 gradient-veil-cool opacity-40 mix-blend-overlay" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <div className="flex flex-wrap gap-2">
-                    {displayedZones.map((city) => (
-                      <span
+                    {displayedZones.map((city, i) => (
+                      <motion.span
                         key={city}
-                        className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm"
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.05 * i, duration: 0.4 }}
+                        className="px-3 py-1 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium"
                       >
                         {city}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
@@ -638,23 +662,28 @@ export default function HomePageClient({
       </section>
 
       {/* Final CTA */}
-      <section className="relative overflow-hidden py-20">
-        {/* Animated aurora background */}
+      <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">
+        {/* Layered animated backdrop */}
         <div
           aria-hidden="true"
           className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700"
         />
+        <div className="absolute inset-0">
+          <GradientVeil variant="brand" />
+        </div>
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-60 mix-blend-overlay"
+          className="absolute inset-0 opacity-70 mix-blend-overlay animate-gradient-shift bg-[length:200%_200%]"
           style={{
             background:
-              "conic-gradient(from 0deg at 50% 50%, rgba(245,158,11,0.15), transparent 20%, transparent 50%, rgba(14,165,233,0.25), transparent 80%, rgba(245,158,11,0.15))",
+              "conic-gradient(from 0deg at 50% 50%, rgba(245,158,11,0.25), transparent 20%, transparent 50%, rgba(14,165,233,0.3), transparent 80%, rgba(139,92,246,0.25))",
           }}
         />
+        <ParticlesLite variant="white" />
         <div className="absolute inset-0 bg-grid opacity-10" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/15 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-accent-500/25 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <NoiseOverlay opacity={0.07} />
 
         <div className="container-custom relative z-10 text-center">
           <motion.div
