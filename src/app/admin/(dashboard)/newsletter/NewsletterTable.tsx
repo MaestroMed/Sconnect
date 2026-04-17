@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/admin/DataTable";
 import type { NewsletterSubscriber } from "@/lib/data-adapter";
 import { UserMinus } from "lucide-react";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 const STATUS_COLOR: Record<string, string> = {
   active: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300",
@@ -30,12 +31,19 @@ function formatDate(iso: string) {
 
 export default function NewsletterTable({ rows }: { rows: NewsletterSubscriber[] }) {
   const router = useRouter();
+  const confirm = useConfirm();
   const [busy, setBusy] = useState<string | null>(null);
   const [, startTransition] = useTransition();
 
   const unsubscribe = async (sub: NewsletterSubscriber) => {
     if (sub.status !== "active") return;
-    if (!window.confirm(`Désinscrire ${sub.email} ?`)) return;
+    const ok = await confirm({
+      title: "Désinscrire l'abonné",
+      description: `Confirmer la désinscription de ${sub.email} ?`,
+      confirmLabel: "Désinscrire",
+      destructive: true,
+    });
+    if (!ok) return;
     setBusy(sub.id);
     try {
       const res = await fetch(

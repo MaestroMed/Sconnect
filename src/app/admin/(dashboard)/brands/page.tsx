@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, Loader2, X, Save, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { SortableGrid } from "@/components/admin/SortableGrid";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 interface Brand {
   id: string;
@@ -21,6 +22,7 @@ const categories = [
 ];
 
 export default function BrandsPage() {
+  const confirm = useConfirm();
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -96,7 +98,13 @@ export default function BrandsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Supprimer cette marque ?")) return;
+    const ok = await confirm({
+      title: "Supprimer la marque",
+      description: "Supprimer cette marque ? Cette action est irréversible.",
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
     try {
       const res = await fetch(`/api/admin/brands?id=${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);

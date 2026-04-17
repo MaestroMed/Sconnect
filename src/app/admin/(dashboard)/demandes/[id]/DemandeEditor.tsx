@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Trash2, Save, CheckCircle2, Clock, Inbox, Archive } from "lucide-react";
 import type { Submission, SubmissionStatus } from "@/lib/data-adapter";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 const STATUS_OPTIONS: { value: SubmissionStatus; label: string; icon: typeof Inbox }[] = [
   { value: "new", label: "Nouveau", icon: Inbox },
@@ -15,6 +16,7 @@ const STATUS_OPTIONS: { value: SubmissionStatus; label: string; icon: typeof Inb
 
 export default function DemandeEditor({ submission }: { submission: Submission }) {
   const router = useRouter();
+  const confirm = useConfirm();
   const [status, setStatus] = useState<SubmissionStatus>(submission.status);
   const [notes, setNotes] = useState<string>(submission.notes ?? "");
   const [saving, setSaving] = useState(false);
@@ -41,7 +43,13 @@ export default function DemandeEditor({ submission }: { submission: Submission }
   };
 
   const remove = async () => {
-    if (!window.confirm("Supprimer définitivement cette demande ?")) return;
+    const ok = await confirm({
+      title: "Supprimer la demande",
+      description: "Supprimer définitivement cette demande ? Cette action est irréversible.",
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
     setSaving(true);
     try {
       const res = await fetch(`/api/admin/submissions/${submission.id}`, {

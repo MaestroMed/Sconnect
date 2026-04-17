@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Search, Trash2, CheckSquare, Square, Copy } from "lucide-react";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 interface MediaItem {
   path: string;
@@ -32,6 +33,7 @@ function formatSize(bytes: number) {
 
 export default function MediaLibraryClient({ initialItems }: { initialItems: MediaItem[] }) {
   const router = useRouter();
+  const confirm = useConfirm();
   const [items] = useState<MediaItem[]>(initialItems);
   const [search, setSearch] = useState("");
   const [folder, setFolder] = useState<string>("all");
@@ -71,7 +73,13 @@ export default function MediaLibraryClient({ initialItems }: { initialItems: Med
 
   const removeSelected = async () => {
     if (selected.size === 0) return;
-    if (!window.confirm(`Supprimer ${selected.size} fichier(s) définitivement ?`)) return;
+    const ok = await confirm({
+      title: "Supprimer les fichiers",
+      description: `Supprimer ${selected.size} fichier(s) définitivement ? Cette action est irréversible.`,
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
     setBusy(true);
     try {
       const res = await fetch("/api/admin/media/library", {

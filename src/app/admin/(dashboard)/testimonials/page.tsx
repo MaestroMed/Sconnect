@@ -5,6 +5,7 @@ import { Plus, Pencil, Trash2, Loader2, X, Save, Star, BadgeCheck } from "lucide
 import { toast } from "sonner";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/admin/DataTable";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 interface Testimonial {
   id: string;
@@ -25,6 +26,7 @@ const categories = [
 ];
 
 export default function TestimonialsPage() {
+  const confirm = useConfirm();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -109,7 +111,13 @@ export default function TestimonialsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Supprimer ce témoignage ?")) return;
+    const ok = await confirm({
+      title: "Supprimer le témoignage",
+      description: "Supprimer ce témoignage ? Cette action est irréversible.",
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
     try {
       const res = await fetch(`/api/admin/testimonials?id=${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);

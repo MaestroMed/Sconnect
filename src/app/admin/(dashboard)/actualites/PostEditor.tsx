@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Save, Trash2, Eye, X } from "lucide-react";
 import RichTextEditor from "@/components/admin/RichTextEditor";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 export interface PostFormValues {
   slug?: string;
@@ -36,6 +37,7 @@ export default function PostEditor({
   mode: "create" | "edit";
 }) {
   const router = useRouter();
+  const confirm = useConfirm();
   const [values, setValues] = useState<PostFormValues>(initial);
   const [tagInput, setTagInput] = useState("");
   const [saving, setSaving] = useState(false);
@@ -104,7 +106,13 @@ export default function PostEditor({
 
   const remove = async () => {
     if (mode !== "edit" || !values.slug) return;
-    if (!window.confirm("Supprimer définitivement cet article ?")) return;
+    const ok = await confirm({
+      title: "Supprimer l'article",
+      description: "Supprimer définitivement cet article ? Cette action est irréversible.",
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
     setSaving(true);
     try {
       const res = await fetch(`/api/admin/posts/${values.slug}`, { method: "DELETE" });
