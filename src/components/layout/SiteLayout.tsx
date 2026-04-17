@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import FloatingCTA from "@/components/ui/FloatingCTA";
 import { SiteConfigProvider, SiteConfigData } from "@/contexts/SiteConfigContext";
 
@@ -36,6 +37,7 @@ export default function SiteLayout({ children, siteConfig }: SiteLayoutProps) {
         phone={siteConfig.phone}
         phoneEmergency={siteConfig.phoneEmergency}
       />
+      <ScrollToTop />
     </SiteConfigProvider>
   );
 }

@@ -132,7 +132,12 @@ export default function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-sm text-foreground-muted">
-            Contactez l&apos;administrateur si vous avez oublié vos identifiants.
+            <a
+              href="/admin/login/forgot"
+              className="text-primary-600 dark:text-primary-300 hover:underline font-medium"
+            >
+              Mot de passe oublié&nbsp;?
+            </a>
           </p>
         </div>
       </div>

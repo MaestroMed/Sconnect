@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,6 +64,14 @@ const steps = [
   { id: 4, title: "Détails", icon: FileText },
 ];
 
+const DRAFT_TTL_MS = 24 * 60 * 60 * 1000;
+const draftStorageKey = (type: "devis" | "intervention") => `sconnect-${type}-draft`;
+
+type DraftEnvelope = {
+  values: Partial<DemandeFormData>;
+  savedAt: number;
+};
+
 export default function DemandeForm({ type }: DemandeFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -75,7 +83,8 @@ export default function DemandeForm({ type }: DemandeFormProps) {
     control,
     watch,
     trigger,
-    formState: { errors },
+    reset,
+    formState: { errors, isDirty },
   } = useForm<DemandeFormData>({
     resolver: zodResolver(demandeSchema),
     defaultValues: {
@@ -87,6 +96,62 @@ export default function DemandeForm({ type }: DemandeFormProps) {
   });
 
   const facturationIdentique = watch("facturationIdentique");
+
+  const storageKey = draftStorageKey(type);
+  const restorePromptedRef = useRef(false);
+
+  useEffect(() => {
+    if (restorePromptedRef.current) return;
+    if (typeof window === "undefined") return;
+    restorePromptedRef.current = true;
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (!raw) return;
+      const draft = JSON.parse(raw) as DraftEnvelope;
+      if (!draft?.savedAt || Date.now() - draft.savedAt > DRAFT_TTL_MS) {
+        window.localStorage.removeItem(storageKey);
+        return;
+      }
+      const id = toast.message("Brouillon trouvé", {
+        description: "Reprendre la demande commencée précédemment ?",
+        duration: 12000,
+        action: {
+          label: "Restaurer",
+          onClick: () => {
+            reset(draft.values as DemandeFormData);
+            toast.success("Brouillon restauré");
+          },
+        },
+        cancel: {
+          label: "Ignorer",
+          onClick: () => {
+            window.localStorage.removeItem(storageKey);
+          },
+        },
+      });
+      return () => {
+        toast.dismiss(id);
+      };
+    } catch {
+      window.localStorage.removeItem(storageKey);
+    }
+  }, [reset, storageKey]);
+
+  const watchedValues = watch();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!isDirty) return;
+    if (submitStatus === "success") return;
+    const handle = window.setTimeout(() => {
+      try {
+        const envelope: DraftEnvelope = { values: watchedValues, savedAt: Date.now() };
+        window.localStorage.setItem(storageKey, JSON.stringify(envelope));
+      } catch {
+        // localStorage may be full or disabled — ignore silently
+      }
+    }, 1000);
+    return () => window.clearTimeout(handle);
+  }, [watchedValues, isDirty, submitStatus, storageKey]);
 
   const validateStep = async (step: number): Promise<boolean> => {
     switch (step) {
@@ -180,6 +245,9 @@ export default function DemandeForm({ type }: DemandeFormProps) {
       }
 
       setSubmitStatus("success");
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(storageKey);
+      }
       toast.success(
         type === "devis" ? "Devis envoyé avec succès" : "Demande d'intervention envoyée",
         { description: "Nous vous recontactons dans les plus brefs délais." },
