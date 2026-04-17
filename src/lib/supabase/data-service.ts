@@ -1,5 +1,20 @@
 import { createServiceClient } from './server'
-import type { SiteConfig, Homepage, ServiceCategory, Service, Realization, Testimonial, Brand, AdminUser } from './types'
+import type {
+  SiteConfig,
+  Homepage,
+  ServiceCategory,
+  Service,
+  Realization,
+  Testimonial,
+  Brand,
+  AdminUser,
+  Submission,
+  SubmissionStatus,
+  SubmissionType,
+  NewsletterSubscriber,
+  Post,
+  PasswordResetToken,
+} from './types'
 
 // Helper to clean update data
 function cleanUpdateData<T extends Record<string, unknown>>(data: T): Omit<T, 'id' | 'created_at' | 'updated_at'> {
@@ -548,4 +563,261 @@ export async function updateAdminUser(id: string, updates: Partial<AdminUser>): 
     return null
   }
   return data as AdminUser
+}
+
+// =============================================
+// SUBMISSIONS (form inbox)
+// =============================================
+export interface SubmissionListFilters {
+  type?: SubmissionType | 'all'
+  status?: SubmissionStatus | 'all'
+  search?: string
+  limit?: number
+  offset?: number
+}
+
+export async function listSubmissions(filters: SubmissionListFilters = {}): Promise<{ rows: Submission[]; count: number }> {
+  const supabase = createServiceClient()
+  let query = supabase
+    .from('submissions')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+
+  if (filters.type && filters.type !== 'all') query = query.eq('type', filters.type)
+  if (filters.status && filters.status !== 'all') query = query.eq('status', filters.status)
+  if (filters.search) {
+    const s = `%${filters.search}%`
+    query = query.or(`contact_name.ilike.${s},contact_email.ilike.${s},contact_phone.ilike.${s}`)
+  }
+  if (typeof filters.limit === 'number') {
+    const offset = filters.offset ?? 0
+    query = query.range(offset, offset + filters.limit - 1)
+  }
+
+  const { data, count, error } = await query
+  if (error) {
+    console.error('Error listing submissions:', error)
+    return { rows: [], count: 0 }
+  }
+  return { rows: (data || []) as Submission[], count: count ?? 0 }
+}
+
+export async function countSubmissionsByStatus(status: SubmissionStatus): Promise<number> {
+  const supabase = createServiceClient()
+  const { count, error } = await supabase
+    .from('submissions')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', status)
+  if (error) {
+    console.error('Error counting submissions:', error)
+    return 0
+  }
+  return count ?? 0
+}
+
+export async function getSubmission(id: string): Promise<Submission | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase.from('submissions').select('*').eq('id', id).single()
+  if (error) {
+    console.error('Error fetching submission:', error)
+    return null
+  }
+  return data as Submission
+}
+
+export async function createSubmission(input: Omit<Submission, 'id' | 'status' | 'notes' | 'created_at' | 'updated_at'> & {
+  status?: SubmissionStatus
+  notes?: string | null
+}): Promise<Submission | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('submissions')
+    .insert(input as never)
+    .select()
+    .single()
+  if (error) {
+    console.error('Error creating submission:', error)
+    return null
+  }
+  return data as Submission
+}
+
+export async function updateSubmission(
+  id: string,
+  updates: Partial<Pick<Submission, 'status' | 'notes'>>
+): Promise<Submission | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('submissions')
+    .update(updates as never)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) {
+    console.error('Error updating submission:', error)
+    return null
+  }
+  return data as Submission
+}
+
+export async function deleteSubmission(id: string): Promise<boolean> {
+  const supabase = createServiceClient()
+  const { error } = await supabase.from('submissions').delete().eq('id', id)
+  if (error) {
+    console.error('Error deleting submission:', error)
+    return false
+  }
+  return true
+}
+
+// =============================================
+// NEWSLETTER SUBSCRIBERS
+// =============================================
+export async function subscribeNewsletter(email: string, source?: string): Promise<NewsletterSubscriber | null> {
+  const supabase = createServiceClient()
+  const normalized = email.trim().toLowerCase()
+
+  const { data: existing } = await supabase
+    .from('newsletter_subscribers')
+    .select('*')
+    .eq('email', normalized)
+    .maybeSingle()
+
+  if (existing) {
+    if ((existing as NewsletterSubscriber).status !== 'active') {
+      const { data: reactivated, error } = await supabase
+        .from('newsletter_subscribers')
+        .update({ status: 'active', source: source ?? null } as never)
+        .eq('email', normalized)
+        .select()
+        .single()
+      if (error) {
+        console.error('Error reactivating subscriber:', error)
+        return null
+      }
+      return reactivated as NewsletterSubscriber
+    }
+    return existing as NewsletterSubscriber
+  }
+
+  const { data, error } = await supabase
+    .from('newsletter_subscribers')
+    .insert({ email: normalized, source: source ?? null } as never)
+    .select()
+    .single()
+  if (error) {
+    console.error('Error subscribing newsletter:', error)
+    return null
+  }
+  return data as NewsletterSubscriber
+}
+
+export async function unsubscribeNewsletterByToken(token: string): Promise<boolean> {
+  const supabase = createServiceClient()
+  const { error } = await supabase
+    .from('newsletter_subscribers')
+    .update({ status: 'unsubscribed' } as never)
+    .eq('unsubscribe_token', token)
+  if (error) {
+    console.error('Error unsubscribing newsletter:', error)
+    return false
+  }
+  return true
+}
+
+export async function listNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('newsletter_subscribers')
+    .select('*')
+    .order('created_at', { ascending: false })
+  if (error) {
+    console.error('Error listing newsletter subscribers:', error)
+    return []
+  }
+  return (data || []) as NewsletterSubscriber[]
+}
+
+// =============================================
+// POSTS (blog)
+// =============================================
+export async function listPosts(opts: { publishedOnly?: boolean } = {}): Promise<Post[]> {
+  const supabase = createServiceClient()
+  let query = supabase.from('posts').select('*').order('published_at', { ascending: false, nullsFirst: false })
+  if (opts.publishedOnly) query = query.eq('published', true)
+  const { data, error } = await query
+  if (error) {
+    console.error('Error listing posts:', error)
+    return []
+  }
+  return (data || []) as Post[]
+}
+
+export async function getPost(slug: string): Promise<Post | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase.from('posts').select('*').eq('slug', slug).single()
+  if (error) {
+    console.error('Error fetching post:', error)
+    return null
+  }
+  return data as Post
+}
+
+export async function upsertPost(post: Partial<Post> & { slug: string; title: string; body_mdx: string }): Promise<Post | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('posts')
+    .upsert(post as never, { onConflict: 'slug' })
+    .select()
+    .single()
+  if (error) {
+    console.error('Error upserting post:', error)
+    return null
+  }
+  return data as Post
+}
+
+export async function deletePost(slug: string): Promise<boolean> {
+  const supabase = createServiceClient()
+  const { error } = await supabase.from('posts').delete().eq('slug', slug)
+  if (error) {
+    console.error('Error deleting post:', error)
+    return false
+  }
+  return true
+}
+
+// =============================================
+// PASSWORD RESET TOKENS
+// =============================================
+export async function createPasswordResetToken(userId: string, token: string, expiresAt: Date): Promise<PasswordResetToken | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('password_reset_tokens')
+    .insert({ token, user_id: userId, expires_at: expiresAt.toISOString() } as never)
+    .select()
+    .single()
+  if (error) {
+    console.error('Error creating reset token:', error)
+    return null
+  }
+  return data as PasswordResetToken
+}
+
+export async function consumePasswordResetToken(token: string): Promise<PasswordResetToken | null> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from('password_reset_tokens')
+    .select('*')
+    .eq('token', token)
+    .single()
+  if (error || !data) return null
+  const row = data as PasswordResetToken
+  if (row.used_at) return null
+  if (new Date(row.expires_at).getTime() < Date.now()) return null
+  await supabase
+    .from('password_reset_tokens')
+    .update({ used_at: new Date().toISOString() } as never)
+    .eq('token', token)
+  return row
 }

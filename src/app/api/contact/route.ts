@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sendContactEmail } from '@/lib/email';
 import { z } from 'zod';
 import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
+import { createSubmission } from '@/lib/data-adapter';
 
 // Schema de validation
 const contactSchema = z.object({
@@ -23,29 +24,33 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = contactSchema.parse(body);
 
-    // Vérifie que Resend est configuré
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY non configurée');
-      return NextResponse.json(
-        { error: 'Service email non configuré' },
-        { status: 500 }
-      );
-    }
+    // Persiste la soumission (Supabase si configuré, no-op sinon)
+    const submission = await createSubmission({
+      type: 'contact',
+      payload: validatedData as unknown as Record<string, unknown>,
+      contact_name: validatedData.nom,
+      contact_email: validatedData.email,
+      contact_phone: null,
+    });
 
-    // Envoie l'email
-    const result = await sendContactEmail(validatedData);
-
-    if (!result.success) {
-      console.error('Erreur envoi email:', result.error);
-      return NextResponse.json(
-        { error: "Erreur lors de l'envoi du message" },
-        { status: 500 }
-      );
+    // Envoi email Resend (best-effort — l'échec n'invalide pas la soumission stockée)
+    let emailOk = true;
+    if (process.env.RESEND_API_KEY) {
+      const result = await sendContactEmail(validatedData);
+      if (!result.success) {
+        emailOk = false;
+        console.error('Erreur envoi email contact:', result.error);
+      }
+    } else {
+      emailOk = false;
+      console.warn('RESEND_API_KEY non configurée — soumission persistée sans email');
     }
 
     return NextResponse.json({
       success: true,
       message: 'Message envoyé avec succès',
+      submissionId: submission?.id ?? null,
+      emailDelivered: emailOk,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

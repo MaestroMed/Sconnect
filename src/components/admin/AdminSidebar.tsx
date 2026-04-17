@@ -20,13 +20,24 @@ import {
   PanelLeftClose,
   PanelLeft,
   Newspaper,
+  Inbox,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-const menuItems = [
+type MenuItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  exact?: boolean;
+  badge?: string;
+  dynamicCount?: "submissions";
+};
+
+const menuItems: MenuItem[] = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard, exact: true },
+  { href: "/admin/demandes", label: "Demandes", icon: Inbox, dynamicCount: "submissions" },
   { href: "/admin/homepage", label: "Page d'accueil", icon: Home },
   { href: "/admin/site-config", label: "Configuration", icon: Settings },
   { href: "/admin/media", label: "Médias & Logo", icon: Upload },
@@ -34,7 +45,7 @@ const menuItems = [
   { href: "/admin/realizations", label: "Réalisations", icon: ImageIcon },
   { href: "/admin/testimonials", label: "Témoignages", icon: MessageSquare },
   { href: "/admin/brands", label: "Marques", icon: Award },
-  { href: "/admin/actualites", label: "Actualités", icon: Newspaper, badge: "Nouveau" },
+  { href: "/admin/actualites", label: "Actualités", icon: Newspaper },
 ];
 
 const COLLAPSED_KEY = "sconnect_admin_collapsed";
@@ -44,6 +55,29 @@ export default function AdminSidebar() {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [newSubmissions, setNewSubmissions] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch("/api/admin/submissions?status=new&limit=1", {
+          cache: "no-store",
+        });
+        if (!res.ok) return;
+        const json = (await res.json()) as { count: number };
+        if (!cancelled) setNewSubmissions(json.count ?? 0);
+      } catch {
+        /* ignore */
+      }
+    };
+    load();
+    const t = setInterval(load, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(t);
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -103,6 +137,11 @@ export default function AdminSidebar() {
         <ul className="space-y-1">
           {menuItems.map((item) => {
             const active = isActive(item);
+            const dynamicBadge =
+              item.dynamicCount === "submissions" && newSubmissions && newSubmissions > 0
+                ? String(newSubmissions)
+                : null;
+            const badge = dynamicBadge ?? item.badge;
             return (
               <li key={item.href} className="relative">
                 {active && (
@@ -126,12 +165,15 @@ export default function AdminSidebar() {
                   {!collapsed && (
                     <>
                       <span className="truncate">{item.label}</span>
-                      {item.badge && (
+                      {badge && (
                         <span className="ml-auto rounded-full bg-accent-500 px-2 py-0.5 text-[10px] font-bold uppercase text-dark-900">
-                          {item.badge}
+                          {badge}
                         </span>
                       )}
                     </>
+                  )}
+                  {collapsed && dynamicBadge && (
+                    <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-accent-500" />
                   )}
                 </Link>
               </li>

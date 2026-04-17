@@ -358,3 +358,126 @@ export async function deleteBrand(id: string) {
 // =============================================
 export { getAdminUser } from './data-service'
 
+// =============================================
+// SUBMISSIONS / NEWSLETTER / POSTS / RESET TOKENS
+// (Supabase-only — fall back to no-op when not configured.)
+// =============================================
+import type {
+  Submission,
+  SubmissionStatus,
+  SubmissionType,
+  NewsletterSubscriber,
+  Post,
+  PasswordResetToken,
+} from './supabase/types'
+
+export type {
+  Submission,
+  SubmissionStatus,
+  SubmissionType,
+  NewsletterSubscriber,
+  Post,
+  PasswordResetToken,
+}
+
+export function isPersistenceAvailable(): boolean {
+  return isSupabaseConfigured()
+}
+
+export async function createSubmission(input: {
+  type: SubmissionType
+  payload: Record<string, unknown>
+  contact_name?: string | null
+  contact_email?: string | null
+  contact_phone?: string | null
+}): Promise<Submission | null> {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.createSubmission({
+    type: input.type,
+    payload: input.payload as never,
+    contact_name: input.contact_name ?? null,
+    contact_email: input.contact_email ?? null,
+    contact_phone: input.contact_phone ?? null,
+  })
+}
+
+export async function listSubmissions(filters?: supabaseService.SubmissionListFilters) {
+  if (!isSupabaseConfigured()) return { rows: [] as Submission[], count: 0 }
+  return supabaseService.listSubmissions(filters)
+}
+
+export async function countSubmissionsByStatus(status: SubmissionStatus) {
+  if (!isSupabaseConfigured()) return 0
+  return supabaseService.countSubmissionsByStatus(status)
+}
+
+export async function getSubmission(id: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.getSubmission(id)
+}
+
+export async function updateSubmission(id: string, updates: Partial<Pick<Submission, 'status' | 'notes'>>) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.updateSubmission(id, updates)
+}
+
+export async function deleteSubmission(id: string) {
+  if (!isSupabaseConfigured()) return false
+  return supabaseService.deleteSubmission(id)
+}
+
+export async function subscribeNewsletter(email: string, source?: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.subscribeNewsletter(email, source)
+}
+
+export async function unsubscribeNewsletterByToken(token: string) {
+  if (!isSupabaseConfigured()) return false
+  return supabaseService.unsubscribeNewsletterByToken(token)
+}
+
+export async function listNewsletterSubscribers() {
+  if (!isSupabaseConfigured()) return [] as NewsletterSubscriber[]
+  return supabaseService.listNewsletterSubscribers()
+}
+
+export async function listPosts(opts?: { publishedOnly?: boolean }) {
+  if (!isSupabaseConfigured()) return [] as Post[]
+  return supabaseService.listPosts(opts)
+}
+
+export async function getPost(slug: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.getPost(slug)
+}
+
+export async function upsertPost(post: Partial<Post> & { slug: string; title: string; body_mdx: string }) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.upsertPost(post)
+}
+
+export async function deletePost(slug: string) {
+  if (!isSupabaseConfigured()) return false
+  return supabaseService.deletePost(slug)
+}
+
+export async function createPasswordResetToken(userId: string, token: string, expiresAt: Date) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.createPasswordResetToken(userId, token, expiresAt)
+}
+
+export async function consumePasswordResetToken(token: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.consumePasswordResetToken(token)
+}
+
+export async function getAdminUserByEmailFromDB(email: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.getAdminUserByEmail(email)
+}
+
+export async function updateAdminUserPasswordHash(userId: string, passwordHash: string) {
+  if (!isSupabaseConfigured()) return null
+  return supabaseService.updateAdminUser(userId, { password_hash: passwordHash })
+}
+

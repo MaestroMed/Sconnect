@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sendInterventionEmail } from '@/lib/email';
 import { z } from 'zod';
 import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
+import { createSubmission } from '@/lib/data-adapter';
 
 // Schema de validation pour intervention urgente
 const interventionSchema = z.object({
@@ -31,24 +32,24 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = interventionSchema.parse(body);
 
-    // Vérifie que Resend est configuré
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY non configurée');
-      return NextResponse.json(
-        { error: 'Service email non configuré' },
-        { status: 500 }
-      );
-    }
+    const submission = await createSubmission({
+      type: 'intervention',
+      payload: validatedData as unknown as Record<string, unknown>,
+      contact_name: `${validatedData.prenom} ${validatedData.nom}`.trim(),
+      contact_email: validatedData.email,
+      contact_phone: validatedData.telephone,
+    });
 
-    // Envoie l'email (avec priorité haute pour urgence)
-    const result = await sendInterventionEmail(validatedData);
-
-    if (!result.success) {
-      console.error('Erreur envoi email intervention:', result.error);
-      return NextResponse.json(
-        { error: "Erreur lors de l'envoi de la demande" },
-        { status: 500 }
-      );
+    let emailOk = true;
+    if (process.env.RESEND_API_KEY) {
+      const result = await sendInterventionEmail(validatedData);
+      if (!result.success) {
+        emailOk = false;
+        console.error('Erreur envoi email intervention:', result.error);
+      }
+    } else {
+      emailOk = false;
+      console.warn('RESEND_API_KEY non configurée — intervention persistée sans email');
     }
 
     // Log l'urgence pour suivi
@@ -57,6 +58,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Demande d\'intervention envoyée avec succès',
+      submissionId: submission?.id ?? null,
+      emailDelivered: emailOk,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

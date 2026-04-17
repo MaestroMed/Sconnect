@@ -50,6 +50,26 @@ export interface Database {
         Insert: Partial<AdminUserRow>
         Update: Partial<AdminUserRow>
       }
+      submissions: {
+        Row: SubmissionRow
+        Insert: Partial<SubmissionRow>
+        Update: Partial<SubmissionRow>
+      }
+      newsletter_subscribers: {
+        Row: NewsletterSubscriberRow
+        Insert: Partial<NewsletterSubscriberRow>
+        Update: Partial<NewsletterSubscriberRow>
+      }
+      posts: {
+        Row: PostRow
+        Insert: Partial<PostRow>
+        Update: Partial<PostRow>
+      }
+      password_reset_tokens: {
+        Row: PasswordResetTokenRow
+        Insert: Partial<PasswordResetTokenRow>
+        Update: Partial<PasswordResetTokenRow>
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
@@ -191,6 +211,57 @@ export interface AdminUserRow {
   updated_at: string
 }
 
+export type SubmissionType = 'contact' | 'devis' | 'intervention'
+export type SubmissionStatus = 'new' | 'in_progress' | 'done' | 'archived'
+
+export interface SubmissionRow {
+  id: string
+  type: SubmissionType
+  status: SubmissionStatus
+  payload: Json
+  contact_name: string | null
+  contact_email: string | null
+  contact_phone: string | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type NewsletterStatus = 'active' | 'unsubscribed' | 'bounced'
+
+export interface NewsletterSubscriberRow {
+  id: string
+  email: string
+  consent_at: string
+  source: string | null
+  status: NewsletterStatus
+  unsubscribe_token: string
+  created_at: string
+  updated_at: string
+}
+
+export interface PostRow {
+  slug: string
+  title: string
+  excerpt: string | null
+  cover_url: string | null
+  body_mdx: string
+  tags: string[]
+  author: string | null
+  published: boolean
+  published_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface PasswordResetTokenRow {
+  token: string
+  user_id: string
+  expires_at: string
+  used_at: string | null
+  created_at: string
+}
+
 // Export convenient aliases
 export type SiteConfig = SiteConfigRow
 export type Homepage = HomepageRow
@@ -200,3 +271,7 @@ export type Realization = RealizationRow
 export type Testimonial = TestimonialRow
 export type Brand = BrandRow
 export type AdminUser = AdminUserRow
+export type Submission = SubmissionRow
+export type NewsletterSubscriber = NewsletterSubscriberRow
+export type Post = PostRow
+export type PasswordResetToken = PasswordResetTokenRow

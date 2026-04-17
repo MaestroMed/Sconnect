@@ -14,7 +14,9 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "db:seed": "tsx scripts/migrate-json-to-supabase.ts",
+    "db:import-mdx": "tsx scripts/import-mdx-to-db.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -76,8 +78,10 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/ui": "^4.1.4",
     "eslint": "^8.57.0",
+    "dotenv": "^16.4.5",
     "eslint-config-next": "^15.5.7",
     "jsdom": "^29.0.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vitest": "^4.1.4"
   }
