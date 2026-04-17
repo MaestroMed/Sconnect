@@ -93,6 +93,15 @@ export default {
         "marquee-x-reverse": "marqueeXReverse var(--marquee-duration, 40s) linear infinite",
         "shimmer": "shimmer 2.5s linear infinite",
         "aurora": "aurora 12s ease-in-out infinite",
+        "aurora-slow": "aurora 28s ease-in-out infinite",
+        "drift": "drift 16s ease-in-out infinite",
+        "drift-reverse": "driftReverse 20s ease-in-out infinite",
+        "gradient-shift": "gradientShift 14s ease infinite",
+        "conic-spin": "conicSpin 30s linear infinite",
+        "pulse-soft": "pulseSoft 4s ease-in-out infinite",
+        "orb-float": "orbFloat 10s ease-in-out infinite",
+        "tilt": "tilt 10s ease-in-out infinite",
+        "gradient-text-shift": "gradientTextShift 8s ease infinite",
       },
       keyframes: {
         fadeIn: {
@@ -152,6 +161,39 @@ export default {
           "100%": { backgroundPosition: "200% 0" },
         },
         aurora: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1) rotate(0deg)" },
+          "33%": { transform: "translate3d(5%, -7%, 0) scale(1.08) rotate(4deg)" },
+          "66%": { transform: "translate3d(-6%, 4%, 0) scale(0.96) rotate(-3deg)" },
+        },
+        driftReverse: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1) rotate(0deg)" },
+          "50%": { transform: "translate3d(-8%, 6%, 0) scale(1.12) rotate(-5deg)" },
+        },
+        gradientShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        conicSpin: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        pulseSoft: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.85" },
+        },
+        orbFloat: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(3%, -5%, 0) scale(1.05)" },
+        },
+        tilt: {
+          "0%, 100%": { transform: "rotate(-0.5deg)" },
+          "50%": { transform: "rotate(0.5deg)" },
+        },
+        gradientTextShift: {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
