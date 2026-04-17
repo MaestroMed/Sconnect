@@ -14,6 +14,7 @@ import {
 import { buildMetadata } from "@/lib/metadata";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MDXComponents from "@/components/blog/MDXComponents";
+import NewsletterForm from "@/components/marketing/NewsletterForm";
 
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
@@ -173,6 +174,10 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
               Demander un devis
               <ArrowRight className="h-4 w-4" />
             </Link>
+          </div>
+
+          <div className="mt-12">
+            <NewsletterForm variant="card" source="blog" />
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 import AvailabilityBadge from "@/components/ui/AvailabilityBadge";
+import NewsletterForm from "@/components/marketing/NewsletterForm";
 
 const services = [
   { name: "Électricité", href: "/services/electricite" },
@@ -226,6 +227,21 @@ export default function Footer() {
                 <AvailabilityBadge variant="dark" schedule={siteConfig.schedule} />
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Newsletter */}
+        <div className="mt-12 pt-8 border-t border-dark-800">
+          <div className="grid md:grid-cols-[1fr_minmax(280px,420px)] gap-6 items-center">
+            <div>
+              <h4 className="font-display font-bold text-xl mb-1">
+                Restez informé
+              </h4>
+              <p className="text-sm text-dark-300">
+                Conseils, normes électriques, retours de chantier — un email par mois maximum.
+              </p>
+            </div>
+            <NewsletterForm source="footer" />
           </div>
         </div>
 

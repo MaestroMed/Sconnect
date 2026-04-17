@@ -21,6 +21,8 @@ import {
   PanelLeft,
   Newspaper,
   Inbox,
+  FolderOpen,
+  Mail,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -41,11 +43,13 @@ const menuItems: MenuItem[] = [
   { href: "/admin/homepage", label: "Page d'accueil", icon: Home },
   { href: "/admin/site-config", label: "Configuration", icon: Settings },
   { href: "/admin/media", label: "Médias & Logo", icon: Upload },
+  { href: "/admin/media-library", label: "Bibliothèque", icon: FolderOpen },
   { href: "/admin/services", label: "Services", icon: Wrench },
   { href: "/admin/realizations", label: "Réalisations", icon: ImageIcon },
   { href: "/admin/testimonials", label: "Témoignages", icon: MessageSquare },
   { href: "/admin/brands", label: "Marques", icon: Award },
   { href: "/admin/actualites", label: "Actualités", icon: Newspaper },
+  { href: "/admin/newsletter", label: "Newsletter", icon: Mail },
 ];
 
 const COLLAPSED_KEY = "sconnect_admin_collapsed";
