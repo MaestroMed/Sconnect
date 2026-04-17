@@ -33,8 +33,10 @@ export default function HeroImage({ src, interventionsPerYear }: HeroImageProps)
               src={src}
               alt="Technicien professionnel au travail"
               fill
+              sizes="(max-width: 1024px) 0px, 512px"
               className="object-cover"
               priority
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 to-transparent" />
           </div>
