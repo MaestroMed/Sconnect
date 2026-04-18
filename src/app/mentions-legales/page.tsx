@@ -48,23 +48,24 @@ export default function MentionsLegalesPage() {
                 <h2 className="text-2xl font-bold text-foreground m-0">Éditeur du site</h2>
               </div>
               <div className="bg-surface-muted p-6 rounded-xl">
-                <p className="mb-2"><strong>Raison sociale :</strong> S'Connect</p>
-                <p className="mb-2"><strong>Forme juridique :</strong> [À COMPLÉTER - SARL, SAS, etc.]</p>
-                <p className="mb-2"><strong>Capital social :</strong> [À COMPLÉTER]</p>
-                <p className="mb-2"><strong>SIRET :</strong> [À COMPLÉTER]</p>
-                <p className="mb-2"><strong>TVA intracommunautaire :</strong> [À COMPLÉTER]</p>
-                <p className="mb-2"><strong>RCS :</strong> [À COMPLÉTER]</p>
-                <p className="mb-2"><strong>Siège social :</strong> [À COMPLÉTER - Adresse complète]</p>
-                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33100000000" className="text-primary-600 hover:text-primary-700">01 XX XX XX XX</a></p>
-                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a></p>
+                <p className="mb-2"><strong>Raison sociale :</strong> S CONNECT FRANCE</p>
+                <p className="mb-2"><strong>Forme juridique :</strong> Société par actions simplifiée (SAS)</p>
+                <p className="mb-2"><strong>Capital social :</strong> 20 000 €</p>
+                <p className="mb-2"><strong>SIRET :</strong> 899 667 596 00014</p>
+                <p className="mb-2"><strong>TVA intracommunautaire :</strong> FR13899667596</p>
+                <p className="mb-2"><strong>RCS :</strong> Nanterre — 899 667 596</p>
+                <p className="mb-2"><strong>Code APE/NAF :</strong> 4321A — Travaux d&apos;installation électrique dans tous locaux</p>
+                <p className="mb-2"><strong>Siège social :</strong> 35 rue des Cailloux, 92110 Clichy</p>
+                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33100000000" className="text-primary-600 hover:text-primary-700">01 XX XX XX XX</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
+                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
               </div>
             </div>
 
             {/* Directeur de publication */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-foreground mb-4">Directeur de la publication</h2>
-              <p><strong>Nom :</strong> [À COMPLÉTER]</p>
-              <p><strong>Fonction :</strong> [À COMPLÉTER - Gérant, Président, etc.]</p>
+              <p><strong>Nom :</strong> Selim SEBBANA</p>
+              <p><strong>Fonction :</strong> Président</p>
             </div>
 
             {/* Hébergement */}

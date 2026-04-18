@@ -32,6 +32,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Marquee from "@/components/ui/Marquee";
 import HeroImage from "@/components/home/HeroImage";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
+import CertificationsBand from "@/components/marketing/CertificationsBand";
 import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
@@ -439,8 +440,11 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* Certifications Band — showcased prominently after stats */}
+      <CertificationsBand background="surface" />
+
       {/* Engagements Section */}
-      <section className="relative section-padding bg-surface overflow-hidden">
+      <section className="relative section-padding bg-surface-muted overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary-50/30 to-transparent dark:via-primary-950/30" />
         <div className="container-custom relative z-10">
           <SectionTitle

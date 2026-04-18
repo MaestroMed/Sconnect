@@ -185,16 +185,16 @@ export default function RootLayout({
               email: "contact@sconnect.fr",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "123 Avenue des Champs-Élysées",
-                addressLocality: "Paris",
-                postalCode: "75008",
+                streetAddress: "35 rue des Cailloux",
+                addressLocality: "Clichy",
+                postalCode: "92110",
                 addressRegion: "Île-de-France",
                 addressCountry: "FR",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: 48.8566,
-                longitude: 2.3522,
+                latitude: 48.9046,
+                longitude: 2.3045,
               },
               openingHoursSpecification: [
                 {

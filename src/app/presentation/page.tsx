@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Zap,
-  Award,
   Shield,
   Users,
   Clock,
@@ -20,6 +18,7 @@ import {
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
+import CertificationsBand from "@/components/marketing/CertificationsBand";
 import { image } from "@/lib/image-manifest";
 
 const values = [
@@ -79,29 +78,6 @@ const timeline = [
     title: "3000+ interventions",
     description:
       "Cap des 3000 interventions annuelles franchi, une équipe de techniciens qualifiés.",
-  },
-];
-
-const certifications = [
-  {
-    name: "Qualifelec",
-    description: "Qualification des entreprises d'électricité",
-    icon: Award,
-  },
-  {
-    name: "RGE",
-    description: "Reconnu Garant de l'Environnement",
-    icon: Shield,
-  },
-  {
-    name: "IRVE",
-    description: "Infrastructure de Recharge Véhicules Électriques",
-    icon: Zap,
-  },
-  {
-    name: "Garantie Décennale",
-    description: "Protection de vos travaux pendant 10 ans",
-    icon: Shield,
   },
 ];
 
@@ -268,37 +244,8 @@ export default function PresentationPage() {
         </div>
       </section>
 
-      {/* Certifications */}
-      <section className="section-padding bg-surface">
-        <div className="container-custom">
-          <SectionTitle
-            badge="Certifications"
-            title="Des qualifications reconnues"
-            subtitle="Nos certifications attestent de notre expertise et de notre engagement qualité."
-          />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6 text-center border-2 border-primary-100 hover:border-primary-300 transition-colors"
-              >
-                <div className="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center mb-4">
-                  <cert.icon className="w-8 h-8 text-primary-600" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-1">
-                  {cert.name}
-                </h3>
-                <p className="text-sm text-foreground-muted">{cert.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Certifications — shared showcase band */}
+      <CertificationsBand background="surface" />
 
       {/* Pourquoi nous choisir */}
       <section className="section-padding bg-gradient-to-br from-primary-600 to-electric-600 relative overflow-hidden">
