@@ -59,7 +59,9 @@ export default function Reveal({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-10% 0px" }}
+      // amount: 0.05 fires as soon as 5% of the element is visible, so fast
+      // scrolls don't leave elements stuck at opacity 0. once: default true.
+      viewport={{ once, amount: 0.05, margin: "0px 0px -5% 0px" }}
       variants={variants}
     >
       {children}

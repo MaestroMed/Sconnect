@@ -33,6 +33,7 @@ import Marquee from "@/components/ui/Marquee";
 import HeroImage from "@/components/home/HeroImage";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
+import BrandChip from "@/components/marketing/BrandChip";
 import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
@@ -543,19 +544,13 @@ export default function HomePageClient({
 
           <Marquee speed={45} className="py-4">
             {brands.map((brand) => (
-              <div key={brand.id} className="group">
-                <div className="w-32 h-14 relative grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                  {brand.logo && brand.logo.startsWith("/") ? (
-                    <Image src={brand.logo} alt={brand.name} fill className="object-contain" />
-                  ) : (
-                    <span className="text-xl font-bold text-foreground-muted group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      {brand.name.split(" ")[0]}
-                    </span>
-                  )}
-                </div>
-              </div>
+              <BrandChip key={brand.id} name={brand.name} logo={brand.logo} />
             ))}
           </Marquee>
+
+          <p className="mt-6 text-center text-xs text-foreground-muted max-w-2xl mx-auto">
+            Marques et produits installés par nos équipes. Les noms et logos restent la propriété de leurs détenteurs respectifs.
+          </p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

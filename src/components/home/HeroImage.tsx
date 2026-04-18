@@ -81,7 +81,7 @@ export default function HeroImage({ src, interventionsPerYear }: HeroImageProps)
               </div>
               <div>
                 <p className="font-bold text-dark-900">{interventionsPerYear}+</p>
-                <p className="text-sm text-dark-500">Clients/an</p>
+                <p className="text-sm text-dark-500">Interventions/an</p>
               </div>
             </div>
           </motion.div>

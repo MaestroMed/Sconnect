@@ -23,7 +23,7 @@ export default function StatCard({
 }: StatCardProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   const reduce = useReducedMotion();
 
   useEffect(() => {
@@ -34,23 +34,28 @@ export default function StatCard({
       return;
     }
 
-    const duration = 2000;
-    const steps = 60;
-    const stepValue = value / steps;
-    const stepDuration = duration / steps;
+    // requestAnimationFrame-based counter: immune to interval throttling,
+    // always lands exactly on `value` even if tab was backgrounded mid-animation.
+    const duration = 1800;
+    const start = performance.now();
+    let raf = 0;
 
-    let current = 0;
-    const timer = setInterval(() => {
-      current += stepValue;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const current = Math.round(value * easeOutCubic(t));
+      setCount(current);
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
       } else {
-        setCount(Math.floor(current));
+        setCount(value); // safety: ensure final landing
       }
-    }, stepDuration);
+    };
 
-    return () => clearInterval(timer);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [isInView, value, reduce]);
 
   return (

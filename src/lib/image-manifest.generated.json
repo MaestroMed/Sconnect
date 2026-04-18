@@ -242,12 +242,12 @@
   {
     "slug": "zone-paris",
     "category": "zones",
-    "alt": "Paris et Île-de-France",
+    "alt": "Paris et la Tour Eiffel",
     "webp": "/images/zones/zone-paris.webp",
     "jpg": "/images/zones/zone-paris.jpg",
     "width": 1600,
     "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAwAAUAmJZQCdADGHHkYFngA/vv+qFW+GVTcAdqmXYb4W3tznQiyqKu83PgAAAA="
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAwAAUAmJQBOgCFxnqefBPgAAP71B90SxKN3rD18h5/Ztg+5vEyw3gqpR1J0m0bwPQcuxulT7iyfm1ndgAAA"
   },
   {
     "slug": "zone-clichy",

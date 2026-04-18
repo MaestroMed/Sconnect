@@ -74,7 +74,7 @@ const CATALOG: ImageSpec[] = [
   { slug: "realisation-8", category: "realisations", unsplashId: "1593941707882-a5bba14938c7", alt: "Réalisation — installation borne IRVE", width: 1200, height: 900 },
 
   // ——— Zones d'intervention ———
-  { slug: "zone-paris", category: "zones", unsplashId: "1449824913935-59a10b8d2000", alt: "Paris et Île-de-France", width: 1600, height: 1200 },
+  { slug: "zone-paris", category: "zones", unsplashId: "1522083165195-3424ed129620", alt: "Paris et la Tour Eiffel", width: 1600, height: 1200 },
   { slug: "zone-clichy", category: "zones", unsplashId: "1502602898657-3e91760cbb34", alt: "Clichy et Hauts-de-Seine", width: 1600, height: 1200 },
   { slug: "zone-idf", category: "zones", unsplashId: "1431274172761-fca41d930114", alt: "Île-de-France vue aérienne", width: 1600, height: 1200 },
 
