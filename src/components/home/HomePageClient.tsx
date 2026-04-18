@@ -26,12 +26,10 @@ import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Marquee from "@/components/ui/Marquee";
-import HeroImage from "@/components/home/HeroImage";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
-import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -189,10 +187,6 @@ export default function HomePageClient({
   const displayedTestimonials = testimonials.slice(0, 4);
   const displayedRealizations = realizations.slice(0, 6);
 
-  // Hero image: admin-overridden URL, or local manifest, or fallback slug
-  const heroManifest = imageOrNull("hero-electricien");
-  const heroImage = homepage.hero_image_url || heroManifest?.webp || "/images/hero/hero-electricien.webp";
-
   return (
     <>
       {/* Hero Section */}
@@ -263,7 +257,14 @@ export default function HomePageClient({
               </div>
             </motion.div>
 
-            <HeroImage src={heroImage} interventionsPerYear={siteConfig.stats.interventionsPerYear} />
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.2 }}
+              className="relative hidden lg:block"
+            >
+              <InterventionMap variant="hero" />
+            </motion.div>
           </div>
         </div>
 
@@ -566,8 +567,7 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* Interactive intervention map — signature feature */}
-      <InterventionMap />
+      {/* InterventionMap promoted to the hero above — no standalone section needed. */}
 
       {/* Final CTA */}
       <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">
