@@ -196,12 +196,11 @@ export default function HomePageClient({
         <InterventionMap variant="hero" />
 
         {/* Readability overlays:
-            1. Strong gradient from left (dark) → center (transparent) so the
-               text column remains legible while the pin cluster stays visible
-               on the right.
-            2. Subtle top + bottom fade for framing. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/75 to-transparent md:via-dark-950/60 lg:via-dark-950/45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/30 via-transparent to-dark-950/70" />
+            The map is already dimmed + pushed right inside the SVG; these
+            two layered gradients make sure the text column sits on almost-
+            solid dark while the map stays atmospheric on the right. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-25% via-dark-950/85 via-55% to-dark-950/20 to-100%" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/40 via-transparent to-dark-950/80" />
         <NoiseOverlay opacity={0.035} />
 
         <div className="container-custom relative z-10 py-20 w-full">

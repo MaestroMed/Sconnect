@@ -197,13 +197,20 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
   const hq = COMMUNES.find((c) => c.tier === "hq")!;
   const otherCommunes = useMemo(() => COMMUNES.filter((c) => c.tier !== "hq"), []);
 
+  // In hero variant we push the map content right (via translate) and dim
+  // everything a touch so the text column on the left has real dark space
+  // to read against. In section variant content stays centred and bright.
+  const isHero = variant === "hero";
+  const mapShift = isHero ? 220 : 0;
+  const mapOpacity = isHero ? 0.75 : 1;
+
   const Svg = (
     <svg
       viewBox="0 0 1000 700"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Carte interactive des communes d'intervention en Île-de-France"
-      preserveAspectRatio={variant === "hero" ? "xMidYMid slice" : "xMidYMid meet"}
+      preserveAspectRatio={isHero ? "xMidYMid slice" : "xMidYMid meet"}
       className="w-full h-full"
     >
       <defs>
@@ -267,6 +274,11 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
           <feDropShadow dx="0" dy="1" stdDeviation="2.5" floodColor="rgba(0,0,0,0.9)" />
         </filter>
       </defs>
+
+      {/* Everything below is shifted right in hero variant, leaving the
+          left column dark for the overlaid hero text. Wrapped in a single
+          <g> with transform + opacity so all map layers stay co-registered. */}
+      <g transform={`translate(${mapShift}, 0)`} opacity={mapOpacity}>
 
       {/* Coverage halo centred on HQ — background layer */}
       <circle cx={hq.x} cy={hq.y} r="380" fill="url(#coverageHalo)" />
@@ -419,8 +431,10 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
         const isHQ = c.tier === "hq";
         const isHovered = hovered === c.name;
         const baseRadius = isHQ ? 11 : c.tier === "primary" ? 6 : 4.5;
-        // Show label always for HQ + primary; on hover only for secondary
-        const showLabel = isHQ || c.tier === "primary" || isHovered;
+        // Only HQ keeps an always-visible label; every other commune reveals
+        // its name on hover / focus (keyboard still works). This keeps the
+        // map breathable behind the hero heading.
+        const showLabel = isHQ || isHovered;
 
         return (
           <g
@@ -539,6 +553,9 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
           </g>
         );
       })}
+
+      </g>
+      {/* /shifted map group */}
     </svg>
   );
 
