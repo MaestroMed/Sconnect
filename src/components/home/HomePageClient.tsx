@@ -17,6 +17,7 @@ import {
   ThumbsUp,
   ArrowRight,
   FileCheck,
+  MapPin,
 } from "lucide-react";
 
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -26,7 +27,7 @@ import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Marquee from "@/components/ui/Marquee";
-import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
+import { GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
@@ -189,86 +190,95 @@ export default function HomePageClient({
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">
-        <AuroraBackdrop intensity="strong" />
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <NoiseOverlay opacity={0.05} />
+      {/* Hero Section — full-bleed interactive IDF map background */}
+      <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
+        {/* Map fills the entire hero */}
+        <InterventionMap variant="hero" />
 
-        <div className="container-custom relative z-10 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
-                <Zap className="w-4 h-4" />
-                Électricité • Contrôle d&apos;accès • Serrurerie • Métallerie
+        {/* Readability overlays:
+            1. Strong gradient from left (dark) → center (transparent) so the
+               text column remains legible while the pin cluster stays visible
+               on the right.
+            2. Subtle top + bottom fade for framing. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/75 to-transparent md:via-dark-950/60 lg:via-dark-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/30 via-transparent to-dark-950/70" />
+        <NoiseOverlay opacity={0.035} />
+
+        <div className="container-custom relative z-10 py-20 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-2xl"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/25 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-md">
+              <Zap className="w-4 h-4" />
+              Électricité • Contrôle d&apos;accès • Serrurerie • Métallerie
+            </span>
+
+            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-[1.05] [text-shadow:_0_2px_20px_rgba(0,0,0,0.5)]">
+              {homepage.hero_title.split(",")[0]},{" "}
+              <span className="gradient-text-living">
+                {homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}
               </span>
+            </h1>
 
-              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-                {homepage.hero_title.split(",")[0]},{" "}
-                <span className="gradient-text-living">{homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}</span>
-              </h1>
+            <p className="text-xl text-white/85 mb-8 leading-relaxed max-w-xl [text-shadow:_0_1px_10px_rgba(0,0,0,0.5)]">
+              {homepage.hero_subtitle}
+            </p>
 
-              <p className="text-xl text-dark-300 mb-8 leading-relaxed">
-                {homepage.hero_subtitle}
-              </p>
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <Link href="/demande-devis" className="btn-primary btn-lg">
+                {homepage.hero_cta_primary}
+                <ChevronRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="/demande-intervention"
+                className="btn bg-accent-500 text-dark-900 hover:bg-accent-400 btn-lg shadow-lg shadow-accent-500/25 hover:shadow-xl"
+              >
+                <DoorOpen className="w-5 h-5" />
+                {homepage.hero_cta_secondary}
+              </Link>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link href="/demande-devis" className="btn-primary btn-lg">
-                  {homepage.hero_cta_primary}
-                  <ChevronRight className="w-5 h-5" />
-                </Link>
-                <Link href="/demande-intervention" className="btn bg-accent-500 text-dark-900 hover:bg-accent-400 btn-lg shadow-lg shadow-accent-500/25 hover:shadow-xl">
-                  <DoorOpen className="w-5 h-5" />
-                  {homepage.hero_cta_secondary}
-                </Link>
-              </div>
-
-              {/* Badges Certifications */}
-              <div className="flex flex-wrap items-center gap-4 mb-6">
-                <div className="glass-badge flex items-center gap-2 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/30">
-                  <Shield className="w-5 h-5 text-green-400" />
-                  <div className="text-left">
-                    <span className="text-xs text-green-300 block">Garantie</span>
-                    <span className="text-sm font-semibold text-white">Décennale</span>
-                  </div>
-                </div>
-                <div className="glass-badge flex items-center gap-2 px-4 py-2 rounded-xl bg-electric-500/10 border border-electric-500/30">
-                  <Zap className="w-5 h-5 text-electric-400" />
-                  <div className="text-left">
-                    <span className="text-xs text-electric-300 block">Certifié</span>
-                    <span className="text-sm font-semibold text-white">IRVE</span>
-                  </div>
+            {/* Certif badges — glass panels remain crisp over the map */}
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <div className="glass-panel flex items-center gap-2 px-4 py-2 rounded-xl">
+                <Shield className="w-5 h-5 text-green-400" />
+                <div className="text-left">
+                  <span className="text-xs text-green-300 block">Garantie</span>
+                  <span className="text-sm font-semibold text-white">Décennale</span>
                 </div>
               </div>
-
-              <div className="flex flex-wrap items-center gap-6 text-dark-400">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-accent-500" />
-                  <span className="text-sm">Intervention 24h/24</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FileCheck className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Devis gratuit</span>
+              <div className="glass-panel flex items-center gap-2 px-4 py-2 rounded-xl">
+                <Zap className="w-5 h-5 text-electric-400" />
+                <div className="text-left">
+                  <span className="text-xs text-electric-300 block">Certifié</span>
+                  <span className="text-sm font-semibold text-white">IRVE</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <InterventionMap variant="hero" />
-            </motion.div>
-          </div>
+            <div className="flex flex-wrap items-center gap-6 text-white/70">
+              <div className="flex items-center gap-2">
+                <Clock className="w-5 h-5 text-accent-400" />
+                <span className="text-sm">Intervention 24h/24</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-green-400" />
+                <span className="text-sm">Devis gratuit</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 text-surface">
+        {/* Map caption — bottom-right, small, honest (no fake data) */}
+        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2 text-xs text-white/50 font-medium pointer-events-none">
+          <MapPin className="w-3.5 h-3.5" />
+          <span>Île-de-France · {18}+ communes couvertes · intervention sous 40 min</span>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 text-surface pointer-events-none">
           <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 100V60C240 20 480 0 720 0C960 0 1200 20 1440 60V100H0Z" fill="currentColor" />
           </svg>
