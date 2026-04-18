@@ -40,10 +40,69 @@ const PARIS_VERTICES: Array<[number, number]> = [
   [48.891, 2.282], // Maillot
   [48.898, 2.321], // Asnières
 ];
-const PARIS_PATH =
-  "M " +
-  PARIS_VERTICES.map((v) => project(v[0], v[1]).map((n) => n.toFixed(1)).join(" ")).join(" L ") +
-  " Z";
+
+// Simplified Hauts-de-Seine (92) boundary — the L-shape wrapping west of Paris,
+// home department of Clichy HQ. ~18 real boundary vertices (clockwise from NE).
+const HDS_VERTICES: Array<[number, number]> = [
+  [48.945, 2.328], // NE — Villeneuve-la-Garenne top
+  [48.900, 2.307], // E — Clichy/Levallois border with Paris 17
+  [48.878, 2.284], // E — Neuilly/Paris 17 border
+  [48.855, 2.268], // E — Neuilly south / Paris 16 border
+  [48.835, 2.249], // SE — Boulogne / Paris 16
+  [48.82, 2.273], // SE — Issy / Paris 15
+  [48.821, 2.311], // S — Vanves / Malakoff border Paris
+  [48.817, 2.32], // S — Montrouge / Paris 14
+  [48.78, 2.316], // far S — Bagneux / Châtillon
+  [48.77, 2.26], // SW — Clamart south
+  [48.78, 2.205], // SW — Meudon south-west
+  [48.81, 2.165], // W — Ville-d'Avray / Chaville
+  [48.86, 2.158], // W — Rueil-Malmaison west
+  [48.9, 2.165], // NW — Nanterre / Mont-Valérien west
+  [48.93, 2.2], // NW — La Garenne / Colombes west
+  [48.942, 2.23], // N — Gennevilliers west
+  [48.95, 2.28], // N — Villeneuve north
+];
+
+// Simplified Seine-Saint-Denis (93) — banana shape NE of Paris. ~12 vertices.
+const SSD_VERTICES: Array<[number, number]> = [
+  [48.96, 2.34], // NW — Saint-Denis / Villetaneuse
+  [49.01, 2.48], // N — Pierrefitte / Villepinte
+  [49.0, 2.62], // NE — Tremblay-en-France
+  [48.94, 2.63], // E — Livry-Gargan / Clichy-sous-Bois
+  [48.88, 2.6], // SE — Rosny / Neuilly-Plaisance
+  [48.855, 2.495], // S — Montreuil / Fontenay
+  [48.86, 2.42], // S — Bagnolet / Romainville near Paris
+  [48.89, 2.39], // SW — Aubervilliers / Pantin near Paris
+  [48.915, 2.368], // W — Saint-Ouen / Saint-Denis
+  [48.94, 2.34], // W — Saint-Denis back to start
+];
+
+// Simplified Val-de-Marne (94) — banana shape SE of Paris. ~12 vertices.
+const VDM_VERTICES: Array<[number, number]> = [
+  [48.85, 2.42], // NW — Charenton / Saint-Maurice near Bercy
+  [48.84, 2.5], // N — Vincennes / Fontenay
+  [48.85, 2.58], // NE — Champigny / Villiers
+  [48.79, 2.6], // E — Sucy / Santeny
+  [48.735, 2.555], // SE — Villeneuve-Saint-Georges
+  [48.685, 2.475], // S — Orly / Villeneuve-le-Roi
+  [48.72, 2.38], // SW — Chevilly / Rungis
+  [48.77, 2.34], // W — Cachan / L'Haÿ near Paris
+  [48.8, 2.36], // W — Gentilly / Kremlin-Bicêtre
+  [48.82, 2.4], // W — Ivry / Vitry near Paris
+];
+
+function polygonPath(vertices: Array<[number, number]>): string {
+  return (
+    "M " +
+    vertices.map((v) => project(v[0], v[1]).map((n) => n.toFixed(1)).join(" ")).join(" L ") +
+    " Z"
+  );
+}
+
+const PARIS_PATH = polygonPath(PARIS_VERTICES);
+const HDS_PATH = polygonPath(HDS_VERTICES);
+const SSD_PATH = polygonPath(SSD_VERTICES);
+const VDM_PATH = polygonPath(VDM_VERTICES);
 
 // Real Seine through IDF — cubic bezier through actual waypoints (upstream SE
 // at Alfortville → through the iconic Paris loops → exits NW at Argenteuil).
@@ -169,8 +228,18 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
         </radialGradient>
         {/* Paris subtle fill */}
         <radialGradient id="parisFill" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stopColor="rgba(139, 92, 246, 0.12)" />
-          <stop offset="100%" stopColor="rgba(139, 92, 246, 0.02)" />
+          <stop offset="0%" stopColor="rgba(139, 92, 246, 0.14)" />
+          <stop offset="100%" stopColor="rgba(139, 92, 246, 0.03)" />
+        </radialGradient>
+        {/* Hauts-de-Seine (92) — home department, slightly more visible */}
+        <radialGradient id="hdsFill" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stopColor="rgba(59, 130, 246, 0.10)" />
+          <stop offset="100%" stopColor="rgba(59, 130, 246, 0.02)" />
+        </radialGradient>
+        {/* 93 / 94 — very subtle, just to frame the petite couronne */}
+        <radialGradient id="deptFillSoft" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stopColor="rgba(148, 163, 184, 0.06)" />
+          <stop offset="100%" stopColor="rgba(148, 163, 184, 0.01)" />
         </radialGradient>
         {/* Seine gradient */}
         <linearGradient id="seine" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -202,15 +271,71 @@ export default function InterventionMap({ variant = "hero" }: InterventionMapPro
       {/* Coverage halo centred on HQ — background layer */}
       <circle cx={hq.x} cy={hq.y} r="380" fill="url(#coverageHalo)" />
 
-      {/* Paris boundary (boulevard périphérique) — real vertices, visible but subtle */}
-      <path d={PARIS_PATH} fill="url(#parisFill)" />
-      <path
-        d={PARIS_PATH}
-        fill="none"
-        stroke="rgba(167, 139, 250, 0.45)"
-        strokeWidth="1.5"
-        strokeDasharray="4 3"
-      />
+      {/* Department layer — petite couronne (93, 94 subtle; 92 stronger; Paris on top) */}
+      <g aria-hidden="true">
+        {/* 93 — Seine-Saint-Denis */}
+        <path d={SSD_PATH} fill="url(#deptFillSoft)" />
+        <path
+          d={SSD_PATH}
+          fill="none"
+          stroke="rgba(148, 163, 184, 0.25)"
+          strokeWidth="1"
+          strokeDasharray="3 4"
+        />
+        {/* 94 — Val-de-Marne */}
+        <path d={VDM_PATH} fill="url(#deptFillSoft)" />
+        <path
+          d={VDM_PATH}
+          fill="none"
+          stroke="rgba(148, 163, 184, 0.25)"
+          strokeWidth="1"
+          strokeDasharray="3 4"
+        />
+        {/* 92 — Hauts-de-Seine (home dept of HQ, emphasised) */}
+        <path d={HDS_PATH} fill="url(#hdsFill)" />
+        <path
+          d={HDS_PATH}
+          fill="none"
+          stroke="rgba(96, 165, 250, 0.55)"
+          strokeWidth="1.5"
+          strokeDasharray="5 4"
+        />
+        {/* Paris (75) boundary — the anchor */}
+        <path d={PARIS_PATH} fill="url(#parisFill)" />
+        <path
+          d={PARIS_PATH}
+          fill="none"
+          stroke="rgba(167, 139, 250, 0.5)"
+          strokeWidth="1.5"
+          strokeDasharray="4 3"
+        />
+
+        {/* Department labels — tiny, letterspaced, letter-shadowed */}
+        {(() => {
+          const labels: Array<{ text: string; pos: [number, number]; color: string }> = [
+            { text: "75 — PARIS", pos: project(48.859, 2.345), color: "rgba(167, 139, 250, 0.65)" },
+            { text: "92 — HAUTS-DE-SEINE", pos: project(48.86, 2.2), color: "rgba(96, 165, 250, 0.7)" },
+            { text: "93", pos: project(48.93, 2.48), color: "rgba(148, 163, 184, 0.55)" },
+            { text: "94", pos: project(48.78, 2.48), color: "rgba(148, 163, 184, 0.55)" },
+          ];
+          return labels.map((l) => (
+            <text
+              key={l.text}
+              x={l.pos[0]}
+              y={l.pos[1]}
+              fill={l.color}
+              fontSize="9"
+              fontWeight="700"
+              textAnchor="middle"
+              letterSpacing="2"
+              style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
+              filter="url(#labelShadow)"
+            >
+              {l.text}
+            </text>
+          ));
+        })()}
+      </g>
 
       {/* Seine — outer glow pass */}
       <path

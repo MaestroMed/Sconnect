@@ -32,6 +32,8 @@ export default function SiteLayout({ children, siteConfig }: SiteLayoutProps) {
         {children}
       </main>
       <Footer />
+      {/* Bottom spacer on mobile so the sticky FloatingCTA bar never covers the last line of the footer. */}
+      <div aria-hidden="true" className="h-[78px] sm:h-0" />
       <CookieBanner />
       <FloatingCTA
         phone={siteConfig.phone}
