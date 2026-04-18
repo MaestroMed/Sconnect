@@ -9,6 +9,8 @@
       "serviceType": "Rénovation",
       "description": "Rénovation complète de l'installation électrique d'un appartement de 120m² avec mise aux normes et domotique.",
       "image": "/images/realisations/realisation-1.webp",
+      "imageBefore": "/images/realisations-before/before-tableau.webp",
+      "imageAfter": "/images/realisations/realisation-1.webp",
       "featured": true
     },
     {
@@ -42,6 +44,8 @@
       "serviceType": "Installation",
       "description": "Pose d'un bloc-porte blindé A2P BP2 avec serrure 5 points et vidéophone intégré.",
       "image": "/images/realisations/realisation-6.webp",
+      "imageBefore": "/images/realisations-before/before-porte.webp",
+      "imageAfter": "/images/realisations/realisation-6.webp",
       "featured": true
     },
     {
@@ -86,6 +90,8 @@
       "serviceType": "Mise aux normes",
       "description": "Remplacement tableau à fusibles par un tableau aux normes NF C 15-100.",
       "image": "/images/realisations/realisation-7.webp",
+      "imageBefore": "/images/realisations-before/before-serrure.webp",
+      "imageAfter": "/images/realisations/realisation-7.webp",
       "featured": false
     },
     {

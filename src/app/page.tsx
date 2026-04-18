@@ -30,6 +30,7 @@ export default async function Home() {
       location: r.location,
       category: r.category,
       image: r.image,
+      hasCompare: Boolean(r.imageBefore && r.imageAfter && r.imageBefore !== r.imageAfter),
     }));
 
   const clientBrands = brands.slice(0, 6).map((b) => ({

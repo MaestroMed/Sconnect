@@ -7,7 +7,7 @@
  */
 import manifestJson from "./image-manifest.generated.json";
 
-export type ImageCategory = "hero" | "services" | "realisations" | "zones" | "team";
+export type ImageCategory = "hero" | "services" | "realisations" | "realisations-before" | "zones" | "team";
 
 export interface ImageEntry {
   slug: string;

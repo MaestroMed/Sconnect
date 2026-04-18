@@ -1,22 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Zap,
   Wrench,
   Shield,
   Clock,
-  Home as HomeIcon,
-  Building2,
   Lock,
   KeyRound,
   Video,
   DoorOpen,
   ChevronRight,
   Phone,
-  Users,
   Calendar,
   ThumbsUp,
   ArrowRight,
@@ -34,6 +30,7 @@ import HeroImage from "@/components/home/HeroImage";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import BrandChip from "@/components/marketing/BrandChip";
+import InterventionMap from "@/components/marketing/InterventionMap";
 import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
@@ -74,6 +71,7 @@ interface HomePageClientProps {
     location: string;
     category: string;
     image: string;
+    hasCompare?: boolean;
   }>;
   brands: Array<{
     id: string;
@@ -190,12 +188,10 @@ export default function HomePageClient({
 
   const displayedTestimonials = testimonials.slice(0, 4);
   const displayedRealizations = realizations.slice(0, 6);
-  const displayedZones = siteConfig.zones.slice(0, 6);
 
   // Hero image: admin-overridden URL, or local manifest, or fallback slug
   const heroManifest = imageOrNull("hero-electricien");
   const heroImage = homepage.hero_image_url || heroManifest?.webp || "/images/hero/hero-electricien.webp";
-  const zoneImg = imageOrNull("zone-paris");
 
   return (
     <>
@@ -473,7 +469,7 @@ export default function HomePageClient({
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {displayedRealizations.map((realization, index) => (
-              <RealizationCard key={realization.id} {...realization} index={index} />
+              <RealizationCard key={realization.id} {...realization} hasCompare={realization.hasCompare} index={index} />
             ))}
           </div>
 
@@ -570,95 +566,8 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* Zone d'intervention */}
-      <section className="section-padding bg-surface">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700 dark:bg-primary-500/15 dark:text-primary-300">
-                Zone d&apos;intervention
-              </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
-                Nous intervenons à Clichy et dans toute l&apos;Île-de-France
-              </h2>
-              <p className="text-lg text-foreground-muted mb-8 leading-relaxed">
-                Basés à Clichy (92110), nous intervenons rapidement dans les Hauts-de-Seine
-                et toute la région parisienne. Particuliers ou professionnels, nous nous
-                déplaçons pour tous vos besoins en électricité, contrôle d&apos;accès et serrurerie.
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                {[
-                  { icon: HomeIcon, text: "Appartements & Maisons" },
-                  { icon: Building2, text: "Commerces & Bureaux" },
-                  { icon: Users, text: "Copropriétés" },
-                  { icon: Building2, text: "Collectivités" },
-                ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-3 text-foreground">
-                    <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-500/15 flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-primary-600 dark:text-primary-300" />
-                    </div>
-                    <span className="font-medium">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/demande-devis" className="btn-primary">
-                  Demander un devis
-                </Link>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="btn-outline">
-                  <Phone className="w-5 h-5" />
-                  {siteConfig.phone}
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative group">
-                <Image
-                  src={zoneImg?.webp || "/images/zones/zone-paris.webp"}
-                  alt={zoneImg?.alt || "Paris et Île-de-France"}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.06]"
-                  placeholder={zoneImg ? "blur" : undefined}
-                  blurDataURL={zoneImg?.blurDataURL}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/20 to-transparent" />
-                <div className="absolute inset-0 gradient-veil-cool opacity-40 mix-blend-overlay" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="flex flex-wrap gap-2">
-                    {displayedZones.map((city, i) => (
-                      <motion.span
-                        key={city}
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.05 * i, duration: 0.4 }}
-                        className="px-3 py-1 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium"
-                      >
-                        {city}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Interactive intervention map — signature feature */}
+      <InterventionMap />
 
       {/* Final CTA */}
       <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">

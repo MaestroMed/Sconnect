@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { MapPin, ArrowUpRight } from "lucide-react";
+import { MapPin, ArrowUpRight, Sparkles } from "lucide-react";
 
 interface RealizationCardProps {
   id: string;
@@ -12,6 +12,8 @@ interface RealizationCardProps {
   location: string;
   category: string;
   image: string;
+  /** When true, the detail page shows a draggable before/after comparison. */
+  hasCompare?: boolean;
   index?: number;
 }
 
@@ -30,6 +32,7 @@ export default function RealizationCard({
   location,
   category,
   image,
+  hasCompare = false,
   index = 0,
 }: RealizationCardProps) {
   const reduce = useReducedMotion();
@@ -51,7 +54,7 @@ export default function RealizationCard({
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-            <div className="absolute top-4 left-4">
+            <div className="absolute top-4 left-4 flex flex-col items-start gap-2">
               <span
                 className={`${
                   categoryColors[category] || "bg-dark-600"
@@ -59,6 +62,12 @@ export default function RealizationCard({
               >
                 {category}
               </span>
+              {hasCompare && (
+                <span className="inline-flex items-center gap-1 bg-gradient-to-r from-accent-500 to-amber-400 text-dark-900 text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
+                  <Sparkles className="w-3 h-3" />
+                  Avant / Après
+                </span>
+              )}
             </div>
             <div className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
               <ArrowUpRight className="w-5 h-5 text-primary-600" />

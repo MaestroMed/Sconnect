@@ -19,6 +19,7 @@ type Category =
   | "hero"
   | "services"
   | "realisations"
+  | "realisations-before"
   | "zones"
   | "team";
 
@@ -72,6 +73,11 @@ const CATALOG: ImageSpec[] = [
   { slug: "realisation-6", category: "realisations", unsplashId: "1517248135467-4c7edcad34c4", alt: "Réalisation — pose de serrure", width: 1200, height: 900 },
   { slug: "realisation-7", category: "realisations", unsplashId: "1621905251189-08b45d6a269e", alt: "Réalisation — chantier complet", width: 1200, height: 900 },
   { slug: "realisation-8", category: "realisations", unsplashId: "1593941707882-a5bba14938c7", alt: "Réalisation — installation borne IRVE", width: 1200, height: 900 },
+
+  // ——— Réalisations « avant » (pour le slider Avant/Après) ———
+  { slug: "before-tableau", category: "realisations-before", unsplashId: "1580894908361-967195033215", alt: "Avant : tableau électrique vétuste", width: 1200, height: 900 },
+  { slug: "before-serrure", category: "realisations-before", unsplashId: "1585771724684-38269d6639fd", alt: "Avant : serrure endommagée", width: 1200, height: 900 },
+  { slug: "before-porte", category: "realisations-before", unsplashId: "1607400201515-c2c41c07d307", alt: "Avant : porte d'entrée à rénover", width: 1200, height: 900 },
 
   // ——— Zones d'intervention ———
   { slug: "zone-paris", category: "zones", unsplashId: "1522083165195-3424ed129620", alt: "Paris et la Tour Eiffel", width: 1600, height: 1200 },

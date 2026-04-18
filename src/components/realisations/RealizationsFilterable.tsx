@@ -12,6 +12,8 @@ interface Item {
   category: string;
   serviceType?: string;
   image: string;
+  imageBefore?: string;
+  imageAfter?: string;
 }
 
 interface RealizationsFilterableProps {
@@ -82,6 +84,7 @@ export default function RealizationsFilterable({
                 location={item.location}
                 category={item.serviceType || categoryLabels[item.category] || item.category}
                 image={item.image}
+                hasCompare={Boolean(item.imageBefore && item.imageAfter && item.imageBefore !== item.imageAfter)}
                 index={index}
               />
             </motion.div>

@@ -221,6 +221,8 @@ export async function getRealizations() {
           serviceType: r.service_type,
           description: r.description,
           image: r.image_url || '',
+          imageBefore: (r as { image_before?: string }).image_before ?? undefined,
+          imageAfter: (r as { image_after?: string }).image_after ?? undefined,
           featured: r.featured,
         }))
       }
