@@ -1,10 +1,13 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./content/**/*.{md,mdx}",
   ],
   theme: {
     extend: {
@@ -60,6 +63,14 @@ export default {
           900: "#0f172a",
           950: "#020617",
         },
+        // Semantic tokens (dark-mode aware via CSS variables)
+        surface: "hsl(var(--surface) / <alpha-value>)",
+        "surface-muted": "hsl(var(--surface-muted) / <alpha-value>)",
+        "surface-elevated": "hsl(var(--surface-elevated) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
+        "foreground-muted": "hsl(var(--foreground-muted) / <alpha-value>)",
+        border: "hsl(var(--border) / <alpha-value>)",
+        ring: "hsl(var(--ring) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
@@ -75,6 +86,22 @@ export default {
         "counter": "counter 2s ease-out forwards",
         "pulse-glow": "pulseGlow 2s infinite",
         "float": "float 6s ease-in-out infinite",
+        "mesh-1": "meshOne 18s ease-in-out infinite",
+        "mesh-2": "meshTwo 22s ease-in-out infinite",
+        "mesh-3": "meshThree 26s ease-in-out infinite",
+        "marquee-x": "marqueeX var(--marquee-duration, 40s) linear infinite",
+        "marquee-x-reverse": "marqueeXReverse var(--marquee-duration, 40s) linear infinite",
+        "shimmer": "shimmer 2.5s linear infinite",
+        "aurora": "aurora 12s ease-in-out infinite",
+        "aurora-slow": "aurora 28s ease-in-out infinite",
+        "drift": "drift 16s ease-in-out infinite",
+        "drift-reverse": "driftReverse 20s ease-in-out infinite",
+        "gradient-shift": "gradientShift 14s ease infinite",
+        "conic-spin": "conicSpin 30s linear infinite",
+        "pulse-soft": "pulseSoft 4s ease-in-out infinite",
+        "orb-float": "orbFloat 10s ease-in-out infinite",
+        "tilt": "tilt 10s ease-in-out infinite",
+        "gradient-text-shift": "gradientTextShift 8s ease infinite",
       },
       keyframes: {
         fadeIn: {
@@ -109,20 +136,82 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
+        meshOne: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(8%, -6%, 0) scale(1.08)" },
+        },
+        meshTwo: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(-6%, 4%, 0) scale(1.12)" },
+        },
+        meshThree: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(4%, 6%, 0) scale(1.05)" },
+        },
+        marqueeX: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        marqueeXReverse: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        aurora: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1) rotate(0deg)" },
+          "33%": { transform: "translate3d(5%, -7%, 0) scale(1.08) rotate(4deg)" },
+          "66%": { transform: "translate3d(-6%, 4%, 0) scale(0.96) rotate(-3deg)" },
+        },
+        driftReverse: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1) rotate(0deg)" },
+          "50%": { transform: "translate3d(-8%, 6%, 0) scale(1.12) rotate(-5deg)" },
+        },
+        gradientShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        conicSpin: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        pulseSoft: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.85" },
+        },
+        orbFloat: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(3%, -5%, 0) scale(1.05)" },
+        },
+        tilt: {
+          "0%, 100%": { transform: "rotate(-0.5deg)" },
+          "50%": { transform: "rotate(0.5deg)" },
+        },
+        gradientTextShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from var(--conic-angle, 0deg), var(--tw-gradient-stops))",
         "hero-pattern": "url('/images/hero-pattern.svg')",
         "electric-grid": `
           linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
           linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)
         `,
+        "noise": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")",
       },
       backgroundSize: {
         "grid": "50px 50px",
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
-

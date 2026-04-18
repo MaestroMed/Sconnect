@@ -1,8 +1,34 @@
 import { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
+import { getRealizations } from "@/lib/data-service";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
   const now = new Date();
+
+  const posts = await getAllPosts();
+  const blogPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/actualites`,
+      lastModified: posts[0]?.updatedAt ? new Date(posts[0].updatedAt) : now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...posts.map((post) => ({
+      url: `${baseUrl}/actualites/${post.slug}`,
+      lastModified: new Date(post.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  const { realizations } = getRealizations();
+  const realizationPages: MetadataRoute.Sitemap = realizations.map((r) => ({
+    url: `${baseUrl}/realisations/${r.id}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: r.featured ? 0.7 : 0.6,
+  }));
 
   // Pages principales
   const mainPages: MetadataRoute.Sitemap = [
@@ -168,11 +194,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Pages légales (basse priorité mais indexables)
+  const legalPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/mentions-legales`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/politique-confidentialite`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/cookies`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/conditions-generales`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ];
+
   return [
     ...mainPages,
     ...electricitePages,
     ...controleAccesPages,
     ...serrureriePages,
     ...metalleriePages,
+    ...blogPages,
+    ...realizationPages,
+    ...legalPages,
   ];
 }

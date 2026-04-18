@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
+import { useSpotlight } from "@/hooks/useSpotlight";
 
 interface EngagementCardProps {
   title: string;
@@ -37,25 +38,33 @@ export default function EngagementCard({
   index = 0,
 }: EngagementCardProps) {
   const colors = colorClasses[color];
+  const reduce = useReducedMotion();
+  const spotlight = useSpotlight();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      whileHover={reduce ? undefined : { y: -4 }}
       className="group"
     >
-      <div className="card p-8 h-full text-center hover:border-transparent hover:shadow-xl transition-all duration-300">
-        <div
-          className={`w-16 h-16 mx-auto bg-gradient-to-br ${colors.bg} rounded-2xl flex items-center justify-center mb-6 shadow-lg ${colors.shadow} ${colors.shadowHover} group-hover:scale-110 transition-all duration-300`}
-        >
-          <Icon className="w-8 h-8 text-white" />
+      <div
+        className="card card-spotlight p-8 h-full text-center hover:shadow-xl transition-all duration-300"
+        onMouseMove={spotlight.onMouseMove}
+      >
+        <div className="relative z-10">
+          <div
+            className={`w-16 h-16 mx-auto bg-gradient-to-br ${colors.bg} rounded-2xl flex items-center justify-center mb-6 shadow-lg ${colors.shadow} ${colors.shadowHover} group-hover:scale-110 transition-all duration-300`}
+          >
+            <Icon className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="font-display font-bold text-xl text-foreground mb-3">
+            {title}
+          </h3>
+          <p className="text-foreground-muted leading-relaxed">{description}</p>
         </div>
-        <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
-          {title}
-        </h3>
-        <p className="text-dark-600 leading-relaxed">{description}</p>
       </div>
     </motion.div>
   );

@@ -1,22 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Zap,
   Wrench,
   Shield,
   Clock,
-  Home as HomeIcon,
-  Building2,
   Lock,
   KeyRound,
   Video,
   DoorOpen,
   ChevronRight,
   Phone,
-  Users,
   Calendar,
   ThumbsUp,
   ArrowRight,
@@ -29,6 +25,13 @@ import EngagementCard from "@/components/ui/EngagementCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Marquee from "@/components/ui/Marquee";
+import HeroImage from "@/components/home/HeroImage";
+import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
+import CertificationsBand from "@/components/marketing/CertificationsBand";
+import BrandChip from "@/components/marketing/BrandChip";
+import InterventionMap from "@/components/marketing/InterventionMap";
+import { imageOrNull } from "@/lib/image-manifest";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -68,6 +71,7 @@ interface HomePageClientProps {
     location: string;
     category: string;
     image: string;
+    hasCompare?: boolean;
   }>;
   brands: Array<{
     id: string;
@@ -184,19 +188,18 @@ export default function HomePageClient({
 
   const displayedTestimonials = testimonials.slice(0, 4);
   const displayedRealizations = realizations.slice(0, 6);
-  const displayedZones = siteConfig.zones.slice(0, 6);
 
-  // Hero image avec fallback
-  const heroImage = homepage.hero_image_url || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=800&fit=crop";
+  // Hero image: admin-overridden URL, or local manifest, or fallback slug
+  const heroManifest = imageOrNull("hero-electricien");
+  const heroImage = homepage.hero_image_url || heroManifest?.webp || "/images/hero/hero-electricien.webp";
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">
+        <AuroraBackdrop intensity="strong" />
         <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-500/10 rounded-full blur-3xl" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -212,7 +215,7 @@ export default function HomePageClient({
 
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 {homepage.hero_title.split(",")[0]},{" "}
-                <span className="gradient-text">{homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}</span>
+                <span className="gradient-text-living">{homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}</span>
               </h1>
 
               <p className="text-xl text-dark-300 mb-8 leading-relaxed">
@@ -260,69 +263,19 @@ export default function HomePageClient({
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <div className="relative w-full aspect-square max-w-lg mx-auto">
-                <div className="absolute inset-0 rounded-3xl overflow-hidden border-4 border-dark-800 shadow-2xl">
-                  <Image
-                    src={heroImage}
-                    alt="Technicien professionnel au travail"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 to-transparent" />
-                </div>
-
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center">
-                      <Clock className="w-6 h-6 text-accent-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-dark-900">24h/24</p>
-                      <p className="text-sm text-dark-500">Urgences</p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
-                      <Users className="w-6 h-6 text-primary-600" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-dark-900">{siteConfig.stats.interventionsPerYear}+</p>
-                      <p className="text-sm text-dark-500">Clients/an</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+            <HeroImage src={heroImage} interventionsPerYear={siteConfig.stats.interventionsPerYear} />
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-0 left-0 right-0 text-surface">
           <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 100V60C240 20 480 0 720 0C960 0 1200 20 1440 60V100H0Z" fill="white" />
+            <path d="M0 100V60C240 20 480 0 720 0C960 0 1200 20 1440 60V100H0Z" fill="currentColor" />
           </svg>
         </div>
       </section>
 
       {/* 4 Métiers Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Métiers"
@@ -330,67 +283,106 @@ export default function HomePageClient({
             subtitle="Électricité, contrôle d'accès, serrurerie et métallerie : une offre complète pour sécuriser et équiper vos locaux."
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.href}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  href={category.href}
-                  className={`block p-6 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${
-                    category.color === "primary"
-                      ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-white"
-                      : category.color === "accent"
-                      ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-white"
-                      : category.color === "orange"
-                      ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-white"
-                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-white"
-                  }`}
+          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-4 md:gap-6">
+            {categories.map((category, index) => {
+              // Bento spans: first tile is larger, others fill the rest
+              const spanClass =
+                index === 0
+                  ? "md:col-span-3 md:row-span-2"
+                  : index === 1
+                    ? "md:col-span-3"
+                    : "md:col-span-2";
+              const colorClasses =
+                category.color === "primary"
+                  ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-surface dark:border-primary-500/30 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted"
+                  : category.color === "accent"
+                    ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-surface dark:border-accent-500/30 dark:hover:border-accent-400 dark:from-accent-500/10 dark:to-surface-muted"
+                    : category.color === "orange"
+                      ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-surface dark:border-orange-500/30 dark:hover:border-orange-400 dark:from-orange-500/10 dark:to-surface-muted"
+                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-surface dark:border-green-500/30 dark:hover:border-green-400 dark:from-green-500/10 dark:to-surface-muted";
+              const iconBg =
+                category.color === "primary"
+                  ? "bg-primary-500"
+                  : category.color === "accent"
+                    ? "bg-accent-500"
+                    : category.color === "orange"
+                      ? "bg-orange-500"
+                      : "bg-green-500";
+              const accentText =
+                category.color === "primary"
+                  ? "text-primary-600 dark:text-primary-300"
+                  : category.color === "accent"
+                    ? "text-accent-600 dark:text-accent-300"
+                    : category.color === "orange"
+                      ? "text-orange-600 dark:text-orange-300"
+                      : "text-green-600 dark:text-green-300";
+
+              return (
+                <motion.div
+                  key={category.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  whileHover={{ y: -4 }}
+                  className={spanClass}
                 >
-                  <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${
-                      category.color === "primary"
-                        ? "bg-primary-500 text-white"
-                        : category.color === "accent"
-                        ? "bg-accent-500 text-white"
-                        : category.color === "orange"
-                        ? "bg-orange-500 text-white"
-                        : "bg-green-500 text-white"
-                    }`}
-                  >
-                    <category.icon className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
-                    {category.title}
-                  </h3>
-                  <p className="text-dark-600 text-sm mb-4">{category.description}</p>
-                  <span
-                    className={`inline-flex items-center gap-2 font-semibold text-sm ${
-                      category.color === "primary"
-                        ? "text-primary-600"
-                        : category.color === "accent"
-                        ? "text-accent-600"
-                        : category.color === "orange"
-                        ? "text-orange-600"
-                        : "text-green-600"
-                    }`}
-                  >
-                    Découvrir
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
+                  <Spotlight className="h-full rounded-2xl">
+                    <Link
+                      href={category.href}
+                      className={`relative overflow-hidden block p-6 md:p-8 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${colorClasses}`}
+                    >
+                      {/* Decorative orb accent — bigger on feature tile */}
+                      <div
+                        aria-hidden="true"
+                        className={`pointer-events-none absolute -right-20 -bottom-20 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100 ${
+                          category.color === "primary"
+                            ? "bg-primary-500/20"
+                            : category.color === "accent"
+                              ? "bg-accent-500/20"
+                              : category.color === "orange"
+                                ? "bg-orange-500/20"
+                                : "bg-green-500/20"
+                        } ${index === 0 ? "h-72 w-72 opacity-70" : "h-48 w-48 opacity-40"}`}
+                      />
+                      <div className="relative z-10 flex h-full flex-col">
+                        <div
+                          className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg text-white magnetic group-hover:scale-110 group-hover:rotate-3 ${iconBg}`}
+                        >
+                          <category.icon className="w-7 h-7" />
+                        </div>
+                        <h3
+                          className={`font-display font-bold ${
+                            index === 0 ? "text-2xl md:text-3xl" : "text-xl"
+                          } text-foreground mb-2`}
+                        >
+                          {category.title}
+                        </h3>
+                        <p
+                          className={`text-foreground-muted mb-4 ${
+                            index === 0 ? "text-base md:text-lg max-w-md" : "text-sm"
+                          }`}
+                        >
+                          {category.description}
+                        </p>
+                        <span
+                          className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${accentText}`}
+                        >
+                          Découvrir
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </Link>
+                  </Spotlight>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Services"
@@ -422,8 +414,10 @@ export default function HomePageClient({
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-violet-500/15 rounded-full blur-3xl animate-orb-float" />
+        <NoiseOverlay opacity={0.04} />
 
         <div className="container-custom relative z-10">
           <SectionTitle
@@ -443,9 +437,13 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* Certifications Band — showcased prominently after stats */}
+      <CertificationsBand background="surface" />
+
       {/* Engagements Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
+      <section className="relative section-padding bg-surface-muted overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary-50/30 to-transparent dark:via-primary-950/30" />
+        <div className="container-custom relative z-10">
           <SectionTitle
             badge="Nos Engagements"
             title="Pourquoi nous faire confiance ?"
@@ -461,7 +459,7 @@ export default function HomePageClient({
       </section>
 
       {/* Realizations Section */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Réalisations"
@@ -471,7 +469,7 @@ export default function HomePageClient({
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {displayedRealizations.map((realization, index) => (
-              <RealizationCard key={realization.id} {...realization} index={index} />
+              <RealizationCard key={realization.id} {...realization} hasCompare={realization.hasCompare} index={index} />
             ))}
           </div>
 
@@ -491,8 +489,10 @@ export default function HomePageClient({
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-50 to-electric-50">
-        <div className="container-custom">
+      <section className="relative section-padding bg-gradient-to-br from-primary-50 to-electric-50 dark:from-dark-900 dark:to-primary-950 overflow-hidden">
+        <div className="pointer-events-none absolute -top-40 right-[-10%] w-[30rem] h-[30rem] bg-primary-400/20 dark:bg-primary-500/15 rounded-full blur-3xl animate-orb-float" />
+        <div className="pointer-events-none absolute bottom-0 left-[-10%] w-[28rem] h-[28rem] bg-electric-400/20 dark:bg-violet-500/15 rounded-full blur-3xl animate-drift" />
+        <div className="container-custom relative z-10">
           <SectionTitle
             badge="Avis Clients"
             title="Ils nous font confiance"
@@ -521,7 +521,7 @@ export default function HomePageClient({
       </section>
 
       {/* Ils nous font confiance Section */}
-      <section className="py-16 bg-white border-t border-b border-dark-100">
+      <section className="py-16 bg-surface border-t border-b border-border">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -530,36 +530,23 @@ export default function HomePageClient({
             viewport={{ once: true }}
             className="text-center mb-8"
           >
-            <h3 className="font-display font-bold text-2xl text-dark-900 mb-2">
+            <h3 className="font-display font-bold text-2xl text-foreground mb-2">
               {homepage.brands_title}
             </h3>
-            <p className="text-dark-500 font-medium">
+            <p className="text-foreground-muted font-medium">
               {homepage.brands_subtitle}
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-            {brands.map((brand, index) => (
-              <motion.div
-                key={brand.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="w-28 h-12 relative grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                  {brand.logo && brand.logo.startsWith('/') ? (
-                    <Image src={brand.logo} alt={brand.name} fill className="object-contain" />
-                  ) : (
-                    <span className="text-xl font-bold text-dark-400 group-hover:text-primary-600 transition-colors">
-                      {brand.name.split(" ")[0]}
-                    </span>
-                  )}
-                </div>
-              </motion.div>
+          <Marquee speed={45} className="py-4">
+            {brands.map((brand) => (
+              <BrandChip key={brand.id} name={brand.name} logo={brand.logo} />
             ))}
-          </div>
+          </Marquee>
+
+          <p className="mt-6 text-center text-xs text-foreground-muted max-w-2xl mx-auto">
+            Marques et produits installés par nos équipes. Les noms et logos restent la propriété de leurs détenteurs respectifs.
+          </p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -579,93 +566,32 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* Zone d'intervention */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700">
-                Zone d&apos;intervention
-              </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
-                Nous intervenons à Clichy et dans toute l&apos;Île-de-France
-              </h2>
-              <p className="text-lg text-dark-600 mb-8 leading-relaxed">
-                Basés à Clichy (92110), nous intervenons rapidement dans les Hauts-de-Seine
-                et toute la région parisienne. Particuliers ou professionnels, nous nous
-                déplaçons pour tous vos besoins en électricité, contrôle d&apos;accès et serrurerie.
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                {[
-                  { icon: HomeIcon, text: "Appartements & Maisons" },
-                  { icon: Building2, text: "Commerces & Bureaux" },
-                  { icon: Users, text: "Copropriétés" },
-                  { icon: Building2, text: "Collectivités" },
-                ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-3 text-dark-700">
-                    <div className="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-primary-600" />
-                    </div>
-                    <span className="font-medium">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/demande-devis" className="btn-primary">
-                  Demander un devis
-                </Link>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="btn-outline">
-                  <Phone className="w-5 h-5" />
-                  {siteConfig.phone}
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=800&fit=crop"
-                  alt="Paris et Île-de-France"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="flex flex-wrap gap-2">
-                    {displayedZones.map((city) => (
-                      <span
-                        key={city}
-                        className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm"
-                      >
-                        {city}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Interactive intervention map — signature feature */}
+      <InterventionMap />
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary-700 via-primary-600 to-electric-600 relative overflow-hidden">
+      <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">
+        {/* Layered animated backdrop */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700"
+        />
+        <div className="absolute inset-0">
+          <GradientVeil variant="brand" />
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-70 mix-blend-overlay animate-gradient-shift bg-[length:200%_200%]"
+          style={{
+            background:
+              "conic-gradient(from 0deg at 50% 50%, rgba(245,158,11,0.25), transparent 20%, transparent 50%, rgba(14,165,233,0.3), transparent 80%, rgba(139,92,246,0.25))",
+          }}
+        />
+        <ParticlesLite variant="white" />
         <div className="absolute inset-0 bg-grid opacity-10" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-accent-500/25 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <NoiseOverlay opacity={0.07} />
 
         <div className="container-custom relative z-10 text-center">
           <motion.div

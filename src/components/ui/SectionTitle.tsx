@@ -30,7 +30,7 @@ export default function SectionTitle({
           className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 ${
             light
               ? "bg-white/10 text-white"
-              : "bg-primary-100 text-primary-700"
+              : "bg-primary-100 text-primary-700 dark:bg-primary-500/15 dark:text-primary-300"
           }`}
         >
           {badge}
@@ -38,7 +38,7 @@ export default function SectionTitle({
       )}
       <h2
         className={`font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 text-balance ${
-          light ? "text-white" : "text-dark-900"
+          light ? "text-white" : "text-foreground"
         }`}
       >
         {title}
@@ -47,7 +47,7 @@ export default function SectionTitle({
         <p
           className={`text-lg md:text-xl max-w-3xl leading-relaxed ${
             centered ? "mx-auto" : ""
-          } ${light ? "text-white/80" : "text-dark-600"}`}
+          } ${light ? "text-white/80" : "text-foreground-muted"}`}
         >
           {subtitle}
         </p>

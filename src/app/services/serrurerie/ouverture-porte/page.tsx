@@ -30,7 +30,10 @@ export default function OuverturePortePage() {
       title="Ouverture de Porte"
       subtitle="Urgence 24h/24"
       description="Porte claquée, clés perdues ou volées, serrure bloquée ? Nos serruriers interviennent en urgence 24h/24 pour vous permettre de rentrer chez vous."
-      iconName="zap"
+      iconName="doorOpen"
+      category="serrurerie"
+      imageSlug="serrurerie-ouverture"
+      parentCategory={{ label: "Serrurerie", href: "/services/serrurerie" }}
       prestations={prestations}
       faqs={faqs}
     />

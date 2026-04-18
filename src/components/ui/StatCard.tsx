@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface StatCardProps {
@@ -23,36 +23,47 @@ export default function StatCard({
 }: StatCardProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (!isInView) return;
 
-    const duration = 2000;
-    const steps = 60;
-    const stepValue = value / steps;
-    const stepDuration = duration / steps;
+    if (reduce) {
+      setCount(value);
+      return;
+    }
 
-    let current = 0;
-    const timer = setInterval(() => {
-      current += stepValue;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
+    // requestAnimationFrame-based counter: immune to interval throttling,
+    // always lands exactly on `value` even if tab was backgrounded mid-animation.
+    const duration = 1800;
+    const start = performance.now();
+    let raf = 0;
+
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const current = Math.round(value * easeOutCubic(t));
+      setCount(current);
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
       } else {
-        setCount(Math.floor(current));
+        setCount(value); // safety: ensure final landing
       }
-    }, stepDuration);
+    };
 
-    return () => clearInterval(timer);
-  }, [isInView, value]);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [isInView, value, reduce]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+      whileInView={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
       className="text-center group"
     >

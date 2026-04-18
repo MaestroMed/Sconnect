@@ -31,6 +31,9 @@ export default function DepannageElectriquePage() {
       subtitle="Intervention 24h/24"
       description="Panne de courant, court-circuit, disjoncteur qui saute ? Nos électriciens interviennent en urgence 24h/24, 7j/7 pour rétablir votre confort électrique."
       iconName="alertTriangle"
+      category="electricite"
+      imageSlug="electricite-depannage"
+      parentCategory={{ label: "Électricité", href: "/services/electricite" }}
       prestations={prestations}
       faqs={faqs}
     />

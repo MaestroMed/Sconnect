@@ -2,18 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
-  Menu,
-  X,
   Phone,
   Zap,
-  ChevronDown,
-  Clock,
   AlertTriangle,
 } from "lucide-react";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import AvailabilityBadge from "@/components/ui/AvailabilityBadge";
+import DesktopNav from "@/components/layout/DesktopNav";
+import MobileNav from "@/components/layout/MobileNav";
 
 const services = [
   {
@@ -47,15 +46,13 @@ const navigation = [
   { name: "Présentation", href: "/presentation" },
   { name: "Services", href: "/services", hasDropdown: true },
   { name: "Réalisations", href: "/realisations" },
+  { name: "Actualités", href: "/actualites" },
   { name: "Avis Clients", href: "/avis" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const pathname = usePathname();
   const siteConfig = useSiteConfig();
 
   useEffect(() => {
@@ -66,22 +63,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-    setIsServicesOpen(false);
-  }, [pathname]);
-
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-dark-900 text-white py-2 hidden md:block">
+      <div className="bg-dark-900 dark:bg-dark-950 text-white py-2 hidden md:block border-b border-dark-800/60">
         <div className="container-custom flex justify-between items-center text-sm">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-accent-400" />
-              Lun-Ven: 8h-19h | Sam: 9h-17h
-            </span>
-            <span className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
+            <AvailabilityBadge variant="dark" schedule={siteConfig.schedule} />
+            <span className="flex items-center gap-2 text-white/70">
               <AlertTriangle className="w-4 h-4 text-accent-400" />
               Urgences 24h/24
             </span>
@@ -100,8 +89,8 @@ export default function Header() {
       <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-dark-900/10 border-b border-white/20"
-            : "bg-white"
+            ? "bg-surface/80 dark:bg-dark-950/80 backdrop-blur-xl shadow-lg shadow-dark-900/10 dark:shadow-black/40 border-b border-border"
+            : "bg-surface dark:bg-dark-950"
         }`}
       >
         <nav className="container-custom">
@@ -109,10 +98,13 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               {siteConfig.logoUrl ? (
-                <img 
-                  src={siteConfig.logoUrl} 
+                <Image
+                  src={siteConfig.logoUrl}
                   alt={siteConfig.siteName}
+                  width={120}
+                  height={48}
                   className="h-12 w-auto object-contain"
+                  priority
                 />
               ) : (
                 <div className="relative">
@@ -123,99 +115,23 @@ export default function Header() {
                 </div>
               )}
               <div className="flex flex-col">
-                <span className="font-display font-bold text-xl text-dark-900">
+                <span className="font-display font-bold text-xl text-foreground">
                   S Connect
                 </span>
-                <span className="text-xs text-primary-600 font-medium tracking-wide">
+                <span className="text-xs text-primary-600 dark:text-primary-400 font-medium tracking-wide">
                   FRANCE
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => (
-                <div key={item.name} className="relative group">
-                  {item.hasDropdown ? (
-                    <button
-                      onMouseEnter={() => setIsServicesOpen(true)}
-                      onMouseLeave={() => setIsServicesOpen(false)}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                        pathname.startsWith("/services")
-                          ? "text-primary-600 bg-primary-50"
-                          : "text-dark-700 hover:text-primary-600 hover:bg-primary-50"
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isServicesOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                        pathname === item.href
-                          ? "text-primary-600 bg-primary-50"
-                          : "text-dark-700 hover:text-primary-600 hover:bg-primary-50"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-
-                  {/* Services Dropdown */}
-                  {item.hasDropdown && (
-                    <AnimatePresence>
-                      {isServicesOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          onMouseEnter={() => setIsServicesOpen(true)}
-                          onMouseLeave={() => setIsServicesOpen(false)}
-                          className="absolute top-full left-0 pt-2"
-                        >
-                          <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-dark-900/15 border border-white/50 p-4 w-80">
-                            <div className="space-y-1">
-                              {services.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  href={service.href}
-                                  className="block p-3 rounded-xl hover:bg-primary-50 transition-colors group/item"
-                                >
-                                  <div className="font-semibold text-dark-900 group-hover/item:text-primary-600 transition-colors">
-                                    {service.name}
-                                  </div>
-                                  <div className="text-sm text-dark-500">
-                                    {service.description}
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="mt-4 pt-4 border-t border-dark-100">
-                              <Link
-                                href="/services"
-                                className="flex items-center justify-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors"
-                              >
-                                Tous nos services
-                                <ChevronDown className="w-4 h-4 -rotate-90" />
-                              </Link>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
-                </div>
-              ))}
+            {/* Desktop Navigation (Radix) */}
+            <div className="hidden lg:flex">
+              <DesktopNav navigation={navigation} services={services} />
             </div>
 
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-3">
+              <ThemeToggle />
               <Link href="/demande-devis" className="btn-outline btn-sm">
                 Devis gratuit
               </Link>
@@ -226,111 +142,17 @@ export default function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-dark-100 transition-colors"
-              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            >
-              {isOpen ? (
-                <X className="w-6 h-6 text-dark-700" />
-              ) : (
-                <Menu className="w-6 h-6 text-dark-700" />
-              )}
-            </button>
+            <div className="lg:hidden flex items-center gap-1">
+              <ThemeToggle />
+              <MobileNav
+                navigation={navigation}
+                services={services}
+                phone={siteConfig.phone}
+                schedule={siteConfig.schedule}
+              />
+            </div>
           </div>
         </nav>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden border-t border-dark-100 bg-white"
-            >
-              <div className="container-custom py-4 space-y-2">
-                {navigation.map((item) => (
-                  <div key={item.name}>
-                    {item.hasDropdown ? (
-                      <>
-                        <button
-                          onClick={() =>
-                            setIsServicesOpen(!isServicesOpen)
-                          }
-                          className="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium text-dark-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-                        >
-                          {item.name}
-                          <ChevronDown
-                            className={`w-5 h-5 transition-transform duration-200 ${
-                              isServicesOpen ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {isServicesOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="ml-4 space-y-1"
-                            >
-                              {services.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  href={service.href}
-                                  className="block px-4 py-2 rounded-lg text-dark-600 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-                                >
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
-                          pathname === item.href
-                            ? "text-primary-600 bg-primary-50"
-                            : "text-dark-700 hover:bg-primary-50 hover:text-primary-600"
-                        }`}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
-                  </div>
-                ))}
-
-                <div className="pt-4 mt-4 border-t border-dark-100 space-y-3">
-                  <a
-                    href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                    className="flex items-center justify-center gap-2 text-dark-700 font-semibold"
-                  >
-                    <Phone className="w-5 h-5 text-primary-600" />
-                    {siteConfig.phone}
-                  </a>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link
-                      href="/demande-devis"
-                      className="btn-outline text-center"
-                    >
-                      Devis gratuit
-                    </Link>
-                    <Link
-                      href="/demande-intervention"
-                      className="btn-accent text-center"
-                    >
-                      Urgence
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
     </>
   );

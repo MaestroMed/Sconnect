@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, Loader2, X, Save, ExternalLink } from "lucide-react";
+import { toast } from "sonner";
+import { SortableGrid } from "@/components/admin/SortableGrid";
+import { useConfirm } from "@/components/ui/ConfirmDialog";
 
 interface Brand {
   id: string;
@@ -19,6 +22,7 @@ const categories = [
 ];
 
 export default function BrandsPage() {
+  const confirm = useConfirm();
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -74,30 +78,62 @@ export default function BrandsPage() {
 
   const handleSave = async () => {
     setSaving(true);
-
-    if (editing) {
-      await fetch("/api/admin/brands", {
-        method: "PUT",
+    try {
+      const res = await fetch("/api/admin/brands", {
+        method: editing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editing.id, ...form }),
+        body: JSON.stringify(editing ? { id: editing.id, ...form } : form),
       });
-    } else {
-      await fetch("/api/admin/brands", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchBrands();
+      toast.success(editing ? "Marque mise à jour" : "Marque ajoutée");
+      closeModal();
+    } catch (error) {
+      toast.error("Enregistrement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
       });
+    } finally {
+      setSaving(false);
     }
-
-    await fetchBrands();
-    setSaving(false);
-    closeModal();
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Supprimer cette marque ?")) return;
-    await fetch(`/api/admin/brands?id=${id}`, { method: "DELETE" });
-    await fetchBrands();
+    const ok = await confirm({
+      title: "Supprimer la marque",
+      description: "Supprimer cette marque ? Cette action est irréversible.",
+      confirmLabel: "Supprimer",
+      destructive: true,
+    });
+    if (!ok) return;
+    try {
+      const res = await fetch(`/api/admin/brands?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await fetchBrands();
+      toast.success("Marque supprimée");
+    } catch (error) {
+      toast.error("Suppression impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
+  };
+
+  const handleReorder = async (ordered: Brand[]) => {
+    const previous = brands;
+    setBrands(ordered); // optimistic
+    try {
+      const res = await fetch("/api/admin/brands/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: ordered.map((b) => b.id) }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      toast.success("Ordre mis à jour");
+    } catch (error) {
+      setBrands(previous); // rollback
+      toast.error("Réordonnancement impossible", {
+        description: error instanceof Error ? error.message : "Erreur inconnue",
+      });
+    }
   };
 
   if (loading) {
@@ -110,65 +146,75 @@ export default function BrandsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-dark-900">Marques partenaires</h1>
-          <p className="text-dark-500">Gérez vos marques et fournisseurs</p>
+          <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            Marques partenaires
+          </h1>
+          <p className="text-foreground-muted">
+            Glissez-déposez pour réorganiser l&apos;ordre d&apos;affichage sur le site.
+          </p>
         </div>
         <button
           onClick={() => openModal()}
-          className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/25"
         >
           <Plus className="w-5 h-5" />
           Ajouter
         </button>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {brands.map((b) => (
-          <div key={b.id} className="bg-white rounded-xl p-6 shadow-sm">
-            <div className="flex items-start justify-between mb-4">
-              <div className="w-16 h-16 bg-dark-100 rounded-xl flex items-center justify-center">
-                <span className="text-2xl font-bold text-dark-400">
+      <SortableGrid
+        items={brands}
+        onReorder={handleReorder}
+        renderItem={(b) => (
+          <div className="rounded-xl border border-border bg-surface-elevated p-6 shadow-sm">
+            <div className="flex items-start justify-between mb-4 pl-6">
+              <div className="w-16 h-16 bg-surface-muted rounded-xl flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground-muted">
                   {b.name.charAt(0)}
                 </span>
               </div>
-              <span className="px-2 py-1 bg-dark-100 text-dark-600 text-xs rounded">
+              <span className="px-2 py-1 bg-surface-muted text-foreground-muted text-xs rounded">
                 {categories.find((c) => c.value === b.category)?.label}
               </span>
             </div>
-            <h3 className="font-semibold text-dark-900 mb-1">{b.name}</h3>
-            <p className="text-sm text-dark-500 mb-4 line-clamp-2">{b.description}</p>
+            <h3 className="font-semibold text-foreground mb-1">{b.name}</h3>
+            <p className="text-sm text-foreground-muted mb-4 line-clamp-2">
+              {b.description}
+            </p>
             <div className="flex items-center justify-between">
               {b.website && (
                 <a
                   href={b.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-primary-600 hover:text-primary-700 flex items-center gap-1"
+                  className="text-sm text-primary-600 dark:text-primary-300 hover:underline flex items-center gap-1"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Site web
                 </a>
               )}
-              <div className="flex gap-2 ml-auto">
+              <div className="flex gap-1 ml-auto">
                 <button
                   onClick={() => openModal(b)}
-                  className="p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                  className="p-2 text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-primary-500/10 rounded-lg transition-colors"
+                  aria-label="Modifier"
                 >
                   <Pencil className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleDelete(b.id)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10 rounded-lg transition-colors"
+                  aria-label="Supprimer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        )}
+      />
 
       {/* Modal */}
       {modalOpen && (

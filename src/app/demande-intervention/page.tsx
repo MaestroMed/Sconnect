@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { AlertTriangle, Phone, Clock, Zap } from "lucide-react";
 import DemandeForm from "@/components/forms/DemandeForm";
+import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Demande d'Intervention Urgente",
@@ -30,10 +31,12 @@ export default function DemandeInterventionPage() {
   return (
     <>
       {/* Hero - Plus impactant pour urgence */}
-      <section className="bg-gradient-to-br from-accent-600 via-accent-500 to-orange-500 py-16 md:py-20 relative overflow-hidden">
+      <section className="relative bg-gradient-to-br from-accent-600 via-accent-500 to-orange-500 py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%] bg-gradient-to-br from-accent-600 via-orange-500 to-rose-500 opacity-60" />
         <div className="absolute inset-0 bg-grid opacity-10" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-red-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/15 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-red-500/30 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <NoiseOverlay opacity={0.06} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
@@ -84,7 +87,7 @@ export default function DemandeInterventionPage() {
       </section>
 
       {/* Form Section */}
-      <section className="py-16 bg-dark-50">
+      <section className="py-16 bg-surface-muted">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Form */}
@@ -131,7 +134,7 @@ export default function DemandeInterventionPage() {
 
               {/* Types d'urgences */}
               <div className="card p-6">
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-4">
+                <h3 className="font-display font-bold text-lg text-foreground mb-4">
                   Nous intervenons pour :
                 </h3>
                 <ul className="space-y-3">
@@ -144,7 +147,7 @@ export default function DemandeInterventionPage() {
                     "Prise ou interrupteur défaillant",
                     "Fils dénudés ou endommagés",
                   ].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-dark-700">
+                    <li key={item} className="flex items-center gap-2 text-foreground">
                       <Zap className="w-4 h-4 text-accent-500" />
                       {item}
                     </li>
@@ -154,20 +157,20 @@ export default function DemandeInterventionPage() {
 
               {/* Tarifs */}
               <div className="card p-6 border-2 border-primary-100">
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-4">
+                <h3 className="font-display font-bold text-lg text-foreground mb-4">
                   Tarifs transparents
                 </h3>
-                <div className="space-y-3 text-sm text-dark-600">
+                <div className="space-y-3 text-sm text-foreground-muted">
                   <p>
-                    <strong className="text-dark-900">Déplacement :</strong> à partir de 80€
+                    <strong className="text-foreground">Déplacement :</strong> à partir de 80€
                   </p>
                   <p>
-                    <strong className="text-dark-900">Nuit & Week-end :</strong> majoration applicable
+                    <strong className="text-foreground">Nuit & Week-end :</strong> majoration applicable
                   </p>
                   <p>
-                    <strong className="text-dark-900">Diagnostic :</strong> inclus dans le déplacement
+                    <strong className="text-foreground">Diagnostic :</strong> inclus dans le déplacement
                   </p>
-                  <p className="pt-3 border-t border-dark-100">
+                  <p className="pt-3 border-t border-border">
                     Le devis de réparation vous est présenté avant toute intervention.
                     Vous êtes libre d&apos;accepter ou non.
                   </p>
@@ -175,11 +178,11 @@ export default function DemandeInterventionPage() {
               </div>
 
               {/* Paiement */}
-              <div className="card p-6 bg-dark-50">
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-3">
+              <div className="card p-6 bg-surface-muted">
+                <h3 className="font-display font-bold text-lg text-foreground mb-3">
                   Moyens de paiement
                 </h3>
-                <p className="text-dark-600 text-sm">
+                <p className="text-foreground-muted text-sm">
                   Le règlement se fait par chèque ou via un lien de paiement
                   carte bancaire sécurisé envoyé après l&apos;intervention.
                 </p>

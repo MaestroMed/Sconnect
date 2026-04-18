@@ -15,6 +15,7 @@ import {
   ChevronRight,
   AlertTriangle,
 } from "lucide-react";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -77,10 +78,10 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-20 md:py-28 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
@@ -89,12 +90,12 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
                 <Mail className="w-4 h-4" />
                 Contact
               </span>
-              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-                Contactez-nous
+              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+                <span className="gradient-text-living">Contactez-nous</span>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 Une question, un projet, un besoin de conseil ? Notre équipe est
@@ -106,7 +107,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Form */}
@@ -117,7 +118,7 @@ export default function ContactPage() {
                 transition={{ duration: 0.5 }}
                 className="card p-6 md:p-8"
               >
-                <h2 className="font-display font-bold text-2xl text-dark-900 mb-6">
+                <h2 className="font-display font-bold text-2xl text-foreground mb-6">
                   Envoyez-nous un message
                 </h2>
 
@@ -126,10 +127,10 @@ export default function ContactPage() {
                     <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
                       <CheckCircle2 className="w-8 h-8 text-green-600" />
                     </div>
-                    <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
+                    <h3 className="font-display font-bold text-xl text-foreground mb-2">
                       Message envoyé !
                     </h3>
-                    <p className="text-dark-600 mb-6">
+                    <p className="text-foreground-muted mb-6">
                       Nous vous répondrons dans les plus brefs délais.
                     </p>
                     <button
@@ -253,7 +254,7 @@ export default function ContactPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="card p-6"
               >
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-6">
+                <h3 className="font-display font-bold text-lg text-foreground mb-6">
                   Nos coordonnées
                 </h3>
                 <ul className="space-y-5">
@@ -266,10 +267,10 @@ export default function ContactPage() {
                         <Phone className="w-6 h-6 text-primary-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-dark-900 group-hover:text-primary-600 transition-colors">
+                        <p className="font-semibold text-foreground group-hover:text-primary-600 transition-colors">
                           01 XX XX XX XX
                         </p>
-                        <p className="text-sm text-dark-500">
+                        <p className="text-sm text-foreground-muted">
                           Urgences 24h/24
                         </p>
                       </div>
@@ -284,10 +285,10 @@ export default function ContactPage() {
                         <Mail className="w-6 h-6 text-primary-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-dark-900 group-hover:text-primary-600 transition-colors">
+                        <p className="font-semibold text-foreground group-hover:text-primary-600 transition-colors">
                           contact@sconnect-france.fr
                         </p>
-                        <p className="text-sm text-dark-500">
+                        <p className="text-sm text-foreground-muted">
                           Réponse sous 24h
                         </p>
                       </div>
@@ -298,10 +299,10 @@ export default function ContactPage() {
                       <MapPin className="w-6 h-6 text-primary-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-dark-900">
+                      <p className="font-semibold text-foreground">
                         XX Rue de XXX
                       </p>
-                      <p className="text-dark-500">92110 Clichy</p>
+                      <p className="text-foreground-muted">92110 Clichy</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-4">
@@ -309,8 +310,8 @@ export default function ContactPage() {
                       <Clock className="w-6 h-6 text-primary-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-dark-900">Horaires</p>
-                      <p className="text-dark-500 text-sm">
+                      <p className="font-semibold text-foreground">Horaires</p>
+                      <p className="text-foreground-muted text-sm">
                         Lun-Ven : 8h - 19h
                         <br />
                         Samedi : 9h - 17h
@@ -331,7 +332,7 @@ export default function ContactPage() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="card overflow-hidden"
               >
-                <div className="aspect-square bg-dark-100 relative">
+                <div className="aspect-square bg-surface-muted relative">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10488.988459788897!2d2.2958!3d48.9022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f6bf8f4a6e7%3A0x40b82c3688c9460!2s92110%20Clichy!5e0!3m2!1sfr!2sfr!4v1234567890"
                     width="100%"

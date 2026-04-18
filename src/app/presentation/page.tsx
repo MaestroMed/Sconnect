@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Zap,
-  Award,
   Shield,
   Users,
   Clock,
@@ -19,6 +17,9 @@ import {
   MapPin,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
+import CertificationsBand from "@/components/marketing/CertificationsBand";
+import { image } from "@/lib/image-manifest";
 
 const values = [
   {
@@ -80,29 +81,6 @@ const timeline = [
   },
 ];
 
-const certifications = [
-  {
-    name: "Qualifelec",
-    description: "Qualification des entreprises d'électricité",
-    icon: Award,
-  },
-  {
-    name: "RGE",
-    description: "Reconnu Garant de l'Environnement",
-    icon: Shield,
-  },
-  {
-    name: "IRVE",
-    description: "Infrastructure de Recharge Véhicules Électriques",
-    icon: Zap,
-  },
-  {
-    name: "Garantie Décennale",
-    description: "Protection de vos travaux pendant 10 ans",
-    icon: Shield,
-  },
-];
-
 const reasons = [
   "Une entreprise dynamique créée en 2021",
   "4 métiers : électricité, contrôle d'accès, serrurerie, métallerie",
@@ -115,13 +93,14 @@ const reasons = [
 ];
 
 export default function PresentationPage() {
+  const teamImg = image("team-equipe");
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-20 md:py-28 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -130,30 +109,30 @@ export default function PresentationPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
                 <Building2 className="w-4 h-4" />
                 Notre Entreprise
               </span>
-              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+              <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Votre partenaire{" "}
-                <span className="gradient-text">multi-services</span> de confiance
+                <span className="gradient-text-living">multi-services</span> de confiance
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed mb-8">
                 Depuis 2021, S Connect France accompagne les particuliers et
-                professionnels d&apos;Île-de-France dans tous leurs projets : 
+                professionnels d&apos;Île-de-France dans tous leurs projets :
                 électricité, contrôle d&apos;accès, serrurerie et métallerie.
               </p>
               <div className="flex flex-wrap gap-6 text-dark-400">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-primary-500" />
+                  <Calendar className="w-5 h-5 text-primary-400" />
                   <span>Depuis 2021</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-accent-500" />
+                  <Users className="w-5 h-5 text-accent-400" />
                   <span>Équipe qualifiée</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-green-500" />
+                  <MapPin className="w-5 h-5 text-emerald-400" />
                   <span>Clichy (92)</span>
                 </div>
               </div>
@@ -165,13 +144,19 @@ export default function PresentationPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative hidden lg:block"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
                 <Image
-                  src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800&h=600&fit=crop"
-                  alt="Équipe S Connect France"
+                  src={teamImg.webp}
+                  alt={teamImg.alt}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 0px, 50vw"
+                  className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.06]"
+                  placeholder="blur"
+                  blurDataURL={teamImg.blurDataURL}
+                  priority
                 />
+                <div className="absolute inset-0 bg-gradient-to-tr from-dark-950/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 gradient-veil-cool opacity-25 mix-blend-overlay" />
               </div>
             </motion.div>
           </div>
@@ -179,7 +164,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Notre histoire */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Notre Histoire"
@@ -215,10 +200,10 @@ export default function PresentationPage() {
                     <span className="inline-block px-3 py-1 bg-primary-100 text-primary-700 font-bold rounded-full text-sm mb-2">
                       {item.year}
                     </span>
-                    <h3 className="font-display font-bold text-xl text-dark-900 mb-2">
+                    <h3 className="font-display font-bold text-xl text-foreground mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-dark-600">{item.description}</p>
+                    <p className="text-foreground-muted">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -228,7 +213,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Nos valeurs */}
-      <section className="section-padding bg-dark-50">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Valeurs"
@@ -249,47 +234,18 @@ export default function PresentationPage() {
                 <div className="w-14 h-14 mx-auto bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-500/25">
                   <value.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {value.title}
                 </h3>
-                <p className="text-dark-600">{value.description}</p>
+                <p className="text-foreground-muted">{value.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Certifications */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <SectionTitle
-            badge="Certifications"
-            title="Des qualifications reconnues"
-            subtitle="Nos certifications attestent de notre expertise et de notre engagement qualité."
-          />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6 text-center border-2 border-primary-100 hover:border-primary-300 transition-colors"
-              >
-                <div className="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center mb-4">
-                  <cert.icon className="w-8 h-8 text-primary-600" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-1">
-                  {cert.name}
-                </h3>
-                <p className="text-sm text-dark-500">{cert.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Certifications — shared showcase band */}
+      <CertificationsBand background="surface" />
 
       {/* Pourquoi nous choisir */}
       <section className="section-padding bg-gradient-to-br from-primary-600 to-electric-600 relative overflow-hidden">
@@ -320,7 +276,7 @@ export default function PresentationPage() {
       </section>
 
       {/* Zone d'intervention */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -332,16 +288,16 @@ export default function PresentationPage() {
               <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-primary-100 text-primary-700">
                 Zone d&apos;intervention
               </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-dark-900 mb-6">
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">
                 Basés à Clichy, nous rayonnons sur toute l&apos;Île-de-France
               </h2>
-              <p className="text-lg text-dark-600 mb-6 leading-relaxed">
+              <p className="text-lg text-foreground-muted mb-6 leading-relaxed">
                 Notre siège est situé à Clichy (92110), au cœur des Hauts-de-Seine.
                 Nous intervenons rapidement dans tout le département et au-delà,
                 couvrant l&apos;ensemble de la région parisienne.
               </p>
               <div className="space-y-3 mb-8">
-                <p className="font-semibold text-dark-900">
+                <p className="font-semibold text-foreground">
                   Secteurs d&apos;intervention prioritaires :
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -359,7 +315,7 @@ export default function PresentationPage() {
                   ].map((city) => (
                     <span
                       key={city}
-                      className="px-3 py-1 bg-dark-100 rounded-full text-dark-700 text-sm"
+                      className="px-3 py-1 bg-surface-muted rounded-full text-foreground text-sm border border-border"
                     >
                       {city}
                     </span>
@@ -383,15 +339,19 @@ export default function PresentationPage() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl"
+              className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group"
             >
               <Image
-                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=800&fit=crop"
-                alt="Paris et Île-de-France"
+                src={image("zone-clichy").webp}
+                alt={image("zone-clichy").alt}
                 fill
-                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.06]"
+                placeholder="blur"
+                blurDataURL={image("zone-clichy").blurDataURL}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-primary-900/20 to-transparent" />
+              <div className="absolute inset-0 gradient-veil-cool opacity-30 mix-blend-overlay" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-white text-xl font-display font-bold">
                   Intervention rapide en Île-de-France
@@ -403,27 +363,32 @@ export default function PresentationPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-dark-900">
-        <div className="container-custom text-center">
+      <section className="relative py-24 bg-dark-950 overflow-hidden">
+        <div className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700" />
+        <GradientVeil variant="brand" className="opacity-60" />
+        <ParticlesLite variant="white" />
+        <div className="absolute inset-0 bg-grid opacity-10" />
+        <NoiseOverlay opacity={0.06} />
+        <div className="container-custom relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-6">
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
               Prêt à travailler avec nous ?
             </h2>
-            <p className="text-xl text-dark-300 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
               Contactez-nous pour discuter de votre projet.
               Devis gratuit et sans engagement.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/demande-devis" className="btn-primary btn-lg">
+              <Link href="/demande-devis" className="btn-white btn-lg">
                 Demander un devis
                 <ChevronRight className="w-5 h-5" />
               </Link>
-              <Link href="/contact" className="btn-outline btn-lg text-white border-white hover:bg-white hover:text-dark-900">
+              <Link href="/contact" className="btn glass-panel text-white hover:bg-white/15 btn-lg">
                 Nous contacter
               </Link>
             </div>

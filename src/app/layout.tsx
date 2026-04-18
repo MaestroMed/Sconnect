@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "sonner";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import MetaThemeColor from "@/components/theme/MetaThemeColor";
+import { getTestimonials } from "@/lib/data-service";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -84,6 +90,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr",
   },
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(process.env.BING_SITE_VERIFICATION
+      ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } }
+      : {}),
+  },
   category: "business",
 };
 
@@ -93,9 +107,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
-  
+
+  // Compute aggregate rating from real testimonials (falls back to 5.0 / 0
+  // when the dataset is empty — in which case we omit the schema to avoid
+  // publishing a 0-review aggregate that Google would flag)
+  const testimonialsData = getTestimonials();
+  const verifiedReviews = testimonialsData.testimonials.filter(
+    (t) => t.verified !== false && typeof t.rating === "number",
+  );
+  const ratingSum = verifiedReviews.reduce((acc, t) => acc + t.rating, 0);
+  const reviewCount = verifiedReviews.length;
+  const ratingValue = reviewCount > 0 ? (ratingSum / reviewCount).toFixed(1) : null;
+
   return (
-    <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`}>
+    <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -160,16 +185,16 @@ export default function RootLayout({
               email: "contact@sconnect.fr",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "123 Avenue des Champs-Élysées",
-                addressLocality: "Paris",
-                postalCode: "75008",
+                streetAddress: "35 rue des Cailloux",
+                addressLocality: "Clichy",
+                postalCode: "92110",
                 addressRegion: "Île-de-France",
                 addressCountry: "FR",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: 48.8566,
-                longitude: 2.3522,
+                latitude: 48.9046,
+                longitude: 2.3045,
               },
               openingHoursSpecification: [
                 {
@@ -233,13 +258,17 @@ export default function RootLayout({
                   },
                 ],
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                reviewCount: "127",
-                bestRating: "5",
-                worstRating: "1",
-              },
+              ...(ratingValue && reviewCount > 0
+                ? {
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue,
+                      reviewCount: String(reviewCount),
+                      bestRating: "5",
+                      worstRating: "1",
+                    },
+                  }
+                : {}),
             }),
           }}
         />
@@ -262,7 +291,24 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        {children}
+        <a href="#main" className="skip-link">
+          Aller au contenu
+        </a>
+        <ThemeProvider>
+          <MetaThemeColor />
+          {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              className:
+                "!bg-surface-elevated !text-foreground !border !border-border !shadow-xl",
+            }}
+            closeButton
+            richColors
+          />
+        </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

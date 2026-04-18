@@ -130,6 +130,8 @@ export interface Realization {
   serviceType: string;
   description: string;
   image: string;
+  imageBefore?: string;
+  imageAfter?: string;
   featured: boolean;
 }
 
@@ -268,6 +270,46 @@ export function getBrands(): BrandsData {
 export function updateBrands(data: BrandsData): BrandsData {
   writeJsonFile('brands.json', data);
   return data;
+}
+
+/**
+ * Persists a new ordering for brands. Preserves any brand whose id
+ * isn't included in `orderedIds` by appending it to the end —
+ * guarantees no data loss if the client sends a stale id list.
+ */
+export function reorderBrands(orderedIds: string[]): BrandsData {
+  const data = getBrands();
+  const byId = new Map(data.brands.map((b) => [b.id, b]));
+  const reordered: Brand[] = [];
+  for (const id of orderedIds) {
+    const brand = byId.get(id);
+    if (brand) {
+      reordered.push(brand);
+      byId.delete(id);
+    }
+  }
+  // Append any brands not in the input (shouldn't happen but guards data)
+  reordered.push(...byId.values());
+  const next: BrandsData = { ...data, brands: reordered };
+  writeJsonFile('brands.json', next);
+  return next;
+}
+
+export function reorderRealizations(orderedIds: string[]): RealizationsData {
+  const data = getRealizations();
+  const byId = new Map(data.realizations.map((r) => [r.id, r]));
+  const reordered: Realization[] = [];
+  for (const id of orderedIds) {
+    const r = byId.get(id);
+    if (r) {
+      reordered.push(r);
+      byId.delete(id);
+    }
+  }
+  reordered.push(...byId.values());
+  const next: RealizationsData = { ...data, realizations: reordered };
+  writeJsonFile('realizations.json', next);
+  return next;
 }
 
 export function addBrand(brand: Omit<Brand, 'id'>): Brand {

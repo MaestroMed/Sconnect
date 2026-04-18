@@ -29,7 +29,10 @@ export default function BadgesDigicodesPage() {
       title="Badges & Digicodes"
       subtitle="Contrôle d'accès"
       description="Contrôlez et tracez les accès à vos locaux avec nos solutions de badges et digicodes. Idéal pour les entreprises, copropriétés et résidences sécurisées."
-      iconName="zap"
+      iconName="creditCard"
+      category="acces"
+      imageSlug="acces-badge"
+      parentCategory={{ label: "Contrôle d'accès", href: "/services/controle-acces" }}
       prestations={prestations}
       faqs={faqs}
     />

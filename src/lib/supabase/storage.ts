@@ -124,22 +124,81 @@ export async function deleteImage(url: string): Promise<boolean> {
  */
 export async function listImages(folder: ImageFolder): Promise<string[]> {
   const supabase = createServiceClient()
-  
+
   const { data, error } = await supabase.storage
     .from('sconnectfrance')
     .list(folder)
-  
+
   if (error) {
     console.error('Error listing images:', error)
     return []
   }
-  
+
   return data.map(file => {
     const { data: { publicUrl } } = supabase.storage
       .from('sconnectfrance')
       .getPublicUrl(`${folder}/${file.name}`)
     return publicUrl
   })
+}
+
+export interface MediaItem {
+  path: string
+  name: string
+  folder: string
+  url: string
+  size: number
+  updatedAt: string
+}
+
+const MEDIA_FOLDERS: ImageFolder[] = ['logos', 'realizations', 'brands', 'hero', 'general']
+
+/**
+ * Lists every image across all known media folders.
+ */
+export async function listAllMedia(): Promise<MediaItem[]> {
+  const supabase = createServiceClient()
+  const items: MediaItem[] = []
+
+  for (const folder of MEDIA_FOLDERS) {
+    const { data, error } = await supabase.storage
+      .from('sconnectfrance')
+      .list(folder, { limit: 200, sortBy: { column: 'updated_at', order: 'desc' } })
+
+    if (error || !data) continue
+
+    for (const file of data) {
+      if (!file.name || file.name === '.emptyFolderPlaceholder') continue
+      const filePath = `${folder}/${file.name}`
+      const { data: { publicUrl } } = supabase.storage
+        .from('sconnectfrance')
+        .getPublicUrl(filePath)
+      items.push({
+        path: filePath,
+        name: file.name,
+        folder,
+        url: publicUrl,
+        size: (file.metadata as { size?: number } | null)?.size ?? 0,
+        updatedAt: file.updated_at ?? file.created_at ?? new Date().toISOString(),
+      })
+    }
+  }
+
+  return items.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+}
+
+/**
+ * Delete several images by storage path (e.g. "realizations/foo.jpg").
+ */
+export async function deleteMediaPaths(paths: string[]): Promise<boolean> {
+  if (paths.length === 0) return true
+  const supabase = createServiceClient()
+  const { error } = await supabase.storage.from('sconnectfrance').remove(paths)
+  if (error) {
+    console.error('Error deleting media:', error)
+    return false
+  }
+  return true
 }
 
 

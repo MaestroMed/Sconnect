@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Zap, FileCheck, AlertTriangle, ChevronRight, Phone } from "lucide-react";
+import CategoryLandingHero from "@/components/services/CategoryLandingHero";
+import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Électricité | Installation, Rénovation & Dépannage",
@@ -31,42 +33,34 @@ const services = [
 export default function ElectricitePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="container-custom relative z-10">
-          <div className="max-w-3xl">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-500/25">
-              <Zap className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-              Électricité
-            </h1>
-            <p className="text-xl text-dark-300 leading-relaxed">
-              Installation, rénovation, mise aux normes et dépannage électrique pour particuliers et professionnels en Île-de-France.
-            </p>
-          </div>
-        </div>
-      </section>
+      <CategoryLandingHero
+        category="electricite"
+        title="Électricité"
+        subtitle="Installation, rénovation, dépannage"
+        description="Installation, rénovation, mise aux normes et dépannage électrique pour particuliers et professionnels en Île-de-France."
+        icon="zap"
+        imageSlug="electricite-installation"
+        breadcrumbLabel="Électricité"
+      />
 
       {/* Services */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
               <Link
                 key={service.slug}
                 href={`/services/electricite/${service.slug}`}
-                className="group block p-8 rounded-2xl border-2 border-primary-100 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-white transition-all hover:shadow-xl"
+                className="group block p-8 rounded-2xl border-2 border-primary-100 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-white dark:border-primary-500/25 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center mb-6">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-electric-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-primary-500/25 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-dark-900 mb-3">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
                   {service.name}
                 </h3>
-                <p className="text-dark-600 mb-4">{service.description}</p>
-                <span className="inline-flex items-center gap-2 text-primary-600 font-semibold group-hover:gap-3 transition-all">
+                <p className="text-foreground-muted mb-4">{service.description}</p>
+                <span className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-300 font-semibold group-hover:gap-3 transition-all">
                   Découvrir
                   <ChevronRight className="w-4 h-4" />
                 </span>
@@ -77,17 +71,21 @@ export default function ElectricitePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-primary-600">
-        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-6">
+      <section className="relative py-20 bg-gradient-to-r from-primary-700 via-primary-600 to-electric-600 overflow-hidden">
+        <NoiseOverlay opacity={0.05} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
+        <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
-            <h2 className="font-display font-bold text-2xl mb-2">Besoin d&apos;un électricien ?</h2>
-            <p className="text-primary-100">Intervention rapide et devis gratuit.</p>
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">Besoin d&apos;un électricien ?</h2>
+            <p className="text-primary-100 text-lg">Intervention rapide et devis gratuit.</p>
           </div>
           <div className="flex gap-4">
-            <Link href="/demande-devis" className="btn-white">
+            <Link href="/demande-devis" className="btn-white btn-lg">
               Demander un devis
+              <ChevronRight className="w-5 h-5" />
             </Link>
-            <a href="tel:+33100000000" className="btn bg-white/10 text-white hover:bg-white/20 border border-white/20">
+            <a href="tel:+33100000000" className="btn glass-panel text-white hover:bg-white/15 btn-lg">
               <Phone className="w-5 h-5" />
               01 XX XX XX XX
             </a>

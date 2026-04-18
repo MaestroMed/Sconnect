@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Save, Loader2, CheckCircle, Upload, Image as ImageIcon, X } from "lucide-react";
+import { toast } from "sonner";
+import ScheduleEditor from "@/components/admin/ScheduleEditor";
+import { DEFAULT_SCHEDULE, type WeeklySchedule } from "@/lib/availability";
 
 interface SiteConfig {
   siteName: string;
@@ -19,6 +22,7 @@ interface SiteConfig {
     saturday: string;
     emergency: string;
   };
+  schedule?: WeeklySchedule;
   social: {
     facebook: string;
     linkedin: string;
@@ -71,6 +75,7 @@ export default function SiteConfigPage() {
         email: data.email || '',
         address: data.address || { street: '', postalCode: '', city: '' },
         hours: data.hours || { weekdays: '', saturday: '', emergency: '' },
+        schedule: data.schedule || DEFAULT_SCHEDULE,
         social: data.social || { facebook: '', linkedin: '', instagram: '' },
         seo: data.seo || { title: '', description: '', keywords: '' },
         stats: data.stats || { interventionsPerYear: 0, yearsExperience: 0, satisfactionRate: 0 },
@@ -90,22 +95,31 @@ export default function SiteConfigPage() {
 
   const handleSave = async () => {
     if (!config) return;
-    
+
     setSaving(true);
     const updatedConfig = {
       ...config,
       zones: zonesText.split(",").map((z) => z.trim()).filter(Boolean),
     };
 
-    await fetch("/api/admin/site-config", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedConfig),
-    });
-
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    try {
+      const res = await fetch("/api/admin/site-config", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedConfig),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setSaved(true);
+      toast.success("Configuration enregistrée", {
+        description: "Les changements sont visibles immédiatement sur le site.",
+      });
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Erreur inconnue";
+      toast.error("Enregistrement impossible", { description: message });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const updateConfig = (path: string, value: string | number) => {
@@ -461,6 +475,18 @@ export default function SiteConfigPage() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Weekly schedule (drives the live AvailabilityBadge) */}
+        <div className="bg-white rounded-xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-dark-900">Horaires hebdomadaires</h2>
+            <span className="badge bg-accent-100 text-accent-700 text-xs">Live</span>
+          </div>
+          <ScheduleEditor
+            value={config.schedule}
+            onChange={(schedule) => setConfig((prev) => (prev ? { ...prev, schedule } : prev))}
+          />
         </div>
 
         {/* Social */}

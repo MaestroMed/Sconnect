@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
+import { getAdminUserByEmailFromDB, isPersistenceAvailable } from './data-adapter';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'sconnect-france-secret-key-2024';
 const COOKIE_NAME = 'sconnect-admin-token';
@@ -61,22 +62,37 @@ export function verifyToken(token: string): { userId: string; email: string; rol
 }
 
 export async function authenticateUser(email: string, password: string): Promise<{ success: boolean; token?: string; user?: Omit<User, 'password'>; error?: string }> {
+  const normalizedEmail = email.toLowerCase();
+
+  // Try Supabase first
+  if (isPersistenceAvailable()) {
+    const dbUser = await getAdminUserByEmailFromDB(normalizedEmail);
+    if (dbUser) {
+      const isValid = await verifyPassword(password, dbUser.password_hash);
+      if (!isValid) return { success: false, error: 'Email ou mot de passe incorrect' };
+      const token = generateToken(dbUser.id, dbUser.email, dbUser.role);
+      return {
+        success: true,
+        token,
+        user: {
+          id: dbUser.id,
+          email: dbUser.email,
+          name: dbUser.name,
+          role: dbUser.role,
+          createdAt: dbUser.created_at,
+        },
+      };
+    }
+  }
+
+  // Fallback to JSON file (dev / no-Supabase)
   const users = getUsers();
-  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
-  
-  if (!user) {
-    return { success: false, error: 'Email ou mot de passe incorrect' };
-  }
-  
+  const user = users.find(u => u.email.toLowerCase() === normalizedEmail);
+  if (!user) return { success: false, error: 'Email ou mot de passe incorrect' };
   const isValid = await verifyPassword(password, user.password);
-  
-  if (!isValid) {
-    return { success: false, error: 'Email ou mot de passe incorrect' };
-  }
-  
+  if (!isValid) return { success: false, error: 'Email ou mot de passe incorrect' };
   const token = generateToken(user.id, user.email, user.role);
   const { password: _, ...userWithoutPassword } = user;
-  
   return { success: true, token, user: userWithoutPassword };
 }
 

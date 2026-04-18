@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Zap, Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -26,15 +27,28 @@ export default function AdminLoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Erreur de connexion");
+        if (response.status === 429) {
+          const retryAfter = Number(response.headers.get("Retry-After") ?? 0);
+          const minutes = Math.ceil(retryAfter / 60);
+          const message = `Trop de tentatives. Réessayez dans ${minutes} minute${minutes > 1 ? "s" : ""}.`;
+          setError(message);
+          toast.error("Accès temporairement bloqué", { description: message });
+        } else {
+          const message = data.error || "Erreur de connexion";
+          setError(message);
+          toast.error("Connexion refusée", { description: message });
+        }
         setLoading(false);
         return;
       }
 
+      toast.success("Connexion réussie");
       router.push("/admin");
       router.refresh();
     } catch {
-      setError("Erreur de connexion au serveur");
+      const message = "Erreur de connexion au serveur";
+      setError(message);
+      toast.error(message);
       setLoading(false);
     }
   };
@@ -50,12 +64,12 @@ export default function AdminLoginPage() {
             <Zap className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-white">S Connect France</h1>
-          <p className="text-dark-400 mt-1">Administration</p>
+          <p className="text-foreground-muted/80 mt-1">Administration</p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h2 className="text-xl font-bold text-dark-900 mb-6 text-center">
+        <div className="bg-surface rounded-2xl shadow-xl p-8">
+          <h2 className="text-xl font-bold text-foreground mb-6 text-center">
             Connexion
           </h2>
 
@@ -68,16 +82,16 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-dark-700 mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground-muted/80" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                   placeholder="admin@sconnect-france.fr"
                   required
                 />
@@ -85,16 +99,16 @@ export default function AdminLoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark-700 mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Mot de passe
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground-muted/80" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                   placeholder="••••••••"
                   required
                 />
@@ -117,8 +131,13 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-dark-500">
-            Contactez l&apos;administrateur si vous avez oublié vos identifiants.
+          <p className="mt-6 text-center text-sm text-foreground-muted">
+            <a
+              href="/admin/login/forgot"
+              className="text-primary-600 dark:text-primary-300 hover:underline font-medium"
+            >
+              Mot de passe oublié&nbsp;?
+            </a>
           </p>
         </div>
       </div>

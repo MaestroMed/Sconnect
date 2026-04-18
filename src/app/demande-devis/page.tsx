@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { FileText, Phone, Clock, Shield } from "lucide-react";
 import DemandeForm from "@/components/forms/DemandeForm";
+import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Demande de Devis Gratuit",
@@ -30,20 +31,20 @@ export default function DemandeDevisPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 py-16 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+      <section className="relative bg-dark-950 py-16 md:py-20 overflow-hidden">
+        <AuroraBackdrop intensity="soft" />
+        <div className="absolute inset-0 bg-grid opacity-[0.12]" />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
               <FileText className="w-4 h-4" />
               Devis Gratuit
             </span>
-            <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-6 leading-tight">
               Demandez votre{" "}
-              <span className="gradient-text">devis gratuit</span>
+              <span className="gradient-text-living">devis gratuit</span>
             </h1>
             <p className="text-xl text-dark-300 leading-relaxed mb-8">
               Remplissez le formulaire ci-dessous et recevez un devis détaillé
@@ -57,7 +58,7 @@ export default function DemandeDevisPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-white text-sm">{item.title}</p>
-                    <p className="text-dark-400 text-sm">{item.description}</p>
+                    <p className="text-white/60 text-sm">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -67,7 +68,7 @@ export default function DemandeDevisPage() {
       </section>
 
       {/* Form Section */}
-      <section className="py-16 bg-dark-50">
+      <section className="py-16 bg-surface-muted">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Form */}
@@ -79,10 +80,10 @@ export default function DemandeDevisPage() {
             <div className="space-y-6">
               {/* Contact Card */}
               <div className="card p-6">
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-4">
+                <h3 className="font-display font-bold text-lg text-foreground mb-4">
                   Besoin d&apos;aide ?
                 </h3>
-                <p className="text-dark-600 mb-4">
+                <p className="text-foreground-muted mb-4">
                   Notre équipe est disponible pour répondre à vos questions.
                 </p>
                 <a
@@ -93,15 +94,15 @@ export default function DemandeDevisPage() {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-dark-900">01 XX XX XX XX</p>
-                    <p className="text-sm text-dark-500">Lun-Ven 8h-19h</p>
+                    <p className="font-bold text-foreground">01 XX XX XX XX</p>
+                    <p className="text-sm text-foreground-muted">Lun-Ven 8h-19h</p>
                   </div>
                 </a>
               </div>
 
               {/* Info Card */}
               <div className="card p-6 bg-gradient-to-br from-primary-50 to-electric-50 border-primary-100">
-                <h3 className="font-display font-bold text-lg text-dark-900 mb-4">
+                <h3 className="font-display font-bold text-lg text-foreground mb-4">
                   Comment ça marche ?
                 </h3>
                 <ol className="space-y-4">
@@ -115,7 +116,7 @@ export default function DemandeDevisPage() {
                       <span className="w-6 h-6 rounded-full bg-primary-600 text-white text-sm font-bold flex items-center justify-center shrink-0">
                         {index + 1}
                       </span>
-                      <span className="text-dark-700">{step}</span>
+                      <span className="text-foreground">{step}</span>
                     </li>
                   ))}
                 </ol>
@@ -128,8 +129,8 @@ export default function DemandeDevisPage() {
                     <Shield className="w-7 h-7 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-dark-900">Garantie décennale</h4>
-                    <p className="text-sm text-dark-500">
+                    <h4 className="font-bold text-foreground">Garantie décennale</h4>
+                    <p className="text-sm text-foreground-muted">
                       Tous nos travaux sont garantis 10 ans
                     </p>
                   </div>

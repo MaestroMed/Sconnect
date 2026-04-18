@@ -8,7 +8,9 @@
       "category": "electricite",
       "serviceType": "Rénovation",
       "description": "Rénovation complète de l'installation électrique d'un appartement de 120m² avec mise aux normes et domotique.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-1.webp",
+      "imageBefore": "/images/realisations-before/before-tableau.webp",
+      "imageAfter": "/images/realisations/realisation-1.webp",
       "featured": true
     },
     {
@@ -19,7 +21,7 @@
       "category": "electricite",
       "serviceType": "Installation",
       "description": "Installation d'un tableau électrique triphasé pour un restaurant avec circuits spécialisés cuisine.",
-      "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-2.webp",
       "featured": true
     },
     {
@@ -30,7 +32,7 @@
       "category": "controle-acces",
       "serviceType": "Installation",
       "description": "Installation complète d'un système de badges et vidéophonie pour 50 collaborateurs.",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-3.webp",
       "featured": true
     },
     {
@@ -41,7 +43,9 @@
       "category": "serrurerie",
       "serviceType": "Installation",
       "description": "Pose d'un bloc-porte blindé A2P BP2 avec serrure 5 points et vidéophone intégré.",
-      "image": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-6.webp",
+      "imageBefore": "/images/realisations-before/before-porte.webp",
+      "imageAfter": "/images/realisations/realisation-6.webp",
       "featured": true
     },
     {
@@ -52,7 +56,7 @@
       "category": "controle-acces",
       "serviceType": "Rénovation",
       "description": "Remplacement complet de l'interphonie avec passage en vidéophonie couleur.",
-      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-4.webp",
       "featured": true
     },
     {
@@ -63,7 +67,7 @@
       "category": "serrurerie",
       "serviceType": "Dépannage",
       "description": "Ouverture sans dégât et remplacement du cylindre défaillant en urgence.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-6.webp",
       "featured": false
     },
     {
@@ -74,7 +78,7 @@
       "category": "controle-acces",
       "serviceType": "Installation",
       "description": "Installation de 8 caméras HD avec enregistreur et accès smartphone.",
-      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-3.webp",
       "featured": false
     },
     {
@@ -85,7 +89,9 @@
       "category": "electricite",
       "serviceType": "Mise aux normes",
       "description": "Remplacement tableau à fusibles par un tableau aux normes NF C 15-100.",
-      "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-7.webp",
+      "imageBefore": "/images/realisations-before/before-serrure.webp",
+      "imageAfter": "/images/realisations/realisation-7.webp",
       "featured": false
     },
     {
@@ -96,7 +102,7 @@
       "category": "electricite",
       "serviceType": "Installation",
       "description": "Installation d'une borne de recharge 22kW avec adaptation du tableau électrique.",
-      "image": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-8.webp",
       "featured": false
     },
     {
@@ -107,7 +113,7 @@
       "category": "serrurerie",
       "serviceType": "Dépannage",
       "description": "Remplacement en urgence par une serrure A2P** avec cylindre haute sécurité.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-6.webp",
       "featured": false
     },
     {
@@ -118,7 +124,7 @@
       "category": "controle-acces",
       "serviceType": "Installation",
       "description": "Système de contrôle d'accès combiné badges + digicode pour 36 appartements.",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-3.webp",
       "featured": false
     },
     {
@@ -129,7 +135,7 @@
       "category": "electricite",
       "serviceType": "Dépannage",
       "description": "Intervention de nuit pour localiser et réparer un court-circuit dans une boutique.",
-      "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop",
+      "image": "/images/realisations/realisation-2.webp",
       "featured": false
     }
   ]
