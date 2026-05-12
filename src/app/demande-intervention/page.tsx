@@ -61,11 +61,11 @@ export default function DemandeInterventionPage() {
                 Pour une intervention immédiate, appelez-nous :
               </p>
               <a
-                href="tel:+33100000000"
+                href="tel:+33652820685"
                 className="inline-flex items-center gap-3 text-3xl md:text-4xl font-display font-bold text-white hover:text-white/90 transition-colors"
               >
                 <Phone className="w-8 h-8" />
-                01 XX XX XX XX
+                06 52 82 06 85
               </a>
             </div>
 
@@ -101,8 +101,8 @@ export default function DemandeInterventionPage() {
                     </p>
                     <p className="text-sm text-accent-700">
                       Pour une réponse plus rapide, appelez-nous directement au{" "}
-                      <a href="tel:+33100000000" className="font-bold underline">
-                        01 XX XX XX XX
+                      <a href="tel:+33652820685" className="font-bold underline">
+                        06 52 82 06 85
                       </a>
                     </p>
                   </div>
@@ -125,10 +125,10 @@ export default function DemandeInterventionPage() {
                   </div>
                 </div>
                 <a
-                  href="tel:+33100000000"
+                  href="tel:+33652820685"
                   className="block text-center py-4 bg-white text-accent-600 rounded-xl font-bold text-xl hover:bg-white/90 transition-colors"
                 >
-                  01 XX XX XX XX
+                  06 52 82 06 85
                 </a>
               </div>
 

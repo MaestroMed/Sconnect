@@ -51,8 +51,8 @@ export function useSiteConfig() {
     return {
       siteName: "S Connect France",
       siteTagline: "Électricité • Contrôle d'accès • Serrurerie • Métallerie",
-      phone: "01 23 45 67 89",
-      phoneEmergency: "01 23 45 67 89",
+      phone: "06 52 82 06 85",
+      phoneEmergency: "06 52 82 06 85",
       email: "contact@sconnectfrance.fr",
       address: {
         street: "XX Rue de XXX",

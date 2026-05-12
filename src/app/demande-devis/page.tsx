@@ -87,14 +87,14 @@ export default function DemandeDevisPage() {
                   Notre équipe est disponible pour répondre à vos questions.
                 </p>
                 <a
-                  href="tel:+33100000000"
+                  href="tel:+33652820685"
                   className="flex items-center gap-3 p-4 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors"
                 >
                   <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-foreground">01 XX XX XX XX</p>
+                    <p className="font-bold text-foreground">06 52 82 06 85</p>
                     <p className="text-sm text-foreground-muted">Lun-Ven 8h-19h</p>
                   </div>
                 </a>

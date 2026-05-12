@@ -260,7 +260,7 @@ export default function ContactPage() {
                 <ul className="space-y-5">
                   <li>
                     <a
-                      href="tel:+33100000000"
+                      href="tel:+33652820685"
                       className="flex items-start gap-4 group"
                     >
                       <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
@@ -268,7 +268,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="font-semibold text-foreground group-hover:text-primary-600 transition-colors">
-                          01 XX XX XX XX
+                          06 52 82 06 85
                         </p>
                         <p className="text-sm text-foreground-muted">
                           Urgences 24h/24

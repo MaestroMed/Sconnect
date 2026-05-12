@@ -56,7 +56,7 @@ export default function MentionsLegalesPage() {
                 <p className="mb-2"><strong>RCS :</strong> Nanterre — 899 667 596</p>
                 <p className="mb-2"><strong>Code APE/NAF :</strong> 4321A — Travaux d&apos;installation électrique dans tous locaux</p>
                 <p className="mb-2"><strong>Siège social :</strong> 35 rue des Cailloux, 92110 Clichy</p>
-                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33100000000" className="text-primary-600 hover:text-primary-700">01 XX XX XX XX</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
+                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33652820685" className="text-primary-600 hover:text-primary-700">06 52 82 06 85</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
                 <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
               </div>
             </div>

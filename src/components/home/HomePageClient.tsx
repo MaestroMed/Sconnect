@@ -197,9 +197,9 @@ export default function HomePageClient({
           stays cinematic on the right. */}
       <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
         <HeroVideo
-          videoSrc="/videos/hero-circuit-breaker.mp4"
-          posterSrc="/images/hero/hero-cinema-electricien.webp"
-          fallbackSrc="/images/hero/hero-cinema-electricien.jpg"
+          videoSrc="/videos/hero-paris-window.mp4"
+          posterSrc="/images/hero/hero-cinema-paris.webp"
+          fallbackSrc="/images/hero/hero-cinema-paris.jpg"
         />
 
         {/* Readability overlays — same grammar as the map version, slightly
