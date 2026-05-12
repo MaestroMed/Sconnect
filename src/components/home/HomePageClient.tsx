@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Zap,
@@ -19,14 +20,13 @@ import {
   FileCheck,
 } from "lucide-react";
 
-import ServiceCard from "@/components/ui/ServiceCard";
 import StatCard from "@/components/ui/StatCard";
 import EngagementCard from "@/components/ui/EngagementCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import RealizationCard from "@/components/ui/RealizationCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Marquee from "@/components/ui/Marquee";
-import { GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
+import { NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
@@ -79,75 +79,89 @@ interface HomePageClientProps {
   }>;
 }
 
-// 4 Métiers principaux
+// 4 Métiers principaux — bento with hero category imagery
 const categories = [
   {
     title: "Électricité",
-    description: "Installation, rénovation, mise aux normes et dépannage électrique pour particuliers et professionnels.",
+    description: "Installation, rénovation, mise aux normes et dépannage électrique.",
     href: "/services/electricite",
     icon: Zap,
-    color: "primary" as const,
+    imageSlug: "hero-electricien",
+    accent: "from-primary-500 to-electric-500",
+    chip: "Devis gratuit",
   },
   {
     title: "Contrôle d'accès",
     description: "Interphonie, vidéophonie, badges et digicodes pour sécuriser vos locaux.",
     href: "/services/controle-acces",
     icon: KeyRound,
-    color: "accent" as const,
+    imageSlug: "hero-controle-acces",
+    accent: "from-accent-500 to-amber-400",
+    chip: "Sécurité 24/7",
   },
   {
     title: "Serrurerie",
-    description: "Ouverture de porte, remplacement de serrure, blindage et sécurisation de vos accès.",
+    description: "Ouverture, remplacement, blindage et sécurisation de vos accès.",
     href: "/services/serrurerie",
     icon: Lock,
-    color: "green" as const,
+    imageSlug: "hero-serrurier",
+    accent: "from-emerald-500 to-teal-400",
+    chip: "Urgence 24/7",
   },
   {
     title: "Métallerie",
     description: "Fabrication de portails, portes et structures métalliques sur mesure.",
     href: "/services/metallerie",
     icon: Wrench,
-    color: "orange" as const,
+    imageSlug: "hero-portail",
+    accent: "from-orange-500 to-rose-500",
+    chip: "Sur mesure",
   },
 ];
 
-// Services détaillés
+// Services détaillés — image-backed bento
 const services = [
   {
     title: "Installation électrique",
-    description: "Création de réseaux électriques complets, poses de prises, éclairages et tableaux neufs.",
+    description: "Réseaux électriques complets, prises, éclairages, tableaux neufs.",
     href: "/services/electricite/installation-renovation",
     icon: Zap,
+    imageSlug: "electricite-installation",
   },
   {
     title: "Dépannage électrique",
-    description: "Intervention rapide 24h/24 pour tous vos problèmes électriques : pannes, courts-circuits.",
+    description: "Intervention rapide 24h/24 : pannes, courts-circuits.",
     href: "/services/electricite/depannage-electrique",
     icon: Zap,
+    imageSlug: "electricite-depannage",
   },
   {
     title: "Interphonie & Vidéophonie",
-    description: "Installation et dépannage d'interphones et vidéophones pour copropriétés et particuliers.",
+    description: "Interphones et vidéophones pour copropriétés et particuliers.",
     href: "/services/controle-acces/interphonie-videophonie",
     icon: Video,
+    imageSlug: "acces-interphone",
   },
   {
     title: "Ouverture de porte",
-    description: "Porte claquée ou bloquée ? Intervention rapide 24h/24 sans dégât dans 95% des cas.",
+    description: "Porte claquée ou bloquée ? Sans dégât dans 95% des cas.",
     href: "/services/serrurerie/ouverture-porte",
     icon: DoorOpen,
+    imageSlug: "serrurerie-ouverture",
   },
   {
     title: "Blindage de porte",
-    description: "Blindage de porte existante ou pose de bloc-porte blindé certifié A2P.",
+    description: "Blindage existant ou pose de bloc-porte blindé certifié A2P.",
     href: "/services/serrurerie/blindage-porte",
     icon: Shield,
+    imageSlug: "serrurerie-blindage",
   },
   {
     title: "Fabrication portail",
-    description: "Conception et fabrication de portails sur mesure en acier, aluminium ou fer forgé.",
+    description: "Portails sur mesure en acier, aluminium ou fer forgé.",
     href: "/services/metallerie/fabrication-portail",
     icon: Wrench,
+    imageSlug: "metallerie-portail",
   },
 ];
 
@@ -286,7 +300,9 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* 4 Métiers Section */}
+      {/* 4 Métiers — Apple bento with full-bleed hero category images.
+          Checker pattern (4-2 / 2-4) so each métier breathes asymmetrically;
+          on mobile they stack as full-width cards. */}
       <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
@@ -295,40 +311,12 @@ export default function HomePageClient({
             subtitle="Électricité, contrôle d'accès, serrurerie et métallerie : une offre complète pour sécuriser et équiper vos locaux."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)] gap-4 md:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-6">
             {categories.map((category, index) => {
-              // Bento spans: first tile is larger, others fill the rest
-              const spanClass =
-                index === 0
-                  ? "md:col-span-3 md:row-span-2"
-                  : index === 1
-                    ? "md:col-span-3"
-                    : "md:col-span-2";
-              const colorClasses =
-                category.color === "primary"
-                  ? "border-primary-200 hover:border-primary-400 bg-gradient-to-br from-primary-50 to-surface dark:border-primary-500/30 dark:hover:border-primary-400 dark:from-primary-500/10 dark:to-surface-muted"
-                  : category.color === "accent"
-                    ? "border-accent-200 hover:border-accent-400 bg-gradient-to-br from-accent-50 to-surface dark:border-accent-500/30 dark:hover:border-accent-400 dark:from-accent-500/10 dark:to-surface-muted"
-                    : category.color === "orange"
-                      ? "border-orange-200 hover:border-orange-400 bg-gradient-to-br from-orange-50 to-surface dark:border-orange-500/30 dark:hover:border-orange-400 dark:from-orange-500/10 dark:to-surface-muted"
-                      : "border-green-200 hover:border-green-400 bg-gradient-to-br from-green-50 to-surface dark:border-green-500/30 dark:hover:border-green-400 dark:from-green-500/10 dark:to-surface-muted";
-              const iconBg =
-                category.color === "primary"
-                  ? "bg-primary-500"
-                  : category.color === "accent"
-                    ? "bg-accent-500"
-                    : category.color === "orange"
-                      ? "bg-orange-500"
-                      : "bg-green-500";
-              const accentText =
-                category.color === "primary"
-                  ? "text-primary-600 dark:text-primary-300"
-                  : category.color === "accent"
-                    ? "text-accent-600 dark:text-accent-300"
-                    : category.color === "orange"
-                      ? "text-orange-600 dark:text-orange-300"
-                      : "text-green-600 dark:text-green-300";
-
+              // Checker pattern: 4+2 on row 1, 2+4 on row 2
+              const span =
+                index === 0 || index === 3 ? "lg:col-span-4" : "lg:col-span-2";
+              const Icon = category.icon;
               return (
                 <motion.div
                   key={category.href}
@@ -337,55 +325,46 @@ export default function HomePageClient({
                   transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: true, margin: "-10% 0px" }}
                   whileHover={{ y: -4 }}
-                  className={spanClass}
+                  className={span}
                 >
-                  <Spotlight className="h-full rounded-2xl">
-                    <Link
-                      href={category.href}
-                      className={`relative overflow-hidden block p-6 md:p-8 rounded-2xl border-2 transition-all hover:shadow-xl group h-full ${colorClasses}`}
-                    >
-                      {/* Decorative orb accent — bigger on feature tile */}
+                  <Link
+                    href={category.href}
+                    className="relative block aspect-[4/5] lg:aspect-[5/6] rounded-3xl overflow-hidden group bg-dark-900 shadow-lg shadow-dark-900/10 hover:shadow-2xl transition-shadow"
+                  >
+                    <Image
+                      src={`/images/hero/${category.imageSlug}.webp`}
+                      alt={category.title}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      priority={index < 2}
+                    />
+                    {/* Top-to-bottom scrim — almost solid at the bottom (text zone),
+                        clear at the top (image hero). */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark-950 from-0% via-dark-950/60 via-40% to-transparent to-70%" />
+                    {/* Chip — top-left */}
+                    <span className="absolute top-5 left-5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white text-xs font-semibold">
+                      {category.chip}
+                    </span>
+                    {/* Content — bottom */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                       <div
-                        aria-hidden="true"
-                        className={`pointer-events-none absolute -right-20 -bottom-20 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100 ${
-                          category.color === "primary"
-                            ? "bg-primary-500/20"
-                            : category.color === "accent"
-                              ? "bg-accent-500/20"
-                              : category.color === "orange"
-                                ? "bg-orange-500/20"
-                                : "bg-green-500/20"
-                        } ${index === 0 ? "h-72 w-72 opacity-70" : "h-48 w-48 opacity-40"}`}
-                      />
-                      <div className="relative z-10 flex h-full flex-col">
-                        <div
-                          className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg text-white magnetic group-hover:scale-110 group-hover:rotate-3 ${iconBg}`}
-                        >
-                          <category.icon className="w-7 h-7" />
-                        </div>
-                        <h3
-                          className={`font-display font-bold ${
-                            index === 0 ? "text-2xl md:text-3xl" : "text-xl"
-                          } text-foreground mb-2`}
-                        >
-                          {category.title}
-                        </h3>
-                        <p
-                          className={`text-foreground-muted mb-4 ${
-                            index === 0 ? "text-base md:text-lg max-w-md" : "text-sm"
-                          }`}
-                        >
-                          {category.description}
-                        </p>
-                        <span
-                          className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${accentText}`}
-                        >
-                          Découvrir
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br ${category.accent} shadow-lg`}
+                      >
+                        <Icon className="w-6 h-6 text-white" />
                       </div>
-                    </Link>
-                  </Spotlight>
+                      <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-2 [text-shadow:_0_2px_16px_rgba(0,0,0,0.7)]">
+                        {category.title}
+                      </h3>
+                      <p className="text-white/85 text-sm md:text-base mb-4 max-w-md leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.6)]">
+                        {category.description}
+                      </p>
+                      <span className="inline-flex items-center gap-2 font-semibold text-sm text-white group-hover:gap-3 transition-all">
+                        Découvrir
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </Link>
                 </motion.div>
               );
             })}
@@ -393,7 +372,8 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section — image-backed cards. Each card uses its matching
+          product macro shot as background, with a vertical scrim for readability. */}
       <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
@@ -403,9 +383,50 @@ export default function HomePageClient({
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {services.map((service, index) => (
-              <ServiceCard key={service.href} {...service} index={index} />
-            ))}
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  whileHover={{ y: -4 }}
+                >
+                  <Link
+                    href={service.href}
+                    className="relative block aspect-[4/3] rounded-2xl overflow-hidden group bg-dark-900 shadow-md shadow-dark-900/10 hover:shadow-xl transition-shadow"
+                  >
+                    <Image
+                      src={`/images/services/${service.imageSlug}.webp`}
+                      alt={service.title}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    />
+                    {/* Scrim — top transparent, bottom solid for text */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark-950/95 from-0% via-dark-950/45 via-50% to-dark-950/10 to-100%" />
+                    {/* Content */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center mb-3">
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <h3 className="font-display font-bold text-lg md:text-xl text-white mb-2 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                        {service.title}
+                      </h3>
+                      <p className="text-white/80 text-sm leading-relaxed [text-shadow:_0_1px_6px_rgba(0,0,0,0.6)]">
+                        {service.description}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-white/90 text-sm font-semibold group-hover:gap-2.5 transition-all">
+                        Voir le service
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
@@ -466,6 +487,108 @@ export default function HomePageClient({
             {engagements.map((engagement, index) => (
               <EngagementCard key={engagement.title} {...engagement} index={index} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team — bento with portrait + technician + vehicle. Adds human warmth
+          before the realisations gallery. */}
+      <section className="section-padding bg-surface">
+        <div className="container-custom">
+          <SectionTitle
+            badge="Au cœur du métier"
+            title="L'humain derrière l'expertise"
+            subtitle="Trois techniciens spécialisés, une équipe soudée, des véhicules toujours prêts."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-6">
+            {/* team-equipe — large feature (4:5 portrait, lg:col-span-3) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              className="lg:col-span-3"
+            >
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-dark-900 group">
+                <Image
+                  src="/images/team/team-equipe.webp"
+                  alt="L'équipe S Connect — électricien, serrurier, métallier"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-950 from-0% via-dark-950/45 via-45% to-transparent to-75%" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
+                  <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white text-xs font-semibold inline-flex w-fit mb-4">
+                    Équipe complète
+                  </span>
+                  <h3 className="font-display font-bold text-2xl md:text-4xl text-white mb-3 [text-shadow:_0_2px_16px_rgba(0,0,0,0.7)]">
+                    Trois métiers, une seule équipe
+                  </h3>
+                  <p className="text-white/85 text-base md:text-lg leading-relaxed max-w-md [text-shadow:_0_1px_8px_rgba(0,0,0,0.6)]">
+                    Électricien, serrurier, métallier — formés A2P, certifiés IRVE, basés à Clichy.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right column — 2 stacked smaller tiles (lg:col-span-3) */}
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
+              {/* team-technicien */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+              >
+                <div className="relative aspect-[5/3] lg:aspect-[5/2] rounded-3xl overflow-hidden bg-dark-900 group">
+                  <Image
+                    src="/images/team/team-technicien.webp"
+                    alt="Technicien S Connect en intervention"
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-950/95 via-dark-950/30 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-7">
+                    <h4 className="font-display font-bold text-lg md:text-2xl text-white mb-1 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                      Le savoir-faire
+                    </h4>
+                    <p className="text-white/80 text-sm md:text-base [text-shadow:_0_1px_6px_rgba(0,0,0,0.6)]">
+                      Plus de {siteConfig.stats.yearsExperience} ans d&apos;expérience en intervention.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* team-vehicule */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+              >
+                <div className="relative aspect-[5/3] lg:aspect-[5/2] rounded-3xl overflow-hidden bg-dark-900 group">
+                  <Image
+                    src="/images/team/team-vehicule.webp"
+                    alt="Véhicule d'intervention S Connect dans une rue parisienne"
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-950/95 via-dark-950/30 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-7">
+                    <h4 className="font-display font-bold text-lg md:text-2xl text-white mb-1 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                      Toujours prêts
+                    </h4>
+                    <p className="text-white/80 text-sm md:text-base [text-shadow:_0_1px_6px_rgba(0,0,0,0.6)]">
+                      Intervention sous 40 min sur toute la petite couronne.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -583,29 +706,25 @@ export default function HomePageClient({
           The map keeps its hover/department/pin interactions. */}
       <InterventionMap variant="section" />
 
-      {/* Final CTA */}
+      {/* Final CTA — Paris aerial backdrop instead of pure gradient, so the
+          page opens and closes on the same cinematic visual language. */}
       <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">
-        {/* Layered animated backdrop */}
+        <Image
+          src="/images/hero/hero-cinema-paris.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-90"
+          aria-hidden="true"
+        />
+        {/* Brand-tinted scrim so the CTA stays unmistakably blue/electric. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 animate-aurora bg-[length:200%_200%] bg-gradient-to-r from-primary-700 via-electric-500 to-primary-700"
+          className="absolute inset-0 bg-gradient-to-br from-primary-700/85 via-primary-900/75 to-electric-600/70 mix-blend-multiply"
         />
-        <div className="absolute inset-0">
-          <GradientVeil variant="brand" />
-        </div>
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-70 mix-blend-overlay animate-gradient-shift bg-[length:200%_200%]"
-          style={{
-            background:
-              "conic-gradient(from 0deg at 50% 50%, rgba(245,158,11,0.25), transparent 20%, transparent 50%, rgba(14,165,233,0.3), transparent 80%, rgba(139,92,246,0.25))",
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/30 via-transparent to-dark-950/60" />
         <ParticlesLite variant="white" />
-        <div className="absolute inset-0 bg-grid opacity-10" />
-        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/10 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-accent-500/25 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
-        <NoiseOverlay opacity={0.07} />
+        <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10 text-center">
           <motion.div
