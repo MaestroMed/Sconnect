@@ -17,7 +17,6 @@ import {
   ThumbsUp,
   ArrowRight,
   FileCheck,
-  MapPin,
 } from "lucide-react";
 
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -31,6 +30,7 @@ import { GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/componen
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
+import HeroVideo from "@/components/home/HeroVideo";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -190,17 +190,23 @@ export default function HomePageClient({
 
   return (
     <>
-      {/* Hero Section — full-bleed interactive IDF map background */}
+      {/* Hero Section — full-bleed cinematic video (Apple-like).
+          The hero-cinema-electricien still serves as poster + reduced-motion fallback;
+          the looping Seedance mp4 plays on top when available. Heavy gradient on the
+          left keeps the text column readable while the subject (circuit breaker + LED)
+          stays cinematic on the right. */}
       <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
-        {/* Map fills the entire hero */}
-        <InterventionMap variant="hero" />
+        <HeroVideo
+          videoSrc="/videos/hero-circuit-breaker.mp4"
+          posterSrc="/images/hero/hero-cinema-electricien.webp"
+          fallbackSrc="/images/hero/hero-cinema-electricien.jpg"
+        />
 
-        {/* Readability overlays:
-            The map is already dimmed + pushed right inside the SVG; these
-            two layered gradients make sure the text column sits on almost-
-            solid dark while the map stays atmospheric on the right. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-25% via-dark-950/85 via-55% to-dark-950/20 to-100%" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/40 via-transparent to-dark-950/80" />
+        {/* Readability overlays — same grammar as the map version, slightly
+            stronger to make sure the deeper photographic values don't fight
+            the type. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-30% via-dark-950/90 via-60% to-dark-950/30 to-100%" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/50 via-transparent to-dark-950/85" />
         <NoiseOverlay opacity={0.035} />
 
         <div className="container-custom relative z-10 py-20 w-full">
@@ -269,12 +275,6 @@ export default function HomePageClient({
               </div>
             </div>
           </motion.div>
-        </div>
-
-        {/* Map caption — bottom-right, small, honest (no fake data) */}
-        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2 text-xs text-white/50 font-medium pointer-events-none">
-          <MapPin className="w-3.5 h-3.5" />
-          <span>Île-de-France · {18}+ communes couvertes · intervention sous 40 min</span>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 text-surface pointer-events-none">
@@ -576,7 +576,10 @@ export default function HomePageClient({
         </div>
       </section>
 
-      {/* InterventionMap promoted to the hero above — no standalone section needed. */}
+      {/* Notre rayonnement — interactive IDF coverage map. Promoted out of the
+          hero so it gets its own respect (and so the hero can be cinematic).
+          The map keeps its hover/department/pin interactions. */}
+      <InterventionMap variant="section" />
 
       {/* Final CTA */}
       <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">

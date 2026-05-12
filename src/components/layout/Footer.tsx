@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Zap,
   Phone,
   Mail,
   MapPin,
@@ -82,10 +82,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-electric-400 rounded-xl flex items-center justify-center">
-                <Zap className="w-7 h-7 text-white" />
-              </div>
+            <Link href="/" className="flex items-center gap-3 mb-6" aria-label="S Connect France — accueil">
+              <Image
+                src="/images/logo_only_white.svg"
+                alt=""
+                width={48}
+                height={48}
+                className="h-12 w-12"
+              />
               <div className="flex flex-col">
                 <span className="font-display font-bold text-xl">S Connect</span>
                 <span className="text-xs text-primary-400 font-medium tracking-wide">

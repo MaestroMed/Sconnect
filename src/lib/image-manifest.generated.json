@@ -2,331 +2,341 @@
   {
     "slug": "hero-electricien",
     "category": "hero",
-    "alt": "Électricien en intervention sur tableau électrique",
+    "alt": "Électricien expert installant un disjoncteur Schneider Electric — appartement Haussmannien",
     "webp": "/images/hero/hero-electricien.webp",
     "jpg": "/images/hero/hero-electricien.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoQAAkAAUAmJYwCdAEfO1O50AD+0mdpztbyr3fayDetZvHhXPe3ZwVHXO9uEMoK/saXgAAA"
-  },
-  {
-    "slug": "hero-serrurier",
-    "category": "hero",
-    "alt": "Serrurier installant une serrure haute sécurité",
-    "webp": "/images/hero/hero-serrurier.webp",
-    "jpg": "/images/hero/hero-serrurier.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoQAAkAAUAmJagCdAEOu4UcAAD++BcVCconqmYvrMRWJ1eGawMPq6Trxzs7QexP91A69AAA"
+    "width": 1600,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQBACdASoQABQAPm0skkWkIqGYBABABsSxgE6P4FIlA+bnhrxuqZjeGAgQAP3B0eQ3OU6FV5OaBNf2eN74dIh7nvUfqnlmrc/d/pRUXXoRkPDCrdvj55iIJ3x/gU84KnKAAA=="
   },
   {
     "slug": "hero-controle-acces",
     "category": "hero",
-    "alt": "Système de contrôle d'accès moderne",
+    "alt": "Clavier de contrôle d'accès noir mat à LED ambrée — porte chêne Haussmann",
     "webp": "/images/hero/hero-controle-acces.webp",
     "jpg": "/images/hero/hero-controle-acces.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAkAAUAmJYwCdACv9CNrQAD+/T8rfHWG+QaoNl3uQv9LdMyQBdAChmOxobICWJjt/kqBiOrgAA=="
+    "width": 1600,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACQAwCdASoQABQAPm0skkWkIqGYBABABsSygE6ZQAF+Ef8kwcJAAP774XoqztVbpe4tjUZ503NBJyHpevnYF1smdt3lbhadgu5ECvm48AA="
+  },
+  {
+    "slug": "hero-serrurier",
+    "category": "hero",
+    "alt": "Main de serrurier installant un cylindre A2P haute sécurité",
+    "webp": "/images/hero/hero-serrurier.webp",
+    "jpg": "/images/hero/hero-serrurier.jpg",
+    "width": 1600,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAACwAwCdASoQABQAPm0skkWkIqGYBABABsSxgE6AD0iFP7jky2o5AAD+9vk20KskCXLfPEykH0wGUJ4FvJjqAvcyjakBPaZq7cbOVoMmJ2GRqJn2AdIsvHs1NsAAAA=="
   },
   {
     "slug": "hero-portail",
     "category": "hero",
-    "alt": "Portail métallique sur mesure",
+    "alt": "Métallier soudant un garde-corps en fer forgé parisien — étincelles",
     "webp": "/images/hero/hero-portail.webp",
     "jpg": "/images/hero/hero-portail.jpg",
+    "width": 1600,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQBACdASoQABQAPm0qkkWkIqGYBABABsSgCdMoLUABL9LPxURWUHa5QAD+/kq/9HbxN/X+qkOnDemzp0rZSDB/sA6R7A71CagS2qHqitF2bIONIkqTKhgycfDxfobpCs5kfkeAAAA="
+  },
+  {
+    "slug": "hero-cinema-electricien",
+    "category": "hero",
+    "alt": "Disjoncteur Schneider Electric en panel — LED bleue éclairée",
+    "webp": "/images/hero/hero-cinema-electricien.webp",
+    "jpg": "/images/hero/hero-cinema-electricien.jpg",
     "width": 1920,
     "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoQAAkAAUAmJZQCdADLXgt+WAD+/De1m5RojK2gz7C3zeXvrYSg7QIeu40lwzMfHdyt7N92NSAFYZkUEwAAAA=="
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAkAAUAmJZQCdAEKpOgzvKAA/v7T6Zl9kL03zpijHeMECt+/Q3cV7ChrAAAA"
   },
   {
     "slug": "electricite-installation",
     "category": "services",
-    "alt": "Installation électrique en cours",
+    "alt": "Tableau électrique Schneider neuf, disjoncteurs matte black avec LED",
     "webp": "/images/services/electricite-installation.webp",
     "jpg": "/images/services/electricite-installation.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAwAAUAmJYwCdACzbuiGtpgA/uzZycqnUtMlr7KE2JZMWLSGuCwlpf/YGw+R0SAAAA=="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoQAAwAAUAmJZQCdAEN2sppQAD++faeqBynwVpy8n/TVEbliOLaVdG8xBQO+TpS2D8xAAAA"
   },
   {
     "slug": "electricite-depannage",
     "category": "services",
-    "alt": "Dépannage électrique",
+    "alt": "Dépannage électrique — multimètre testant un terminal sous tension",
     "webp": "/images/services/electricite-depannage.webp",
     "jpg": "/images/services/electricite-depannage.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAwAAUAmJQBOgCHw1bnmlAAA/v6gfIl0O6Ch8IkdZ4HXEbMoWiFr9QThd8yAAAA="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAwAAUAmJQBOgCP/3OILsYAAy0pADzDPg7UM8oPbw8rJ9vCQnFuunNJgj7zr8zw4Gl+U9wAAAA=="
   },
   {
     "slug": "electricite-borne-irve",
     "category": "services",
-    "alt": "Borne de recharge IRVE",
+    "alt": "Borne de recharge IRVE Type 2 murale neuve",
     "webp": "/images/services/electricite-borne-irve.webp",
     "jpg": "/images/services/electricite-borne-irve.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAwAgCdASoQAAwAAUAmJZwC7AD0Z5GA2yupAAD80Nqq5m0ivLHNfzNecf9GMnA9SvgTKyZN/cYAAA=="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAwAAUAmJYwCdADG4uOaZgAA/PyAPnmMrpSbROPGZT93Fush+MsRzd/AvaNTiNySexidCjc0O+ahgt73GOAA"
   },
   {
     "slug": "acces-interphone",
     "category": "services",
-    "alt": "Interphone vidéo",
+    "alt": "Interphone moderne sur façade Haussmannienne",
     "webp": "/images/services/acces-interphone.webp",
     "jpg": "/images/services/acces-interphone.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAwAAUAmJZwAAudk1AB73QAA/v7pf0ZdmiIaE4zzz2J6Zh8S/OMnhQhuAAAA"
-  },
-  {
-    "slug": "acces-badge",
-    "category": "services",
-    "alt": "Système de badge d'accès",
-    "webp": "/images/services/acces-badge.webp",
-    "jpg": "/images/services/acces-badge.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAAAQAgCdASoQAAwAAUAmJYwCdAENo/fJUW2AAP7tJeOzDrsOuq738iMhQAaDd00qQm4AmByoinQsAAAA"
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoQAAwAAUAmJQBOgCHw2lxsAAD++yB+ZtNfA77lpg7wTYX3FZEiEanDI6AAAA=="
   },
   {
     "slug": "acces-videophone",
     "category": "services",
-    "alt": "Vidéophone moderne",
+    "alt": "Moniteur vidéophone intérieur monochrome",
     "webp": "/images/services/acces-videophone.webp",
     "jpg": "/images/services/acces-videophone.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAwAAUAmJZwCdAD0sr2RwSyAAP76ymIlEPIvv/qcOypYhWJepZwYfF3AwLLF9muAUrP7HMAAAA=="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAwAAUAmJZQCdADGK2HjKAD+/XJXnetzay1ZNLda/cGP+kKDxQv0oWanzeAiC8b17ptiVI5fMgAA"
+  },
+  {
+    "slug": "acces-badge",
+    "category": "services",
+    "alt": "Lecteur de badge RFID mural et carte d'accès",
+    "webp": "/images/services/acces-badge.webp",
+    "jpg": "/images/services/acces-badge.jpg",
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAwAAUAmJQBOgCFUnfksXPMAAP7+oQt4P0myb8exMpVar0ywuP2H027Vrp0Ny6xZd57kgD5Ldr84AAA="
   },
   {
     "slug": "serrurerie-ouverture",
     "category": "services",
-    "alt": "Ouverture de porte",
+    "alt": "Serrurier ouvrant une porte avec outils de précision",
     "webp": "/images/services/serrurerie-ouverture.webp",
     "jpg": "/images/services/serrurerie-ouverture.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAwAAUAmJZwCdAENb2rOjgAA/v7pozg0ABqN/+j3zoq59/ChXYz8h1LtKs/i41uQ2EQv9GAAAA=="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQAAwAAUAmJZQCdH8AFcqrdEqAAP7+p031uH8qim0RQ4UAmU545tjdTF+mhFUIL5IX+A0AAAA="
   },
   {
     "slug": "serrurerie-blindage",
     "category": "services",
-    "alt": "Blindage de porte",
+    "alt": "Porte blindée A2P avec cylindre chromé haute sécurité",
     "webp": "/images/services/serrurerie-blindage.webp",
     "jpg": "/images/services/serrurerie-blindage.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAwAAUAmJQBOgBuHuOZGAAD+/YpL1YvkWnvtohbn93hcDlRggNtMhKpOQN6cF+bq8LMPdHsy9aY692Q6gAAA"
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABQAgCdASoQAAwAAUAmJZACdH8AGDtNeFBgRPAA/t4GsZkk00QPU/3D6/9dN/WZj7nSuB3sFJMqd2YKtoCrj7QRfVrgAA=="
   },
   {
     "slug": "serrurerie-serrure",
     "category": "services",
-    "alt": "Remplacement de serrure haute sécurité",
+    "alt": "Trois cylindres de serrure A2P différentes finitions",
     "webp": "/images/services/serrurerie-serrure.webp",
     "jpg": "/images/services/serrurerie-serrure.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwAAUAmJZQCdAC9rwFbycAA/v4Dy/08w6obq6fAt5OwH0T4mZysqKic37rzxmgs+4FwSn8In0eznbUkrCJgAAA="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAwAAUAmJZQCdAEO1b+egAD+0n8eG+5c9wx7v2n5uXn3snLYb9ceRZ0rs2wQzsAAAA=="
   },
   {
     "slug": "metallerie-portail",
     "category": "services",
-    "alt": "Fabrication de portail sur mesure",
+    "alt": "Portail wrought-iron parisien fait main, finition atelier",
     "webp": "/images/services/metallerie-portail.webp",
     "jpg": "/images/services/metallerie-portail.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwAAUAmJZQCdAC9rwFbycAA/v4Dy/08w6obq6fAt5OwH0T4mZysqKic37rzxmgs+4FwSn8In0eznbUkrCJgAAA="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoQAAwAAUAmJQBOgCHfxFCwAAD++2oXUzKxu7+qg7sBPnTO3rR8Vl/NkZkYAA=="
   },
   {
     "slug": "metallerie-garde-corps",
     "category": "services",
-    "alt": "Garde-corps métallique",
+    "alt": "Garde-corps acier brossé sur balcon Haussmann",
     "webp": "/images/services/metallerie-garde-corps.webp",
     "jpg": "/images/services/metallerie-garde-corps.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAwAAUAmJZQCdH8AEmOZd+sIAP75+2p5AOKzc6A5RMSUSiAEDayJLpj4G9Wzd134iXSQ/HTj0Ocf84mJ6ovN0YisAA=="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAwAAUAmJYwCdAEOtflQAAD+8mXZQCOit+um8eENldL5UliBtWly2kKdIaoegAA="
   },
   {
     "slug": "metallerie-structure",
     "category": "services",
-    "alt": "Structure métallique sur mesure",
+    "alt": "Soudure structurelle d'une poutre IPN en rénovation",
     "webp": "/images/services/metallerie-structure.webp",
     "jpg": "/images/services/metallerie-structure.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAwAAUAmJYwCdACvpVnBK6AA4nzgg3t1ZO3n8ep/P3lavJQPckbt9kXDuOz39RCT9LQCktVKJUm2AAA="
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAwAgCdASoQAAwAAUAmJZQCdH8AE6lfwvdgAAD+/SeUlCge8yqJfsSt8cuvt0CLCnSjBEvdEqJBM7hCbgqoZ7q2gAA="
   },
   {
     "slug": "realisation-1",
     "category": "realisations",
-    "alt": "Réalisation — installation électrique complète",
+    "alt": "Réalisation — tableau électrique entièrement rénové",
     "webp": "/images/realisations/realisation-1.webp",
     "jpg": "/images/realisations/realisation-1.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwAAUAmJZQCdAC9rwFbycAA/v4Dy/08w6obq6fAt5OwH0T4mZysqKic37rzxmgs+4FwSn8In0eznbUkrCJgAAA="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAkAAUAmJYwCdAERH9kji+AA/q2j+f+RMLToCQJiY2xwn2pq0TNeGXeu1QnVzAA="
   },
   {
     "slug": "realisation-2",
     "category": "realisations",
-    "alt": "Réalisation — tableau électrique rénové",
+    "alt": "Réalisation — porte blindée installée Paris",
     "webp": "/images/realisations/realisation-2.webp",
     "jpg": "/images/realisations/realisation-2.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAwAAUAmJYwCdACzbuiGtpgA/uzZycqnUtMlr7KE2JZMWLSGuCwlpf/YGw+R0SAAAA=="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAkAAUAmJYwCdADDogXOAAD+/G34pBBVcRkn8WcNlTVOK+ZNuEkizLlomCo/oKGqDq0AAAA="
   },
   {
     "slug": "realisation-3",
     "category": "realisations",
-    "alt": "Réalisation — contrôle d'accès installé",
+    "alt": "Réalisation — interphone façade Haussmann blue-hour",
     "webp": "/images/realisations/realisation-3.webp",
     "jpg": "/images/realisations/realisation-3.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAwAAUAmJQBOgBuHuOZGAAD+/YpL1YvkWnvtohbn93hcDlRggNtMhKpOQN6cF+bq8LMPdHsy9aY692Q6gAAA"
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoQAAkAAUAmJZQCdAD0uDQzIJAA/t0QS7+kVO7Mm9p1xc9tVhyTg4JvVcZcw6cmuC2aAAAA"
   },
   {
     "slug": "realisation-4",
     "category": "realisations",
-    "alt": "Réalisation — interphonie copropriété",
+    "alt": "Réalisation — borne IRVE résidentielle",
     "webp": "/images/realisations/realisation-4.webp",
     "jpg": "/images/realisations/realisation-4.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAwAAUAmJQBOgCEjGa8zAAD+7lrt1AStfc/pv3DrRuI+I4OGpCyVfeM53R+VErY6XvpWgMbHAAAA"
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAkAAUAmJZQCdADMqa6tKSAA/vKI2BvtQB7/RRZXmcPVKEilYsKLVgzFKXo7hB4AAA=="
   },
   {
     "slug": "realisation-5",
     "category": "realisations",
-    "alt": "Réalisation — éclairage intérieur",
+    "alt": "Réalisation — portail wrought-iron sur rue parisienne",
     "webp": "/images/realisations/realisation-5.webp",
     "jpg": "/images/realisations/realisation-5.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAwAAUAmJZQCdADwy2cGAAD+2+tcGXr6pGFJC+3bddklRk0dvxLGaNSYi8rIIAAAAA=="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAAAQAgCdASoQAAkAAUAmJQBOgCbGEGxwBRAAAP77js7NC4GqoQZxylqo+Avew8gzy3RFCAAA"
   },
   {
     "slug": "realisation-6",
     "category": "realisations",
-    "alt": "Réalisation — pose de serrure",
+    "alt": "Réalisation — garde-corps balcon vue rooftops Paris",
     "webp": "/images/realisations/realisation-6.webp",
     "jpg": "/images/realisations/realisation-6.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAwAAUAmJZwCdAENb2rOjgAA/v7pozg0ABqN/+j3zoq59/ChXYz8h1LtKs/i41uQ2EQv9GAAAA=="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQAAkAAUAmJQBOjXAAWbO3WEDAAP75UerTrC2+PxsGbXBx59wfWFpqTLWUEf2eTdYhgaAAAAA="
   },
   {
     "slug": "realisation-7",
     "category": "realisations",
-    "alt": "Réalisation — chantier complet",
+    "alt": "Réalisation — rénovation électrique salon Haussmann",
     "webp": "/images/realisations/realisation-7.webp",
     "jpg": "/images/realisations/realisation-7.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAQCdASoQAAwAAUAmJQBOgBQaQS0AAP6GsHzKjzkyXIHvQ0I4gi71K9oSyUPNAHjFkB8LUYZCh6BnqlAAAA=="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAkAAUAmJYwCdAD0fHGabAD++WWqgJpxGS72+AUM/O3dKfXk7fa0yDnF1tqNOeAaJBMLQAA="
   },
   {
     "slug": "realisation-8",
     "category": "realisations",
-    "alt": "Réalisation — installation borne IRVE",
+    "alt": "Réalisation — système badge réception bureau",
     "webp": "/images/realisations/realisation-8.webp",
     "jpg": "/images/realisations/realisation-8.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAwAgCdASoQAAwAAUAmJZwC7AD0Z5GA2yupAAD80Nqq5m0ivLHNfzNecf9GMnA9SvgTKyZN/cYAAA=="
-  },
-  {
-    "slug": "before-tableau",
-    "category": "realisations-before",
-    "alt": "Avant : tableau électrique vétuste",
-    "webp": "/images/realisations-before/before-tableau.webp",
-    "jpg": "/images/realisations-before/before-tableau.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoQAAwAAUAmJQBOgB3URChuAAD84XyVtlBUEXTYc28QYKPHZCM5CHtywLd0a0XPlqqbmxaTMBzu+x4CC2AAAA=="
-  },
-  {
-    "slug": "before-serrure",
-    "category": "realisations-before",
-    "alt": "Avant : serrure endommagée",
-    "webp": "/images/realisations-before/before-serrure.webp",
-    "jpg": "/images/realisations-before/before-serrure.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoQAAwAAUAmJQBOgBuyRRhEgAD+0TweAnf+P6yw9a+NM/gVU+2Me9YHVLrhbXLoZcsqgAAA"
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAkAAUAmJQBOgCFV6pgaa6AA/cGAdRhYVpR2+FKWyH7I9jJvoZaVhvusuqk6chvAAA=="
   },
   {
     "slug": "before-porte",
     "category": "realisations-before",
-    "alt": "Avant : porte d'entrée à rénover",
+    "alt": "Avant : porte d'entrée vétuste à rénover",
     "webp": "/images/realisations-before/before-porte.webp",
     "jpg": "/images/realisations-before/before-porte.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoQAAwAAUAmJQBOgBZNlq+PAADOMJ6HmFmKLuoIBXbu6n98ucCij5z1nhAWMU09AdT+wA1qTdlR2LWAAAA="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAkAAUAmJYwCdAD2N2DjaAAA/vlfaERsu/ymrvomldcO2I80gv9lxoKAAA=="
+  },
+  {
+    "slug": "before-serrure",
+    "category": "realisations-before",
+    "alt": "Avant : ancienne serrure usée à remplacer",
+    "webp": "/images/realisations-before/before-serrure.webp",
+    "jpg": "/images/realisations-before/before-serrure.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAAAQAgCdASoQAAkAAUAmJZQCdAEPh9Uub48IAP74T6gxb6nwZlDBkNjPMRhbwAAA"
+  },
+  {
+    "slug": "before-tableau",
+    "category": "realisations-before",
+    "alt": "Avant : tableau électrique dangereux à remettre aux normes",
+    "webp": "/images/realisations-before/before-tableau.webp",
+    "jpg": "/images/realisations-before/before-tableau.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAkAAUAmJZQCdAD0iXyTwAD+9e6TLBEb5dC+cIT/qoq6ZnRIhtUB4ErCuHtgAAA="
   },
   {
     "slug": "zone-paris",
     "category": "zones",
-    "alt": "Paris et la Tour Eiffel",
+    "alt": "Paris vue aérienne blue hour — Tour Eiffel + Seine",
     "webp": "/images/zones/zone-paris.webp",
     "jpg": "/images/zones/zone-paris.jpg",
-    "width": 1600,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAwAAUAmJQBOgCFxnqefBPgAAP71B90SxKN3rD18h5/Ztg+5vEyw3gqpR1J0m0bwPQcuxulT7iyfm1ndgAAA"
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAkAAUAmJZACdADdJpCkAAD+9LIptFgzwc2ByurYYjVn1pe036aaB6lndNFpvQ3ZfWt69UAAAA=="
   },
   {
     "slug": "zone-clichy",
     "category": "zones",
-    "alt": "Clichy et Hauts-de-Seine",
+    "alt": "Clichy (92) — rue résidentielle blue hour",
     "webp": "/images/zones/zone-clichy.webp",
     "jpg": "/images/zones/zone-clichy.jpg",
-    "width": 1600,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoQAAwAAUAmJYwCdH8AGCZQcNRiAAD+8znCYbKNkw7/RDxCTgu+itb7eEdD6P19kCCx50FymQGXIf4+2MHsMOfKgAA="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAkAAUAmJZACdAD2PPxhw+ygAP74pzk6qU+pBM6IAkd2jg5OaNf+bHdnCQuA3os0zoxvJ3Y74frZfYukb5IQAAA="
   },
   {
     "slug": "zone-idf",
     "category": "zones",
-    "alt": "Île-de-France vue aérienne",
+    "alt": "Île-de-France vue aérienne — Paris + La Défense + petite couronne",
     "webp": "/images/zones/zone-idf.webp",
     "jpg": "/images/zones/zone-idf.jpg",
-    "width": 1600,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAwAAUAmJbACdAEUqfxJgADLS22Td2UZcVIOuVUeiZix/ScP/44vTP+MJIDx1Do3/iPf89UKZoAA"
-  },
-  {
-    "slug": "team-technicien",
-    "category": "team",
-    "alt": "Technicien en intervention",
-    "webp": "/images/team/team-technicien.webp",
-    "jpg": "/images/team/team-technicien.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAwAgCdASoQAAwAAUAmJZQCsAEf3VoIwo34AAD+/MkUCHEH9IKEygIVzpisvPSRtUXLFdxyICIMAA=="
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAkAAUAmJYwCdAEegZNS6QAA/vM41wL6bV2eT0/xqRvM1OLWuE7Wg9l5EFAA"
   },
   {
     "slug": "team-equipe",
     "category": "team",
-    "alt": "Équipe Sconnect au complet",
+    "alt": "Équipe S'Connect — trois techniciens experts",
     "webp": "/images/team/team-equipe.webp",
     "jpg": "/images/team/team-equipe.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoQAAwAAUAmJZQCdAC3nZ5z1OUAAP7QS7hEL1jd1HYzAByTA83+320rDY0CwNhDMAyKh2ixEuNT7QAA"
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwBACdASoQABQAPm0skkWkIqGYBABABsSygE6ZQZLGJMrxzmM3q5vlpvAA/vqW5q1oH+p2MC0AJ3EIlMdz9UUh8gLxsQnp4TXk+tE0kbp9M+34cAA="
+  },
+  {
+    "slug": "team-technicien",
+    "category": "team",
+    "alt": "Technicien S'Connect en intervention",
+    "webp": "/images/team/team-technicien.webp",
+    "jpg": "/images/team/team-technicien.jpg",
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAwCdASoQABQAPm0sk0WkIqGYBABABsSygE6ADdGuq+aWx9Cy0TgAAP78anCSmkfCDZzHQhYo9k/XPKJ8crx6vwgcsVmg9fVC2fgheFhbX2/9BsSTkxUJqbxztgAA"
   },
   {
     "slug": "team-vehicule",
     "category": "team",
-    "alt": "Véhicule d'intervention Sconnect",
+    "alt": "Véhicule d'intervention S'Connect — rue parisienne",
     "webp": "/images/team/team-vehicule.webp",
     "jpg": "/images/team/team-vehicule.jpg",
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAwAgCdASoQAAwAAUAmJYwCdH8KsAAeFNGBAAD+udlBN4Np4IRJKNy13t19RBfLvMthanKzibVsOrnLEwbmKBEE+zAAAA=="
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAwCdASoQABQAPm0skkWkIqGYBABABsSygE6AD0fygo0qsX+FYAD+0Twd/g7/nFttSgF75jyxjvFetTNXufVLh6HszWre8WWZJF/n3vv4+Id1ZDZc8oAA"
   }
 ]

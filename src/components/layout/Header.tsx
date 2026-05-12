@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Phone,
-  Zap,
   AlertTriangle,
 } from "lucide-react";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
@@ -95,24 +94,40 @@ export default function Header() {
       >
         <nav className="container-custom">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            {/* Logo — official SVG brand mark. Color variant on light surfaces,
+                white variant flipped in via Tailwind dark: classes (Tailwind's
+                class strategy means both <Image>s ship to the client; the
+                hidden one is rendered with display:none and not actually
+                fetched until it becomes visible). */}
+            <Link href="/" className="flex items-center gap-3 group" aria-label="S Connect France — accueil">
               {siteConfig.logoUrl ? (
                 <Image
                   src={siteConfig.logoUrl}
-                  alt={siteConfig.siteName}
+                  alt=""
                   width={120}
                   height={48}
                   className="h-12 w-auto object-contain"
                   priority
                 />
               ) : (
-                <div className="relative">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-electric-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-xl group-hover:shadow-primary-500/30 transition-all duration-300">
-                    <Zap className="w-7 h-7 text-white" />
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent-400 rounded-full animate-pulse" />
-                </div>
+                <>
+                  <Image
+                    src="/images/logo_only.svg"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 block dark:hidden transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                  <Image
+                    src="/images/logo_only_white.svg"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 hidden dark:block transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                </>
               )}
               <div className="flex flex-col">
                 <span className="font-display font-bold text-xl text-foreground">
