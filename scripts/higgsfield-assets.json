@@ -66,7 +66,7 @@
     },
     {
       "slug": "serrurerie-ouverture",
-      "job_id": "41daf169-5eec-46c4-b1da-bcac344da518",
+      "job_id": "805705b0-596b-4118-8a9a-ff337ab89acf",
       "ratio": "4:3",
       "res": "2k",
       "target_dir": "public/images/services"
@@ -116,6 +116,34 @@
     {
       "slug": "team-technicien",
       "job_id": "2b95e742-9728-4306-87df-8573d3ed2272",
+      "ratio": "4:5",
+      "res": "2k",
+      "target_dir": "public/images/team"
+    },
+    {
+      "slug": "realisation-1",
+      "job_id": "b8dfb1d4-056f-4f10-a77c-2a965e904f2c",
+      "ratio": "16:9",
+      "res": "2k",
+      "target_dir": "public/images/realisations"
+    },
+    {
+      "slug": "realisation-3",
+      "job_id": "bf1d0923-0495-4109-9235-2fbde232cab6",
+      "ratio": "16:9",
+      "res": "2k",
+      "target_dir": "public/images/realisations"
+    },
+    {
+      "slug": "zone-clichy",
+      "job_id": "9d7a5123-dabc-46fb-861d-34640ed45988",
+      "ratio": "16:9",
+      "res": "2k",
+      "target_dir": "public/images/zones"
+    },
+    {
+      "slug": "team-vehicule",
+      "job_id": "959051a6-91a1-4eff-8b16-21ee97714b59",
       "ratio": "4:5",
       "res": "2k",
       "target_dir": "public/images/team"

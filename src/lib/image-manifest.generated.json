@@ -1,5 +1,55 @@
 [
   {
+    "slug": "serrurerie-ouverture",
+    "category": "services",
+    "alt": "Serrurier ouvrant une porte avec outils de précision",
+    "webp": "/images/services/serrurerie-ouverture.webp",
+    "jpg": "/images/services/serrurerie-ouverture.jpg",
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAwAAUAmJYwCw7EK4z/ojgAA/v64O6rnotUivHoVA74NxVNcgOcLdjIwA2oAAAA="
+  },
+  {
+    "slug": "zone-clichy",
+    "category": "zones",
+    "alt": "Clichy (92) — rue résidentielle blue hour",
+    "webp": "/images/zones/zone-clichy.webp",
+    "jpg": "/images/zones/zone-clichy.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAkAAUAmJQBOgBjFoB1AAP70wvLWLWPQyTu2CZncXejdYdwzZwscd0t6i8b2AQ08WdhfSVE27Ibo5wAAAA=="
+  },
+  {
+    "slug": "team-vehicule",
+    "category": "team",
+    "alt": "Véhicule d'intervention S'Connect — rue parisienne",
+    "webp": "/images/team/team-vehicule.webp",
+    "jpg": "/images/team/team-vehicule.jpg",
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAwCdASoQABQAPm0qkUWkIqGYBABABsSxgE6ZQAHByl/OpDLwsnKAAP7RIPahph/n3O4ZUOZXDva5D24xyKPmjtkxwn6+yLj6+6xrUk2dz+f0BwofPeBLe+juWZE4AAA="
+  },
+  {
+    "slug": "realisation-1",
+    "category": "realisations",
+    "alt": "Réalisation — tableau électrique entièrement rénové",
+    "webp": "/images/realisations/realisation-1.webp",
+    "jpg": "/images/realisations/realisation-1.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoQAAkAAUAmJZACdHIAApRtiPAA/v3yo2BLNspm/tDz3TNV3EtgTfhhwxO8Kvx0x7bQ1QAA"
+  },
+  {
+    "slug": "realisation-3",
+    "category": "realisations",
+    "alt": "Réalisation — interphone façade Haussmann blue-hour",
+    "webp": "/images/realisations/realisation-3.webp",
+    "jpg": "/images/realisations/realisation-3.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAkAAUAmJZwC7ADw1UxJwAD+/F+jskhH4y9SvADP61ZC1rGAAA=="
+  },
+  {
     "slug": "team-equipe",
     "category": "team",
     "alt": "Équipe S'Connect — trois techniciens experts",
@@ -190,26 +240,6 @@
     "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAwAAUAmJQBOgCFUnfksXPMAAP7+oQt4P0myb8exMpVar0ywuP2H027Vrp0Ny6xZd57kgD5Ldr84AAA="
   },
   {
-    "slug": "serrurerie-ouverture",
-    "category": "services",
-    "alt": "Serrurier ouvrant une porte avec outils de précision",
-    "webp": "/images/services/serrurerie-ouverture.webp",
-    "jpg": "/images/services/serrurerie-ouverture.jpg",
-    "width": 1600,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQAAwAAUAmJZQCdH8AFcqrdEqAAP7+p031uH8qim0RQ4UAmU545tjdTF+mhFUIL5IX+A0AAAA="
-  },
-  {
-    "slug": "realisation-1",
-    "category": "realisations",
-    "alt": "Réalisation — tableau électrique entièrement rénové",
-    "webp": "/images/realisations/realisation-1.webp",
-    "jpg": "/images/realisations/realisation-1.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAkAAUAmJYwCdAERH9kji+AA/q2j+f+RMLToCQJiY2xwn2pq0TNeGXeu1QnVzAA="
-  },
-  {
     "slug": "realisation-2",
     "category": "realisations",
     "alt": "Réalisation — porte blindée installée Paris",
@@ -218,16 +248,6 @@
     "width": 1920,
     "height": 1080,
     "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAkAAUAmJYwCdADDogXOAAD+/G34pBBVcRkn8WcNlTVOK+ZNuEkizLlomCo/oKGqDq0AAAA="
-  },
-  {
-    "slug": "realisation-3",
-    "category": "realisations",
-    "alt": "Réalisation — interphone façade Haussmann blue-hour",
-    "webp": "/images/realisations/realisation-3.webp",
-    "jpg": "/images/realisations/realisation-3.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoQAAkAAUAmJZQCdAD0uDQzIJAA/t0QS7+kVO7Mm9p1xc9tVhyTg4JvVcZcw6cmuC2aAAAA"
   },
   {
     "slug": "realisation-4",
@@ -320,16 +340,6 @@
     "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAkAAUAmJZACdADdJpCkAAD+9LIptFgzwc2ByurYYjVn1pe036aaB6lndNFpvQ3ZfWt69UAAAA=="
   },
   {
-    "slug": "zone-clichy",
-    "category": "zones",
-    "alt": "Clichy (92) — rue résidentielle blue hour",
-    "webp": "/images/zones/zone-clichy.webp",
-    "jpg": "/images/zones/zone-clichy.jpg",
-    "width": 1920,
-    "height": 1080,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAkAAUAmJZACdAD2PPxhw+ygAP74pzk6qU+pBM6IAkd2jg5OaNf+bHdnCQuA3os0zoxvJ3Y74frZfYukb5IQAAA="
-  },
-  {
     "slug": "zone-idf",
     "category": "zones",
     "alt": "Île-de-France vue aérienne — Paris + La Défense + petite couronne",
@@ -338,15 +348,5 @@
     "width": 1920,
     "height": 1080,
     "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAkAAUAmJYwCdAEegZNS6QAA/vM41wL6bV2eT0/xqRvM1OLWuE7Wg9l5EFAA"
-  },
-  {
-    "slug": "team-vehicule",
-    "category": "team",
-    "alt": "Véhicule d'intervention S'Connect — rue parisienne",
-    "webp": "/images/team/team-vehicule.webp",
-    "jpg": "/images/team/team-vehicule.jpg",
-    "width": 1280,
-    "height": 1600,
-    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAwCdASoQABQAPm0skkWkIqGYBABABsSygE6AD0fygo0qsX+FYAD+0Twd/g7/nFttSgF75jyxjvFetTNXufVLh6HszWre8WWZJF/n3vv4+Id1ZDZc8oAA"
   }
 ]
