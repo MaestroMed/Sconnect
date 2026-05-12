@@ -1,5 +1,25 @@
 [
   {
+    "slug": "team-equipe",
+    "category": "team",
+    "alt": "Équipe S'Connect — trois techniciens experts",
+    "webp": "/images/team/team-equipe.webp",
+    "jpg": "/images/team/team-equipe.jpg",
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAABwAwCdASoQABQAPm0qkkWkIqGYBABABsSygF2AEPDGaV1IYCAA/vwDZFvzIQLTuaCWc8t2hZIgxhMm4H2tOmRH/ob76EKwYkzHXVD7WAA="
+  },
+  {
+    "slug": "team-technicien",
+    "category": "team",
+    "alt": "Technicien S'Connect en intervention",
+    "webp": "/images/team/team-technicien.webp",
+    "jpg": "/images/team/team-technicien.jpg",
+    "width": 1280,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQBACdASoQABQAPm0skkWkIqGYBABABsSygE6ZQAGg3MzHGit4fObYwAD+8ZFye37KX6ikAc8tzJF7FtVRqhS+ivZGYXk19AuUWxUdzIp/5Wcohqhx8YTgAAA="
+  },
+  {
     "slug": "serrurerie-serrure",
     "category": "services",
     "alt": "Trois cylindres de serrure A2P différentes finitions",
@@ -318,26 +338,6 @@
     "width": 1920,
     "height": 1080,
     "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoQAAkAAUAmJYwCdAEegZNS6QAA/vM41wL6bV2eT0/xqRvM1OLWuE7Wg9l5EFAA"
-  },
-  {
-    "slug": "team-equipe",
-    "category": "team",
-    "alt": "Équipe S'Connect — trois techniciens experts",
-    "webp": "/images/team/team-equipe.webp",
-    "jpg": "/images/team/team-equipe.jpg",
-    "width": 1280,
-    "height": 1600,
-    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwBACdASoQABQAPm0skkWkIqGYBABABsSygE6ZQZLGJMrxzmM3q5vlpvAA/vqW5q1oH+p2MC0AJ3EIlMdz9UUh8gLxsQnp4TXk+tE0kbp9M+34cAA="
-  },
-  {
-    "slug": "team-technicien",
-    "category": "team",
-    "alt": "Technicien S'Connect en intervention",
-    "webp": "/images/team/team-technicien.webp",
-    "jpg": "/images/team/team-technicien.jpg",
-    "width": 1280,
-    "height": 1600,
-    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAwCdASoQABQAPm0sk0WkIqGYBABABsSygE6ADdGuq+aWx9Cy0TgAAP78anCSmkfCDZzHQhYo9k/XPKJ8crx6vwgcsVmg9fVC2fgheFhbX2/9BsSTkxUJqbxztgAA"
   },
   {
     "slug": "team-vehicule",

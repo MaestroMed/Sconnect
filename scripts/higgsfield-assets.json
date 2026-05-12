@@ -1,23 +1,133 @@
 {
   "_comment": "Asset manifest for Higgsfield generations — Apple-like SOTA refresh Wave 2 — 2026-05-12",
   "stills": [
-    { "slug": "hero-cinema-paris", "job_id": "a18f0d31-c62b-450a-a967-00a3d2854a58", "ratio": "16:9", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-electricien", "job_id": "51dcc123-9e0c-47c6-8d21-df9a25393b85", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-controle-acces", "job_id": "0046e813-13a8-488e-82f1-1ecdf3ccaa85", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-serrurier", "job_id": "60a474cc-7f17-437b-9bb2-9eb945bb900e", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-portail", "job_id": "a09c6f98-9bef-42ae-947b-72c839c18a6b", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "electricite-installation", "job_id": "390e3862-740a-4e98-bc2a-9d2823a5495b", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "electricite-depannage", "job_id": "8698fc86-5d11-4dde-b234-72c3b348fb0b", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "electricite-borne-irve", "job_id": "0a4016cd-6e00-455c-adcd-452a11170481", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "acces-interphone", "job_id": "019767e0-8ebd-47fd-b8e0-fafb3701c439", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-ouverture", "job_id": "41daf169-5eec-46c4-b1da-bcac344da518", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-blindage", "job_id": "d94a6475-0e2f-45b0-b754-bbf62aa5f548", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-serrure", "job_id": "02461869-5cda-4f28-9a30-3323ab0ca9b6", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-portail", "job_id": "3d143dc8-8275-40ce-a835-aa6debbeb5b3", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-garde-corps", "job_id": "7c89775e-1f0f-4630-8e90-2c9435cb7811", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-structure", "job_id": "1b7104d6-be2b-442d-8407-af670f3edc1a", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" }
+    {
+      "slug": "hero-cinema-paris",
+      "job_id": "a18f0d31-c62b-450a-a967-00a3d2854a58",
+      "ratio": "16:9",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-electricien",
+      "job_id": "51dcc123-9e0c-47c6-8d21-df9a25393b85",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-controle-acces",
+      "job_id": "0046e813-13a8-488e-82f1-1ecdf3ccaa85",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-serrurier",
+      "job_id": "60a474cc-7f17-437b-9bb2-9eb945bb900e",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-portail",
+      "job_id": "a09c6f98-9bef-42ae-947b-72c839c18a6b",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "electricite-installation",
+      "job_id": "390e3862-740a-4e98-bc2a-9d2823a5495b",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "electricite-depannage",
+      "job_id": "8698fc86-5d11-4dde-b234-72c3b348fb0b",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "electricite-borne-irve",
+      "job_id": "0a4016cd-6e00-455c-adcd-452a11170481",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "acces-interphone",
+      "job_id": "019767e0-8ebd-47fd-b8e0-fafb3701c439",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-ouverture",
+      "job_id": "41daf169-5eec-46c4-b1da-bcac344da518",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-blindage",
+      "job_id": "d94a6475-0e2f-45b0-b754-bbf62aa5f548",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-serrure",
+      "job_id": "02461869-5cda-4f28-9a30-3323ab0ca9b6",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-portail",
+      "job_id": "3d143dc8-8275-40ce-a835-aa6debbeb5b3",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-garde-corps",
+      "job_id": "7c89775e-1f0f-4630-8e90-2c9435cb7811",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-structure",
+      "job_id": "1b7104d6-be2b-442d-8407-af670f3edc1a",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "team-equipe",
+      "job_id": "6e5d5c04-a0c7-4a89-935c-d16389e72ed1",
+      "ratio": "4:5",
+      "res": "2k",
+      "target_dir": "public/images/team"
+    },
+    {
+      "slug": "team-technicien",
+      "job_id": "2b95e742-9728-4306-87df-8573d3ed2272",
+      "ratio": "4:5",
+      "res": "2k",
+      "target_dir": "public/images/team"
+    }
   ],
   "videos": [
-    { "slug": "hero-paris-window", "job_id": "081287a8-6514-4c73-992b-3f2d9c1e8f86", "ratio": "16:9", "res": "1080p", "target_dir": "public/videos" }
+    {
+      "slug": "hero-paris-window",
+      "job_id": "081287a8-6514-4c73-992b-3f2d9c1e8f86",
+      "ratio": "16:9",
+      "res": "1080p",
+      "target_dir": "public/videos"
+    }
   ]
 }
