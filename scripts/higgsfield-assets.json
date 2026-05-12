@@ -1,44 +1,133 @@
 {
-  "_comment": "Asset manifest for Higgsfield generations — Apple-like SOTA refresh 2026-05-12",
-  "_total_credits_planned": 162,
+  "_comment": "Asset manifest for Higgsfield generations — Apple-like SOTA refresh Wave 2 — 2026-05-12",
   "stills": [
-    { "slug": "concept-disjoncteur", "job_id": "b1cacb07-196b-4f1e-9b13-98cc63e8fd47", "ratio": "4:5", "res": "2k", "target_dir": null, "_note": "concept board, not shipped" },
-    { "slug": "concept-cylindre", "job_id": "9bdc891e-30fc-4894-8bb3-51e99bea7817", "ratio": "21:9", "res": "2k", "target_dir": null, "_note": "concept board, not shipped" },
-    { "slug": "concept-paris-aerial", "job_id": "05f17f33-058f-40ff-8833-018761126ef8", "ratio": "16:9", "res": "2k", "target_dir": null, "_note": "concept board, not shipped" },
-    { "slug": "hero-electricien", "job_id": "fb843ce2-971f-4ecd-ae85-9e0877cbe6d8", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-controle-acces", "job_id": "51e5bd44-b9b5-4489-b285-8c112c6fd040", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-serrurier", "job_id": "32e6ae25-307b-48f5-9f1f-dfe55e255c5f", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-portail", "job_id": "ce32267e-0c31-42c4-a142-987fa6c76135", "ratio": "4:5", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "hero-cinema-electricien", "job_id": "6e50673d-0a57-4097-82c2-82d10c0444cb", "ratio": "16:9", "res": "4k", "target_dir": "public/images/hero" },
-    { "slug": "electricite-installation", "job_id": "824f192c-2c6e-481b-828d-d077df5efba4", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "electricite-depannage", "job_id": "5d612814-3200-4826-b04a-f2f336ca05db", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "electricite-borne-irve", "job_id": "39dbe1d3-38bd-47c6-88b5-872a69a5470d", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "acces-interphone", "job_id": "8ac4bc34-baef-4257-ab89-98543c17e473", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "acces-videophone", "job_id": "981a59a8-985a-4772-bc20-1333d976e89b", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "acces-badge", "job_id": "d60c0da3-c9be-4809-886b-9957278a3ff0", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-ouverture", "job_id": "6f4cf200-4128-4277-8540-078b9fde275b", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-blindage", "job_id": "f4a092e5-475b-4d65-b4f6-e3f7b47132f4", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "serrurerie-serrure", "job_id": "39a06863-638c-43bd-be02-37caf1da3914", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-portail", "job_id": "645fa371-fed2-42ac-ad1b-e459ad9ed139", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-garde-corps", "job_id": "c56da57d-14ee-4b87-a22d-5f9d40af2a72", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "metallerie-structure", "job_id": "bae0a01f-611f-408b-b0dd-3e5824e88663", "ratio": "4:3", "res": "2k", "target_dir": "public/images/services" },
-    { "slug": "realisation-1", "job_id": "2789d5d5-2f5c-4beb-81e8-abac0417f74d", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-2", "job_id": "fdd4a06f-2fd2-4c79-8563-d94d98bb75c5", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-3", "job_id": "1b3e5b31-ea8b-42dc-bec3-fa22278f3a60", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-4", "job_id": "69ab3f3f-01e2-4fca-95f2-0155e79cc405", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-5", "job_id": "1693f892-c652-4fad-9ff5-d0bcb55ccc0c", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-6", "job_id": "3a79f5fb-be70-4be7-9b22-b4731f3a9155", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-7", "job_id": "62f03adf-e135-47be-94d7-c8d30165b974", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "realisation-8", "job_id": "e0b8c846-d5c8-4856-ba4f-3913b1b7588e", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations" },
-    { "slug": "before-porte", "job_id": "ea01d2e5-1294-402c-8fcc-f22a69767a3b", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations-before" },
-    { "slug": "before-serrure", "job_id": "7f18fa23-d730-4892-bca6-41e8201b37bc", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations-before" },
-    { "slug": "before-tableau", "job_id": "71e0ba03-8a69-434b-9c73-a21d2af30313", "ratio": "16:9", "res": "2k", "target_dir": "public/images/realisations-before" },
-    { "slug": "zone-paris", "job_id": "2f559389-690b-468e-a2ae-c70aa9610ae8", "ratio": "16:9", "res": "2k", "target_dir": "public/images/zones" },
-    { "slug": "zone-clichy", "job_id": "21487938-87e6-40ee-8e7c-8fdecec06483", "ratio": "16:9", "res": "2k", "target_dir": "public/images/zones" },
-    { "slug": "zone-idf", "job_id": "8c194ad1-7cf6-4209-8281-502014ee8689", "ratio": "16:9", "res": "2k", "target_dir": "public/images/zones" },
-    { "slug": "team-equipe", "job_id": "deb7cf88-05a8-41f8-a479-d9de095db667", "ratio": "4:5", "res": "2k", "target_dir": "public/images/team" },
-    { "slug": "team-technicien", "job_id": "153ea825-1223-497d-bfbb-efc675781967", "ratio": "4:5", "res": "2k", "target_dir": "public/images/team" },
-    { "slug": "team-vehicule", "job_id": "f0084013-567c-425f-bffd-e1f37af2999a", "ratio": "4:5", "res": "2k", "target_dir": "public/images/team" }
+    {
+      "slug": "hero-cinema-paris",
+      "job_id": "a18f0d31-c62b-450a-a967-00a3d2854a58",
+      "ratio": "16:9",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-electricien",
+      "job_id": "51dcc123-9e0c-47c6-8d21-df9a25393b85",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-controle-acces",
+      "job_id": "0046e813-13a8-488e-82f1-1ecdf3ccaa85",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-serrurier",
+      "job_id": "60a474cc-7f17-437b-9bb2-9eb945bb900e",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "hero-portail",
+      "job_id": "a09c6f98-9bef-42ae-947b-72c839c18a6b",
+      "ratio": "4:5",
+      "res": "4k",
+      "target_dir": "public/images/hero"
+    },
+    {
+      "slug": "electricite-installation",
+      "job_id": "390e3862-740a-4e98-bc2a-9d2823a5495b",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "electricite-depannage",
+      "job_id": "8698fc86-5d11-4dde-b234-72c3b348fb0b",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "electricite-borne-irve",
+      "job_id": "0a4016cd-6e00-455c-adcd-452a11170481",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "acces-interphone",
+      "job_id": "019767e0-8ebd-47fd-b8e0-fafb3701c439",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-ouverture",
+      "job_id": "41daf169-5eec-46c4-b1da-bcac344da518",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-blindage",
+      "job_id": "d94a6475-0e2f-45b0-b754-bbf62aa5f548",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "serrurerie-serrure",
+      "job_id": "02461869-5cda-4f28-9a30-3323ab0ca9b6",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-portail",
+      "job_id": "3d143dc8-8275-40ce-a835-aa6debbeb5b3",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-garde-corps",
+      "job_id": "7c89775e-1f0f-4630-8e90-2c9435cb7811",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "metallerie-structure",
+      "job_id": "1b7104d6-be2b-442d-8407-af670f3edc1a",
+      "ratio": "4:3",
+      "res": "2k",
+      "target_dir": "public/images/services"
+    },
+    {
+      "slug": "team-equipe",
+      "job_id": "6e5d5c04-a0c7-4a89-935c-d16389e72ed1",
+      "ratio": "4:5",
+      "res": "2k",
+      "target_dir": "public/images/team"
+    },
+    {
+      "slug": "team-technicien",
+      "job_id": "2b95e742-9728-4306-87df-8573d3ed2272",
+      "ratio": "4:5",
+      "res": "2k",
+      "target_dir": "public/images/team"
+    }
   ],
-  "videos": []
+  "videos": [
+    {
+      "slug": "hero-paris-window",
+      "job_id": "081287a8-6514-4c73-992b-3f2d9c1e8f86",
+      "ratio": "16:9",
+      "res": "1080p",
+      "target_dir": "public/videos"
+    }
+  ]
 }

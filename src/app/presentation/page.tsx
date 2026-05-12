@@ -327,9 +327,9 @@ export default function PresentationPage() {
                   Nous contacter
                   <ChevronRight className="w-5 h-5" />
                 </Link>
-                <a href="tel:+33100000000" className="btn-outline">
+                <a href="tel:+33652820685" className="btn-outline">
                   <Phone className="w-5 h-5" />
-                  01 XX XX XX XX
+                  06 52 82 06 85
                 </a>
               </div>
             </motion.div>
