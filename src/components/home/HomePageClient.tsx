@@ -191,10 +191,12 @@ export default function HomePageClient({
   return (
     <>
       {/* Hero Section — full-bleed cinematic video (Apple-like).
-          The hero-cinema-electricien still serves as poster + reduced-motion fallback;
-          the looping Seedance mp4 plays on top when available. Heavy gradient on the
-          left keeps the text column readable while the subject (circuit breaker + LED)
-          stays cinematic on the right. */}
+          Heavy gradients were drowning the Seedance video. New approach: a
+          localised left-column scrim that protects the headline + a soft
+          bottom fade for the curve transition. The subject (Paris rooftops
+          → warm window) breathes fully on the right two-thirds. Text
+          readability is held by stronger text-shadow on the headings, not
+          a global blue blanket. */}
       <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
         <HeroVideo
           videoSrc="/videos/hero-paris-window.mp4"
@@ -202,12 +204,12 @@ export default function HomePageClient({
           fallbackSrc="/images/hero/hero-cinema-paris.jpg"
         />
 
-        {/* Readability overlays — same grammar as the map version, slightly
-            stronger to make sure the deeper photographic values don't fight
-            the type. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-30% via-dark-950/90 via-60% to-dark-950/30 to-100%" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/50 via-transparent to-dark-950/85" />
-        <NoiseOverlay opacity={0.035} />
+        {/* Left-column scrim — protects the text without covering the video
+            subject. Strong on the very left edge, fully transparent by mid-frame. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-950/85 from-0% via-dark-950/35 via-25% to-transparent to-55%" />
+        {/* Bottom fade — just enough to land cleanly into the curve SVG. */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-dark-950/75 to-transparent" />
+        <NoiseOverlay opacity={0.025} />
 
         <div className="container-custom relative z-10 py-20 w-full">
           <motion.div
@@ -221,14 +223,14 @@ export default function HomePageClient({
               Électricité • Contrôle d&apos;accès • Serrurerie • Métallerie
             </span>
 
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-[1.05] [text-shadow:_0_2px_20px_rgba(0,0,0,0.5)]">
+            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-[1.05] [text-shadow:_0_2px_28px_rgba(0,0,0,0.85),_0_1px_4px_rgba(0,0,0,0.7)]">
               {homepage.hero_title.split(",")[0]},{" "}
               <span className="gradient-text-living">
                 {homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}
               </span>
             </h1>
 
-            <p className="text-xl text-white/85 mb-8 leading-relaxed max-w-xl [text-shadow:_0_1px_10px_rgba(0,0,0,0.5)]">
+            <p className="text-xl text-white/95 mb-8 leading-relaxed max-w-xl [text-shadow:_0_2px_16px_rgba(0,0,0,0.8),_0_1px_3px_rgba(0,0,0,0.6)]">
               {homepage.hero_subtitle}
             </p>
 
