@@ -49,36 +49,9 @@ export default function Footer() {
   
   return (
     <footer className="bg-dark-900 text-white">
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-primary-700 via-primary-600 to-electric-600">
-        <div className="container-custom py-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="text-center lg:text-left">
-              <h3 className="text-2xl md:text-3xl font-display font-bold mb-2">
-                Besoin d&apos;un professionnel ?
-              </h3>
-              <p className="text-primary-100 text-lg">
-                Intervention rapide en Île-de-France • Garantie décennale • Certifié IRVE
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/demande-devis" className="btn-white btn-lg">
-                Demander un devis
-                <ChevronRight className="w-5 h-5" />
-              </Link>
-              <Link
-                href="/demande-intervention"
-                className="btn bg-accent-500 text-dark-900 hover:bg-accent-400 btn-lg"
-              >
-                <AlertTriangle className="w-5 h-5" />
-                Intervention urgente
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer */}
+      {/* Main Footer — universal CTA strip removed so it doesn't double up
+          with the page-specific CTAs that live at the bottom of each service
+          page. Pages without a CTA already redirect via the in-content links. */}
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
