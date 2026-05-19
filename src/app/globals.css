@@ -181,12 +181,12 @@
     @apply bg-gradient-to-r from-primary-600 via-electric-500 to-primary-700 bg-clip-text text-transparent;
   }
 
-  /* Living gradient text — award-winning glass refraction effect.
-     The bright white stop near 46 % travels through the text as the
-     gradient shifts → mimics light catching real glass. A two-layer
-     drop-shadow (soft cyan glow + tight white halo) adds depth and
-     makes the type feel three-dimensional on dark surfaces.
-     Falls back to a static gradient under prefers-reduced-motion. */
+  /* Living gradient text — animated multi-color fill with a bright stop
+     near 46 % that travels through the text (mimics light catching glass).
+     NO drop-shadow filter on the parent : it was producing a soft halo
+     around the whole block that read as "blurry text". Glow / shadow is
+     now the responsibility of the parent context (text-shadow, BulbText
+     animation). Falls back to a static gradient under prefers-reduced-motion. */
   .gradient-text-living {
     background: linear-gradient(
       110deg,
@@ -205,15 +205,12 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    filter:
-      drop-shadow(0 1px 14px rgba(59, 130, 246, 0.35))
-      drop-shadow(0 0 1px rgba(255, 255, 255, 0.45));
     animation: gradientTextShift 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     will-change: background-position;
   }
 
   /* Gradient text — electric / cold variant for headings on dark surfaces.
-     Same glass principle, cooler palette (no amber). */
+     Same shape, cooler palette (no amber). */
   .gradient-text-electric {
     background: linear-gradient(
       110deg,
@@ -230,9 +227,6 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    filter:
-      drop-shadow(0 1px 14px rgba(56, 189, 248, 0.35))
-      drop-shadow(0 0 1px rgba(255, 255, 255, 0.4));
     animation: gradientTextShift 13s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     will-change: background-position;
   }
