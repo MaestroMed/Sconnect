@@ -20,6 +20,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
 import CertificationsBand from "@/components/marketing/CertificationsBand";
 import { image } from "@/lib/image-manifest";
+import BulbText from "@/components/ui/BulbText";
 
 const values = [
   {
@@ -115,7 +116,7 @@ export default function PresentationPage() {
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Votre partenaire{" "}
-                <span className="gradient-text-living">multi-services</span> de confiance
+                <BulbText>multi-services</BulbText> de confiance
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed mb-8">
                 Depuis 2021, S Connect France accompagne les particuliers et

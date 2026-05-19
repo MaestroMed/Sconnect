@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Star, ChevronRight, Phone, Quote, Filter, TrendingUp } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
+import BulbText from "@/components/ui/BulbText";
 
 const stats = {
   average: 4.9,
@@ -176,7 +177,7 @@ export default function AvisPage() {
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Ce que disent{" "}
-                <span className="gradient-text-living">nos clients</span>
+                <BulbText>nos clients</BulbText>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 La satisfaction de nos clients est notre meilleure publicité.

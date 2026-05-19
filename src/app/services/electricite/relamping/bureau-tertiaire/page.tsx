@@ -27,6 +27,7 @@ import {
   generateFAQSchema,
   injectSchema,
 } from "@/lib/structured-data";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Relamping LED Bureau & Tertiaire — Conforme NF EN 12464-1 | S Connect",
@@ -152,8 +153,8 @@ export default function RelampingBureauPage() {
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
               Relamping LED bureau & tertiaire
             </h1>
-            <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-              Conformité NF EN 12464-1 · Gestion DALI · Décret tertiaire
+            <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>Conformité NF EN 12464-1 · Gestion DALI · Décret tertiaire</BulbText>
             </p>
             <p className="text-lg text-white/90 leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
               Open-spaces, plateaux de bureau, salles de réunion, espaces de coworking. Nous

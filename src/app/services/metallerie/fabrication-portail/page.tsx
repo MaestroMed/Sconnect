@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Wrench, ChevronRight, Phone, Check, ArrowLeft, Sparkles } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import { image } from "@/lib/image-manifest";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Fabrication de Portails Sur Mesure | Portails Coulissants & Battants | S'Connect",
@@ -72,9 +73,9 @@ export default function FabricationPortailPage() {
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
                 Fabrication de Portails
               </h1>
-              <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-                Sur mesure, Île-de-France
-              </p>
+              <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>Sur mesure, Île-de-France</BulbText>
+            </p>
               <p className="text-lg text-dark-300 leading-relaxed">
                 Des portails sur mesure conçus et fabriqués selon vos envies.
                 Qualité artisanale et installation professionnelle.

@@ -27,6 +27,7 @@ import {
   generateFAQSchema,
   injectSchema,
 } from "@/lib/structured-data";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Relamping LED Industriel & Entrepôt | High-bay & ICPE | S Connect",
@@ -152,8 +153,8 @@ export default function RelampingIndustrielPage() {
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
               Relamping LED industriel & entrepôt
             </h1>
-            <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-              High-bay 150 lm/W · IP65 · ATEX disponible
+            <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>High-bay 150 lm/W · IP65 · ATEX disponible</BulbText>
             </p>
             <p className="text-lg text-white/90 leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
               Entrepôts logistiques, ateliers de production, hangars, zones de stockage froid. Nous

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { DoorOpen, ChevronRight, Phone, Check, ArrowLeft, Sparkles } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import { image } from "@/lib/image-manifest";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Fabrication de Portes Métalliques Sur Mesure | S'Connect",
@@ -72,9 +73,9 @@ export default function FabricationPortePage() {
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
                 Fabrication de Portes
               </h1>
-              <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-                Sur mesure, Île-de-France
-              </p>
+              <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>Sur mesure, Île-de-France</BulbText>
+            </p>
               <p className="text-lg text-dark-300 leading-relaxed">
                 Portes métalliques sur mesure pour tous vos besoins : entrée, garage, technique, coupe-feu.
                 Sécurité et qualité garanties.

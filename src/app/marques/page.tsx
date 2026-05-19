@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, Phone, Award, Shield, Zap, CheckCircle2 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
+import BulbText from "@/components/ui/BulbText";
 
 const brands = [
   {
@@ -105,7 +106,7 @@ export default function MarquesPage() {
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Des marques de{" "}
-                <span className="gradient-text-living">référence</span>
+                <BulbText>référence</BulbText>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 Nous travaillons exclusivement avec les plus grandes marques
