@@ -3,6 +3,20 @@ import Link from "next/link";
 import { Wrench, ChevronRight, Phone, DoorOpen, Shield } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+const metallerieSchema = generateServiceSchema(
+  {
+    name: "Métallerie sur mesure — portails, portes, structures métalliques",
+    description:
+      "Atelier métallerie en Île-de-France : conception et fabrication sur mesure de portails (battants, coulissants, motorisés), portes métalliques, garde-corps, escaliers, verrières et structures en acier. Pose incluse.",
+    provider: "S Connect",
+    areaServed: ["Paris", "Clichy", "Hauts-de-Seine", "Île-de-France"],
+    priceRange: "€€€",
+  },
+  siteUrl,
+);
 
 export const metadata: Metadata = {
   title: "Métallerie | Fabrication Portails, Portes & Structures Métalliques | S'Connect",
@@ -51,6 +65,10 @@ const services = [
 export default function MetalleriePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(metallerieSchema)}
+      />
       <CategoryLandingHero
         category="metallerie"
         title="Métallerie"

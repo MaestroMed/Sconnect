@@ -3,6 +3,20 @@ import Link from "next/link";
 import { KeyRound, Video, CreditCard, ChevronRight, Phone } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+const controleAccesSchema = generateServiceSchema(
+  {
+    name: "Contrôle d'accès — interphonie, vidéophonie, badges, digicodes",
+    description:
+      "Installation et dépannage de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges RFID, digicodes et lecteurs biométriques pour copropriétés, entreprises et particuliers.",
+    provider: "S Connect",
+    areaServed: ["Paris", "Clichy", "Hauts-de-Seine", "Île-de-France"],
+    priceRange: "€€",
+  },
+  siteUrl,
+);
 
 export const metadata: Metadata = {
   title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S'Connect",
@@ -45,6 +59,10 @@ const services = [
 export default function ControleAccesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(controleAccesSchema)}
+      />
       <CategoryLandingHero
         category="acces"
         title="Contrôle d'accès"

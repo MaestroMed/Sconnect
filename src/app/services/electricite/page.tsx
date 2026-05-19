@@ -12,12 +12,26 @@ import {
 } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Électricité Paris & IDF | Installation, Rénovation, Relamping | S Connect",
   description:
     "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes, dépannage 24h/24 et relamping LED. Audit gratuit. Aides CEE & certifications RGE.",
 };
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+const electriciteSchema = generateServiceSchema(
+  {
+    name: "Électricité — installation, rénovation, mise aux normes, dépannage, relamping LED",
+    description:
+      "Artisan électricien à Clichy et en Île-de-France. Installation et rénovation d'installations basse tension, mise aux normes NF C 15-100, dépannage 24h/24, relamping LED et bornes IRVE. Certifié Qualifélec.",
+    provider: "S Connect",
+    areaServed: ["Paris", "Clichy", "Hauts-de-Seine", "Île-de-France"],
+    priceRange: "€€",
+  },
+  siteUrl,
+);
 
 const services = [
   {
@@ -46,6 +60,10 @@ const services = [
 export default function ElectricitePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(electriciteSchema)}
+      />
       <CategoryLandingHero
         category="electricite"
         title="Électricité"
