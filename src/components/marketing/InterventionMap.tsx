@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, Clock, Phone, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import BulbText from "@/components/ui/BulbText";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Real-world geography → SVG coordinates (Apple-Maps-style minimal renderer).
@@ -145,8 +146,7 @@ export default function InterventionMap({ variant = "section" }: InterventionMap
             Zone d&apos;intervention
           </span>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-5 leading-tight">
-            Chaque commune à{" "}
-            <span className="gradient-text-living">moins de 40 min</span>
+            Chaque commune à <BulbText>moins de 40 min</BulbText>
           </h2>
           <p className="text-lg text-foreground-muted leading-relaxed">
             Basés à Clichy (92), nos équipes rayonnent sur Paris et toute la

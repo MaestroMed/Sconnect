@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { FileText, Phone, Clock, Shield } from "lucide-react";
 import DemandeForm from "@/components/forms/DemandeForm";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Demande de Devis Gratuit",
@@ -44,7 +45,7 @@ export default function DemandeDevisPage() {
             </span>
             <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-6 leading-tight">
               Demandez votre{" "}
-              <span className="gradient-text-living">devis gratuit</span>
+              <BulbText>devis gratuit</BulbText>
             </h1>
             <p className="text-xl text-dark-300 leading-relaxed mb-8">
               Remplissez le formulaire ci-dessous et recevez un devis détaillé

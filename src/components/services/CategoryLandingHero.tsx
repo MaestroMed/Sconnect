@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight, Sparkles, Zap, KeyRound, Lock, Wrench } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import BulbText from "@/components/ui/BulbText";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import { image as getImage } from "@/lib/image-manifest";
 
@@ -102,8 +103,8 @@ export default function CategoryLandingHero({
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
               {title}
             </h1>
-            <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-              {subtitle}
+            <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>{subtitle}</BulbText>
             </p>
             <p className="text-lg text-dark-300 leading-relaxed">
               {description}

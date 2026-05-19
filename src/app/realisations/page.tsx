@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import RealizationsFilterable from "@/components/realisations/RealizationsFilterable";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
+import BulbText from "@/components/ui/BulbText";
 
 const CATEGORY_LABELS: Record<string, string> = {
   electricite: "Électricité",
@@ -46,7 +47,7 @@ export default function RealisationsPage() {
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 Découvrez nos{" "}
-                <span className="gradient-text-living">derniers chantiers</span>
+                <BulbText>derniers chantiers</BulbText>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 Un aperçu de notre savoir-faire à travers des projets variés :

@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite, Spotlight } from "@/components/ui/ambient";
 import { image } from "@/lib/image-manifest";
+import BulbText from "@/components/ui/BulbText";
 
 const categories = [
   {
@@ -99,7 +100,7 @@ export default function ServicesPage() {
             </span>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
               4 expertises pour{" "}
-              <span className="gradient-text-living">votre habitat</span>
+              <BulbText>votre habitat</BulbText>
             </h1>
             <p className="text-xl text-dark-300 max-w-3xl mx-auto">
               Électricité, contrôle d&apos;accès, serrurerie et métallerie : une offre complète pour

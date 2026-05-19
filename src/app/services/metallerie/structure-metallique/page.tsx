@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Shield, ChevronRight, Phone, Check, ArrowLeft, Sparkles } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import { image } from "@/lib/image-manifest";
+import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Structures Métalliques | Garde-corps, Escaliers, Verrières | S'Connect",
@@ -72,9 +73,9 @@ export default function StructureMetalliquePage() {
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
                 Structures Métalliques
               </h1>
-              <p className="text-xl md:text-2xl font-medium mb-6 gradient-text-living">
-                Artisanat, Île-de-France
-              </p>
+              <p className="text-xl md:text-2xl font-medium mb-6">
+              <BulbText>Artisanat, Île-de-France</BulbText>
+            </p>
               <p className="text-lg text-dark-300 leading-relaxed">
                 Conception et réalisation de structures métalliques sur mesure : garde-corps, escaliers,
                 verrières et bien plus. Un savoir-faire artisanal au service de vos projets.

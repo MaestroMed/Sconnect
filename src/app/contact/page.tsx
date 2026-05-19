@@ -16,6 +16,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
+import BulbText from "@/components/ui/BulbText";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -95,7 +96,7 @@ export default function ContactPage() {
                 Contact
               </span>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-                <span className="gradient-text-living">Contactez-nous</span>
+                <BulbText>Contactez-nous</BulbText>
               </h1>
               <p className="text-xl text-dark-300 leading-relaxed">
                 Une question, un projet, un besoin de conseil ? Notre équipe est
