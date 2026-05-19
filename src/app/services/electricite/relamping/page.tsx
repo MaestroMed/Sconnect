@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
+import RelampingROICalculator from "@/components/relamping/RelampingROICalculator";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseOverlay } from "@/components/ui/ambient";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -465,6 +466,9 @@ export default function RelampingPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── Calculateur ROI interactif ─── */}
+      <RelampingROICalculator />
 
       {/* ─── Aides CEE callout ─── */}
       <section className="section-padding bg-gradient-to-br from-emerald-50 via-surface to-primary-50 dark:from-emerald-500/10 dark:via-surface-muted dark:to-primary-500/10">
