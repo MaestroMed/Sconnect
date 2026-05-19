@@ -3,6 +3,20 @@ import Link from "next/link";
 import { Lock, DoorOpen, KeyRound, Shield, ChevronRight, Phone } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+const serrurerieSchema = generateServiceSchema(
+  {
+    name: "Serrurerie — ouverture de porte 24h/24, remplacement de serrure, blindage",
+    description:
+      "Serrurier en Île-de-France disponible 24h/24 et 7j/7. Ouverture de porte claquée ou fermée à clé, remplacement de serrure et cylindre, blindage de porte certifié A2P, sécurisation des accès.",
+    provider: "S Connect",
+    areaServed: ["Paris", "Clichy", "Hauts-de-Seine", "Île-de-France"],
+    priceRange: "€€",
+  },
+  siteUrl,
+);
 
 export const metadata: Metadata = {
   title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S'Connect",
@@ -51,6 +65,10 @@ const services = [
 export default function SerrureriePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(serrurerieSchema)}
+      />
       <CategoryLandingHero
         category="serrurerie"
         title="Serrurerie"
