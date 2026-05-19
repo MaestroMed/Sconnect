@@ -47,14 +47,28 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   const related = await getRelatedPosts(slug, 3);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 
+  // Author can be a real person (Mehdi) or fallback to the org. When we
+  // recognise a known person we link to their author page → boosts E-E-A-T.
+  const authorString = post.frontmatter.author || "S'Connect";
+  const isMehdi = authorString.toLowerCase().includes("mehdi");
+  const authorSchema = isMehdi
+    ? {
+        "@type": "Person",
+        "@id": `${siteUrl}/auteur/mehdi-belkacem#person`,
+        name: "Mehdi Belkacem",
+        url: `${siteUrl}/auteur/mehdi-belkacem`,
+      }
+    : { "@type": "Organization", name: authorString };
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.frontmatter.title,
     description: post.frontmatter.excerpt,
-    author: { "@type": "Organization", name: post.frontmatter.author || "S'Connect" },
+    author: authorSchema,
     publisher: {
       "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
       name: "S'Connect",
       logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` },
     },
@@ -103,10 +117,20 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
               {post.frontmatter.excerpt}
             </p>
             <div className="flex flex-wrap items-center gap-5 text-sm text-white/85">
-              <span className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                {post.frontmatter.author}
-              </span>
+              {isMehdi ? (
+                <Link
+                  href="/auteur/mehdi-belkacem"
+                  className="flex items-center gap-2 hover:text-white transition-colors underline-offset-4 hover:underline"
+                >
+                  <User className="h-4 w-4" />
+                  {post.frontmatter.author}
+                </Link>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  {post.frontmatter.author}
+                </span>
+              )}
               <span className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 {formatDate(post.frontmatter.date)}
