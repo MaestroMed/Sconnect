@@ -1,116 +1,140 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { useMemo } from "react";
+import { useEffect, useRef } from "react";
+import { useAnimate, stagger, useReducedMotion } from "framer-motion";
 
 interface BulbTextProps {
-  /** Text content (string). Use ` ` for nbsp inside. */
+  /** Text content (string). */
   children: string;
   /** Extra Tailwind classes. The base `gradient-text-living` is applied automatically. */
   className?: string;
-  /** Per-letter stagger in seconds. Default 0.06 (smooth without dragging). */
-  stagger?: number;
-  /** Initial delay before the first letter lights. Default 0.25. */
-  delay?: number;
-  /** If true (default), the burst replays each time the element scrolls into view.
-   *  If false, animation plays only on mount (use for above-the-fold hero text). */
-  replayOnView?: boolean;
+  /** Per-letter stagger in seconds during the burst phase. Default 0.06. */
+  letterStagger?: number;
+  /** Delay before the first letter starts to light. Default 0.25 s. */
+  startDelay?: number;
+  /** Period of the breathing loop after settle, in seconds. Default 4.2. */
+  breathPeriod?: number;
 }
+
+// Shadow recipes — kept tight (no big 100 px halo) so letters stay crisp.
+const SHADOW_OFF = "0 0 0px rgba(255, 248, 220, 0)";
+// Burst : intense flash when the letter "ignites" — short blur radii so it
+// reads as a flash, not as a fog.
+const SHADOW_BURST =
+  "0 0 22px rgba(255, 248, 220, 1), 0 0 44px rgba(245, 158, 11, 0.7), 0 0 80px rgba(245, 158, 11, 0.28)";
+// Settled : minimal glow so the letter shape stays sharp on dark surface.
+const SHADOW_SETTLED =
+  "0 0 6px rgba(255, 248, 220, 0.55), 0 0 14px rgba(245, 158, 11, 0.22)";
+// Breath peak : a hair brighter than settled — the bulb is "breathing".
+const SHADOW_BREATH_PEAK =
+  "0 0 10px rgba(255, 248, 220, 0.75), 0 0 22px rgba(245, 158, 11, 0.36)";
 
 /**
  * BulbText — Apple-grade "letters lighting up like bulbs" animation.
  *
- * Each letter starts very dim (~12 % opacity, no glow). It animates in with a
- * stagger : a fast warm-amber flash burst (peak text-shadow halo + opacity 1),
- * then settles to a softer steady glow. Layered on top of the existing
- * gradient-text-living glass texture so the type still feels like backlit
- * frosted glass once all letters are lit.
+ * Choreography in two stages :
+ *   1. **Burst & settle** (one-shot) — letters light up one by one with a
+ *      stagger. Each letter goes : dim opacity 0.12 → burst (warm flash,
+ *      opacity 1) → settled (sharp letter with minimal warm glow).
+ *   2. **Breathing** (infinite) — once all letters have settled, the whole
+ *      group pulses synchronously between the settled state and a slightly
+ *      brighter "breath peak". Loop period ≈ 4 s, easeInOut for naturalness.
  *
- * Respects prefers-reduced-motion : falls back to the static gradient text.
+ * The settled and breath shadows are intentionally tight (≤ 22 px) so the
+ * final glyphs stay crisp on a dark hero — no fog around them.
  *
- * Usage in a heading :
- *   <h1>La lumière qui <BulbText>divise par 5</BulbText> votre facture.</h1>
+ * Respects `prefers-reduced-motion` (renders the static gradient text).
  */
 export default function BulbText({
   children,
   className = "",
-  stagger = 0.06,
-  delay = 0.25,
-  replayOnView = false,
+  letterStagger = 0.06,
+  startDelay = 0.25,
+  breathPeriod = 4.2,
 }: BulbTextProps) {
   const reduce = useReducedMotion();
+  const [scope, animate] = useAnimate();
+  const cancelledRef = useRef(false);
 
-  // Pre-split letters (preserve layout via nbsp on spaces).
-  const letters = useMemo(() => Array.from(children), [children]);
+  // Pre-split letters preserving the spaces.
+  const letters = Array.from(children);
 
-  // Reduced-motion fallback — no animation, just the static gradient.
+  useEffect(() => {
+    if (reduce) return;
+    cancelledRef.current = false;
+
+    const run = async () => {
+      try {
+        // Stage 1 — burst & settle, with per-letter stagger.
+        await animate(
+          "[data-bulb-letter]",
+          {
+            opacity: [0.12, 1, 1],
+            textShadow: [SHADOW_OFF, SHADOW_BURST, SHADOW_SETTLED],
+          },
+          {
+            duration: 0.95,
+            times: [0, 0.42, 1],
+            delay: stagger(letterStagger, { startDelay }),
+            ease: [0.22, 1, 0.36, 1],
+          },
+        );
+
+        if (cancelledRef.current) return;
+
+        // Stage 2 — synchronized breathing loop. Symmetric keyframe so the
+        // transition both ways is smooth (settled → peak → settled).
+        animate(
+          "[data-bulb-letter]",
+          {
+            textShadow: [SHADOW_SETTLED, SHADOW_BREATH_PEAK, SHADOW_SETTLED],
+          },
+          {
+            duration: breathPeriod,
+            ease: "easeInOut",
+            repeat: Infinity,
+          },
+        );
+      } catch {
+        // animation interrupted — silently ignore
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelledRef.current = true;
+    };
+  }, [animate, breathPeriod, letterStagger, reduce, startDelay]);
+
+  // Reduced-motion fallback : static gradient text, no animation.
   if (reduce) {
     return (
       <span className={`gradient-text-living ${className}`}>{children}</span>
     );
   }
 
-  const container: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: stagger,
-        delayChildren: delay,
-      },
-    },
-  };
-
-  const letter: Variants = {
-    hidden: {
-      opacity: 0.12,
-      textShadow: "0 0 0px rgba(254, 243, 199, 0)",
-      y: 0,
-    },
-    visible: {
-      opacity: [0.12, 1, 1],
-      // Three-keyframe stack : dim → bright burst → settled steady glow.
-      textShadow: [
-        "0 0 0px rgba(254, 243, 199, 0)",
-        "0 0 30px rgba(255, 248, 220, 1), 0 0 64px rgba(245, 158, 11, 0.75), 0 0 110px rgba(245, 158, 11, 0.35)",
-        "0 0 14px rgba(255, 248, 220, 0.65), 0 0 32px rgba(245, 158, 11, 0.32), 0 0 64px rgba(245, 158, 11, 0.12)",
-      ],
-      transition: {
-        duration: 0.95,
-        times: [0, 0.42, 1],
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
-
-  const motionProps = replayOnView
-    ? {
-        initial: "hidden",
-        whileInView: "visible",
-        viewport: { once: false, margin: "-20% 0px -20% 0px" },
-      }
-    : {
-        initial: "hidden",
-        animate: "visible",
-      };
-
   return (
-    <motion.span
+    <span
+      ref={scope}
       className={`inline-block gradient-text-living ${className}`}
-      variants={container}
       aria-label={children}
-      {...motionProps}
     >
       {letters.map((char, i) => (
-        <motion.span
+        <span
           key={`${char}-${i}`}
+          data-bulb-letter
           className="inline-block whitespace-pre"
-          variants={letter}
           aria-hidden="true"
-          style={{ willChange: "opacity, text-shadow" }}
+          style={{
+            opacity: 0.12,
+            textShadow: SHADOW_OFF,
+            willChange: "opacity, text-shadow",
+          }}
         >
-          {char === " " ? " " : char}
-        </motion.span>
+          {char === " " ? " " : char}
+        </span>
       ))}
-    </motion.span>
+    </span>
   );
 }
