@@ -88,7 +88,7 @@ const categories = [
     icon: Zap,
     imageSlug: "hero-electricien",
     accent: "from-primary-500 to-electric-500",
-    chip: "Devis gratuit",
+    chip: "Relamping LED · −80%",
   },
   {
     title: "Contrôle d'accès",

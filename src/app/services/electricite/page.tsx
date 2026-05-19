@@ -1,12 +1,22 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Zap, FileCheck, AlertTriangle, ChevronRight, Phone } from "lucide-react";
+import Image from "next/image";
+import {
+  Zap,
+  FileCheck,
+  AlertTriangle,
+  ChevronRight,
+  Phone,
+  Lightbulb,
+  ArrowRight,
+} from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
-  title: "Électricité | Installation, Rénovation & Dépannage",
-  description: "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes et dépannage 24h/24. Devis gratuit.",
+  title: "Électricité Paris & IDF | Installation, Rénovation, Relamping | S Connect",
+  description:
+    "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes, dépannage 24h/24 et relamping LED. Audit gratuit. Aides CEE & certifications RGE.",
 };
 
 const services = [
@@ -14,19 +24,22 @@ const services = [
     name: "Installation & Rénovation",
     slug: "installation-renovation",
     icon: Zap,
-    description: "Création de réseaux électriques complets, poses de prises, éclairages et tableaux neufs pour habitations et locaux professionnels.",
+    description:
+      "Création de réseaux électriques complets, poses de prises, éclairages et tableaux neufs pour habitations et locaux professionnels.",
   },
   {
     name: "Mise aux Normes",
     slug: "mise-aux-normes",
     icon: FileCheck,
-    description: "Mise en conformité de vos installations selon la norme NF C 15-100. Diagnostics et remise à niveau de votre sécurité électrique.",
+    description:
+      "Mise en conformité de vos installations selon la norme NF C 15-100. Diagnostics et remise à niveau de votre sécurité électrique.",
   },
   {
     name: "Dépannage Électrique",
     slug: "depannage-electrique",
     icon: AlertTriangle,
-    description: "Intervention rapide 24h/24, 7j/7 pour tous vos problèmes électriques : pannes, courts-circuits, disjoncteurs.",
+    description:
+      "Intervention rapide 24h/24, 7j/7 pour tous vos problèmes électriques : pannes, courts-circuits, disjoncteurs.",
   },
 ];
 
@@ -36,12 +49,71 @@ export default function ElectricitePage() {
       <CategoryLandingHero
         category="electricite"
         title="Électricité"
-        subtitle="Installation, rénovation, dépannage"
-        description="Installation, rénovation, mise aux normes et dépannage électrique pour particuliers et professionnels en Île-de-France."
+        subtitle="Installation, rénovation, relamping, dépannage"
+        description="Installation, rénovation, mise aux normes, dépannage électrique et relamping LED pour particuliers et professionnels en Île-de-France."
         icon="zap"
         imageSlug="electricite-installation"
         breadcrumbLabel="Électricité"
       />
+
+      {/* ─── Relamping LED — featured callout, top of category page ─── */}
+      <section className="relative py-16 md:py-20 bg-dark-950 overflow-hidden">
+        <Image
+          src="/images/hero/relamping-lightbulb.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-50"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-0% via-dark-950/70 via-50% to-dark-950/20 to-100%" />
+        <NoiseOverlay opacity={0.04} />
+        <div className="container-custom relative z-10">
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-200 text-sm font-semibold mb-6 backdrop-blur-md">
+              <Lightbulb className="w-4 h-4" />
+              Nouveau · Relamping LED
+            </span>
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
+              Divisez par 5 votre facture d&apos;éclairage.
+            </h2>
+            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
+              Audit éclairage gratuit, étude économique avec ROI précis, installation LED clé en
+              main et gestion des aides CEE. Pour bureaux, commerces, copropriétés et sites
+              industriels en Île-de-France.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/services/electricite/relamping"
+                className="btn-primary btn-lg"
+              >
+                Découvrir le relamping
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="/demande-devis"
+                className="btn glass-panel text-white hover:bg-white/15 btn-lg"
+              >
+                Audit gratuit
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-6 text-white/70 text-sm">
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Aides CEE gérées
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Conformité décret tertiaire
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Qualifélec Éclairage
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Services */}
       <section className="section-padding bg-surface">

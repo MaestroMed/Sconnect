@@ -1,5 +1,55 @@
 [
   {
+    "slug": "relamping-lightbulb",
+    "category": "hero",
+    "alt": "relamping-lightbulb",
+    "webp": "/images/hero/relamping-lightbulb.webp",
+    "jpg": "/images/hero/relamping-lightbulb.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAkAAUAmJQBOkCYjA2HRu4AA/v72s2NDm6zBmLAVrvMy6hafP379KWw3wlrYTgAAAA=="
+  },
+  {
+    "slug": "relamping-bureau",
+    "category": "services",
+    "alt": "relamping-bureau",
+    "webp": "/images/services/relamping-bureau.webp",
+    "jpg": "/images/services/relamping-bureau.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAkAAUAmJQBOgCHf3AlcAAD+71zGG0N8uGfZAs7xFcKF8+tjsXoPo5QYHEbzPigAAA=="
+  },
+  {
+    "slug": "relamping-commerce",
+    "category": "services",
+    "alt": "relamping-commerce",
+    "webp": "/images/services/relamping-commerce.webp",
+    "jpg": "/images/services/relamping-commerce.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAkAAUAmJQBOgCHhcGbxykAA/vxqsrVBHnIA6FXu/uFxT64uiUsi1LVlqMi4AAA="
+  },
+  {
+    "slug": "relamping-copropriete",
+    "category": "services",
+    "alt": "relamping-copropriete",
+    "webp": "/images/services/relamping-copropriete.webp",
+    "jpg": "/images/services/relamping-copropriete.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoQAAkAAUAmJZwCdAEOtW9oAP77APPfn9wRYhA8V7rqsbf8aQ8UUrIKAAA="
+  },
+  {
+    "slug": "relamping-industriel",
+    "category": "services",
+    "alt": "relamping-industriel",
+    "webp": "/images/services/relamping-industriel.webp",
+    "jpg": "/images/services/relamping-industriel.jpg",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAAAQAgCdASoQAAkAAUAmJZQCdAEPDEhr14EAAP7+T8C6/0v/S7SsxdaGZ+vFPctEQAAAAA=="
+  },
+  {
     "slug": "serrurerie-ouverture",
     "category": "services",
     "alt": "Serrurier ouvrant une porte avec outils de précision",
