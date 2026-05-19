@@ -23,6 +23,7 @@ import {
   Clock,
 } from "lucide-react";
 import HeroVideo from "@/components/home/HeroVideo";
+import BulbText from "@/components/ui/BulbText";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseOverlay } from "@/components/ui/ambient";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -283,8 +284,7 @@ export default function RelampingPage() {
             </span>
 
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-[1.05] [text-shadow:_0_2px_28px_rgba(0,0,0,0.85),_0_1px_4px_rgba(0,0,0,0.7)]">
-              La lumière qui{" "}
-              <span className="gradient-text-living">divise par 5</span> votre facture.
+              La lumière qui <BulbText>divise par 5</BulbText> votre facture.
             </h1>
 
             <p className="text-xl text-white/95 mb-8 leading-relaxed max-w-xl [text-shadow:_0_2px_16px_rgba(0,0,0,0.8)]">
