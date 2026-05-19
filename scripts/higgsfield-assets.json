@@ -191,6 +191,13 @@
       "ratio": "16:9",
       "res": "1080p",
       "target_dir": "public/videos"
+    },
+    {
+      "slug": "relamping-lightbulb",
+      "job_id": "92b7abdb-f7e6-49c9-9059-f98af2275c07",
+      "ratio": "16:9",
+      "res": "1080p",
+      "target_dir": "public/videos"
     }
   ]
 }
