@@ -1,0 +1,142 @@
+---
+title: "Audit éclairage LED : la méthode complète qu'on applique vraiment"
+excerpt: "Un audit éclairage sérieux ne se résume pas à un photomètre. Voici la méthode en 7 étapes que nous utilisons sur chaque chantier de relamping, avec les outils, les pièges et les chiffres réels."
+date: "2026-05-15"
+author: "Mehdi Belkacem, fondateur S Connect"
+category: "Relamping LED"
+tags: ["audit éclairage", "relamping LED", "NF EN 12464-1", "DALI", "méthode"]
+cover: "/images/services/relamping-bureau.webp"
+---
+
+Quand un client nous appelle pour un relamping, la question revient toujours : *"combien je vais économiser ?"*. La seule façon honnête d'y répondre, c'est de mesurer **avant** de chiffrer. Voici la méthode d'audit qu'on applique sur chaque chantier, du plus petit (boutique 80 m²) au plus gros (entrepôt logistique 8 000 m²).
+
+Pas de marketing, pas de chiffres approximatifs. Le vrai workflow d'un audit éclairage en 2026.
+
+## 1. Le relevé du parc existant — l'étape qu'on ne saute jamais
+
+Avant de parler économies, il faut savoir ce qui est installé. Nous comptons **chaque luminaire**, identifions sa source (tube T5, T8, LED 1ère génération, halogène, fluo-compact, iodures métalliques), relevons :
+
+- La **puissance unitaire** (watt) — étiquette ou mesure clamp si l'étiquette est illisible
+- La **technologie** (matrice 2×4, downlight, projecteur, suspension, applique)
+- L'**état** (luminance ressentie en début et fin de tube, présence de scintillement, jaunissement)
+- L'**âge approximatif** — un tube T8 jauni a déjà perdu 30 à 40 % de son flux lumineux nominal
+- Les **horaires d'usage** réels (entretien avec le responsable de site)
+
+Sur un bureau de 600 m² avec 80 luminaires, ce relevé prend une demi-journée. Sur un entrepôt 8 000 m², deux jours avec deux techniciens. C'est non-négociable : sans relevé, l'estimation est de la voyance.
+
+## 2. La mesure des luminances actuelles
+
+Nous utilisons un **luxmètre Konica Minolta T-10A** (étalonné chaque année) pour mesurer les niveaux d'éclairement réels sur les plans utiles : bureaux (poste de travail), circulations, zones de stockage, vitrines, etc.
+
+L'objectif : confronter la réalité à la [norme NF EN 12464-1](https://www.boutique.afnor.org/fr-fr/norme/nf-en-124641/lumiere-et-eclairage-eclairage-des-lieux-de-travail-partie-1-lieux-de-travail/fa192683/336316) qui fixe les niveaux d'éclairement minimaux par type de tâche :
+
+| Espace | Niveau requis (lux) | Uniformité |
+|---|---|---|
+| Bureau, lecture, écran | 500 lux | ≥ 0,6 |
+| Salle de réunion | 500 lux | ≥ 0,6 |
+| Circulation tertiaire | 100-200 lux | ≥ 0,4 |
+| Boutique — produits | 750-1000 lux | ≥ 0,6 |
+| Restaurant — salle | 200 lux | ≥ 0,5 |
+| Parking | 75 lux (allée), 150 lux (rampe) | ≥ 0,4 |
+| Entrepôt — stockage | 100-300 lux selon hauteur | ≥ 0,4 |
+| Atelier précision | 750-1500 lux | ≥ 0,7 |
+
+Dans 70 % des bureaux que nous auditons, **les niveaux sont sous la norme**. Pas seulement à cause des sources vieillissantes : aussi parce que l'installation initiale a été dimensionnée à la louche, sans étude.
+
+## 3. La mesure du facteur de puissance
+
+Sur les installations anciennes avec **ballasts ferromagnétiques** (tubes T8 non rénovés), le facteur de puissance est souvent autour de **0,5 à 0,6**. Concrètement, vous payez de l'énergie réactive qui ne sert à rien.
+
+Un relamping LED moderne avec drivers électroniques affiche un FP ≥ 0,9 — voire 0,95-0,98 sur les bonnes références. Cette amélioration seule peut représenter 10-15 % d'économies sur la facture totale du poste éclairage, indépendamment des watts économisés.
+
+Nous mesurons ça à la **pince ampèremétrique** sur le tableau divisionnaire éclairage. Si vous voyez un installateur qui ne sort pas sa pince, fuyez.
+
+## 4. Le diagnostic du tableau et des circuits
+
+Le relamping change la nature de la charge : on passe d'une charge inductive (fluo) à une charge capacitive (drivers LED). Conséquences à vérifier :
+
+- **Disjoncteurs adaptés** — courbe C parfois insuffisante avec drivers haute fréquence, courbe D recommandée
+- **Section des conducteurs** — encore correcte si la puissance baisse, mais les harmoniques peuvent imposer une revue
+- **Protection différentielle** — type A obligatoire (NF C 15-100), parfois type F sur installations sensibles
+- **Présence d'une commande adaptée** — interrupteurs simples vs gradation DALI / 1-10V / Casambi
+
+C'est rarement un blocage, mais ça doit être documenté dans le devis. Un installateur sérieux mentionne ces points ; un installateur pressé envoie un prix sans regarder le tableau.
+
+## 5. Le dimensionnement du nouveau parc (étude photométrique)
+
+Avec les données de relevé + mesures + cahier des charges client (qui occupe quoi, niveau de performance attendu), nous lançons une **étude photométrique sur DIALux evo**. Pas de la déco : une vraie simulation 3D du bâtiment avec :
+
+- Géométrie des locaux (longueur × largeur × hauteur, obstacles)
+- Coefficients de réflexion des murs, plafond, sol
+- Position exacte des luminaires candidats
+- Maillage de calcul au sol (et sur écran, pour les bureaux)
+
+DIALux génère un rapport PDF avec :
+- Niveaux d'éclairement moyen, max, min
+- Uniformité (Emin / Emoyen)
+- UGR (Unified Glare Rating) — indice d'éblouissement, doit être ≤ 19 en bureau
+- Vue 3D rendue
+
+Ce rapport, c'est ce qu'on envoie au client. C'est aussi ce qu'il garde dans son DOE pour prouver la conformité NF EN 12464-1 en cas d'audit social ou d'expertise judiciaire.
+
+## 6. Le calcul du ROI et de la prime CEE
+
+À ce stade nous avons :
+- **Conso actuelle annuelle** = ∑ (watt × heures usage × 365 × ratio occupation) / 1000
+- **Conso future annuelle** = même formule avec le nouveau parc + gestion (détection, gradation)
+- **Économie kWh** = différence
+- **Économie € annuelle** = économie kWh × tarif électrique (en 2026 : ~0,21 €/kWh tertiaire HTB, ~0,28 €/kWh tertiaire HTA petits sites)
+- **Économie de maintenance** = nombre d'ampoules remplacées par an évitées × prix unitaire × main d'œuvre
+
+À ça s'ajoute la **prime CEE** :
+- Fiche [BAT-EQ-127](https://www.ecologie.gouv.fr/certificats-deconomies-denergie) pour les luminaires LED tertiaire
+- Fiche **BAT-EQ-130** pour les systèmes de gestion d'éclairage (détection + DALI)
+- Fiche **IND-UT-130** pour le high-bay industriel
+
+Le montant de la prime dépend des kWh cumac économisés sur la durée de vie. Sur un bureau 600 m² typique, la prime CEE couvre **30 à 45 % du coût matériel + pose**.
+
+Nous publions tous les chiffres dans le devis. Pas de "prime estimée à...", on calcule à l'euro près avec les fiches officielles du registre EMMY.
+
+## 7. Le plan de pose et le phasage
+
+Dernier livrable de l'audit : un **plan de pose** (CAD ou PDF coté) qui indique :
+
+- Position exacte de chaque luminaire neuf
+- Type d'optique (faisceau 60°, 90°, asymétrique pour les rayonnages)
+- Câblage à réutiliser ou à refaire
+- Position des détecteurs / panneaux de commande
+- Phasage si le site est occupé : zones traitées par jour, horaires non-perturbants
+
+Sur un bureau en exploitation, on découpe en **îlots de 10-20 luminaires par soirée** entre 18h et 23h. Sur un commerce, **2 nuits** (lundi-mardi typiquement) suffisent pour 50 spots. Sur un industriel 24/7, on coordonne avec le shift manager pour des **fenêtres maintenance** programmées.
+
+## Ce que nous remettons au client
+
+Après audit (typiquement 5 jours ouvrés après la visite), le client reçoit :
+
+1. **Rapport d'audit** : relevé du parc, mesures actuelles, photos, points de vigilance tableau
+2. **Étude photométrique DIALux** : niveaux futurs, UGR, vue 3D, conformité NF EN 12464-1
+3. **Estimation économique chiffrée** : conso actuelle, conso future, gains €, gains kWh, équivalent CO2
+4. **Simulation prime CEE** : montant net, fiche utilisée, conditions
+5. **Devis détaillé** : matériel ligne par ligne (référence, marque, prix unitaire), main d'œuvre, recyclage, garanties
+6. **Plan de pose** : implantation + phasage
+7. **ROI net après prime CEE** : mois précis de retour sur investissement
+
+Tout est gratuit, sans engagement. Si vous décidez de faire le chantier ailleurs, vous gardez le rapport — il est valable.
+
+## L'audit n'est pas un gadget marketing
+
+Beaucoup de "promo audit gratuit" sont en réalité **30 minutes sur site + un mail générique avec une fourchette de prix**. Ça ne sert à rien — vous ne pouvez ni vérifier, ni faire jouer la concurrence sur des bases solides.
+
+Un audit sérieux prend **0,5 à 2 jours selon la taille du site**, mobilise un **luxmètre étalonné et un logiciel photométrique payant** (DIALux evo Pro, ~1000 €/an), et produit un livrable **opposable** que vous gardez 10 ans dans votre DOE.
+
+Si vous demandez à votre installateur quel logiciel il utilise pour ses études et qu'il vous répond "Excel", changez d'installateur.
+
+## En résumé
+
+L'audit éclairage est l'étape qui fait la différence entre un relamping qui tient ses promesses et un projet qui dérape. Chez S Connect, on en fait depuis 2021 — sur du parc bureau, du commerce, de la copropriété et du logistique en Île-de-France. Toujours la même méthode, toujours le même livrable. La transparence n'est pas une posture marketing : c'est l'outil qui permet à un client de comparer sérieusement et de signer en confiance.
+
+Si vous voulez démarrer un projet, prenez 2 minutes pour [demander un audit gratuit](/demande-devis) — ou appelez-nous directement au **06 52 82 06 85**.
+
+---
+
+*Pour aller plus loin : la [page pilier Relamping LED](/services/electricite/relamping) détaille notre offre complète, et les 4 sub-pages couvrent chaque environnement : [bureau & tertiaire](/services/electricite/relamping/bureau-tertiaire), [commerce & restaurant](/services/electricite/relamping/commerce-restaurant), [copropriété & parking](/services/electricite/relamping/copropriete-parking), [industriel & entrepôt](/services/electricite/relamping/industriel-entrepot).*
