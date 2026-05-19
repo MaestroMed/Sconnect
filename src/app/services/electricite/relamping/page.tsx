@@ -37,6 +37,7 @@ import {
 import {
   generateServiceSchema,
   generateFAQSchema,
+  generateVideoSchema,
   injectSchema,
 } from "@/lib/structured-data";
 
@@ -248,11 +249,25 @@ const serviceSchema = generateServiceSchema(
 );
 const faqSchema = generateFAQSchema(faqs);
 
+// VideoObject schema for the hero lightbulb animation. Google indexes this
+// and can surface the video as a rich result alongside the page.
+const videoSchema = generateVideoSchema({
+  name: "Animation relamping LED — ampoule qui s'allume",
+  description:
+    "Visualisation Seedance d'une ampoule LED moderne s'allumant progressivement. Illustration du service de relamping LED proposé par S Connect en Île-de-France.",
+  thumbnailUrl: "/images/hero/relamping-lightbulb.webp",
+  uploadDate: "2026-05-12",
+  duration: "PT5S",
+  contentUrl: `${siteUrl}/videos/relamping-lightbulb.mp4`,
+  baseUrl: siteUrl,
+});
+
 export default function RelampingPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(serviceSchema)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(faqSchema)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(videoSchema)} />
 
       {/* ─── Hero — full-bleed lightbulb video with progressive illumination ─── */}
       <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">

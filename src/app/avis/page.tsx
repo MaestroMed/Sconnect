@@ -7,6 +7,35 @@ import { Star, ChevronRight, Phone, Quote, Filter, TrendingUp } from "lucide-rea
 import SectionTitle from "@/components/ui/SectionTitle";
 import { AuroraBackdrop, GradientVeil, NoiseOverlay, ParticlesLite } from "@/components/ui/ambient";
 import BulbText from "@/components/ui/BulbText";
+import { injectSchema } from "@/lib/structured-data";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+
+// French month → ISO month (15 of the month as a stable midpoint).
+const FR_MONTHS: Record<string, string> = {
+  janvier: "01",
+  février: "02",
+  fevrier: "02",
+  mars: "03",
+  avril: "04",
+  mai: "05",
+  juin: "06",
+  juillet: "07",
+  août: "08",
+  aout: "08",
+  septembre: "09",
+  octobre: "10",
+  novembre: "11",
+  décembre: "12",
+  decembre: "12",
+};
+
+function parseReviewDate(input: string): string {
+  const [monthRaw, yearRaw] = input.toLowerCase().split(" ");
+  const month = FR_MONTHS[monthRaw];
+  if (!month || !yearRaw) return new Date().toISOString().slice(0, 10);
+  return `${yearRaw}-${month}-15`;
+}
 
 const stats = {
   average: 4.9,
@@ -145,6 +174,37 @@ const testimonials = [
 
 const filterOptions = ["Tous", "Dépannage", "Rénovation", "Installation", "Mise aux normes", "Domotique", "Maintenance"];
 
+// Schema.org: extend the LocalBusiness @id with aggregate rating + individual
+// reviews. Single combined node so Google attaches the rating directly to the
+// already-declared LocalBusiness (no orphan AggregateRating).
+const localBusinessReviewSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "Electrician", "Locksmith"],
+  "@id": `${siteUrl}/#localbusiness`,
+  name: "S'Connect",
+  url: siteUrl,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: stats.average.toFixed(1),
+    reviewCount: stats.total,
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: testimonials.map((t) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: t.name },
+    datePublished: parseReviewDate(t.date),
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: t.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: t.text,
+    publisher: { "@type": "Organization", name: "S'Connect" },
+  })),
+};
+
 export default function AvisPage() {
   const [activeFilter, setActiveFilter] = useState("Tous");
   const [visibleCount, setVisibleCount] = useState(6);
@@ -158,6 +218,11 @@ export default function AvisPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(localBusinessReviewSchema)}
+      />
+
       {/* Hero */}
       <section className="relative bg-dark-950 py-20 md:py-28 overflow-hidden">
         <AuroraBackdrop intensity="soft" />
