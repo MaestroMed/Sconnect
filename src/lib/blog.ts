@@ -15,6 +15,19 @@ export interface PostFrontmatter {
   tags?: string[];
   category?: string;
   draft?: boolean;
+  /** Optional how-to metadata — when present, the article page emits an
+   *  additional HowTo JSON-LD schema (Google rich results for "how to" /
+   *  procedural content). */
+  howTo?: {
+    /** Human-readable name (defaults to title if omitted). */
+    name?: string;
+    /** Estimated total duration in ISO 8601 (e.g. "PT2H" for 2 hours). */
+    totalTime?: string;
+    steps: Array<{
+      name: string;
+      text: string;
+    }>;
+  };
 }
 
 export interface Post {

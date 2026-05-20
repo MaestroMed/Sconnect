@@ -32,9 +32,18 @@ import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
 import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
-import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 import { MagneticAnchor, MagneticLink } from "@/components/ui/MagneticButton";
 import RatingBadge from "@/components/marketing/RatingBadge";
+import dynamic from "next/dynamic";
+
+// Lazy-load the comparator: not in the initial bundle (saves ~6 KB gzip
+// + the pointer event listeners). Renders a poster-sized skeleton until
+// the chunk arrives so layout stays stable.
+const BeforeAfterSlider = dynamic(() => import("@/components/ui/BeforeAfterSlider"), {
+  loading: () => (
+    <div className="aspect-video w-full rounded-2xl bg-slate-200 dark:bg-dark-800 animate-pulse" />
+  ),
+});
 
 interface HomePageClientProps {
   siteConfig: {

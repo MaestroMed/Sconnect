@@ -81,12 +81,40 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
       : `${siteUrl}/api/og?title=${encodeURIComponent(post.frontmatter.title)}&type=article&category=${encodeURIComponent(post.frontmatter.category || "")}`,
   };
 
+  // Optional HowTo schema → only when the post frontmatter declares a
+  // procedural sequence. Google can surface it as a rich "How to" snippet
+  // (numbered steps) on the SERP.
+  const howToSchema = post.frontmatter.howTo
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: post.frontmatter.howTo.name ?? post.frontmatter.title,
+        description: post.frontmatter.excerpt,
+        ...(post.frontmatter.howTo.totalTime
+          ? { totalTime: post.frontmatter.howTo.totalTime }
+          : {}),
+        ...(post.frontmatter.cover ? { image: `${siteUrl}${post.frontmatter.cover}` } : {}),
+        step: post.frontmatter.howTo.steps.map((s, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: s.name,
+          text: s.text,
+        })),
+      }
+    : null;
+
   return (
     <article className="bg-surface">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
 
       {/* Hero */}
       <header className="relative overflow-hidden bg-gradient-to-br from-primary-700 via-primary-600 to-electric-600 text-white">
