@@ -15,6 +15,7 @@ import { buildMetadata } from "@/lib/metadata";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MDXComponents from "@/components/blog/MDXComponents";
 import NewsletterForm from "@/components/marketing/NewsletterForm";
+import ShareButtons from "@/components/blog/ShareButtons";
 
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
@@ -185,6 +186,14 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
               </div>
             </div>
           )}
+
+          <div className="mt-8 pt-6 border-t border-border">
+            <ShareButtons
+              title={post.frontmatter.title}
+              url={`${siteUrl}/actualites/${slug}`}
+              excerpt={post.frontmatter.excerpt}
+            />
+          </div>
 
           <div className="mt-10 flex items-center justify-between">
             <Link
