@@ -22,6 +22,7 @@ import NewsletterForm from "@/components/marketing/NewsletterForm";
 const services = [
   { name: "Électricité", href: "/services/electricite" },
   { name: "Relamping LED", href: "/services/electricite/relamping" },
+  { name: "Borne IRVE", href: "/services/electricite/borne-irve" },
   { name: "Contrôle d'accès", href: "/services/controle-acces" },
   { name: "Serrurerie", href: "/services/serrurerie" },
   { name: "Métallerie", href: "/services/metallerie" },

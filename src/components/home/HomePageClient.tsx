@@ -32,6 +32,7 @@ import BrandChip from "@/components/marketing/BrandChip";
 import InterventionMap from "@/components/marketing/InterventionMap";
 import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -605,6 +606,39 @@ export default function HomePageClient({
               </motion.div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Before/After showcase — audit-v2 fix: the "Avant/Après" badges on
+          the realization cards promised a comparator that wasn't actually
+          on screen. Now we show a flagship one inline, full-width. */}
+      <section className="section-padding bg-surface">
+        <div className="container-custom max-w-6xl">
+          <SectionTitle
+            badge="Avant / Après"
+            title="Le résultat parle de lui-même"
+            subtitle="Glissez le curseur pour comparer. Voici un tableau électrique vieillissant remplacé en 2 jours, conforme NF C 15-100, avec différentiel 30 mA et repérage des circuits."
+          />
+          <BeforeAfterSlider
+            beforeSrc="/images/realisations-before/before-tableau.webp"
+            afterSrc="/images/realisations/realisation-1.webp"
+            beforeAlt="Tableau électrique vétuste avant intervention"
+            afterAlt="Tableau électrique aux normes NF C 15-100 après intervention S Connect"
+            aspect="video"
+            className="shadow-2xl shadow-dark-900/20 ring-1 ring-border"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="mt-10 text-center"
+          >
+            <Link href="/realisations" className="btn-outline">
+              Voir toutes les transformations
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
