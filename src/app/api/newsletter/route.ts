@@ -19,24 +19,50 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  // Accept both JSON (regular SPA flow) and FormData (no-JS progressive
+  // enhancement fallback when the form submits natively).
+  const contentType = request.headers.get('content-type') || ''
   let body: unknown
+  let isFormSubmit = false
   try {
-    body = await request.json()
+    if (contentType.includes('application/json')) {
+      body = await request.json()
+    } else {
+      isFormSubmit = true
+      const form = await request.formData()
+      body = {
+        email: form.get('email'),
+        source: form.get('source') ?? 'no-js',
+        consent: form.get('consent') === 'on' || form.get('consent') === 'true',
+      }
+    }
   } catch {
     return NextResponse.json({ error: 'Corps de requête invalide' }, { status: 400 })
   }
 
   const parsed = SubscribeSchema.safeParse(body)
   if (!parsed.success) {
-    return NextResponse.json(
-      { error: parsed.error.errors[0]?.message ?? 'Données invalides' },
-      { status: 400 },
-    )
+    const msg = parsed.error.errors[0]?.message ?? 'Données invalides'
+    if (isFormSubmit) {
+      // No-JS clients can't parse JSON responses meaningfully → redirect with status.
+      return NextResponse.redirect(
+        new URL(`/?newsletter=error&msg=${encodeURIComponent(msg)}`, request.url),
+        303,
+      )
+    }
+    return NextResponse.json({ error: msg }, { status: 400 })
   }
 
   const sub = await subscribeNewsletter(parsed.data.email, parsed.data.source)
   if (!sub) {
+    if (isFormSubmit) {
+      return NextResponse.redirect(new URL('/?newsletter=error', request.url), 303)
+    }
     return NextResponse.json({ error: 'Inscription échouée' }, { status: 500 })
+  }
+
+  if (isFormSubmit) {
+    return NextResponse.redirect(new URL('/?newsletter=ok', request.url), 303)
   }
 
   return NextResponse.json({

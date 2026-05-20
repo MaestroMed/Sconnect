@@ -71,11 +71,11 @@ export default function Header() {
             <AvailabilityBadge variant="dark" schedule={siteConfig.schedule} />
             <span className="flex items-center gap-2 text-white/70">
               <AlertTriangle className="w-4 h-4 text-accent-400" />
-              Urgences 24h/24
+              Urgences 24/7
             </span>
           </div>
           <a
-            href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
+            href={`tel:${siteConfig.phone.replace(/\s/g, '').replace(/^0/, '+33')}`}
             className="flex items-center gap-2 hover:text-accent-400 transition-colors"
           >
             <Phone className="w-4 h-4" />

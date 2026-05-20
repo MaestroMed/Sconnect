@@ -215,6 +215,7 @@ export default function HomePageClient({
       <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
         <HeroVideo
           videoSrc="/videos/hero-paris-window.mp4"
+          videoSrcWebm="/videos/hero-paris-window.webm"
           posterSrc="/images/hero/hero-cinema-paris.webp"
           fallbackSrc="/images/hero/hero-cinema-paris.jpg"
         />

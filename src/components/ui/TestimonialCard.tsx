@@ -48,14 +48,14 @@ export default function TestimonialCard({
       </div>
       <p className="text-foreground leading-relaxed flex-grow mb-6">{text}</p>
       <div className="pt-4 border-t border-border">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="font-semibold text-foreground">{name}</p>
+        <div className="flex items-start justify-between gap-3 flex-wrap">
+          <div className="min-w-0">
+            <p className="font-semibold text-foreground whitespace-nowrap">{name}</p>
             {location && (
               <p className="text-sm text-foreground-muted">{location}</p>
             )}
           </div>
-          <span className="badge-primary">{service}</span>
+          <span className="badge-primary whitespace-nowrap">{service}</span>
         </div>
       </div>
     </motion.div>
