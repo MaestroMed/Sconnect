@@ -18,6 +18,8 @@
     "analyze": "ANALYZE=true next build",
     "perf:lh": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --view --preset=desktop --throttling-method=devtools",
     "perf:lh:mobile": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-mobile.html --view",
+    "seo:generate": "tsx scripts/seo-generate.ts",
+    "seo:generate:dry": "tsx scripts/seo-generate.ts -- --dry",
     "db:seed": "tsx scripts/migrate-json-to-supabase.ts",
     "db:import-mdx": "tsx scripts/import-mdx-to-db.ts",
     "assets:fetch": "tsx scripts/fetch-images.ts",

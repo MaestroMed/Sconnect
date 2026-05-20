@@ -157,6 +157,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    // Local landing pages — auto-generated via scripts/seo-generate.ts
+    {
+      url: `${baseUrl}/services/electricite/relamping/paris`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/electricite/relamping/la-defense`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.82,
+    },
+    {
+      url: `${baseUrl}/services/electricite/relamping/clichy`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
   ];
 
   // Pages services - Contrôle d'accès

@@ -1,0 +1,1084 @@
+{
+  "$schema": "./seo-backlog.schema.json",
+  "version": 1,
+  "lastReviewed": "2026-05-20",
+  "items": [
+    {
+      "id": "post-suppression-cee-fev-2026",
+      "type": "blog-post",
+      "cluster": "post-cee",
+      "priority": 100,
+      "status": "generated",
+      "slug": "suppression-primes-cee-eclairage-led-2026",
+      "title": "Suppression des primes CEE éclairage LED en 2026 : ce qui change pour votre projet",
+      "excerpt": "L'arrêté du 23 février 2026 a supprimé les fiches BAT-EQ-127, IND-BA-116 et BAR-EQ-110. Voici l'impact réel sur les projets relamping en cours et les financements alternatifs qui marchent encore.",
+      "category": "Relamping LED",
+      "tags": [
+        "CEE",
+        "BAT-EQ-127",
+        "IND-BA-116",
+        "arrêté 23 février 2026",
+        "financement relamping"
+      ],
+      "cover": "/images/services/relamping-bureau.webp",
+      "primaryKeyword": "suppression CEE éclairage 2026",
+      "secondaryKeywords": [
+        "fin BAT-EQ-127",
+        "fin prime CEE relamping",
+        "relamping sans CEE 2026",
+        "arrêté 23 février 2026"
+      ],
+      "wordTarget": 1500,
+      "outline": [
+        "Le contexte : arrêté du 23 février 2026 (sources : Légifrance + FFBâtiment)",
+        "Les 3 fiches supprimées : BAT-EQ-127, IND-BA-116, BAR-EQ-110 (rappel rôle)",
+        "Pourquoi cette suppression : dérives constatées (surdimensionnement, audits non conformes, factures gonflées)",
+        "Impact concret : ROI relamping moyen passe de 1.5 à 3 ans → de 2.5 à 4.5 ans",
+        "Les alternatives qui restent : leasing LED, CEE sur autres opérations (isolation, GTB, pompes à chaleur), ADEME PACTE, prêts éco-PTZ",
+        "Calcul ROI sans CEE avec données réelles (1500 m² bureau exemple)",
+        "Le décret tertiaire (DEET) reste OBLIGATOIRE → le relamping reste l'investissement n°1 même sans prime",
+        "Notre méthode pour rentabiliser sans CEE : leasing OPEX + économies dès le mois 1",
+        "FAQ — Mon dossier signé avant le 25 février est-il encore valable ? Quel est le délai pour finaliser ?"
+      ],
+      "howTo": null,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-financer-relamping-sans-cee",
+      "type": "blog-post",
+      "cluster": "post-cee",
+      "priority": 95,
+      "status": "generated",
+      "slug": "financer-relamping-led-sans-cee-2026",
+      "title": "Financer un relamping LED en 2026 sans prime CEE : 4 leviers qui marchent",
+      "excerpt": "Sans CEE, le relamping reste rentable. Voici les 4 mécanismes que nous utilisons réellement : leasing OPEX, CEE sur autres travaux, ADEME PACTE, autofinancement par économies. Avec chiffres réels.",
+      "category": "Relamping LED",
+      "tags": [
+        "financement relamping",
+        "leasing LED",
+        "CEE 2026",
+        "ROI éclairage"
+      ],
+      "cover": "/images/services/relamping-commerce.webp",
+      "primaryKeyword": "financer relamping LED sans CEE",
+      "secondaryKeywords": [
+        "leasing LED entreprise",
+        "alternative prime CEE éclairage",
+        "économies LED autofinancement"
+      ],
+      "wordTarget": 1300,
+      "outline": [
+        "Le pivot 2026 : pourquoi 'sans CEE' n'égale pas 'pas rentable'",
+        "Levier 1 — Leasing LED (24-60 mois, 0 € upfront, cash neutre)",
+        "Levier 2 — CEE sur d'autres opérations du même site (isolation, ventilation, GTB)",
+        "Levier 3 — ADEME PACTE + appels à projet sectoriels",
+        "Levier 4 — Autofinancement par économies (typique : remboursement en 24-36 mois)",
+        "Comparatif chiffré : CAPEX vs OPEX vs CEE 2025 (baseline) vs scenarios 2026",
+        "Choisir son levier selon profil : PME, copropriété, industriel, ERP",
+        "Outils : nos partenaires leasing (sans nous engager nominalement)",
+        "FAQ — Combien coûte le leasing ? Puis-je cumuler ?"
+      ],
+      "howTo": null,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-deet-pivot-sans-cee",
+      "type": "blog-post",
+      "cluster": "decret-tertiaire",
+      "priority": 90,
+      "status": "generated",
+      "slug": "decret-tertiaire-eclairage-strategie-2026-sans-cee",
+      "title": "Décret tertiaire 2030 : pourquoi le relamping reste obligatoire même sans CEE",
+      "excerpt": "Le DEET impose toujours −40 % de consommation en 2030. L'éclairage représente 15 à 30 % de la conso. Suppression CEE ou pas, le relamping reste le levier le plus rapide. Voici comment recalculer votre plan.",
+      "category": "Relamping LED",
+      "tags": [
+        "décret tertiaire",
+        "DEET",
+        "OPERAT",
+        "stratégie post-CEE"
+      ],
+      "cover": "/images/services/relamping-bureau.webp",
+      "primaryKeyword": "décret tertiaire éclairage 2026",
+      "secondaryKeywords": [
+        "DEET sans CEE",
+        "OPERAT éclairage",
+        "−40 % énergie tertiaire"
+      ],
+      "wordTarget": 1400,
+      "outline": [
+        "Rappel DEET 2030/2040/2050",
+        "Pourquoi l'éclairage reste le levier n°1 (15-30 % conso, ROI rapide)",
+        "Recalcul ROI sans CEE sur 4 typologies (bureau, commerce, industriel, copropriété)",
+        "Pénalités OPERAT : enjeu réel ?",
+        "Stratégie 2026 recommandée par S Connect"
+      ],
+      "howTo": null,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-paris",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 90,
+      "status": "generated",
+      "slug": "paris",
+      "city": "Paris",
+      "postalCodes": [
+        "75001-75020"
+      ],
+      "title": "Relamping LED à Paris — audit gratuit, ROI mesuré, conforme NF EN 12464-1",
+      "primaryKeyword": "relamping LED Paris",
+      "secondaryKeywords": [
+        "audit éclairage Paris",
+        "électricien LED Paris",
+        "relamping bureau Paris"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-la-defense",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 88,
+      "status": "generated",
+      "slug": "la-defense",
+      "city": "La Défense",
+      "postalCodes": [
+        "92800",
+        "92400",
+        "92900"
+      ],
+      "title": "Relamping LED La Défense — tertiaire grand format, gestion DALI, conformité décret",
+      "primaryKeyword": "relamping LED La Défense",
+      "secondaryKeywords": [
+        "audit éclairage tertiaire La Défense",
+        "relamping tour bureau Défense"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-boulogne",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 85,
+      "status": "pending",
+      "slug": "boulogne-billancourt",
+      "city": "Boulogne-Billancourt",
+      "postalCodes": [
+        "92100"
+      ],
+      "title": "Relamping LED à Boulogne-Billancourt — bureaux, commerces, copropriétés",
+      "primaryKeyword": "relamping LED Boulogne-Billancourt",
+      "secondaryKeywords": [
+        "électricien Boulogne tertiaire",
+        "audit éclairage 92100"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-levallois",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 83,
+      "status": "pending",
+      "slug": "levallois-perret",
+      "city": "Levallois-Perret",
+      "postalCodes": [
+        "92300"
+      ],
+      "title": "Relamping LED à Levallois-Perret — sociétés, agences, plateaux tertiaires",
+      "primaryKeyword": "relamping LED Levallois-Perret",
+      "secondaryKeywords": [
+        "électricien Levallois",
+        "éclairage entreprise 92300"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-neuilly",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 82,
+      "status": "pending",
+      "slug": "neuilly-sur-seine",
+      "city": "Neuilly-sur-Seine",
+      "postalCodes": [
+        "92200"
+      ],
+      "title": "Relamping LED à Neuilly-sur-Seine — bureaux haut de gamme et copropriétés",
+      "primaryKeyword": "relamping LED Neuilly-sur-Seine",
+      "secondaryKeywords": [
+        "éclairage bureau Neuilly",
+        "électricien 92200"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-issy",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 80,
+      "status": "pending",
+      "slug": "issy-les-moulineaux",
+      "city": "Issy-les-Moulineaux",
+      "postalCodes": [
+        "92130"
+      ],
+      "title": "Relamping LED à Issy-les-Moulineaux — sièges sociaux, tertiaire tech",
+      "primaryKeyword": "relamping LED Issy-les-Moulineaux",
+      "secondaryKeywords": [
+        "éclairage tech Issy",
+        "audit LED 92130"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-clichy",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 95,
+      "status": "generated",
+      "slug": "clichy",
+      "city": "Clichy",
+      "postalCodes": [
+        "92110"
+      ],
+      "title": "Relamping LED à Clichy — l'expertise locale S Connect, basée 35 rue des Cailloux",
+      "primaryKeyword": "relamping LED Clichy",
+      "secondaryKeywords": [
+        "électricien LED Clichy",
+        "audit éclairage 92110"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-nanterre",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 78,
+      "status": "pending",
+      "slug": "nanterre",
+      "city": "Nanterre",
+      "postalCodes": [
+        "92000"
+      ],
+      "title": "Relamping LED à Nanterre — bureaux et plateaux tertiaires",
+      "primaryKeyword": "relamping LED Nanterre",
+      "secondaryKeywords": [
+        "éclairage tertiaire Nanterre",
+        "audit LED 92000"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-courbevoie",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 76,
+      "status": "pending",
+      "slug": "courbevoie",
+      "city": "Courbevoie",
+      "postalCodes": [
+        "92400"
+      ],
+      "title": "Relamping LED à Courbevoie — bureaux, copropriétés et commerces",
+      "primaryKeyword": "relamping LED Courbevoie",
+      "secondaryKeywords": [
+        "éclairage Courbevoie",
+        "électricien LED 92400"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-puteaux",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 75,
+      "status": "pending",
+      "slug": "puteaux",
+      "city": "Puteaux",
+      "postalCodes": [
+        "92800"
+      ],
+      "title": "Relamping LED à Puteaux — tertiaire La Défense + commerces locaux",
+      "primaryKeyword": "relamping LED Puteaux",
+      "secondaryKeywords": [
+        "éclairage Puteaux",
+        "audit LED 92800"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-asnieres",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 74,
+      "status": "pending",
+      "slug": "asnieres-sur-seine",
+      "city": "Asnières-sur-Seine",
+      "postalCodes": [
+        "92600"
+      ],
+      "title": "Relamping LED à Asnières-sur-Seine — entreprises, ERP, copropriétés",
+      "primaryKeyword": "relamping LED Asnières",
+      "secondaryKeywords": [
+        "éclairage Asnières",
+        "électricien LED 92600"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "location-saint-denis",
+      "type": "location-page",
+      "cluster": "local",
+      "priority": 72,
+      "status": "pending",
+      "slug": "saint-denis",
+      "city": "Saint-Denis",
+      "postalCodes": [
+        "93200"
+      ],
+      "title": "Relamping LED à Saint-Denis (93) — industriels, entrepôts, ERP",
+      "primaryKeyword": "relamping LED Saint-Denis",
+      "secondaryKeywords": [
+        "éclairage industriel Saint-Denis",
+        "audit LED 93200"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-pharmacie",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 70,
+      "status": "pending",
+      "slug": "pharmacie",
+      "vertical": "Pharmacie",
+      "title": "Relamping LED pharmacie — IRC > 90 pour la lecture des étiquettes, conformité officine",
+      "primaryKeyword": "relamping LED pharmacie",
+      "secondaryKeywords": [
+        "éclairage officine LED",
+        "IRC pharmacie norme"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-restaurant",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 70,
+      "status": "pending",
+      "slug": "restaurant",
+      "vertical": "Restaurant",
+      "title": "Relamping LED restaurant — ambiance modulable, températures de couleur multi-zones",
+      "primaryKeyword": "relamping LED restaurant",
+      "secondaryKeywords": [
+        "éclairage restaurant",
+        "ambiance LED salle"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-hotel",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 68,
+      "status": "pending",
+      "slug": "hotel",
+      "vertical": "Hôtel",
+      "title": "Relamping LED hôtel — couloirs avec détection, chambres avec gradation, ROI 18 mois",
+      "primaryKeyword": "relamping LED hôtel",
+      "secondaryKeywords": [
+        "éclairage hôtellerie",
+        "LED chambre hôtel"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-ecole",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 70,
+      "status": "pending",
+      "slug": "ecole-college",
+      "vertical": "École / Collège",
+      "title": "Relamping LED école et collège — éclairage salle de classe NF EN 12464-1 (500 lux, UGR ≤ 19)",
+      "primaryKeyword": "relamping LED école",
+      "secondaryKeywords": [
+        "éclairage salle de classe LED",
+        "norme éclairage collège"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-gymnase",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 65,
+      "status": "pending",
+      "slug": "gymnase-salle-sport",
+      "vertical": "Gymnase",
+      "title": "Relamping LED gymnase et salle de sport — projecteurs anti-éblouissement, IK10",
+      "primaryKeyword": "relamping LED gymnase",
+      "secondaryKeywords": [
+        "éclairage sportif LED",
+        "projecteur gymnase"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "vertical-parking-souterrain",
+      "type": "vertical-page",
+      "cluster": "verticals",
+      "priority": 72,
+      "status": "pending",
+      "slug": "parking-souterrain",
+      "vertical": "Parking souterrain",
+      "title": "Relamping LED parking souterrain — IP65, détection présence, économies 80 %",
+      "primaryKeyword": "relamping LED parking souterrain",
+      "secondaryKeywords": [
+        "éclairage parking IP65",
+        "détection présence parking"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-norme-12464-1-tableau",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 65,
+      "status": "pending",
+      "slug": "norme-nf-en-12464-1-tableau-resume",
+      "title": "Norme NF EN 12464-1 : le tableau résumé par typologie de local (à imprimer)",
+      "excerpt": "Niveaux d'éclairement obligatoires par type d'espace : bureau, commerce, atelier, parking, école. Tableau complet UGR / IRC / Em / U0 selon la version 2021 de la norme.",
+      "category": "Guide éclairage",
+      "tags": [
+        "NF EN 12464-1",
+        "norme éclairage",
+        "lux requis",
+        "UGR"
+      ],
+      "primaryKeyword": "norme NF EN 12464-1 tableau",
+      "secondaryKeywords": [
+        "lux requis bureau",
+        "UGR éclairage",
+        "IRC norme"
+      ],
+      "wordTarget": 1200,
+      "outline": [
+        "Pourquoi la NF EN 12464-1 (cadre réglementaire)",
+        "Bureau, salle de réunion, open-space",
+        "Commerce, boutique, restaurant",
+        "Industrie, entrepôt, atelier",
+        "Parking, circulation, escalier",
+        "ERP, gymnase, école",
+        "Tableau récapitulatif PDF (lien)"
+      ],
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-dali-vs-on-off",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 60,
+      "status": "pending",
+      "slug": "dali-vs-on-off-eclairage-tertiaire",
+      "title": "DALI vs ON/OFF en éclairage tertiaire : quand le surcoût se justifie",
+      "excerpt": "Le DALI ajoute 15-25 % au budget matériel mais réduit la conso de 30-40 %. Voici les seuils précis (surface, horaires, type d'occupation) au-delà desquels c'est indispensable.",
+      "category": "Guide éclairage",
+      "tags": [
+        "DALI",
+        "gestion éclairage",
+        "ROI"
+      ],
+      "primaryKeyword": "DALI vs ON/OFF",
+      "secondaryKeywords": [
+        "protocole DALI éclairage",
+        "ROI gestion DALI"
+      ],
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "comparison-tube-t5-t8-led",
+      "type": "blog-post",
+      "cluster": "comparisons",
+      "priority": 58,
+      "status": "pending",
+      "slug": "tube-t5-t8-led-comparatif-2026",
+      "title": "Tube T5 vs T8 vs LED : le vrai comparatif 2026 (efficacité, durée, coût total)",
+      "excerpt": "Avant de relamper, comprendre ce qu'on remplace. Comparatif chiffré T5 vs T8 vs LED avec consommation, durée, IRC, coût total possession sur 10 ans.",
+      "category": "Comparatif",
+      "tags": [
+        "T5",
+        "T8",
+        "LED",
+        "comparatif"
+      ],
+      "primaryKeyword": "tube T5 T8 LED comparatif",
+      "secondaryKeywords": [
+        "T5 vs LED",
+        "T8 vs LED économie"
+      ],
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "comparison-marques-luminaires-pro",
+      "type": "blog-post",
+      "cluster": "comparisons",
+      "priority": 56,
+      "status": "pending",
+      "slug": "marques-luminaires-pro-comparatif",
+      "title": "Trilux, Sylvania, Philips, Hager : quelle marque LED pro choisir en 2026",
+      "excerpt": "Comparatif honnête des 4 marques pro qu'on installe le plus. Forces, faiblesses, gammes typées (bureau / industriel / commerce), prix indicatifs et SAV.",
+      "category": "Comparatif",
+      "tags": [
+        "Trilux",
+        "Sylvania",
+        "Philips",
+        "Hager",
+        "marques LED"
+      ],
+      "primaryKeyword": "marques LED professionnelles",
+      "secondaryKeywords": [
+        "Trilux vs Sylvania",
+        "meilleur luminaire LED pro"
+      ],
+      "wordTarget": 1200,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-temperature-couleur-led",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 55,
+      "status": "pending",
+      "slug": "temperature-couleur-led-3000k-4000k-5000k",
+      "title": "3000K, 4000K, 5000K : choisir la bonne température de couleur LED",
+      "excerpt": "Guide pratique avec exemples photo. 3000K pour ambiance / hôtellerie. 4000K pour bureau / commerce. 5000K pour industriel / hôpital. Erreurs à éviter et cas mixtes (HCL).",
+      "category": "Guide éclairage",
+      "tags": [
+        "température couleur",
+        "Kelvin",
+        "HCL"
+      ],
+      "primaryKeyword": "température couleur LED 3000K 4000K",
+      "wordTarget": 950,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-ugr-explication-bureau",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 50,
+      "status": "pending",
+      "slug": "ugr-eblouissement-bureau",
+      "title": "UGR ≤ 19 en bureau : qu'est-ce que c'est et pourquoi c'est obligatoire",
+      "excerpt": "L'Unified Glare Rating mesure l'éblouissement perçu. Pour un bureau, la norme exige UGR ≤ 19. Explication simple, méthode de mesure, conséquences d'un dépassement.",
+      "category": "Guide éclairage",
+      "tags": [
+        "UGR",
+        "éblouissement",
+        "bureau",
+        "norme"
+      ],
+      "primaryKeyword": "UGR 19 bureau norme",
+      "wordTarget": 900,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-ip-ik-indices-luminaires",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 52,
+      "status": "pending",
+      "slug": "ip-ik-indices-luminaires-led",
+      "title": "Indices IP et IK des luminaires LED : choisir le bon pour chaque environnement",
+      "excerpt": "IP54, IP65, IK08, IK10 : que veulent dire ces sigles et lequel pour parking, cuisine pro, atelier, extérieur, gymnase ?",
+      "category": "Guide éclairage",
+      "tags": [
+        "IP",
+        "IK",
+        "norme luminaire"
+      ],
+      "primaryKeyword": "indice IP IK luminaire LED",
+      "wordTarget": 850,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-irc-90-pourquoi",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 48,
+      "status": "pending",
+      "slug": "irc-90-luminaire-led-pourquoi",
+      "title": "Pourquoi exiger IRC > 90 sur vos luminaires LED (et pas 80)",
+      "excerpt": "L'Indice de Rendu des Couleurs distingue un éclairage utilitaire d'un éclairage qui rend justice aux couleurs. Boutiques, pharmacies, restaurants, hôpitaux : où le 90+ est non-négociable.",
+      "category": "Guide éclairage",
+      "tags": [
+        "IRC",
+        "CRI",
+        "qualité éclairage"
+      ],
+      "primaryKeyword": "IRC 90 luminaire LED",
+      "wordTarget": 800,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-flicker-led-sante",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 45,
+      "status": "pending",
+      "slug": "scintillement-flicker-led-sante-travail",
+      "title": "Scintillement (flicker) des LED : impact santé au bureau et comment l'éviter",
+      "excerpt": "Le flicker des LED bas de gamme provoque maux de tête, fatigue oculaire, baisse de concentration. Norme TLM, drivers flicker-free, comment vérifier soi-même.",
+      "category": "Guide éclairage",
+      "tags": [
+        "flicker",
+        "scintillement",
+        "santé",
+        "TLM"
+      ],
+      "primaryKeyword": "scintillement LED santé bureau",
+      "wordTarget": 950,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-eclairage-circadien-hcl",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 42,
+      "status": "pending",
+      "slug": "eclairage-circadien-hcl-bureau",
+      "title": "Éclairage circadien (HCL) en bureau : la prochaine frontière du bien-être au travail",
+      "excerpt": "Le Human-Centric Lighting fait varier température et intensité au fil de la journée pour suivre le rythme circadien. Études, ROI sur la productivité, coût d'installation.",
+      "category": "Innovation éclairage",
+      "tags": [
+        "HCL",
+        "circadien",
+        "bien-être",
+        "innovation"
+      ],
+      "primaryKeyword": "Human Centric Lighting bureau",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-mise-aux-normes-2026-changements",
+      "type": "blog-post",
+      "cluster": "elec-norms",
+      "priority": 75,
+      "status": "pending",
+      "slug": "nf-c-15-100-2026-changements-irve",
+      "title": "NF C 15-100 mises à jour 2026 : ce que les électriciens doivent connaître",
+      "excerpt": "Amendement 6 de la NF C 15-100 : nouvelles exigences sur les modules réservés IRVE, protection des circuits sensibles, prises USB. Notre check-list.",
+      "category": "Électricité",
+      "tags": [
+        "NF C 15-100",
+        "amendement",
+        "IRVE"
+      ],
+      "primaryKeyword": "NF C 15-100 amendement 2026",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-advenir-2026-borne",
+      "type": "blog-post",
+      "cluster": "irve",
+      "priority": 80,
+      "status": "pending",
+      "slug": "prime-advenir-borne-recharge-2026",
+      "title": "Prime ADVENIR 2026 : montants, conditions, dossier — guide complet",
+      "excerpt": "ADVENIR finance jusqu'à 1 660 € par borne en copropriété. Voici les barèmes 2026, les éligibles, la procédure et les pièges fréquents.",
+      "category": "Borne IRVE",
+      "tags": [
+        "ADVENIR",
+        "IRVE",
+        "borne recharge",
+        "prime"
+      ],
+      "primaryKeyword": "prime ADVENIR 2026 borne",
+      "wordTarget": 1300,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-borne-irve-copro-droit-prise",
+      "type": "blog-post",
+      "cluster": "irve",
+      "priority": 70,
+      "status": "pending",
+      "slug": "borne-irve-copropriete-droit-prise",
+      "title": "Borne de recharge en copropriété : exercer son droit à la prise pas à pas",
+      "excerpt": "La loi 2014 + arrêtés 2020 protègent votre droit. Voici la procédure : courrier au syndic, délais, contenu obligatoire, recours si refus.",
+      "category": "Borne IRVE",
+      "tags": [
+        "copropriété",
+        "droit à la prise",
+        "IRVE"
+      ],
+      "primaryKeyword": "borne recharge copropriété droit prise",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-controle-acces-coproprete-guide",
+      "type": "blog-post",
+      "cluster": "controle-acces",
+      "priority": 60,
+      "status": "pending",
+      "slug": "interphonie-copropriete-guide-syndic",
+      "title": "Remplacer l'interphonie de votre copropriété : le guide pour syndic",
+      "excerpt": "Du diagnostic en AG au choix audio/vidéo, des coûts à la mise en service. Notre guide complet rédigé pour les syndics et conseils syndicaux.",
+      "category": "Contrôle d'accès",
+      "tags": [
+        "interphonie",
+        "copropriété",
+        "syndic"
+      ],
+      "primaryKeyword": "interphonie copropriété syndic",
+      "wordTarget": 1200,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-serrure-a2p-decryptee",
+      "type": "blog-post",
+      "cluster": "serrurerie",
+      "priority": 65,
+      "status": "pending",
+      "slug": "serrure-a2p-1-2-3-etoiles-decryptee",
+      "title": "Serrure A2P 1, 2 ou 3 étoiles : la différence concrète face à un cambriolage",
+      "excerpt": "5, 10 ou 15 minutes de résistance. Marques certifiées, prix, choix selon votre porte. Notre guide pour ne pas se faire avoir.",
+      "category": "Serrurerie",
+      "tags": [
+        "serrure A2P",
+        "sécurité",
+        "cambriolage"
+      ],
+      "primaryKeyword": "serrure A2P 1 2 3 étoiles",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-blindage-vs-bloc-porte",
+      "type": "blog-post",
+      "cluster": "serrurerie",
+      "priority": 58,
+      "status": "pending",
+      "slug": "blindage-porte-vs-bloc-porte-blinde",
+      "title": "Blindage de porte existante ou bloc-porte blindé neuf : que choisir ?",
+      "excerpt": "Comparatif : coût, sécurité, esthétique, contraintes de pose. Recommandation S Connect par profil (locataire vs proprio, vieille porte vs récente).",
+      "category": "Serrurerie",
+      "tags": [
+        "blindage",
+        "porte blindée",
+        "BP1",
+        "BP2"
+      ],
+      "primaryKeyword": "blindage porte vs bloc porte blindé",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-tableau-electrique-vetuste-signes",
+      "type": "blog-post",
+      "cluster": "depannage",
+      "priority": 62,
+      "status": "pending",
+      "slug": "tableau-electrique-vetuste-signes-reconnaitre",
+      "title": "10 signes qui montrent que votre tableau électrique doit être remplacé",
+      "excerpt": "Fusibles en porcelaine, pas de différentiel 30 mA, jaunissement, odeur, disjoncteur qui saute : checklist visuelle + photos exemples.",
+      "category": "Électricité",
+      "tags": [
+        "tableau électrique",
+        "vétusté",
+        "diagnostic"
+      ],
+      "primaryKeyword": "tableau électrique vétuste signes",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-disjoncteur-saute-causes",
+      "type": "blog-post",
+      "cluster": "depannage",
+      "priority": 70,
+      "status": "pending",
+      "slug": "disjoncteur-saute-souvent-causes-solutions",
+      "title": "Disjoncteur qui saute sans arrêt : 7 causes possibles, comment diagnostiquer",
+      "excerpt": "Surcharge, défaut d'isolement, appareil défectueux, terre absente. Notre méthode de diagnostic pas à pas + ce qu'on peut faire soi-même avant l'intervention.",
+      "category": "Électricité",
+      "tags": [
+        "disjoncteur",
+        "panne électrique",
+        "diagnostic"
+      ],
+      "primaryKeyword": "disjoncteur qui saute souvent",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-porte-claquee-que-faire",
+      "type": "blog-post",
+      "cluster": "serrurerie",
+      "priority": 75,
+      "status": "pending",
+      "slug": "porte-claquee-que-faire-paris",
+      "title": "Porte claquée à Paris : la procédure honnête (et combien ça coûte vraiment)",
+      "excerpt": "Sans arnaque : prix réels, méthode non destructive, droit d'accès, démarche assurance. Tout ce qu'il faut savoir avant d'appeler.",
+      "category": "Serrurerie",
+      "tags": [
+        "porte claquée",
+        "Paris",
+        "urgence",
+        "tarifs"
+      ],
+      "primaryKeyword": "porte claquée que faire Paris",
+      "wordTarget": 1200,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-portail-motorisation-types",
+      "type": "blog-post",
+      "cluster": "metallerie",
+      "priority": 50,
+      "status": "pending",
+      "slug": "portail-motorisation-types-comparatif",
+      "title": "Motorisation de portail : à bras, à vérins, enterrée, ou coulissant ?",
+      "excerpt": "Comparatif des 4 motorisations principales : robustesse, prix, contraintes d'installation, marques recommandées (FAAC, Came, Nice).",
+      "category": "Métallerie",
+      "tags": [
+        "portail",
+        "motorisation"
+      ],
+      "primaryKeyword": "motorisation portail comparatif",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-garde-corps-nf-p01-012",
+      "type": "blog-post",
+      "cluster": "metallerie",
+      "priority": 45,
+      "status": "pending",
+      "slug": "garde-corps-norme-nf-p01-012",
+      "title": "Garde-corps métallique : ce qu'impose la norme NF P01-012 (hauteur, écartement, charge)",
+      "excerpt": "Avant de commander un garde-corps, connaître les exigences obligatoires : hauteur 1 m, espacement barreaux 11 cm max, résistance 60 kg/ml.",
+      "category": "Métallerie",
+      "tags": [
+        "garde-corps",
+        "NF P01-012",
+        "norme"
+      ],
+      "primaryKeyword": "garde-corps NF P01-012",
+      "wordTarget": 900,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-porte-coupe-feu-ei30-ei60-erp",
+      "type": "blog-post",
+      "cluster": "metallerie",
+      "priority": 48,
+      "status": "pending",
+      "slug": "porte-coupe-feu-ei30-ei60-erp",
+      "title": "Porte coupe-feu EI30, EI60 ou EI90 : laquelle exige votre ERP ?",
+      "excerpt": "Lecture du Code de la construction et de l'habitation pour ERP. Tableau classement par activité, type, catégorie ERP. Conséquences en cas de non-conformité.",
+      "category": "Métallerie",
+      "tags": [
+        "porte coupe-feu",
+        "ERP",
+        "EI30",
+        "EI60"
+      ],
+      "primaryKeyword": "porte coupe-feu ERP EI30 EI60",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-eclairage-securite-evacuation-baes",
+      "type": "blog-post",
+      "cluster": "elec-norms",
+      "priority": 55,
+      "status": "pending",
+      "slug": "eclairage-securite-baes-erp-obligations",
+      "title": "Éclairage de sécurité BAES en ERP : obligations, périodicité, sanctions",
+      "excerpt": "Blocs Autonomes d'Éclairage de Sécurité : où en installer, comment les tester, quand les remplacer. Décortique le règlement ERP.",
+      "category": "Électricité",
+      "tags": [
+        "BAES",
+        "éclairage sécurité",
+        "ERP"
+      ],
+      "primaryKeyword": "BAES éclairage sécurité ERP",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-audit-energie-pme-obligatoire",
+      "type": "blog-post",
+      "cluster": "decret-tertiaire",
+      "priority": 60,
+      "status": "pending",
+      "slug": "audit-energetique-obligatoire-pme-2026",
+      "title": "Audit énergétique obligatoire pour PME en 2026 : qui, quand, comment",
+      "excerpt": "Loi de transition énergétique : les PME > 250 salariés ou > 50 M€ CA doivent réaliser un audit tous les 4 ans. Voici qui est concerné, le périmètre, les pénalités.",
+      "category": "Décret tertiaire",
+      "tags": [
+        "audit énergétique",
+        "PME",
+        "obligation"
+      ],
+      "primaryKeyword": "audit énergétique obligatoire PME 2026",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "comparison-detection-presence-vs-gradation",
+      "type": "blog-post",
+      "cluster": "comparisons",
+      "priority": 42,
+      "status": "pending",
+      "slug": "detection-presence-vs-gradation-jour",
+      "title": "Détection de présence vs gradation crépusculaire : laquelle prioriser ?",
+      "excerpt": "Les deux économisent. La détection seule = 25-35 %, la gradation seule = 20-30 %, les deux combinées = 50-60 %. Lequel installer en premier selon votre profil.",
+      "category": "Guide éclairage",
+      "tags": [
+        "détection présence",
+        "gradation",
+        "ROI"
+      ],
+      "primaryKeyword": "détection présence vs gradation éclairage",
+      "wordTarget": 950,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-electricien-clichy-urgences",
+      "type": "blog-post",
+      "cluster": "local",
+      "priority": 60,
+      "status": "pending",
+      "slug": "electricien-urgence-clichy-92110",
+      "title": "Électricien d'urgence à Clichy (92110) : intervention sous 2h, 24h/24",
+      "excerpt": "Coupure générale, court-circuit, odeur de brûlé : qui appeler ? Notre intervention type, les tarifs réels en urgence, les pièges à éviter.",
+      "category": "Dépannage électrique",
+      "tags": [
+        "urgence",
+        "Clichy",
+        "92110",
+        "dépannage"
+      ],
+      "primaryKeyword": "électricien urgence Clichy 92110",
+      "wordTarget": 900,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-decret-deet-operat-2026-deadline",
+      "type": "blog-post",
+      "cluster": "decret-tertiaire",
+      "priority": 55,
+      "status": "pending",
+      "slug": "operat-declaration-octobre-2026-checklist",
+      "title": "Déclaration OPERAT 30 septembre 2026 : checklist pour ne rien oublier",
+      "excerpt": "La déclaration annuelle OPERAT clôt le 30 septembre. Périmètre, IFA, consommation, calcul, justification : la checklist exhaustive S Connect.",
+      "category": "Décret tertiaire",
+      "tags": [
+        "OPERAT",
+        "déclaration",
+        "2026"
+      ],
+      "primaryKeyword": "OPERAT déclaration septembre 2026",
+      "wordTarget": 1100,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-led-fluo-conversion-calcul",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 50,
+      "status": "pending",
+      "slug": "fluo-led-conversion-puissance-calcul",
+      "title": "Convertir un tube fluo en LED : calcul de puissance équivalente sans se planter",
+      "excerpt": "Un T8 36 W ≠ une LED 36 W. La conversion correcte se fait par lumens. Tableau de conversion + erreurs fréquentes qui mènent à un sur-éclairage.",
+      "category": "Guide éclairage",
+      "tags": [
+        "conversion fluo LED",
+        "lumens",
+        "calcul puissance"
+      ],
+      "primaryKeyword": "conversion fluo LED calcul lumens",
+      "wordTarget": 850,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    },
+    {
+      "id": "post-greenwashing-led-eviter",
+      "type": "blog-post",
+      "cluster": "guides",
+      "priority": 38,
+      "status": "pending",
+      "slug": "greenwashing-led-comment-eviter-installateur",
+      "title": "Greenwashing relamping LED : 5 mensonges fréquents et comment les détecter",
+      "excerpt": "« 90 % d'économies », « durée 100 000 h garantie », « zéro entretien » : les promesses excessives qui devraient vous alerter. Cas réels d'installations qui ont raté.",
+      "category": "Guide éclairage",
+      "tags": [
+        "greenwashing",
+        "arnaque",
+        "transparence"
+      ],
+      "primaryKeyword": "greenwashing LED installateur",
+      "wordTarget": 1000,
+      "createdAt": "2026-05-21",
+      "publishedAt": null
+    }
+  ]
+}

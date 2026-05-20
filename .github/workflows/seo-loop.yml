@@ -1,0 +1,141 @@
+name: SEO Loop — daily content generator
+
+# Daily cron that picks the next pending item from content/seo-backlog.json
+# and scaffolds the page (MDX blog post, TSX location page) via
+# scripts/seo-generate.ts. Opens a pull request — never commits directly
+# to main, so a human reviews the scaffold before publishing.
+#
+# Off-peak time (04:17 UTC = 06:17 Europe/Paris) to avoid colliding with
+# the rest of the planet's daily crons.
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      forced_id:
+        description: "Backlog id to generate (overrides priority pick)"
+        required: false
+        type: string
+
+concurrency:
+  group: seo-loop
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate next backlog item
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run SEO generator
+        id: gen
+        env:
+          FORCED_ID: ${{ inputs.forced_id }}
+        run: |
+          set -e
+          if [ -n "$FORCED_ID" ]; then
+            npm run seo:generate -- --id="$FORCED_ID"
+          else
+            npm run seo:generate
+          fi
+          # Capture the diff summary for the PR body
+          git status --porcelain > /tmp/changes.txt
+          if [ ! -s /tmp/changes.txt ]; then
+            echo "nothing_to_commit=true" >> "$GITHUB_OUTPUT"
+            echo "→ Nothing to generate (backlog empty or only existing files)."
+          else
+            echo "nothing_to_commit=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Identify generated item
+        if: steps.gen.outputs.nothing_to_commit != 'true'
+        id: meta
+        run: |
+          # Find the newly-marked 'generated' item id
+          ITEM_ID=$(node -e "
+            const fs=require('fs');
+            const b=JSON.parse(fs.readFileSync('content/seo-backlog.json','utf-8'));
+            const lastGenerated=b.items.filter(i=>i.status==='generated').slice(-1)[0];
+            process.stdout.write(lastGenerated ? lastGenerated.id : '');
+          ")
+          ITEM_TITLE=$(node -e "
+            const fs=require('fs');
+            const b=JSON.parse(fs.readFileSync('content/seo-backlog.json','utf-8'));
+            const i=b.items.find(x=>x.id==='$ITEM_ID');
+            process.stdout.write(i ? i.title : '');
+          ")
+          ITEM_TYPE=$(node -e "
+            const fs=require('fs');
+            const b=JSON.parse(fs.readFileSync('content/seo-backlog.json','utf-8'));
+            const i=b.items.find(x=>x.id==='$ITEM_ID');
+            process.stdout.write(i ? i.type : '');
+          ")
+          echo "item_id=$ITEM_ID" >> "$GITHUB_OUTPUT"
+          echo "item_title=$ITEM_TITLE" >> "$GITHUB_OUTPUT"
+          echo "item_type=$ITEM_TYPE" >> "$GITHUB_OUTPUT"
+
+      - name: Typecheck the generated content
+        if: steps.gen.outputs.nothing_to_commit != 'true'
+        run: npm run typecheck
+
+      - name: Lint the generated content
+        if: steps.gen.outputs.nothing_to_commit != 'true'
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Open PR
+        if: steps.gen.outputs.nothing_to_commit != 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: seo-loop/${{ steps.meta.outputs.item_id }}
+          delete-branch: true
+          commit-message: "feat(seo): scaffold ${{ steps.meta.outputs.item_id }}"
+          title: "[SEO loop] ${{ steps.meta.outputs.item_title }}"
+          labels: |
+            seo-loop
+            auto-generated
+            draft
+          body: |
+            ## 🤖 Scaffold auto-généré par le SEO loop
+
+            **Item backlog :** \`${{ steps.meta.outputs.item_id }}\`
+            **Type :** ${{ steps.meta.outputs.item_type }}
+            **Date :** ${{ github.run_started_at }}
+
+            ### Pré-merge
+
+            - [ ] Relire le scaffold et enrichir chaque section (target wordTarget atteint)
+            - [ ] Ajouter sources, exemples chiffrés, cas concrets
+            - [ ] Vérifier le maillage interne (au moins 2 liens internes vers pillar/sub-pages)
+            - [ ] Vérifier les images / cover
+            - [ ] Pour les blog posts : retirer le bloc "draft auto-généré" et basculer \`draft: false\`
+            - [ ] Pour les location pages : valider la cohérence du H1, métadescription, breadcrumb
+
+            ### Quality gates
+
+            - [x] Typecheck passé en CI
+            - [ ] Tests E2E manuels sur la nouvelle route
+            - [ ] Axe-core a11y (relancer \`npm run test:a11y\` si nouvelle route)
+
+            ### Backlog status
+
+            Item passé de \`pending\` à \`generated\`. Sera bascule à \`published\` automatiquement au prochain run du loop **si** le PR a été mergé.
+
+            ---
+
+            🤖 Generated by `.github/workflows/seo-loop.yml`
