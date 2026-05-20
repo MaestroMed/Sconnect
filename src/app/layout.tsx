@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
+import AnalyticsGate from "@/components/analytics/AnalyticsGate";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import MetaThemeColor from "@/components/theme/MetaThemeColor";
@@ -338,8 +337,7 @@ export default function RootLayout({
             richColors
           />
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsGate />
       </body>
     </html>
   );

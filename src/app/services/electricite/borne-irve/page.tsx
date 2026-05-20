@@ -32,6 +32,7 @@ import {
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
 import PricingTable from "@/components/marketing/PricingTable";
+import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
   title: "Installation borne de recharge IRVE — Paris & IDF | S Connect",
@@ -301,51 +302,8 @@ export default function BorneIrvePage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <PricingTable
-        variant="muted"
-        title="Combien coûte une borne IRVE installée ?"
-        subtitle="Fourchettes à partir de — basées sur nos installations IRVE récentes en Île-de-France. Aides ADVENIR déductibles selon configuration."
-        items={[
-          {
-            label: "Borne 7 kW maison individuelle",
-            fromPrice: 1290,
-            note: "Avant prime ADVENIR 600 €",
-            includes: ["Wallbox Type 2 7 kW (Schneider/Hager)", "Tableau divisionnaire dédié + diff. type B", "5 à 10 m de câble + pose murale"],
-          },
-          {
-            label: "Borne 11 kW triphasée",
-            fromPrice: 1690,
-            note: "Maison avec raccordement tri",
-            includes: ["Wallbox Type 2 11 kW", "Adaptation tableau si besoin", "Délestage dynamique selon abonnement"],
-          },
-          {
-            label: "Borne 22 kW (résidentiel)",
-            fromPrice: 2390,
-            note: "Recharge 100 km en ~30 min",
-            includes: ["Wallbox 22 kW Type 2 connectée", "Câblage tri renforcé", "Configuration app + RFID"],
-          },
-          {
-            label: "Borne copropriété (résident)",
-            fromPrice: 1890,
-            note: "Avant prime ADVENIR 1 660 €",
-            includes: ["Sous-compteur dédié au lot", "Câblage du TGBT à la place", "Dossier syndic + ADVENIR"],
-          },
-          {
-            label: "Infrastructure collective IRVE",
-            fromPrice: 4990,
-            note: "Copropriété 5 à 20 places",
-            includes: ["Étude de puissance + bus de communication", "Bornes mutualisées + supervision", "Contrat de maintenance optionnel"],
-          },
-          {
-            label: "Borne tertiaire 22 kW",
-            fromPrice: 2890,
-            note: "Avant prime ADVENIR 960 €",
-            includes: ["Wallbox tri + lecteur RFID", "Refacturation utilisateur", "Supervision multi-sites optionnelle"],
-          },
-        ]}
-        disclaimer="Tarifs TTC indicatifs hors gros œuvre (saignée, percements murs porteurs), hors modification d'abonnement Enedis. Délai d'installation : 1 à 3 jours selon configuration. Délai prime ADVENIR : 4 à 8 semaines après mise en service. Nous instruisons l'intégralité du dossier."
-      />
+      {/* Pricing — centralized data */}
+      <PricingTable variant="muted" {...getPricing("electricite/borne-irve")} />
 
       {/* FAQ */}
       <section className="section-padding bg-surface">

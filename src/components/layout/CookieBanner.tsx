@@ -71,6 +71,9 @@ export default function CookieBanner() {
     loadScripts(prefs);
     setShowBanner(false);
     setShowSettings(false);
+    // Notify AnalyticsGate (and any other consumer) so they can flip
+    // Vercel Analytics / Speed Insights / GA mounts without a reload.
+    window.dispatchEvent(new CustomEvent("cookie-consent:updated", { detail: prefs }));
   };
 
   const acceptAll = () => {
