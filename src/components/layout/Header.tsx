@@ -130,10 +130,14 @@ export default function Header() {
                 </>
               )}
               <div className="flex flex-col">
-                <span className="font-display font-bold text-xl text-foreground">
-                  S Connect
+                {/* Wordmark in CAPS + slight tracking — kills the "S Connect"
+                    vs "8 Connect" misreading reported in the visual audit
+                    (the lowercase S in Outfit display was too round and
+                    closed). Caps + tracking give an unmistakable lockup. */}
+                <span className="font-display font-bold text-xl text-foreground tracking-[0.02em]">
+                  SCONNECT
                 </span>
-                <span className="text-xs text-primary-600 dark:text-primary-400 font-medium tracking-wide">
+                <span className="text-[10px] text-primary-600 dark:text-primary-400 font-semibold tracking-[0.3em] -mt-0.5">
                   FRANCE
                 </span>
               </div>

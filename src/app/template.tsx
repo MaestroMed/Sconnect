@@ -11,7 +11,7 @@ const defaultConfig: SiteConfigData = {
   siteTagline: "Électricité • Contrôle d'accès • Serrurerie • Métallerie",
   phone: "06 52 82 06 85",
   phoneEmergency: "06 52 82 06 85",
-  email: "contact@sconnectfrance.fr",
+  email: "contact@sconnect-france.fr",
   address: {
     street: "XX Rue de XXX",
     postalCode: "92110",
@@ -20,7 +20,7 @@ const defaultConfig: SiteConfigData = {
   hours: {
     weekdays: "Lun-Ven: 8h-19h",
     saturday: "Samedi: 9h-17h",
-    emergency: "Urgences 24h/24",
+    emergency: "Urgences 24/7",
   },
   social: {
     facebook: "",
