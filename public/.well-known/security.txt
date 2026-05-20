@@ -1,0 +1,8 @@
+# Security policy for sconnectfrance.fr — RFC 9116
+# Contact us if you discover a security vulnerability on this site.
+
+Contact: mailto:contact@sconnect-france.fr
+Expires: 2027-12-31T23:59:59Z
+Preferred-Languages: fr, en
+Canonical: https://sconnectfrance.fr/.well-known/security.txt
+Policy: https://sconnectfrance.fr/mentions-legales

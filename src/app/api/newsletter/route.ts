@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { isPersistenceAvailable, subscribeNewsletter } from '@/lib/data-adapter'
+import { getClientIdentifier, rateLimit, rateLimitResponse } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -12,6 +13,13 @@ const SubscribeSchema = z.object({
 })
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 3 subscribe attempts per 15 min per IP → kills the
+  // "submit until you find a working email" abuse pattern + spam bots.
+  const id = getClientIdentifier(request, 'newsletter')
+  const limit = rateLimit({ identifier: id, limit: 3, windowMs: 15 * 60_000 })
+  const limited = rateLimitResponse(limit)
+  if (limited) return limited
+
   if (!isPersistenceAvailable()) {
     return NextResponse.json(
       { error: 'Inscription temporairement indisponible' },

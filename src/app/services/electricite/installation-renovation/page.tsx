@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
+import PricingTable from "@/components/marketing/PricingTable";
+import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
   title: "Installation & Rénovation Électrique | S'Connect",
@@ -37,6 +39,9 @@ export default function InstallationRenovationPage() {
       parentCategory={{ label: "Électricité", href: "/services/electricite" }}
       prestations={prestations}
       faqs={faqs}
+      extraContent={
+        <PricingTable variant="muted" {...getPricing("electricite/installation-renovation")} />
+      }
     />
   );
 }

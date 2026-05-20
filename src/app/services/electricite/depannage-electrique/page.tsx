@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 import PricingTable from "@/components/marketing/PricingTable";
+import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
   title: "Dépannage Électrique Urgent 24h/24 | S'Connect",
@@ -26,50 +27,7 @@ const faqs = [
 ];
 
 const pricingSection = (
-  <PricingTable
-    variant="muted"
-    title="Combien coûte un dépannage électrique ?"
-    subtitle="Fourchettes à partir de — basées sur nos chantiers récents en Île-de-France. Devis ferme communiqué après diagnostic téléphonique ou sur place."
-    items={[
-      {
-        label: "Dépannage horaires ouvrés",
-        fromPrice: 90,
-        note: "Lun-Ven 8h-19h, Sam 9h-17h",
-        includes: ["Déplacement IDF inclus", "Diagnostic complet de la panne", "Première heure de main d'œuvre"],
-      },
-      {
-        label: "Dépannage nuit / week-end",
-        fromPrice: 140,
-        note: "Hors horaires + dimanche/férié",
-        includes: ["Déplacement + diagnostic", "Intervention dans les 2h", "Devis avant toute action facturable"],
-      },
-      {
-        label: "Recherche de panne complexe",
-        fromPrice: 220,
-        note: "Forfait diagnostic approfondi",
-        includes: ["Mesures et tests installation", "Localisation précise du défaut", "Rapport écrit avec préconisations"],
-      },
-      {
-        label: "Remplacement disjoncteur différentiel",
-        fromPrice: 180,
-        note: "30 mA, type AC standard",
-        includes: ["Matériel marque Schneider/Legrand", "Pose et test de fonctionnement", "Garantie pièce 2 ans"],
-      },
-      {
-        label: "Mise aux normes tableau (T2-T4)",
-        fromPrice: 980,
-        note: "Tableau ≤ 13 modules",
-        includes: ["Audit NF C 15-100", "Remplacement disjoncteurs vétustes", "Repérage et étiquetage des circuits"],
-      },
-      {
-        label: "Diagnostic Consuel obligatoire",
-        fromPrice: 290,
-        note: "Avant raccordement Enedis",
-        includes: ["Visite complète installation", "Rapport conformité NF C 15-100", "Présence Consuel le jour J"],
-      },
-    ]}
-    disclaimer="Tarifs TTC indicatifs. Majoration nuit (22h-6h) +50 %, dimanche/jour férié +50 %. Devis ferme et gratuit communiqué après diagnostic. Garantie décennale sur tous travaux. Carte Vitale, CB, espèces, virement, chèque acceptés."
-  />
+  <PricingTable variant="muted" {...getPricing("electricite/depannage-electrique")} />
 );
 
 export default function DepannageElectriquePage() {

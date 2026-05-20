@@ -4,6 +4,7 @@ import { Lock, DoorOpen, KeyRound, Shield, ChevronRight, Phone } from "lucide-re
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
 import PricingTable from "@/components/marketing/PricingTable";
+import { getPricing } from "@/lib/data/pricing";
 import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -107,51 +108,8 @@ export default function SerrureriePage() {
         </div>
       </section>
 
-      {/* Pricing — kills the call-anxiety */}
-      <PricingTable
-        variant="muted"
-        title="Combien coûte une intervention serrurerie ?"
-        subtitle="Fourchettes à partir de — basées sur nos chantiers récents en Île-de-France. Devis ferme gratuit après diagnostic téléphonique ou sur place."
-        items={[
-          {
-            label: "Ouverture de porte simple",
-            fromPrice: 89,
-            note: "Porte claquée, en horaires 8h-19h",
-            includes: ["Déplacement inclus IDF", "Sans dégât (méthode non destructive)", "Diagnostic offert"],
-          },
-          {
-            label: "Ouverture porte blindée",
-            fromPrice: 250,
-            note: "Serrure 3 à 5 points, A2P",
-            includes: ["Méthode non destructive si possible", "Si destruction : matériel de remplacement à coût"],
-          },
-          {
-            label: "Remplacement de serrure standard",
-            fromPrice: 180,
-            note: "Cylindre + main d'œuvre",
-            includes: ["Cylindre européen entrée de gamme", "Pose et calibrage", "Remise de 2 clés minimum"],
-          },
-          {
-            label: "Remplacement serrure A2P**",
-            fromPrice: 420,
-            note: "Bricard / Vachette / Fichet certifiée",
-            includes: ["Cylindre A2P niveau 2 (10+ minutes de résistance)", "Pose, calibrage", "5 clés brevetées + carte de propriété"],
-          },
-          {
-            label: "Blindage de porte existante",
-            fromPrice: 1490,
-            note: "Sur porte bois standard",
-            includes: ["Tôle d'acier 15/10e", "Cornière anti-pince", "Serrure A2P** 5 points", "Garantie 5 ans"],
-          },
-          {
-            label: "Bloc-porte blindé neuf",
-            fromPrice: 3200,
-            note: "Pose complète bâti + porte",
-            includes: ["BP1 / BP2 certifié A2P", "Pose et finitions", "Garantie décennale"],
-          },
-        ]}
-        disclaimer="Tarifs TTC indicatifs en horaires ouvrés (8h-19h Lun-Ven, 9h-17h Sam). Majoration urgence nuit (+50 %), dimanche/férié (+50 %). Devis ferme et gratuit communiqué après diagnostic. Pas de surprise à la facturation."
-      />
+      {/* Pricing — centralized data, single source of truth */}
+      <PricingTable variant="muted" {...getPricing("serrurerie")} />
 
       {/* Emergency CTA */}
       <section className="relative py-20 bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 overflow-hidden">
