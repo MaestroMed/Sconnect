@@ -259,6 +259,15 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+          {/* Mentions légales obligatoires (loi LCEN + Code commerce). */}
+          <p className="mt-4 text-xs text-dark-500 text-center md:text-left">
+            S CONNECT FRANCE — SAS au capital de 20&nbsp;000&nbsp;€ ·
+            SIRET&nbsp;899&nbsp;667&nbsp;596&nbsp;00014 ·
+            RCS Nanterre&nbsp;899&nbsp;667&nbsp;596 ·
+            TVA&nbsp;FR13899667596 ·
+            APE 4321A ·
+            Siège&nbsp;: 35&nbsp;rue des Cailloux, 92110 Clichy
+          </p>
         </div>
       </div>
     </footer>

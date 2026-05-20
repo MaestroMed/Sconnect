@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import MetaThemeColor from "@/components/theme/MetaThemeColor";
+import CookieBanner from "@/components/layout/CookieBanner";
 import { getTestimonials } from "@/lib/data-service";
 
 const outfit = Outfit({
@@ -324,6 +325,7 @@ export default function RootLayout({
         <ThemeProvider>
           <MetaThemeColor />
           {children}
+          <CookieBanner />
           <Toaster
             position="top-right"
             toastOptions={{
