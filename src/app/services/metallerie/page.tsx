@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Wrench, ChevronRight, Phone, DoorOpen, Shield } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import PricingTable from "@/components/marketing/PricingTable";
 import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -132,6 +133,52 @@ export default function MetalleriePage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing — transparent reference rates */}
+      <PricingTable
+        variant="muted"
+        title="Combien coûte un projet de métallerie ?"
+        subtitle="Fourchettes à partir de — basées sur nos fabrications récentes en Île-de-France. Devis ferme et plan technique après prise de cotes sur site (gratuit)."
+        items={[
+          {
+            label: "Portail battant sur mesure (3m)",
+            fromPrice: 1890,
+            note: "Acier galvanisé thermolaqué",
+            includes: ["Conception 3D + plan technique", "Fabrication atelier", "Pose et réglages"],
+          },
+          {
+            label: "Portail coulissant motorisé (4m)",
+            fromPrice: 3990,
+            note: "Acier + moteur 24V",
+            includes: ["Motorisation FAAC/Came", "2 télécommandes + photocellules", "Pose et mise en service"],
+          },
+          {
+            label: "Porte de service métallique",
+            fromPrice: 980,
+            note: "Acier 15/10e, fermeture 3 points",
+            includes: ["Bâti + porte sur mesure", "Serrure cylindre standard", "Finition thermolaquage"],
+          },
+          {
+            label: "Porte coupe-feu EI60",
+            fromPrice: 1690,
+            note: "Norme EI60 / 60 min",
+            includes: ["Certificat conformité ERP", "Pose avec contrôle d'étanchéité", "Garantie décennale"],
+          },
+          {
+            label: "Garde-corps acier extérieur (ml)",
+            fromPrice: 290,
+            note: "Prix par mètre linéaire",
+            includes: ["Conception conforme NF P01-012", "Acier galvanisé + thermolaqué", "Pose chevillée façade"],
+          },
+          {
+            label: "Structure métallique sur mesure",
+            fromPrice: 4500,
+            note: "Verrière, mezzanine, charpente",
+            includes: ["Étude charge bureau d'études", "Soudures certifiées", "Mise en place levage"],
+          },
+        ]}
+        disclaimer="Tarifs TTC indicatifs hors livraison hors petite couronne (+150 km), hors gros œuvre lié à la pose. Délais de fabrication 3 à 6 semaines selon complexité. Plan technique signé livré avec le devis ferme."
+      />
 
       {/* CTA */}
       <section className="relative py-20 bg-gradient-to-r from-orange-700 via-orange-600 to-rose-600 overflow-hidden">

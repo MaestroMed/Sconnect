@@ -120,6 +120,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/services/electricite/borne-irve`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
     // Relamping LED — pillar + 4 sub-pages (SEO cluster)
     {
       url: `${baseUrl}/services/electricite/relamping`,

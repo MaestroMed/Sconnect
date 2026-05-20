@@ -3,6 +3,7 @@ import Link from "next/link";
 import { KeyRound, Video, CreditCard, ChevronRight, Phone } from "lucide-react";
 import CategoryLandingHero from "@/components/services/CategoryLandingHero";
 import { NoiseOverlay } from "@/components/ui/ambient";
+import PricingTable from "@/components/marketing/PricingTable";
 import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -99,6 +100,52 @@ export default function ControleAccesPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing — transparent reference rates */}
+      <PricingTable
+        variant="muted"
+        title="Combien coûte un système de contrôle d'accès ?"
+        subtitle="Fourchettes à partir de — basées sur nos installations récentes en copropriétés, bureaux et résidences en Île-de-France."
+        items={[
+          {
+            label: "Interphone audio simple",
+            fromPrice: 290,
+            note: "Particulier · 1 combiné + platine",
+            includes: ["Platine de rue + combiné intérieur", "Câblage + pose", "Garantie 2 ans"],
+          },
+          {
+            label: "Vidéophone couleur connecté",
+            fromPrice: 590,
+            note: "Maison individuelle",
+            includes: ["Caméra HD platine + écran 7'' intérieur", "App smartphone (réponse à distance)", "Mémoire des visites"],
+          },
+          {
+            label: "Interphonie copropriété audio",
+            fromPrice: 1890,
+            note: "Immeuble jusqu'à 12 lots",
+            includes: ["Platine rue + un combiné par lot", "Programmation + repérage", "Mise en service syndic"],
+          },
+          {
+            label: "Interphonie copropriété vidéo",
+            fromPrice: 3990,
+            note: "Immeuble jusqu'à 12 lots",
+            includes: ["Platine vidéo HD + écrans couleur", "Câblage 2 fils", "Formation gardien/résidents"],
+          },
+          {
+            label: "Système de badges RFID",
+            fromPrice: 690,
+            note: "Lecture + 10 badges fournis",
+            includes: ["Lecteur RFID Mifare", "Centrale d'autorisation", "10 badges encodés"],
+          },
+          {
+            label: "Digicode + clavier codé",
+            fromPrice: 380,
+            note: "100 codes utilisateurs",
+            includes: ["Clavier vandal-proof IP54", "Relais ouverture + alarme", "Programmation des codes"],
+          },
+        ]}
+        disclaimer="Tarifs TTC indicatifs hors gros œuvre (saignée, percements murs porteurs) et hors raccordement courant fort. Devis ferme communiqué après visite technique. Possibilité d'aides ANAH MaPrimeRénov'Copropriété sur certains équipements en immeuble collectif."
+      />
 
       {/* CTA */}
       <section className="relative py-20 bg-gradient-to-r from-amber-600 via-accent-500 to-amber-500 overflow-hidden">

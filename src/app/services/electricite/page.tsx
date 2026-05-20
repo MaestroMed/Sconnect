@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   ChevronRight,
   Phone,
+  Battery,
   Lightbulb,
   ArrowRight,
 } from "lucide-react";
@@ -54,6 +55,13 @@ const services = [
     icon: AlertTriangle,
     description:
       "Intervention rapide 24h/24, 7j/7 pour tous vos problèmes électriques : pannes, courts-circuits, disjoncteurs.",
+  },
+  {
+    name: "Borne de recharge IRVE",
+    slug: "borne-irve",
+    icon: Battery,
+    description:
+      "Installateur IRVE certifié niveau 2. Bornes 7 à 22 kW pour maison, copropriété ou tertiaire. Aides ADVENIR jusqu'à 1 660 € gérées de A à Z.",
   },
 ];
 
@@ -136,7 +144,7 @@ export default function ElectricitePage() {
       {/* Services */}
       <section className="section-padding bg-surface">
         <div className="container-custom">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {services.map((service) => (
               <Link
                 key={service.slug}
