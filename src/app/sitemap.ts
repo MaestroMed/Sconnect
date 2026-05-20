@@ -1,6 +1,63 @@
 import { MetadataRoute } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import { getAllPosts } from "@/lib/blog";
 import { getRealizations } from "@/lib/data-service";
+
+/**
+ * Auto-discover relamping location + vertical sub-pages so the sitemap
+ * stays in sync with whatever `scripts/seo-generate.ts` (or a human)
+ * creates under `src/app/services/electricite/relamping/`.
+ */
+function discoverRelampingSubroutes(baseUrl: string, now: Date): MetadataRoute.Sitemap {
+  const relampingDir = path.join(process.cwd(), "src", "app", "services", "electricite", "relamping");
+  const out: MetadataRoute.Sitemap = [];
+
+  // Skip dirs already declared statically below to avoid duplicates
+  const explicit = new Set([
+    "bureau-tertiaire",
+    "commerce-restaurant",
+    "copropriete-parking",
+    "industriel-entrepot",
+    "paris",
+    "la-defense",
+    "clichy",
+  ]);
+
+  try {
+    const entries = fs.readdirSync(relampingDir, { withFileTypes: true });
+    for (const e of entries) {
+      if (!e.isDirectory() || explicit.has(e.name)) continue;
+      if (e.name === "verticales") {
+        // Vertical sub-pages
+        const verticalDir = path.join(relampingDir, "verticales");
+        for (const v of fs.readdirSync(verticalDir, { withFileTypes: true })) {
+          if (!v.isDirectory()) continue;
+          out.push({
+            url: `${baseUrl}/services/electricite/relamping/verticales/${v.name}`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.75,
+          });
+        }
+        continue;
+      }
+      // Location pages (city sub-route)
+      const pageFile = path.join(relampingDir, e.name, "page.tsx");
+      if (fs.existsSync(pageFile)) {
+        out.push({
+          url: `${baseUrl}/services/electricite/relamping/${e.name}`,
+          lastModified: now,
+          changeFrequency: "monthly",
+          priority: 0.8,
+        });
+      }
+    }
+  } catch {
+    // Directory not present (e.g. unit tests) — return empty
+  }
+  return out;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -92,6 +149,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    // SEO weapons — standalone landings rankable on their own
+    {
+      url: `${baseUrl}/calculateur-relamping`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/lexique-eclairage`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/presse`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
   ];
 
   // Pages services - Électricité
@@ -176,6 +252,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    // Auto-discovered relamping subroutes (cities + verticals)
+    ...discoverRelampingSubroutes(baseUrl, now),
   ];
 
   // Pages services - Contrôle d'accès
