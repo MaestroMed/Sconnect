@@ -56,8 +56,8 @@ export default function MentionsLegalesPage() {
                 <p className="mb-2"><strong>RCS :</strong> Nanterre — 899 667 596</p>
                 <p className="mb-2"><strong>Code APE/NAF :</strong> 4321A — Travaux d&apos;installation électrique dans tous locaux</p>
                 <p className="mb-2"><strong>Siège social :</strong> 35 rue des Cailloux, 92110 Clichy</p>
-                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33652820685" className="text-primary-600 hover:text-primary-700">06 52 82 06 85</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
-                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a> <span className="text-foreground-muted text-sm">(à confirmer)</span></p>
+                <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33652820685" className="text-primary-600 hover:text-primary-700">06 52 82 06 85</a></p>
+                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnect-france.fr" className="text-primary-600 hover:text-primary-700">contact@sconnect-france.fr</a></p>
               </div>
             </div>
 
@@ -101,7 +101,7 @@ export default function MentionsLegalesPage() {
                 vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données personnelles.
               </p>
               <p>
-                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a>
+                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : <a href="mailto:contact@sconnect-france.fr" className="text-primary-600 hover:text-primary-700">contact@sconnect-france.fr</a>
               </p>
               <p>
                 Pour plus d'informations, consultez notre <Link href="/politique-confidentialite" className="text-primary-600 hover:text-primary-700 font-semibold">politique de confidentialité</Link>.
@@ -134,8 +134,8 @@ export default function MentionsLegalesPage() {
             {/* Crédits */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-foreground mb-4">Crédits</h2>
-              <p className="mb-2"><strong>Conception et développement :</strong> [À COMPLÉTER]</p>
-              <p className="mb-0"><strong>Crédits photos :</strong> [À COMPLÉTER si applicable]</p>
+              <p className="mb-2"><strong>Conception et développement :</strong> S Connect France</p>
+              <p className="mb-0"><strong>Crédits visuels :</strong> Photographies internes, visuels générés et logos partenaires reproduits avec leur licence éditoriale.</p>
             </div>
 
             {/* Date MAJ */}
