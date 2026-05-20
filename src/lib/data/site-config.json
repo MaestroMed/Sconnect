@@ -12,7 +12,7 @@
   "hours": {
     "weekdays": "Lun-Ven: 8h - 19h",
     "saturday": "Samedi: 9h - 17h",
-    "emergency": "Urgences 24h/24"
+    "emergency": "Urgences 24/7"
   },
   "social": {
     "facebook": "https://facebook.com/sconnectfrance",
@@ -26,7 +26,7 @@
   },
   "stats": {
     "interventionsPerYear": 3000,
-    "yearsExperience": 4,
+    "yearsExperience": 5,
     "satisfactionRate": 98
   },
   "zones": [

@@ -50,6 +50,8 @@ export default function NewsletterForm({
   if (variant === "card") {
     return (
       <form
+        method="post"
+        action="/api/newsletter"
         onSubmit={submit}
         className={`rounded-2xl border border-border bg-surface-elevated p-6 shadow-sm ${className}`}
       >
@@ -69,6 +71,7 @@ export default function NewsletterForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="votre@email.fr"
+            name="email"
             className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none"
           />
           <label className="flex items-start gap-2 text-xs text-foreground-muted">
@@ -105,7 +108,7 @@ export default function NewsletterForm({
   }
 
   return (
-    <form onSubmit={submit} className={`space-y-2 ${className}`}>
+    <form method="post" action="/api/newsletter" onSubmit={submit} className={`space-y-2 ${className}`}>
       <div className="flex flex-col sm:flex-row gap-2">
         <label htmlFor="newsletter-email" className="sr-only">
           Email
@@ -113,6 +116,7 @@ export default function NewsletterForm({
         <input
           id="newsletter-email"
           type="email"
+          name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}

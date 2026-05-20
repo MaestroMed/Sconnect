@@ -171,7 +171,11 @@ export default function RootLayout({
                   areaServed: "FR",
                 },
               ],
-              sameAs: [],
+              sameAs: [
+                "https://facebook.com/sconnectfrance",
+                "https://linkedin.com/company/sconnectfrance",
+                "https://instagram.com/sconnectfrance",
+              ],
             }),
           }}
         />

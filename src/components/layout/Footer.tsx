@@ -125,7 +125,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Nos Services</h4>
+            <h3 className="font-display font-bold text-lg mb-6">Nos Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.href}>
@@ -143,7 +143,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Liens Rapides</h4>
+            <h3 className="font-display font-bold text-lg mb-6">Liens Rapides</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -161,11 +161,11 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Contact</h4>
+            <h3 className="font-display font-bold text-lg mb-6">Contact</h3>
             <ul className="space-y-4">
               <li>
                 <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
+                  href={`tel:${siteConfig.phone.replace(/\s/g, '').replace(/^0/, '+33')}`}
                   className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors"
                 >
                   <Phone className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
@@ -212,9 +212,9 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-dark-800">
           <div className="grid md:grid-cols-[1fr_minmax(280px,420px)] gap-6 items-center">
             <div>
-              <h4 className="font-display font-bold text-xl mb-1">
+              <h3 className="font-display font-bold text-xl mb-1">
                 Restez informé
-              </h4>
+              </h3>
               <p className="text-sm text-dark-300">
                 Conseils, normes électriques, retours de chantier — un email par mois maximum.
               </p>

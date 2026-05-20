@@ -215,6 +215,7 @@ export default function HomePageClient({
       <section className="relative min-h-[100vh] flex items-center bg-dark-950 overflow-hidden">
         <HeroVideo
           videoSrc="/videos/hero-paris-window.mp4"
+          videoSrcWebm="/videos/hero-paris-window.webm"
           posterSrc="/images/hero/hero-cinema-paris.webp"
           fallbackSrc="/images/hero/hero-cinema-paris.jpg"
         />
@@ -534,8 +535,10 @@ export default function HomePageClient({
               </div>
             </motion.div>
 
-            {/* Right column — 2 stacked smaller tiles (lg:col-span-3) */}
-            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
+            {/* Right column — 2 stacked smaller tiles (lg:col-span-3).
+                On lg we use grid-rows-2 so each tile gets exactly half the
+                height of the big portrait on the left → no more empty space. */}
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4 md:gap-6">
               {/* team-technicien */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -543,7 +546,7 @@ export default function HomePageClient({
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true, margin: "-10% 0px" }}
               >
-                <div className="relative aspect-[5/3] lg:aspect-[5/2] rounded-3xl overflow-hidden bg-dark-900 group">
+                <div className="relative aspect-[5/3] lg:aspect-auto lg:h-full lg:min-h-[14rem] rounded-3xl overflow-hidden bg-dark-900 group">
                   <Image
                     src="/images/team/team-technicien.webp"
                     alt="Technicien S Connect en intervention"
@@ -570,7 +573,7 @@ export default function HomePageClient({
                 transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true, margin: "-10% 0px" }}
               >
-                <div className="relative aspect-[5/3] lg:aspect-[5/2] rounded-3xl overflow-hidden bg-dark-900 group">
+                <div className="relative aspect-[5/3] lg:aspect-auto lg:h-full lg:min-h-[14rem] rounded-3xl overflow-hidden bg-dark-900 group">
                   <Image
                     src="/images/team/team-vehicule.webp"
                     alt="Véhicule d'intervention S Connect dans une rue parisienne"

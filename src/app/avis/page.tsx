@@ -307,7 +307,7 @@ export default function AvisPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface overflow-x-clip">
         <div className="container-custom">
           {/* Filter */}
           <motion.div
@@ -364,14 +364,14 @@ export default function AvisPage() {
                   {testimonial.text}
                 </p>
                 <div className="pt-4 border-t border-border">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <p className="font-semibold text-foreground">
+                  <div className="flex items-start justify-between gap-3 flex-wrap">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="font-semibold text-foreground whitespace-nowrap">
                           {testimonial.name}
                         </p>
                         {testimonial.verified && (
-                          <span className="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-500/10 px-2 py-0.5 rounded-full">
+                          <span className="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-500/10 px-2 py-0.5 rounded-full whitespace-nowrap">
                             Vérifié
                           </span>
                         )}
@@ -380,7 +380,7 @@ export default function AvisPage() {
                         {testimonial.location} • {testimonial.date}
                       </p>
                     </div>
-                    <span className="badge-primary text-xs">
+                    <span className="badge-primary text-xs whitespace-nowrap">
                       {testimonial.service}
                     </span>
                   </div>

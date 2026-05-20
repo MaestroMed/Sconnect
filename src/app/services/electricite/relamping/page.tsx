@@ -273,6 +273,7 @@ export default function RelampingPage() {
       <section className="relative min-h-[90vh] flex items-center bg-dark-950 overflow-hidden">
         <HeroVideo
           videoSrc="/videos/relamping-lightbulb.mp4"
+          videoSrcWebm="/videos/relamping-lightbulb.webm"
           posterSrc="/images/hero/relamping-lightbulb.webp"
           fallbackSrc="/images/hero/relamping-lightbulb.jpg"
         />
