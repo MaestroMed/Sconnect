@@ -103,7 +103,7 @@
       "serviceType": "Installation",
       "description": "Installation d'une borne de recharge 22kW avec adaptation du tableau électrique.",
       "image": "/images/realisations/realisation-8.webp",
-      "featured": false
+      "featured": true
     },
     {
       "id": "10",
