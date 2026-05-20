@@ -138,6 +138,9 @@ interface ServicePageTemplateProps {
   faqs: FAQ[];
   zones?: string[];
   parentCategory?: { label: string; href: string };
+  /** Optional content slot rendered between the FAQ and the closing CTA.
+   *  Use for transparent pricing tables, before/after sliders, etc. */
+  extraContent?: React.ReactNode;
 }
 
 export default function ServicePageTemplate({
@@ -160,6 +163,7 @@ export default function ServicePageTemplate({
     "Île-de-France",
   ],
   parentCategory,
+  extraContent,
 }: ServicePageTemplateProps) {
   const Icon = iconMap[iconName];
   const theme = CATEGORY_THEME[category];
@@ -407,6 +411,9 @@ export default function ServicePageTemplate({
           </motion.div>
         </div>
       </section>
+
+      {/* Extra content slot (e.g. transparent pricing) */}
+      {extraContent}
 
       {/* CTA — category-themed */}
       <section className={`relative py-20 bg-gradient-to-r ${theme.ctaGradient} overflow-hidden`}>

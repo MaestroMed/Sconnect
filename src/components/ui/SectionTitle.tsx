@@ -47,7 +47,12 @@ export default function SectionTitle({
         <p
           className={`text-lg md:text-xl max-w-3xl leading-relaxed ${
             centered ? "mx-auto" : ""
-          } ${light ? "text-white/80" : "text-foreground-muted"}`}
+          } ${
+            // WCAG AAA: bumped from text-foreground-muted (~4.5:1) to
+            // slate-700 / slate-300 (~7.6:1) so subtitles read clearly
+            // even on overlaid gradients.
+            light ? "text-white/85" : "text-slate-700 dark:text-slate-300"
+          }`}
         >
           {subtitle}
         </p>
