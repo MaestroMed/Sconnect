@@ -311,10 +311,15 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* Trust band — certifications visible immediately under the hero.
+          Audit-driven: Qualifélec / RGE / IRVE / Décennale are premium
+          assets in this vertical; they deserve fold-1 placement. */}
+      <CertificationsBand background="surface" />
+
       {/* 4 Métiers — Apple bento with full-bleed hero category images.
           Checker pattern (4-2 / 2-4) so each métier breathes asymmetrically;
           on mobile they stack as full-width cards. */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Métiers"
@@ -390,7 +395,7 @@ export default function HomePageClient({
 
       {/* Services Section — image-backed cards. Each card uses its matching
           product macro shot as background, with a vertical scrim for readability. */}
-      <section className="section-padding bg-surface-muted">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Services"
@@ -485,9 +490,6 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
-
-      {/* Certifications Band — showcased prominently after stats */}
-      <CertificationsBand background="surface" />
 
       {/* Engagements Section */}
       <section className="relative section-padding bg-surface-muted overflow-hidden">
