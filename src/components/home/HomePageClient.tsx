@@ -34,6 +34,7 @@ import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 import { MagneticAnchor, MagneticLink } from "@/components/ui/MagneticButton";
+import RatingBadge from "@/components/marketing/RatingBadge";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -273,8 +274,9 @@ export default function HomePageClient({
               </MagneticLink>
             </div>
 
-            {/* Certif badges — glass panels remain crisp over the map */}
-            <div className="flex flex-wrap items-center gap-4 mb-6">
+            {/* Trust row — certifs + aggregate rating in a single line.
+                Audit-driven : remonter les preuves au plus près du H1. */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
               <div className="glass-panel flex items-center gap-2 px-4 py-2 rounded-xl">
                 <Shield className="w-5 h-5 text-green-400" />
                 <div className="text-left">
@@ -289,6 +291,7 @@ export default function HomePageClient({
                   <span className="text-sm font-semibold text-white">IRVE</span>
                 </div>
               </div>
+              <RatingBadge variant="dark" />
             </div>
 
             <div className="flex flex-wrap items-center gap-6 text-white/70">
