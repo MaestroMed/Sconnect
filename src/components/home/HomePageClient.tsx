@@ -33,6 +33,7 @@ import InterventionMap from "@/components/marketing/InterventionMap";
 import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import { MagneticAnchor, MagneticLink } from "@/components/ui/MagneticButton";
 
 interface HomePageClientProps {
   siteConfig: {
@@ -252,23 +253,24 @@ export default function HomePageClient({
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              {/* Primary funnel — saturated brand blue. Largest visual weight
-                  so the eye lands here first on cold visits. */}
-              <Link href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/40">
+              {/* Primary funnel — saturated brand blue + magnetic hover.
+                  Largest visual weight so the eye lands here first on
+                  cold visits. The magnetic effect adds premium feel
+                  without being a gimmick (disabled on touch + reduced
+                  motion). */}
+              <MagneticLink href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/40">
                 {homepage.hero_cta_primary}
                 <ChevronRight className="w-5 h-5" />
-              </Link>
+              </MagneticLink>
               {/* Secondary urgency — outline accent, smaller chromatic
-                  footprint so it doesn't compete with the devis funnel.
-                  Still unmistakably actionable thanks to the door icon
-                  and the warm border. */}
-              <Link
+                  footprint so it doesn't compete with the devis funnel. */}
+              <MagneticLink
                 href="/demande-intervention"
                 className="btn btn-lg bg-transparent text-white border-2 border-accent-400/80 hover:border-accent-300 hover:bg-accent-500/15 transition-colors"
               >
                 <DoorOpen className="w-5 h-5 text-accent-300" />
                 {homepage.hero_cta_secondary}
-              </Link>
+              </MagneticLink>
             </div>
 
             {/* Certif badges — glass panels remain crisp over the map */}
@@ -309,10 +311,15 @@ export default function HomePageClient({
         </div>
       </section>
 
+      {/* Trust band — certifications visible immediately under the hero.
+          Audit-driven: Qualifélec / RGE / IRVE / Décennale are premium
+          assets in this vertical; they deserve fold-1 placement. */}
+      <CertificationsBand background="surface" />
+
       {/* 4 Métiers — Apple bento with full-bleed hero category images.
           Checker pattern (4-2 / 2-4) so each métier breathes asymmetrically;
           on mobile they stack as full-width cards. */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Métiers"
@@ -388,7 +395,7 @@ export default function HomePageClient({
 
       {/* Services Section — image-backed cards. Each card uses its matching
           product macro shot as background, with a vertical scrim for readability. */}
-      <section className="section-padding bg-surface-muted">
+      <section className="section-padding bg-surface">
         <div className="container-custom">
           <SectionTitle
             badge="Nos Services"
@@ -483,9 +490,6 @@ export default function HomePageClient({
           </div>
         </div>
       </section>
-
-      {/* Certifications Band — showcased prominently after stats */}
-      <CertificationsBand background="surface" />
 
       {/* Engagements Section */}
       <section className="relative section-padding bg-surface-muted overflow-hidden">
@@ -790,21 +794,22 @@ export default function HomePageClient({
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               {/* Primary — solid white on brand-blue scrim → maximum
-                  contrast for the bottom-funnel conversion. */}
-              <Link href="/demande-devis" className="btn-white btn-lg shadow-xl shadow-black/20">
+                  contrast for the bottom-funnel conversion. Magnetic
+                  hover for premium polish. */}
+              <MagneticLink href="/demande-devis" className="btn-white btn-lg shadow-xl shadow-black/20">
                 {homepage.cta_button}
                 <ChevronRight className="w-5 h-5" />
-              </Link>
+              </MagneticLink>
               {/* Secondary — solid outline white at 100% opacity (not the
                   previous bg-white/10 ghost which was unreadable on photo).
                   Still calls clearly. E.164 format for international dial. */}
-              <a
+              <MagneticAnchor
                 href={`tel:${siteConfig.phone.replace(/\s/g, '').replace(/^0/, '+33')}`}
                 className="btn btn-lg bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary-700 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 {siteConfig.phone}
-              </a>
+              </MagneticAnchor>
             </div>
           </motion.div>
         </div>

@@ -13,7 +13,7 @@ const defaultConfig: SiteConfigData = {
   phoneEmergency: "06 52 82 06 85",
   email: "contact@sconnect-france.fr",
   address: {
-    street: "XX Rue de XXX",
+    street: "35 rue des Cailloux",
     postalCode: "92110",
     city: "Clichy",
   },

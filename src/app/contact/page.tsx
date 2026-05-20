@@ -301,7 +301,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">
-                        XX Rue de XXX
+                        35 rue des Cailloux
                       </p>
                       <p className="text-foreground-muted">92110 Clichy</p>
                     </div>
