@@ -251,15 +251,21 @@ export default function HomePageClient({
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <Link href="/demande-devis" className="btn-primary btn-lg">
+              {/* Primary funnel — saturated brand blue. Largest visual weight
+                  so the eye lands here first on cold visits. */}
+              <Link href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/40">
                 {homepage.hero_cta_primary}
                 <ChevronRight className="w-5 h-5" />
               </Link>
+              {/* Secondary urgency — outline accent, smaller chromatic
+                  footprint so it doesn't compete with the devis funnel.
+                  Still unmistakably actionable thanks to the door icon
+                  and the warm border. */}
               <Link
                 href="/demande-intervention"
-                className="btn bg-accent-500 text-dark-900 hover:bg-accent-400 btn-lg shadow-lg shadow-accent-500/25 hover:shadow-xl"
+                className="btn btn-lg bg-transparent text-white border-2 border-accent-400/80 hover:border-accent-300 hover:bg-accent-500/15 transition-colors"
               >
-                <DoorOpen className="w-5 h-5" />
+                <DoorOpen className="w-5 h-5 text-accent-300" />
                 {homepage.hero_cta_secondary}
               </Link>
             </div>
@@ -313,11 +319,16 @@ export default function HomePageClient({
             subtitle="Électricité, contrôle d'accès, serrurerie et métallerie : une offre complète pour sécuriser et équiper vos locaux."
           />
 
+          {/* Bento checker — large + small per row. Geometry trick: a
+              col-span-4 large card needs aspect [4/3], a col-span-2 small
+              needs aspect [2/3] → they compute to the SAME HEIGHT
+              (0.667w*0.75 == 0.333w*1.5 == 0.5w). Killing the empty
+              white slot that the previous uniform aspect-5/6 produced. */}
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-6">
             {categories.map((category, index) => {
-              // Checker pattern: 4+2 on row 1, 2+4 on row 2
-              const span =
-                index === 0 || index === 3 ? "lg:col-span-4" : "lg:col-span-2";
+              const isLarge = index === 0 || index === 3;
+              const span = isLarge ? "lg:col-span-4" : "lg:col-span-2";
+              const aspect = isLarge ? "lg:aspect-[4/3]" : "lg:aspect-[2/3]";
               const Icon = category.icon;
               return (
                 <motion.div
@@ -331,7 +342,7 @@ export default function HomePageClient({
                 >
                   <Link
                     href={category.href}
-                    className="relative block aspect-[4/5] lg:aspect-[5/6] rounded-3xl overflow-hidden group bg-dark-900 shadow-lg shadow-dark-900/10 hover:shadow-2xl transition-shadow"
+                    className={`relative block aspect-[4/5] ${aspect} rounded-3xl overflow-hidden group bg-dark-900 shadow-lg shadow-dark-900/10 hover:shadow-2xl transition-shadow`}
                   >
                     <Image
                       src={`/images/hero/${category.imageSlug}.webp`}
@@ -744,11 +755,19 @@ export default function HomePageClient({
               {homepage.cta_subtitle}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/demande-devis" className="btn-white btn-lg">
+              {/* Primary — solid white on brand-blue scrim → maximum
+                  contrast for the bottom-funnel conversion. */}
+              <Link href="/demande-devis" className="btn-white btn-lg shadow-xl shadow-black/20">
                 {homepage.cta_button}
                 <ChevronRight className="w-5 h-5" />
               </Link>
-              <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="btn bg-white/10 text-white hover:bg-white/20 btn-lg border border-white/20">
+              {/* Secondary — solid outline white at 100% opacity (not the
+                  previous bg-white/10 ghost which was unreadable on photo).
+                  Still calls clearly. E.164 format for international dial. */}
+              <a
+                href={`tel:${siteConfig.phone.replace(/\s/g, '').replace(/^0/, '+33')}`}
+                className="btn btn-lg bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary-700 transition-colors"
+              >
                 <Phone className="w-5 h-5" />
                 {siteConfig.phone}
               </a>

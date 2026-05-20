@@ -65,8 +65,8 @@ export default function Footer() {
                 className="h-12 w-12"
               />
               <div className="flex flex-col">
-                <span className="font-display font-bold text-xl">S Connect</span>
-                <span className="text-xs text-primary-400 font-medium tracking-wide">
+                <span className="font-display font-bold text-xl tracking-[0.02em]">SCONNECT</span>
+                <span className="text-[10px] text-primary-400 font-semibold tracking-[0.3em] -mt-0.5">
                   FRANCE
                 </span>
               </div>

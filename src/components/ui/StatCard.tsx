@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface StatCardProps {
@@ -13,6 +13,18 @@ interface StatCardProps {
   index?: number;
 }
 
+/**
+ * Static stat readout. Previous version animated count-up from 0 → value over
+ * 1.8s, which during scroll exposed intermediate frames like "57% clients
+ * satisfaits" or "2 ans d'expérience" — a brand-damaging artifact for a trust
+ * signal block. SSR + JS-off fallback also showed "0% satisfaits". The
+ * solution is to render the final number directly: it's correct on first
+ * paint, indexable by Googlebot, and visually punctuated by a fade + scale
+ * intro that's just as alive but never wrong.
+ *
+ * `font-variant-numeric: tabular-nums` keeps the width stable in case we
+ * reintroduce a counter in the future.
+ */
 export default function StatCard({
   value,
   suffix = "",
@@ -21,50 +33,16 @@ export default function StatCard({
   icon: Icon,
   index = 0,
 }: StatCardProps) {
-  const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    if (reduce) {
-      setCount(value);
-      return;
-    }
-
-    // requestAnimationFrame-based counter: immune to interval throttling,
-    // always lands exactly on `value` even if tab was backgrounded mid-animation.
-    const duration = 1800;
-    const start = performance.now();
-    let raf = 0;
-
-    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / duration, 1);
-      const current = Math.round(value * easeOutCubic(t));
-      setCount(current);
-      if (t < 1) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        setCount(value); // safety: ensure final landing
-      }
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [isInView, value, reduce]);
 
   return (
     <motion.div
       ref={ref}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92 }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       className="text-center group"
     >
       <div className="relative inline-flex items-center justify-center mb-4">
@@ -73,9 +51,12 @@ export default function StatCard({
           <Icon className="w-8 h-8 text-white" />
         </div>
       </div>
-      <div className="font-display font-bold text-4xl md:text-5xl text-white mb-2">
+      <div
+        className="font-display font-bold text-4xl md:text-5xl text-white mb-2"
+        style={{ fontVariantNumeric: "tabular-nums" }}
+      >
         {prefix}
-        {count.toLocaleString("fr-FR")}
+        {value.toLocaleString("fr-FR")}
         {suffix}
       </div>
       <p className="text-dark-300 font-medium">{label}</p>
