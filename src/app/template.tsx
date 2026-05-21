@@ -37,28 +37,39 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const [config, setConfig] = useState<SiteConfigData>(defaultConfig);
 
   useEffect(() => {
-    // Fetch site config on mount
-    fetch("/api/admin/site-config")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.siteName) {
-          setConfig({
-            siteName: data.siteName || defaultConfig.siteName,
-            siteTagline: data.siteTagline || defaultConfig.siteTagline,
-            phone: data.phone || defaultConfig.phone,
-            phoneEmergency: data.phoneEmergency || defaultConfig.phoneEmergency,
-            email: data.email || defaultConfig.email,
-            address: data.address || defaultConfig.address,
-            hours: data.hours || defaultConfig.hours,
-            social: data.social || defaultConfig.social,
-            logoUrl: data.logoUrl || defaultConfig.logoUrl,
-            logoDarkUrl: data.logoDarkUrl || defaultConfig.logoDarkUrl,
-          });
-        }
-      })
-      .catch(() => {
-        // Keep default config on error
-      });
+    // Lazy fetch site config — defers to idle to NOT block initial paint.
+    // The default config (defined above) is already correct for first
+    // paint (phone, email, address, hours match production). The fetch
+    // refreshes only if the admin has overridden something. Uses
+    // requestIdleCallback to avoid contention with hydration + LCP.
+    const refresh = () => {
+      fetch("/api/admin/site-config", { cache: "force-cache" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.siteName) {
+            setConfig({
+              siteName: data.siteName || defaultConfig.siteName,
+              siteTagline: data.siteTagline || defaultConfig.siteTagline,
+              phone: data.phone || defaultConfig.phone,
+              phoneEmergency: data.phoneEmergency || defaultConfig.phoneEmergency,
+              email: data.email || defaultConfig.email,
+              address: data.address || defaultConfig.address,
+              hours: data.hours || defaultConfig.hours,
+              social: data.social || defaultConfig.social,
+              logoUrl: data.logoUrl || defaultConfig.logoUrl,
+              logoDarkUrl: data.logoDarkUrl || defaultConfig.logoDarkUrl,
+            });
+          }
+        })
+        .catch(() => {
+          // Default config remains — no UX impact
+        });
+    };
+    if ("requestIdleCallback" in window) {
+      (window as Window & typeof globalThis).requestIdleCallback(refresh, { timeout: 2000 });
+    } else {
+      setTimeout(refresh, 1200);
+    }
   }, []);
 
   if (isAdminRoute) {
