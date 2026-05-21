@@ -5,49 +5,193 @@ date: "2026-05-21"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Guide décideur"
 tags: ["RFP", "cahier des charges", "achat", "appel d'offres"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-21)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-rfp-relamping-trame`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Pourquoi cet article s'adresse aux acheteurs
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Vous êtes responsable immobilier, acheteur tertiaire, directeur des achats, ou property manager. Vous devez sourcer un prestataire relamping LED. Le réflexe classique : demander **3 devis à 3 artisans**.
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Sauf que les 3 devis arrivent avec :
+- Des configurations matérielles différentes (Trilux vs Sylvania vs marque blanche chinoise)
+- Des hypothèses de gestion différentes (DALI-2 vs ON/OFF simple)
+- Des durées de vie différentes (L80 50 000h vs L70 35 000h vs non précisé)
+- Des méthodes de pose différentes (jour ouvré vs nuit)
+- Des garanties différentes (2 ans pièces vs 5 ans tout inclus)
 
-À rédiger.
+Résultat : vous ne comparez pas la même prestation. Le moins-disant gagne, et 3 ans plus tard vous payez le remplacement complet parce que le matériel choisi est en fin de vie prématurée.
 
-## 2. Le contexte technique / réglementaire
+Cet article propose **une trame de RFP standardisée** qui force tous les répondants à se positionner sur les mêmes critères mesurables. À ajuster selon votre contexte, mais le squelette est solide.
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+## La structure standard d'un RFP relamping LED
 
-À rédiger.
+### Section 1 — Contexte et objectifs (1 page)
 
-## 3. Notre méthode S Connect
+À fournir aux répondants :
+- **Adresse du bâtiment** + surface totale concernée + nombre d'étages
+- **Typologie de l'espace** (bureau open-space, bureaux fermés, commerce, copropriété…)
+- **Usage et horaires d'occupation** (8h-19h jours ouvrés / 24/7 / saisonnier…)
+- **Configuration existante** (T8 fluo / halogène / mercure / LED 1ʳᵉ génération)
+- **Consommation actuelle mesurée** (kWh/an sur poste éclairage si sous-comptage)
+- **Objectif explicite** : conformité DEET 2030 + amélioration QVT + arbitrage maintenance, ou autre combinaison
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Sans ces éléments, les répondants compensent par des hypothèses — donc des devis non comparables.
 
-À rédiger.
+### Section 2 — Périmètre technique attendu (2-3 pages)
 
-## 4. Cas concret chiffré
+C'est le cœur du RFP. **Tableau standardisé à imposer** :
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+| Critère | Exigence minimum 2026 | Variante premium |
+|---|---|---|
+| Niveau d'éclairement (Em) | 500 lux open-space, 300 lux circulation (NF EN 12464-1) | + 750 lux salles de réunion premium |
+| Uniformité (U0) | ≥ 0,60 zones de tâche | ≥ 0,70 |
+| Éblouissement (UGR) | ≤ 19 open-space, ≤ 22 commerce | ≤ 16 plateaux design |
+| Indice de rendu des couleurs (IRC) | ≥ 80 bureau | ≥ 90 commerce / hôtellerie / accueil premium |
+| Température de couleur (CCT) | 4000K bureau, 3000K hôtellerie | Tunable white 3000-5000K (HCL) |
+| Durée de vie (L80) | ≥ 50 000 h | ≥ 60 000 h |
+| MacAdam SDCM | ≤ 3 | ≤ 2 |
+| Flicker (PstLM) | ≤ 1,0 | < 0,4 |
+| Indice de protection IP | IP20 bureau, IP65 parking | IP65 humidité élevée |
+| Indice résistance chocs (IK) | IK02 bureau, IK10 zone vandale | IK10 partout |
+| Gestion | DALI-2 obligatoire ≥ 200 m² | DALI-D4i + capteurs présence + gradation jour |
+| Power Factor (PF) | ≥ 0,9 | ≥ 0,95 |
+| THD (distorsion harmonique) | ≤ 15 % | ≤ 10 % |
 
-À rédiger.
+Exiger que **chaque répondant remplisse ce tableau** dans sa proposition. Pas de phrases vagues "matériel haut de gamme conforme aux normes".
 
-## 5. Pièges à éviter
+### Section 3 — Méthode photométrique (½ page)
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Imposer :
+- **Étude photométrique Dialux ou Relux** annexée à la proposition (fichier .dlx ou .rlx)
+- **Plan d'implantation** des luminaires sur le plan architecte fourni
+- **Calculs Em, U0, UGR par zone** (open-space, bureaux fermés, circulations, salles de réunion)
+- **Facteur de maintenance** (MF) explicite (typiquement 0,7-0,8)
 
-À rédiger.
+Un répondant qui ne fournit pas l'étude photométrique sort du processus. C'est la base.
 
-## 6. FAQ
+### Section 4 — Marques et garanties (1 page)
 
-<!-- TODO[seo-generate]: ~217 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Spécifier dans le RFP :
+- **Liste des marques acceptables** : Trilux, Philips, Zumtobel, Sylvania, Modular, Targetti, Erco. Ou autorisation "équivalent" si argumenté.
+- **Refus explicite** : marques blanches sans fiche technique LM-80, drivers no-name (Tridonic, Osram, Philips, Mean Well acceptés)
+- **Durée de garantie minimum** : 5 ans luminaires + drivers (2026 = standard pro)
+- **Garantie décennale** active de l'installateur (joindre attestation)
+- **RC pro** (responsabilité civile professionnelle) à hauteur de 1 M€ minimum
+- **Qualification Qualifelec mention Éclairage** (joindre attestation à jour)
 
-À rédiger.
+### Section 5 — Méthode de pose et planning (½ page)
+
+Exiger précisément :
+- **Plage d'intervention** : nuit / weekend / jour ouvré
+- **Phasage** : par étage / par zone / global
+- **Durée totale** et durée par phase
+- **Sécurité incendie maintenue** pendant le chantier (BAES + balisage)
+- **Mode opératoire** propreté (bâches, aspiration, nettoyage post-pose)
+- **Réception et tests** : mesure post-installation au luxmètre étalonné
+
+### Section 6 — Modalités financières (½ page)
+
+À imposer :
+- **Devis ferme** = facture finale (engagement contractuel, pas estimation indicative)
+- **Décomposition** : matériel / pose / mise en service / études photométriques / Consuel si applicable
+- **Modalités de paiement** : acompte 30 % à commande, 60 % à mi-chantier, 10 % à réception (avec clause de réserve)
+- **Pénalités de retard** : 1 ‰ du montant HT/jour à partir de J+5 du planning convenu
+
+### Section 7 — Modalités de réponse (½ page)
+
+Cadrer la réponse :
+- **Délai de remise des offres** : 21 jours minimum (sur dossier sérieux)
+- **Format** : PDF + .dlx/.rlx + fiche technique luminaires + attestations
+- **Présentation orale** demandée pour les 2-3 finalistes (1h, sur site idéal)
+- **Critères d'attribution** explicités (prix 40 %, qualité technique 35 %, garanties + planning 25 %)
+
+## La grille d'évaluation des réponses
+
+Voici la grille standardisée pour comparer les devis reçus :
+
+| Critère | Pondération | Notation 1-5 |
+|---|---|---|
+| Conformité technique au cahier des charges | 25 % | 1 = écarts majeurs, 5 = strict conforme |
+| Qualité de l'étude photométrique (Em, U0, UGR atteints) | 15 % | 1 = absente, 5 = complète + .dlx |
+| Marques luminaires + qualité drivers | 10 % | 1 = marque blanche, 5 = Trilux/Zumtobel/Philips |
+| Durée de vie L80 et garantie | 10 % | 1 = ≤ 35 000h, 5 = ≥ 60 000h + garantie 7 ans |
+| Méthode de pose (nuit, sécurité, planning) | 10 % | 1 = jour ouvré non négocié, 5 = nuit + phasage propre |
+| Qualifications (Qualifelec, RGE, IRVE) | 10 % | 1 = aucune, 5 = toutes à jour |
+| Engagement devis ferme | 5 % | 1 = estimation indicative, 5 = ferme contractuel |
+| Prix (à conformité égale) | 15 % | 1 = sup à +20 % du min, 5 = min ou -5 % |
+
+**Note importante** : ne JAMAIS pondérer le prix à plus de 30 % sur un projet relamping LED. La différence de qualité de matériel se paie en durée de vie réelle. Un devis 15 % moins cher avec L70 40 000h vs un devis L80 60 000h pose à refaire entièrement à 7 ans = pas du tout la même affaire.
+
+## Les pièges les plus fréquents en RFP relamping
+
+### 1. Critère "fourniture LED équivalente" sans cadre
+Sans liste de marques + spécifications techniques, les répondants pourront répondre avec matériel chinois OEM à 50 % du prix Trilux mais 30 % de durée de vie. Cadrez ou refusez.
+
+### 2. Absence de plan photométrique attendu
+La photométrie n'est pas un détail technique — c'est ce qui garantit la conformité NF EN 12464-1 et donc la conformité du bail (sur tertiaire). Sans étude, vous achetez à l'aveugle.
+
+### 3. Garanties trop courtes
+La norme 2026 = 5 ans minimum pièces + main d'œuvre. Le standard premium = 7 ans. Si un répondant offre 2 ans, c'est un signal de qualité matérielle douteuse.
+
+### 4. Pas d'engagement devis ferme
+"Estimation susceptible d'évoluer en fonction de l'avancement des travaux" = vous signez un chèque en blanc. Imposez ferme = facture finale.
+
+### 5. Critère de prix trop pondéré (≥ 50 %)
+Erreur n°1 en marchés publics où le code des marchés permet de pondérer à 60-80 % le prix. Sur du relamping, la qualité matérielle compte autant que le prix. Une pondération équilibrée 35-40 % prix maximum est la bonne approche.
+
+## Notre approche S Connect quand on répond à un RFP
+
+Vous trouverez dans notre proposition :
+- **Tableau de conformité point par point** au cahier des charges
+- **Étude photométrique Dialux** annexée (.dlx fourni)
+- **Fiche technique luminaires** détaillée (LM-80, certifications)
+- **Devis ferme** contractuel (pas d'avenant après mise en service)
+- **Planning détaillé** avec sécurité incendie maintenue
+- **Modalités SAV** (durée garantie, hot-line, délai intervention)
+- **Attestations** Qualifelec mention Éclairage, RGE, IRVE niveau 2, décennale active, RC pro
+
+Notre engagement type sur un RFP 1 000 m² tertiaire :
+- Étude photométrique livrée sous 7 jours après visite site
+- Devis ferme dans la foulée
+- Planning intervention démarrant sous 6-8 semaines après commande
+
+## FAQ
+
+### Combien de répondants consulter ?
+**3 minimum, 5 maximum**. En dessous de 3, pas de comparaison. Au-dessus de 5, vous diluez le temps de chacun et vous obtenez des propositions moins soignées (les sérieux ne répondent pas aux RFP "à 8 répondants" qui ressemblent à de la chasse au moins-disant).
+
+### Faut-il faire une visite site pour les répondants ?
+Oui, obligatoire pour tout projet > 500 m². Sans visite physique, le devis est forcément approximatif. Programmez une visite de 1h par répondant — c'est le moment où vous identifierez ceux qui posent les bonnes questions.
+
+### Quel délai pour le processus complet ?
+- Rédaction RFP + identification répondants : 1-2 semaines
+- Envoi + visites + remise des offres : 3-4 semaines
+- Analyse + présentations orales + choix : 2-3 semaines
+- Délai post-choix avant démarrage chantier : 4-6 semaines (commande matériel)
+- **Total : 10-15 semaines** de la rédaction du RFP au démarrage du chantier
+
+### Faut-il imposer une marque précise ?
+Pas dans la version générique, mais **vous pouvez exiger une liste de 4-6 marques acceptables** (Trilux, Philips, Zumtobel, Sylvania, Modular, Targetti). Cela exclut les marques blanches sans rejeter la concurrence.
+
+### Et pour les marchés publics ?
+Le code de la commande publique impose certaines règles spécifiques (CCAP, BPU, RC). Mais les principes restent les mêmes. Sur le tertiaire public (mairies, préfectures, hôpitaux), notre RFP générique est compatible — il suffit d'y intégrer le formalisme administratif.
 
 ## Pour aller plus loin
 
 - [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Audit éclairage LED — la méthode S Connect](/actualites/audit-eclairage-led-methode)
+- [Norme NF EN 12464-1 : tableau résumé](/actualites/norme-nf-en-12464-1-tableau-resume)
+- [Justifier un CAPEX relamping à votre comité d'investissement](/actualites/justifier-capex-relamping-comite-investissement)
+- [Marques luminaires pro : comparatif](/actualites/marques-luminaires-pro-comparatif)
+- [Demander un devis gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [AFNOR — NF EN 12464-1 Éclairage des lieux de travail](https://www.afnor.org/)
+- [Qualifelec — Certification professionnelle](https://www.qualifelec.fr/)
+- [Légifrance — Code de la commande publique](https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000037701019/)
+- [DGE — Acheter responsable dans le tertiaire](https://www.entreprises.gouv.fr/)
+- Benchmark interne S Connect — réponses à ~25 RFP relamping IDF 2024-2026
