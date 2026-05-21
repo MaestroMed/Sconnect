@@ -364,6 +364,62 @@ const TERMS: Term[] = [
     category: "Réglementation",
     definition:
       "Prime dédiée à la mobilité électrique. 600 € maison individuelle, 1 660 € copropriété résidentielle, 960 € tertiaire par point de charge. Versée 4-8 semaines après pose. Pas affectée par la suppression CEE éclairage de février 2026.",
+    link: { label: "Article ADVENIR 2026", href: "/actualites/prime-advenir-borne-recharge-2026" },
+  },
+
+  // RE2020 / Diagnostic
+  {
+    acronym: "DPE",
+    full: "Diagnostic de Performance Énergétique",
+    category: "Réglementation",
+    definition:
+      "Obligatoire pour vente/location depuis 2007 (refondu 2021). Note A à G selon consommation énergie primaire + émissions GES. Le poste éclairage compte dans la consommation finale et impacte le score. Un relamping LED peut faire gagner une lettre sur tertiaire mal éclairé.",
+  },
+  {
+    acronym: "Bbio",
+    full: "Coefficient Besoin Bioclimatique",
+    category: "Réglementation",
+    definition:
+      "Indicateur RE2020 qui mesure les besoins du bâtiment en chauffage, climatisation et éclairage avant prise en compte des systèmes. L'éclairage compte dans le calcul. Bbio max imposé selon zone climatique. Un LED + gestion DALI réduit le Bbio_éclairage de 60-75 %.",
+  },
+  {
+    acronym: "Cep",
+    full: "Consommation d'Énergie Primaire",
+    category: "Réglementation",
+    definition:
+      "Indicateur RE2020 du total consommation primaire du bâtiment (chauffage + ECS + clim + auxiliaires + éclairage). Cep max imposé selon usage. Le relamping LED réduit directement le Cep_éclairage. Influence directe sur l'étiquette DPE finale.",
+  },
+
+  // Composants additionnels
+  {
+    acronym: "DEL",
+    full: "Diode Électroluminescente (= LED)",
+    category: "Composant",
+    definition:
+      "Terme français équivalent à LED (Light-Emitting Diode). Utilisé dans la normalisation française et les textes officiels (AFNOR, ADEME). LED reste l'usage courant.",
+  },
+  {
+    acronym: "PWM",
+    full: "Pulse Width Modulation",
+    category: "Composant",
+    definition:
+      "Méthode de gradation par modulation de largeur d'impulsion. Économique mais peut générer du flicker (≥ 100 Hz acceptable, < 100 Hz inconfort visuel). Préférer drivers à gradation analogique 0-10V ou DALI pour le tertiaire.",
+  },
+
+  // Certifications bâtiment
+  {
+    acronym: "WELL Building",
+    full: "WELL Building Standard",
+    category: "Norme",
+    definition:
+      "Certification internationale bien-être au travail (International WELL Building Institute). Imposée sur certains projets premium IDF. Le module Light définit des exigences fortes : CCT tunable, IRC ≥ 80, UGR ≤ 19, accès lumière du jour. Influence directement les choix relamping.",
+  },
+  {
+    acronym: "HQE / LEED / BREEAM",
+    full: "Certifications environnementales bâtiment",
+    category: "Norme",
+    definition:
+      "HQE (français, Cerway), LEED (USA, USGBC), BREEAM (UK, BRE). Toutes intègrent un volet éclairage (efficacité lumineuse, gestion, pollution lumineuse). Le relamping LED est typiquement éligible à 8-15 points selon référentiel. Vérifier le cahier des charges du projet.",
   },
 ];
 
