@@ -20,6 +20,8 @@
     "perf:lh:mobile": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-mobile.html --view",
     "seo:generate": "tsx scripts/seo-generate.ts",
     "seo:generate:dry": "tsx scripts/seo-generate.ts -- --dry",
+    "seo:refresh-dates": "tsx scripts/refresh-dates.ts",
+    "seo:refresh-dates:dry": "tsx scripts/refresh-dates.ts -- --dry",
     "db:seed": "tsx scripts/migrate-json-to-supabase.ts",
     "db:import-mdx": "tsx scripts/import-mdx-to-db.ts",
     "assets:fetch": "tsx scripts/fetch-images.ts",

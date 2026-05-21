@@ -20,6 +20,7 @@ import {
   injectSchema,
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
+import AuthorByline from "@/components/seo/AuthorByline";
 
 // EDITORIALISED 2026-05-21 — production quality, with real INSEE + market
 // data on Clichy's tertiary tissue. Updates to the city stats should be
@@ -311,6 +312,13 @@ export default function RelampingClichyPage() {
               Calculer mon ROI
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Author byline — E-E-A-T signal avant le CTA */}
+      <section className="bg-surface py-10 md:py-14">
+        <div className="container-custom max-w-3xl">
+          <AuthorByline variant="card" />
         </div>
       </section>
 

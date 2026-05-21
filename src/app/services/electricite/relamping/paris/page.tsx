@@ -20,6 +20,7 @@ import {
   injectSchema,
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
+import AuthorByline from "@/components/seo/AuthorByline";
 
 // EDITORIALISED 2026-05-21 — production quality with real Paris office
 // market data (ORIE, BNPP RE). Update annually.
@@ -279,6 +280,13 @@ export default function RelampingParisPage() {
               Études de cas
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Author byline — E-E-A-T signal avant le CTA */}
+      <section className="bg-surface py-10 md:py-14">
+        <div className="container-custom max-w-3xl">
+          <AuthorByline variant="card" />
         </div>
       </section>
 

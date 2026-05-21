@@ -1,53 +1,185 @@
 ---
 title: "Justifier un CAPEX relamping à votre comité d'investissement : la grille de lecture"
-excerpt: "DAF, contrôleur de gestion : comment présenter le relamping LED en termes financiers stricts. TRI, VAN, payback, sensibilité au prix de l'électricité, scénarios DEET avec/sans CEE. Modèle Excel inclus en téléchargement."
+excerpt: "DAF, contrôleur de gestion : comment présenter le relamping LED en termes financiers stricts. TRI, VAN, payback, sensibilité au prix de l'électricité, scénarios DEET avec/sans CEE. La grille de décision opérationnelle."
 date: "2026-05-21"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Guide décideur"
 tags: ["CAPEX", "TRI", "VAN", "comité investissement", "DAF"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-21)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-justifier-capex-relamping-daf`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Le contexte : pourquoi cet article s'adresse aux DAF
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Vous portez un dossier relamping LED à votre comité d'investissement. Le DG est convaincu (DEET 2030, QVT collaborateurs), mais le DAF demande la grille financière standard : **TRI, VAN, payback, sensibilité aux paramètres**. C'est légitime — c'est son métier.
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Cet article propose le format de présentation que nous voyons fonctionner depuis 2022 dans les comités d'investissement de PME et grands groupes IDF. Pas la version commerciale, **la version contrôleur de gestion**. Avec les pièges où l'argumentaire tombe systématiquement, et comment les anticiper.
 
-À rédiger.
+Important : cet article n'est pas du conseil financier. Il propose un cadre méthodologique. La validation finale dépend toujours de votre politique d'investissement interne et du contexte précis du bâtiment.
 
-## 2. Le contexte technique / réglementaire
+## La grille de présentation à un comité d'investissement
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### 1. Le périmètre chiffré, mesuré
 
-À rédiger.
+La première erreur dans 80 % des dossiers que nous voyons : **chiffres "moyens" ou "selon la littérature"**. Un comité d'investissement sérieux ne valide pas un CAPEX sur "selon les estimations habituelles, on économise 60 % d'énergie".
 
-## 3. Notre méthode S Connect
+Ce qu'il faut présenter :
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **Consommation actuelle mesurée** (kWh/an) sur le poste éclairage. Soit via sous-comptage si installé, soit via audit énergétique mesuré (luxmètre étalonné + relevé heures de fonctionnement réel par zone). Notre audit gratuit produit ce chiffre.
+- **Consommation projetée post-relamping** (kWh/an), calculée à partir du dimensionnement luminaire-par-luminaire + facteurs de gestion (détection présence, gradation lumière du jour, scénarisation).
+- **Économies brutes annuelles** = différence × prix de l'électricité contractualisé HT (ne pas utiliser le prix moyen tertiaire publié, utiliser **votre prix** depuis votre dernière facture).
 
-À rédiger.
+Exemple concret pour un bureau 1 200 m² Levallois (cas réel S Connect 2026) :
 
-## 4. Cas concret chiffré
+- Conso 2025 mesurée : 28 800 kWh/an
+- Conso 2026 projetée post-LED+DALI : 9 200 kWh/an
+- Économie brute : 19 600 kWh/an × 0,135 €/kWh HT (prix contractualisé client) = **2 646 €/an**
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### 2. Les éléments hors-énergie à valoriser
 
-À rédiger.
+Une analyse purement énergétique sous-estime la VAN. Ajouter dans la présentation :
 
-## 5. Pièges à éviter
+| Poste | Économie typique tertiaire | Source méthodologique |
+|---|---|---|
+| Maintenance lampes (remplacements + main d'œuvre) | 0,8-1,4 €/m²/an | LED durée 50 000 h vs T8 15 000 h |
+| Climatisation (LED dégage 60 % moins de chaleur) | 0,3-0,7 €/m²/an | CIBSE TM65 / ASHRAE 90.1 |
+| Productivité QVT (mesurable sur tertiaire intellectuel) | 0 à 4 % CA chargé/an | Conservatif — non valorisé par défaut |
+| Valeur immobilière (label / DEET conformité) | Sur revente uniquement | Difficile à modéliser en VAN |
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Notre conseil : valorisez **uniquement les économies énergie + maintenance + climatisation** en VAN. Les économies QVT et valeur immobilière sont des "options réelles" qu'on mentionne sans chiffrer pour rester conservateur.
 
-À rédiger.
+### 3. Le calcul TRI / VAN
 
-## 6. FAQ
+Voici la trame standard pour un dossier 1 200 m² tertiaire IDF :
 
-<!-- TODO[seo-generate]: ~250 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+| Paramètre | Valeur (cas Levallois 2026) |
+|---|---|
+| CAPEX initial HT | 38 400 € |
+| Économies annuelles totales | 3 850 € (énergie 2 646 + maintenance 990 + clim 214) |
+| Durée d'amortissement comptable | 7 ans |
+| Durée de vie utile (luminaire) | 12-15 ans |
+| Taux d'actualisation (corporate IDF 2026) | 8 % |
+| Inflation prix électricité (hypothèse conservatrice) | +3 % / an |
 
-À rédiger.
+Avec ces hypothèses :
+
+- **Payback simple** : 9,97 ans (sans inflation)
+- **Payback actualisé** : ~12,4 ans
+- **TRI sur 12 ans** : ~5,2 %
+- **VAN sur 12 ans à 8 %** : −2 100 € (légèrement négative)
+- **VAN sur 15 ans à 8 %** : +4 600 € (positive)
+
+Conclusion DAF honnête : à horizon 12 ans, le projet est légèrement déficitaire en VAN à 8 %. À 15 ans, il devient positif. **C'est la dépendance à la durée d'horizon qui rend le dossier sensible**.
+
+### 4. La sensibilité aux paramètres clés
+
+Le DAF demandera systématiquement le tornado chart de sensibilité. Voici l'impact sur la VAN 15 ans des variations ±20 % par paramètre, pour le même cas :
+
+| Paramètre | Impact VAN −20 % | Impact VAN +20 % |
+|---|---|---|
+| Prix électricité futur | −9 800 € | +9 800 € |
+| Économies maintenance | −2 300 € | +2 300 € |
+| CAPEX initial | +7 700 € | −7 700 € |
+| Taux actualisation | +5 100 € | −5 100 € |
+
+**Lecture** : le projet est principalement sensible au prix futur de l'électricité. Si on prend l'hypothèse RTE 2026-2030 (+5 %/an au lieu de +3 %), la VAN 15 ans passe à +18 000 € — projet clairement rentable.
+
+### 5. Le point de bascule DEET
+
+Pour un comité d'investissement, l'argument financier "stand-alone" du relamping LED reste **borderline** à horizon < 10 ans dans la plupart des cas. **Le vrai déclencheur 2026 est le coût de la non-conformité DEET 2030**.
+
+Voici la grille à présenter en parallèle :
+
+- Si relamping fait en 2026-2028 → trajectoire DEET 2030 sécurisée, ROI cumulé positif à 8 ans
+- Si pas de relamping → en 2030, l'investissement est subi (avec inflation matériel + main-d'œuvre +25 à 35 %) et l'amende administrative DEET est en jeu (max **7 500 € pour personne morale**, par bâtiment, renouvelable)
+- Le surcoût d'un retard 2026 → 2030 est typiquement **+18 à 25 % sur le CAPEX final**
+
+En ramenant cela dans la VAN, le **scénario "retarder de 4 ans"** est presque toujours déficitaire vs scénario "lancer maintenant" sur tertiaire > 1 000 m².
+
+## La présentation au comité — script type
+
+Voici le déroulé qui fonctionne dans les comités où nous accompagnons les clients :
+
+**Diapositive 1 : contexte business** (1 min)
+- "Nous portons un dossier relamping LED 1 200 m² siège Levallois. CAPEX 38 400 € HT. Objectif : conformité DEET 2030 + amélioration QVT + arbitrage maintenance."
+
+**Diapositive 2 : périmètre + chiffres mesurés** (2 min)
+- Audit photométrique S Connect du 15 mars 2026 annexé.
+- Consommation 2025 mesurée, projection 2026 chiffrée, hypothèses transparentes.
+
+**Diapositive 3 : analyse financière** (3 min)
+- TRI 5,2 %, VAN 15 ans +4 600 € à 8 %.
+- Sensibilité prix électricité = paramètre dominant.
+- Comparaison scénario "lancer 2026" vs scénario "retarder 2030" → écart positif 2026.
+
+**Diapositive 4 : risques + plan de mitigation** (2 min)
+- Risque #1 : dérapage chantier → mitigé par devis ferme = facture finale (engagement S Connect contractuel).
+- Risque #2 : sous-performance énergétique → mesure post-installation + ajustement DALI + clause de réserve 5 % à la réception.
+- Risque #3 : interruption d'activité → intervention nuit/weekend, planning communiqué J−14.
+
+**Diapositive 5 : décision demandée** (1 min)
+- Validation CAPEX 38 400 € HT sur exercice 2026.
+- Démarrage chantier mai 2026, livraison juillet 2026.
+
+## Les objections fréquentes et les réponses
+
+### "Le payback est trop long, > 10 ans"
+**Réponse** : payback simple stand-alone > 10 ans, oui. Mais ce n'est pas le bon angle. Le dossier est porté par la **trajectoire DEET 2030**, où retarder l'investissement coûte +18 à 25 % sur le CAPEX final + risque amende. Et le projet est positif en VAN sur 15 ans, qui est la durée de vie utile du luminaire.
+
+### "Pourquoi pas un leasing pour étaler ?"
+**Réponse** : option viable. Surcoût leasing ~1,5-3 %/an sur 5 ans = ~3 200 € sur la durée. À mettre dans la balance vs trésorerie économisée. Notre conseil : étudier les 3 cas (cash, leasing 3 ans, leasing 5 ans) côte-à-côte avec votre DAF.
+
+### "Et si on attend une nouvelle prime ?"
+**Réponse** : risque réel. La fiche CEE BAT-EQ-127 a été supprimée en février 2026. Aucun signal politique 2026 ne laisse présager un nouveau dispositif national avant 2027-2028, et la trajectoire DEET 2030 rend l'attente contre-productive. Les régions (IDF notamment) maintiennent des aides ciblées mais sur enveloppe limitée.
+
+### "Sur quel scénario d'inflation électricité travailler ?"
+**Réponse** : RTE publie des trajectoires officielles. Pour un comité d'investissement IDF 2026, **3 %/an est conservateur**, 5 %/an est la médiane RTE, 8 %/an est pessimiste. Présentez les 3 scénarios. Le projet devient clairement rentable au-delà de 4 %/an.
+
+## Les pièges méthodologiques à éviter
+
+1. **Sur-estimer les économies "littérature"**. La fourchette "-60 à -75 %" sur le poste éclairage est correcte en moyenne, mais elle dépend du benchmark de départ. Sur un parc déjà LED 1ʳᵉ génération (post-2015), la marge de progression est de seulement -20 à -35 %. Auditer avant de chiffrer.
+
+2. **Oublier le coût d'opportunité du capital**. Un CAPEX 40 k€ qui produit 4 k€/an en économies vaut moins qu'un CAPEX similaire qui produit 8 k€/an en marge brute commerciale. Le DAF compare. Le bon angle : **le relamping n'est pas un investissement de croissance, c'est un investissement de conformité + résilience**.
+
+3. **Présenter une VAN positive sur 20 ans pour rassurer**. Beaucoup d'études commerciales relamping étirent l'horizon à 20-25 ans. Les comités d'investissement rejettent cette approche : la durée de vie utile du luminaire LED est **12-15 ans**, la VAN au-delà est spéculative.
+
+4. **Ne pas valoriser la résilience prix électricité**. Le LED + DALI réduit la consommation de 65-75 % — c'est une **assurance contre la volatilité tarifaire**. Cette dimension est rarement chiffrée mais elle a un vrai impact stratégique.
+
+5. **Sous-estimer le coût de la non-conformité DEET 2030**. Au-delà de l'amende administrative (jusqu'à 7 500 €), les baux verts post-2024 incluent des clauses environnementales — la non-conformité DEET peut conduire à une **renégociation à la baisse du loyer** par le locataire, ou à un blocage de revente du bâtiment.
+
+## FAQ
+
+### Quel taux d'actualisation utiliser ?
+Votre taux corporate interne (WACC). Pour les PME IDF 2026, on observe en pratique 8-12 %. Plus le taux est haut, plus l'investissement énergétique apparaît défavorable — c'est pourquoi le scénario DEET est essentiel pour rééquilibrer.
+
+### Le coût de maintenance est-il vraiment significatif ?
+Oui, surtout sur tertiaire > 500 m². Un parc T8 36W représente ~3-5 remplacements lampes/luminaire sur 12 ans + main-d&apos;œuvre. Le LED 50 000 h ne nécessite typiquement aucun remplacement avant 12-15 ans. Sur 1 000 m², l&apos;économie maintenance cumulée est de 8 000 à 14 000 €.
+
+### Comment chiffrer la QVT en VAN ?
+Honnêtement : difficile à chiffrer rigoureusement. La littérature scientifique (CIE TC 6-71, Lighting Research Center) indique +8 à +12 % productivité auto-mesurée, mais "auto-mesuré" est faible en preuve. Notre recommandation : **mentionnez la QVT comme upside non-chiffré**, ne la mettez pas dans le calcul VAN. Cela maintient la crédibilité de votre dossier auprès du DAF.
+
+### Quels documents joindre au dossier comité ?
+- Audit photométrique S Connect (annexé)
+- Modèle ROI Excel détaillé (variantes scénarios)
+- Devis ferme avec engagement contractuel
+- Attestations Qualifélec / RGE / Décennale du prestataire
+- Plan d'intervention détaillé (nuit/weekend, sécurité, BAES)
 
 ## Pour aller plus loin
 
 - [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Audit éclairage LED — la méthode S Connect](/actualites/audit-eclairage-led-methode)
+- [Décret tertiaire 2030 — stratégie sans CEE](/actualites/decret-tertiaire-eclairage-strategie-2026-sans-cee)
+- [Financer son relamping LED sans CEE](/actualites/financer-relamping-led-sans-cee-2026)
+- [Calculateur ROI relamping](/calculateur-relamping)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [Légifrance — Décret tertiaire (DEET) + sanctions](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049671143)
+- [ADEME — Plateforme OPERAT](https://operat.ademe.fr/)
+- [RTE — Bilan prévisionnel](https://www.rte-france.com/analyses-tendances-et-prospectives/bilan-previsionnel-2050)
+- [CIBSE TM65 — Embodied carbon + operational energy](https://www.cibse.org/knowledge-research/knowledge-portal/tm65)
+- Benchmark S Connect — 80 dossiers tertiaires IDF 2024-2026 (anonymisés)

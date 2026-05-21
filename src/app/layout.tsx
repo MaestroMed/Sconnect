@@ -301,7 +301,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* Schema.org WebSite for sitelinks search box */}
+        {/* Schema.org WebSite for sitelinks search box.
+            SearchAction = active la sitelinks searchbox dans Google SERP
+            (les visiteurs peuvent chercher dans le site directement depuis
+            les résultats Google). Pointe vers /actualites?q={search_term}
+            qui agira comme search endpoint (à implémenter côté UI). */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -314,6 +318,14 @@ export default function RootLayout({
               description: "Expert en électricité, contrôle d'accès et serrurerie en Île-de-France",
               publisher: { "@id": `${siteUrl}/#organization` },
               inLanguage: "fr-FR",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${siteUrl}/actualites?q={search_term_string}`,
+                },
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />
