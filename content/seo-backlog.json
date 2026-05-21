@@ -1319,7 +1319,7 @@
       "type": "vertical-page",
       "cluster": "verticals",
       "priority": 58,
-      "status": "pending",
+      "status": "generated",
       "slug": "musee-galerie-art",
       "vertical": "Musée / Galerie d'art",
       "title": "Relamping LED musée et galerie d'art — IRC > 95, sécurité œuvres, muséographie",
