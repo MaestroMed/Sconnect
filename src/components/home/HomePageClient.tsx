@@ -34,6 +34,7 @@ import HeroVideo from "@/components/home/HeroVideo";
 import BulbText from "@/components/ui/BulbText";
 import { MagneticAnchor, MagneticLink } from "@/components/ui/MagneticButton";
 import RatingBadge from "@/components/marketing/RatingBadge";
+import RelampingFeatured from "@/components/home/RelampingFeatured";
 import dynamic from "next/dynamic";
 
 // Lazy-load the comparator: not in the initial bundle (saves ~6 KB gzip
@@ -322,6 +323,11 @@ export default function HomePageClient({
           </svg>
         </div>
       </section>
+
+      {/* RELAMPING FEATURED — pillar topic gets top-of-page weight.
+          Strategic SEO move: every visitor + every crawler sees that
+          relamping LED tertiary is the marquee expertise. */}
+      <RelampingFeatured />
 
       {/* Trust band — certifications visible immediately under the hero.
           Audit-driven: Qualifélec / RGE / IRVE / Décennale are premium

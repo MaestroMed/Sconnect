@@ -387,6 +387,36 @@ function writeOnce(p: string, content: string) {
   return true;
 }
 
+// ─── Editorial readiness gate ────────────────────────────────────────────
+function reportEditorialReadiness(b: Backlog) {
+  const counts = b.items.reduce<Record<string, number>>((a, i) => {
+    a[i.status] = (a[i.status] || 0) + 1;
+    return a;
+  }, {});
+  const generated = counts["generated"] || 0;
+  const published = counts["published"] || 0;
+  const pending = counts["pending"] || 0;
+
+  console.log("");
+  console.log("── Editorial readiness ──");
+  console.log(`  pending:    ${pending}`);
+  console.log(`  generated:  ${generated}  (drafts awaiting human editorialisation)`);
+  console.log(`  published:  ${published}  (live with draft: false)`);
+  console.log("");
+
+  if (generated > 5) {
+    console.log(
+      `⚠  ${generated} drafts awaiting human review. Per the SEO Ultraplan` +
+        " (docs/SEO-ULTRAPLAN-10-ANS.md §10), no draft ships to production" +
+        " without editorialisation. The cron will keep scaffolding but" +
+        " consider pausing it until the backlog of drafts is drained.",
+    );
+  }
+  if (pending === 0) {
+    console.log("✓ Backlog drained — pause the cron or add new items.");
+  }
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────
 function main() {
   const backlog = readBacklog();
@@ -394,6 +424,7 @@ function main() {
 
   if (!item) {
     console.log("✓ Backlog empty (no pending items). Nothing to generate.");
+    reportEditorialReadiness(backlog);
     return;
   }
 
@@ -440,6 +471,8 @@ function main() {
     writeBacklog(backlog);
     console.log(`✓ backlog updated: ${item.id} → generated`);
   }
+
+  reportEditorialReadiness(backlog);
 }
 
 try {
