@@ -1193,7 +1193,7 @@
       "type": "blog-post",
       "cluster": "comparisons",
       "priority": 68,
-      "status": "pending",
+      "status": "generated",
       "slug": "gtb-eclairage-knx-vs-dali-vs-bluetooth-mesh",
       "title": "GTB et éclairage : KNX vs DALI-2 vs Bluetooth Mesh — comparatif technique 2026",
       "excerpt": "3 protocoles, 3 philosophies. KNX (matures bus + bouton), DALI-2 (le standard éclairage), Bluetooth Mesh (sans fil émergent). Forces, limites, coûts, cas d'usage. Notre choix selon profil.",

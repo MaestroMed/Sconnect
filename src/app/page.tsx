@@ -2,8 +2,12 @@ import { getSiteConfig, getHomepage, getTestimonials, getRealizations, getBrands
 import HomePageClient from "@/components/home/HomePageClient";
 import { generateVideoSchema, injectSchema } from "@/lib/structured-data";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0; // Disable cache to always fetch fresh data
+// ISR — re-render at most every 10 min. The home content (site config,
+// testimonials, brands) doesn't change second by second; static + ISR
+// gives us sub-1s TTFB instead of the 5-15s cold-start we had with
+// `force-dynamic` + `revalidate: 0`. Editorial changes propagate within
+// 10 min, or instantly via Vercel's on-demand revalidation if we wire it.
+export const revalidate = 600;
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 
