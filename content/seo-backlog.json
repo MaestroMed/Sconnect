@@ -1336,7 +1336,7 @@
       "type": "vertical-page",
       "cluster": "verticals",
       "priority": 62,
-      "status": "pending",
+      "status": "generated",
       "slug": "centre-commercial",
       "vertical": "Centre commercial",
       "title": "Relamping LED centre commercial — pilotage zones, variation circadienne, ROI 24 mois",
