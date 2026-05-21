@@ -23,6 +23,21 @@ const heroVideoSchema = generateVideoSchema({
   baseUrl: siteUrl,
 });
 
+// Home breadcrumb — even on the root, declaring it explicit helps Google
+// understand the URL is the canonical entry point of the site graph.
+const homeBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Accueil",
+      item: siteUrl,
+    },
+  ],
+};
+
 export default async function Home() {
   // Récupérer les données du back-office (Supabase en prod, JSON en dev)
   const siteConfig = await getSiteConfig();
@@ -63,6 +78,10 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={injectSchema(heroVideoSchema)}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={injectSchema(homeBreadcrumbSchema)}
       />
       <HomePageClient
         siteConfig={{
