@@ -1168,7 +1168,7 @@
       "type": "blog-post",
       "cluster": "regions",
       "priority": 65,
-      "status": "pending",
+      "status": "generated",
       "slug": "abf-eclairage-immeuble-classe-paris",
       "title": "Relamping en immeuble classé : le workflow ABF complet (Architectes des Bâtiments de France)",
       "excerpt": "Quand l'ABF intervient, quels équipements concernés, la procédure de pré-validation, les délais réels constatés à Paris en 2026. Pour ne pas faire planter un chantier au dernier moment.",
