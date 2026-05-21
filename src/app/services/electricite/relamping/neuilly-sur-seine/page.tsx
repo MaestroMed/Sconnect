@@ -54,12 +54,13 @@ export default function RelampingNeuillysurSeinePage() {
       {/* Hero */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <Image
-          src="/images/services/relamping-bureau.webp"
+          src="/images/locations/neuilly-sur-seine-hero.webp"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-50"
+          className="object-cover opacity-55"
           aria-hidden="true"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark-950 from-0% via-dark-950/75 via-50% to-dark-950/35 to-100%" />
         <NoiseOverlay opacity={0.04} />
