@@ -159,15 +159,17 @@ ${sections.join("\n\n")}
 `;
 }
 
-function locationPageTemplate(item: LocationPageItem): string {
+function locationPageTemplate(item: LocationPageItem, isVertical = false): string {
   const city = item.city;
   const slug = item.slug;
   const postalCodes = item.postalCodes.join(", ");
   const secondary = (item.secondaryKeywords ?? []).map((k) => `"${k}"`).join(", ");
-  // Auto-pick a dedicated hero image if one exists for this slug.
-  // Convention: /images/locations/<slug>-hero.webp generated via Higgsfield
-  // in the strategy pipeline (docs/SEO-ULTRAPLAN-10-ANS.md §8).
-  const heroPath = `/images/locations/${slug}-hero.webp`;
+  // Auto-pick a dedicated hero image based on item type:
+  // - location-page  → /images/locations/<slug>-hero.webp
+  // - vertical-page  → /images/verticales/<slug>-hero.webp
+  // Both conventions generated via Higgsfield (Ultraplan §8).
+  const imageDir = isVertical ? "verticales" : "locations";
+  const heroPath = `/images/${imageDir}/${slug}-hero.webp`;
 
   return `import type { Metadata } from "next";
 import Link from "next/link";
@@ -448,14 +450,18 @@ function main() {
       content = locationPageTemplate(item);
       break;
     case "vertical-page":
-      // Vertical pages share the location template (city → vertical context).
-      // A bespoke vertical template can land in a future iteration.
+      // Vertical pages share the location template (city → vertical context)
+      // but with isVertical=true so the hero image path lands under
+      // /images/verticales/ instead of /images/locations/.
       writePath = path.join(RELAMPING_DIR, "verticales", item.slug, "page.tsx");
-      content = locationPageTemplate({
-        ...item,
-        city: (item as VerticalPageItem).vertical,
-        postalCodes: ["IDF"],
-      } as unknown as LocationPageItem);
+      content = locationPageTemplate(
+        {
+          ...item,
+          city: (item as VerticalPageItem).vertical,
+          postalCodes: ["IDF"],
+        } as unknown as LocationPageItem,
+        true, // isVertical
+      );
       break;
   }
 

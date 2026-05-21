@@ -54,7 +54,7 @@ export default function RelampingCentrecommercialPage() {
       {/* Hero — Higgsfield-generated dedicated image (Ultraplan §8). */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <Image
-          src="/images/locations/centre-commercial-hero.webp"
+          src="/images/verticales/centre-commercial-hero.webp"
           alt=""
           fill
           sizes="100vw"

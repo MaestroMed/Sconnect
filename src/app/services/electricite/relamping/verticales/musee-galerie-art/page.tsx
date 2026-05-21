@@ -54,7 +54,7 @@ export default function RelampingMuseGaleriedartPage() {
       {/* Hero — Higgsfield-generated dedicated image (Ultraplan §8). */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <Image
-          src="/images/locations/musee-galerie-art-hero.webp"
+          src="/images/verticales/musee-galerie-art-hero.webp"
           alt=""
           fill
           sizes="100vw"

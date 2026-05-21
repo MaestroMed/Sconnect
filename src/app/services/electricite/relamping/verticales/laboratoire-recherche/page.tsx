@@ -54,7 +54,7 @@ export default function RelampingLaboratoireRecherchePage() {
       {/* Hero — Higgsfield-generated dedicated image (Ultraplan §8). */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <Image
-          src="/images/locations/laboratoire-recherche-hero.webp"
+          src="/images/verticales/laboratoire-recherche-hero.webp"
           alt=""
           fill
           sizes="100vw"
