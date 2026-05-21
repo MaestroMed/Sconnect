@@ -1353,7 +1353,7 @@
       "type": "vertical-page",
       "cluster": "verticals",
       "priority": 55,
-      "status": "pending",
+      "status": "generated",
       "slug": "laboratoire-recherche",
       "vertical": "Laboratoire / Recherche",
       "title": "Relamping LED laboratoire et recherche — flicker-free, IRC 95, IP54 zones humides",
