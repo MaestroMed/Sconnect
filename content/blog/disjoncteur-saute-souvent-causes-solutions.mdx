@@ -1,53 +1,179 @@
 ---
 title: "Disjoncteur qui saute sans arrêt : 7 causes possibles, comment diagnostiquer"
 excerpt: "Surcharge, défaut d'isolement, appareil défectueux, terre absente. Notre méthode de diagnostic pas à pas + ce qu'on peut faire soi-même avant l'intervention."
-date: "2026-05-20"
+date: "2026-05-21"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Électricité"
 tags: ["disjoncteur", "panne électrique", "diagnostic"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-disjoncteur-saute-causes`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Sécurité d'abord : avant tout diagnostic
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+**Si votre disjoncteur saute de manière répétée**, prenez 30 secondes pour lire ce paragraphe avant d'essayer quoi que ce soit. Une partie des causes possibles présente un risque réel d'électrocution ou d'incendie.
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+**Règles absolues** :
+- Si vous sentez une **odeur de brûlé** ou voyez de la fumée près d'un appareil, **coupez le disjoncteur général** et appelez immédiatement les pompiers ou un électricien d'urgence.
+- Si le disjoncteur saute juste après un orage et impacte plusieurs zones, ne touchez rien et appelez un pro.
+- Ne tentez **jamais** de neutraliser ou de bloquer un disjoncteur qui saute. Ce n'est pas une "ampoule grillée", c'est une **protection qui détecte une anomalie réelle**.
 
-À rédiger.
+Ces interventions ne sont pas du bricolage. Si vous avez le moindre doute, appelez. Notre numéro : 06 52 82 06 85 (24/7 urgence sur Paris/92).
 
-## 2. Le contexte technique / réglementaire
+## Comprendre quel disjoncteur saute
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Sur votre tableau électrique, il y a plusieurs types de protections :
 
-À rédiger.
+| Protection | Fonction | Symptôme quand elle saute |
+|---|---|---|
+| **Disjoncteur général** (en haut) | Coupe tout l'appartement | Plus de courant nulle part |
+| **Disjoncteur différentiel** 30 mA | Détecte les fuites de courant à la terre | Tout l'étage / circuit coupé |
+| **Disjoncteur divisionnaire** (par circuit) | Protège un seul circuit en cas de surcharge | Une seule zone affectée (chambre, cuisine, etc.) |
+| **Disjoncteur de branchement** Enedis | Coupe l'arrivée du réseau | Plus de courant nulle part, bouton à réarmer 1× max |
 
-## 3. Notre méthode S Connect
+**Le premier diagnostic est de savoir lequel a sauté.** Selon la protection concernée, les causes diffèrent.
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+## Les 7 causes possibles
 
-À rédiger.
+### Cause 1 — Surcharge sur un circuit (disjoncteur divisionnaire qui saute)
 
-## 4. Cas concret chiffré
+**Symptôme** : un seul disjoncteur divisionnaire (cuisine, par exemple) saute après que vous ayez allumé un appareil de forte puissance.
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+**Diagnostic rapide** : lister les appareils branchés sur le circuit qui saute. Total en watts ? Si ça dépasse la puissance autorisée par le disjoncteur (par exemple 16A = 3 680 W en 230V), c'est une surcharge.
 
-À rédiger.
+**Solution** :
+- Court terme : ne pas brancher tous les appareils en même temps
+- Long terme : **ajouter un circuit dédié** (souvent ~250-450 € HT pour un circuit cuisine renforcé 20A)
 
-## 5. Pièges à éviter
+### Cause 2 — Court-circuit (disjoncteur divisionnaire qui saute instantanément)
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+**Symptôme** : le disjoncteur saute **immédiatement** à l'allumage d'un appareil précis, sans délai.
 
-À rédiger.
+**Diagnostic** : 99 % du temps, c'est **l'appareil** qui est en cause (rallonge endommagée, prise grillée, appareil avec composant interne défaillant).
 
-## 6. FAQ
+**Solution** :
+- Débrancher l'appareil suspect, réarmer le disjoncteur. Si tout remarche, c'est l'appareil.
+- Si vous suspectez un câble interne de la prise, **ne touchez pas** sans avoir coupé le disjoncteur du circuit. Appelez un pro.
 
-<!-- TODO[seo-generate]: ~183 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### Cause 3 — Défaut d'isolement (disjoncteur différentiel 30 mA qui saute)
 
-À rédiger.
+**Symptôme** : le disjoncteur différentiel 30 mA saute périodiquement, parfois sans appareil branché. Souvent par temps humide.
+
+**Diagnostic** : il y a un courant qui fuit à la terre quelque part (câble dénudé dans un mur, prise oxydée, appareil avec isolement dégradé, infiltration d'eau dans une boîte de dérivation).
+
+**C'est sérieux** : un défaut d'isolement peut provoquer une électrocution si quelqu'un touche un élément métallique du circuit. C'est aussi le **scénario typique d'un incendie d'origine électrique** quand l'arc électrique persiste.
+
+**Solution** : intervention pro indispensable. Le diagnostic se fait avec un **mégohmmètre** (mesure de résistance d'isolement). Coût intervention typique 150-280 € HT, réparation selon localisation du défaut.
+
+### Cause 4 — Borne IRVE mal protégée (différentiel qui saute pendant la charge)
+
+**Symptôme** : le différentiel saute quand vous branchez votre voiture électrique en charge, alors qu'il ne saute pas autrement.
+
+**Diagnostic** : votre borne IRVE est protégée par un différentiel de **mauvais type** (type AC au lieu de type A ou F obligatoire pour IRVE), ou la borne génère des **courants de fuite à composante continue** que l'ancien différentiel détecte mal.
+
+**Solution** : remplacer le différentiel par le bon type (A ou F selon norme A6 / borne). Coût ~120-220 € HT.
+
+### Cause 5 — Vétusté du tableau (plusieurs disjoncteurs qui sautent par roulement)
+
+**Symptôme** : différents disjoncteurs sautent par moment, sans logique apparente. Le tableau est ancien (> 25 ans, fusibles à cartouche, peigne d'alimentation aluminium).
+
+**Diagnostic** : le tableau est vétuste, les contacts oxydés, l'alimentation devient instable.
+
+**Solution** : remplacement du tableau complet (mise aux normes NF C 15-100 A6). Coût typique appartement 50-90 m² : **1 200-2 200 € HT**. C'est un investissement qui sécurise pour 25+ ans et permet l'ajout futur de bornes IRVE, climatisation, plaque induction.
+
+### Cause 6 — Foudre / surtension (disjoncteur général + appareils HS)
+
+**Symptôme** : après un orage, le disjoncteur général a sauté et plusieurs appareils électroniques (TV, box internet, électroménager) sont morts simultanément.
+
+**Diagnostic** : surtension foudre. Sans **parafoudre type 2** au tableau, votre installation n'a aucune protection.
+
+**Solution** :
+- Court terme : déclarer le sinistre à l'assurance (multirisque habitation)
+- Long terme : **installer un parafoudre type 2** au tableau (~280-450 € HT). Obligatoire en zone à risque foudre (AQ2/AQ3) selon NF C 15-100. Optionnel mais fortement recommandé partout.
+
+### Cause 7 — Défaut Enedis / réseau (disjoncteur de branchement qui saute)
+
+**Symptôme** : le disjoncteur Enedis (boîtier blanc avec compteur) a sauté, vous l'avez réarmé une fois, il refait sauter.
+
+**Diagnostic** : problème côté réseau (puissance souscrite insuffisante, défaut du raccordement Enedis, compteur Linky en sécurité).
+
+**Solution** :
+- Vérifier votre puissance souscrite (sur Espace Client EDF / Enedis). Si insuffisante : **augmentation de puissance** (de 6 kVA à 9 ou 12 kVA, par exemple). Gratuit chez Enedis si réseau OK, comptez +1 à +5 €/mois sur abonnement.
+- Si vous suspectez un défaut Enedis : appelez le **dépannage urgence Enedis 09 72 67 50 + (numéro département)**, disponible 24/7.
+
+## La méthode S Connect pour le diagnostic
+
+Quand vous appelez un électricien pour un disjoncteur qui saute, voici ce qu'on fait :
+
+1. **Identification du disjoncteur** qui saute (général, différentiel, divisionnaire, branchement Enedis)
+2. **Mesure de l'isolement** au mégohmmètre sur chaque circuit suspect
+3. **Test différentiel** avec une fiche de test (vérification du seuil 30 mA)
+4. **Inspection visuelle** des prises, interrupteurs, boîtes de dérivation accessibles
+5. **Bilan de puissance** vs souscription si surcharge
+6. **Diagnostic global** : on vous dit ce qui est ponctuel vs vétusté générale
+
+Le diagnostic seul prend **30-60 minutes**, coûte **80-130 € HT** sur Paris/92, et inclut le rapport écrit. Si la cause est simple (appareil défectueux, défaut localisé), la réparation se fait souvent dans la foulée.
+
+## Ce que vous pouvez faire vous-même (en sécurité)
+
+**Sans danger** :
+- Débrancher tous les appareils et réarmer le disjoncteur. Brancher un par un pour identifier le coupable.
+- Vérifier l'état visuel des prises et interrupteurs (brûlures, jaunissement = signe à remplacer)
+- Noter quand exactement le disjoncteur saute (humidité ? après orage ? appareil spécifique ?)
+- Vérifier la **puissance souscrite** sur votre facture EDF
+
+**Avec précaution** (uniquement si vous savez ce que vous faites) :
+- Vérifier visuellement le tableau électrique (capot fermé, propre, pas d'odeur)
+- Tester le bouton "test" du différentiel (il doit sauter — sinon, il est défectueux)
+
+**À ne JAMAIS faire** :
+- Démonter une prise ou un interrupteur sans avoir coupé le disjoncteur correspondant
+- Tenter de "réparer" un câble qui chauffe
+- Bloquer ou pontonner un disjoncteur qui saute (danger mortel)
+- Brancher une rallonge ou une multiprise sur une multiprise (effet domino surcharge)
+
+## Quand appeler urgentement
+
+Appelez un électricien en **urgence** (et non en RDV standard) si :
+- Odeur de brûlé persistante
+- Étincelles visibles à une prise ou un appareil
+- Disjoncteur qui saute toutes les heures et qui ne tient plus
+- Vous voyez ou suspectez de l'eau près d'une prise ou d'un tableau électrique
+- Le tableau est très chaud au toucher
+
+Notre numéro urgence : **06 52 82 06 85** (24/7 Paris/92).
+
+## FAQ
+
+### Combien coûte un diagnostic disjoncteur ?
+**80-130 € HT** sur Paris/92 en RDV standard (8h-19h jour ouvré). Tarif urgence (nuit, dimanche) : +50 à +100 %. Voir notre [guide tarifs serrurerie urgence](/blog/porte-claquee-que-faire-paris) — la grille tarifaire pour électricité d'urgence suit les mêmes règles.
+
+### Combien de fois maximum réarmer un disjoncteur qui saute ?
+**Une fois.** Si ça refait sauter immédiatement, il y a un défaut. Ne pas réarmer 5-6 fois : ça use le disjoncteur et ça peut endommager le circuit.
+
+### Est-ce que je peux changer un disjoncteur moi-même ?
+Légalement, non. La modification du tableau électrique est réservée aux électriciens certifiés (et la Consuel ne valide que les modifs faites par un pro). Concrètement : un disjoncteur divisionnaire vaut 15-30 €, mais le **risque d'erreur de calibre / câblage** peut coûter votre logement (incendie) ou votre vie (électrocution). Ne pas tenter.
+
+### Un disjoncteur peut-il être défectueux lui-même ?
+Oui, ça arrive. Un disjoncteur > 20 ans peut "fatiguer" et déclencher abusivement, ou au contraire ne plus déclencher quand il faudrait. Test simple : le bouton "test" du différentiel doit le faire sauter immédiatement. Si non, il faut le changer.
+
+### Combien coûte un changement de tableau complet ?
+Sur appartement 50-90 m² : **1 200-2 200 € HT** pose comprise (matériel + main d'œuvre + Consuel + mise en service). Pour une maison ou tertiaire, comptez 1 800-4 500 € HT selon nombre de circuits et options.
 
 ## Pour aller plus loin
 
-- [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Notre service dépannage électrique urgence](/services/electricite/depannage)
+- [Notre service mise aux normes électriques](/services/electricite/mise-aux-normes)
+- [NF C 15-100 changements 2026](/blog/nf-c-15-100-2026-changements-irve)
+- [Tableau électrique vétuste : signes à reconnaître](/blog/tableau-electrique-vetuste-signes-reconnaitre)
+- [Demander un diagnostic gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [Promotelec — Sécurité électrique](https://www.promotelec.com/)
+- [Enedis — Dépannage urgence](https://www.enedis.fr/contact)
+- [INRS — Risque électrique](https://www.inrs.fr/risques/electriques/ce-qu-il-faut-retenir.html)
+- [Consuel — Attestation de conformité](https://www.consuel.com/)
+- Benchmark interne S Connect — 300+ interventions diagnostic 2024-2026 Paris/92
