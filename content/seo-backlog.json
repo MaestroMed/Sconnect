@@ -1219,7 +1219,7 @@
       "type": "blog-post",
       "cluster": "methode-terrain",
       "priority": 55,
-      "status": "pending",
+      "status": "generated",
       "slug": "auditer-flicker-parc-fluo-methode",
       "title": "Mesurer le scintillement (flicker) d'un parc fluo existant : notre méthode terrain",
       "excerpt": "Avant de remplacer 80 luminaires, mesurer le flicker actuel pour justifier la dépense par l'impact santé/productivité. Smartphone + app gratuite, ou photomètre pro : protocole en 4 étapes.",
