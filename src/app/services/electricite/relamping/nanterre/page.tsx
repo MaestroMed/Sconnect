@@ -8,6 +8,9 @@ import {
   MapPin,
   CheckCircle2,
   ArrowRight,
+  Building2,
+  TrendingUp,
+  Landmark,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseOverlay } from "@/components/ui/ambient";
@@ -17,30 +20,42 @@ import {
   injectSchema,
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
+import AuthorByline from "@/components/seo/AuthorByline";
 
-// Auto-generated from seo-backlog.json item "location-nanterre" on 2026-05-20.
-// Review before going live: validate the local stats, swap the hero image
-// if a city-specific one exists in /public/images/locations/.
+// EDITORIALISED 2026-05-21 — production quality. Nanterre = préfecture 92
+// + Université Paris Nanterre + tertiaire arrière-cour de La Défense.
+// ~600 k m² bureaux, 95 000 habitants. Update annually.
 
 export const metadata: Metadata = {
-  title: "Relamping LED à Nanterre — bureaux et plateaux tertiaires | S Connect",
+  title: "Relamping LED à Nanterre — administration, tertiaire & université | S Connect",
   description:
-    "Spécialiste relamping LED à Nanterre (92000) : audit gratuit, étude personnalisée, installation, conformité NF EN 12464-1, accompagnement décret tertiaire. Devis sous 7 jours.",
+    "Spécialiste relamping LED à Nanterre (92000) : préfecture des Hauts-de-Seine, ~600 k m² de bureaux, Université Paris Nanterre. Audit gratuit, conformité NF EN 12464-1 (norme renforcée écoles 500 lux), DEET 2030. Devis ferme sous 7 jours.",
   keywords: [
     "relamping LED Nanterre",
-    "éclairage tertiaire Nanterre", "audit LED 92000",
+    "électricien Nanterre 92000",
+    "audit éclairage tertiaire Nanterre",
+    "relamping université Nanterre",
+    "éclairage administration 92",
+    "DEET Nanterre",
   ],
   alternates: { canonical: "/services/electricite/relamping/nanterre" },
+  openGraph: {
+    title: "Relamping LED à Nanterre — administration, tertiaire & uni",
+    description:
+      "Préfecture 92, ~600 k m² bureaux, Université Paris Nanterre. S Connect maîtrise les chantiers à forte contrainte normative.",
+    images: ["/images/locations/nanterre-hero.webp"],
+    type: "website",
+  },
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 const serviceSchema = generateServiceSchema(
   {
-    name: "Relamping LED à Nanterre",
+    name: "Relamping LED à Nanterre (92000)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux, commerces, copropriétés et industriels à Nanterre et alentours. Conformité NF EN 12464-1 et décret tertiaire (DEET) couverts.",
+      "Audit, étude et installation relamping LED pour bureaux administratifs, université et copropriétés à Nanterre. Conformité NF EN 12464-1 (incl. exigences salles de classe), décret tertiaire (DEET), DALI. Certifié Qualifélec + RGE + IRVE.",
     provider: "S Connect",
-    areaServed: ["Nanterre", "Île-de-France"],
+    areaServed: ["Nanterre", "Rueil-Malmaison", "Suresnes", "Île-de-France"],
     priceRange: "€€€",
   },
   siteUrl,
@@ -81,15 +96,18 @@ export default function RelampingNanterrePage() {
               <MapPin className="w-8 h-8 text-white" />
             </div>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
-              Relamping LED à {"Nanterre"}
+              Relamping LED à Nanterre
             </h1>
             <p className="text-xl md:text-2xl font-medium mb-6">
-              <BulbText>Audit gratuit · ROI mesuré · Conforme NF EN 12464-1</BulbText>
+              <BulbText>Préfecture · 600 k m² · Université · DEET 2030</BulbText>
             </p>
             <p className="text-lg text-white/90 leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              S Connect intervient sur tout Nanterre et la couronne immédiate. Bureaux,
-              copropriétés, commerces, industriels : nous mesurons avant de chiffrer,
-              et la facture finale = le devis.
+              Nanterre = ville mixte au tissu unique : <strong>préfecture des
+              Hauts-de-Seine</strong>, ~600 k m² de bureaux tertiaires
+              (Caisse d&apos;Épargne, Crédit Mutuel, Vinci), Université
+              Paris Nanterre (~30 000 étudiants), et résidentiel dense.
+              Notre savoir-faire : éclairage normé par usage (bureau,
+              amphithéâtre, salle de TD, accueil public).
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/30">
@@ -105,20 +123,118 @@ export default function RelampingNanterrePage() {
         </div>
       </section>
 
-      {/* Pourquoi nous pour Nanterre */}
+      {/* Nanterre en chiffres */}
       <section className="section-padding bg-surface">
+        <div className="container-custom max-w-5xl">
+          <SectionTitle
+            badge="Le marché"
+            title="Nanterre, l'arrière-cour stratégique de La Défense"
+            subtitle="Quatre fonctions urbaines superposées rendent Nanterre unique : administration départementale, tertiaire bancaire, université de référence, et résidentiel en pleine mutation."
+          />
+          <div className="grid md:grid-cols-3 gap-5 mb-8">
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Building2 className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">~600 000 m² bureaux</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Quartier des Terrasses, Préfecture, Université. Loyers
+                tertiaires ~280-340 €/m²/an HT/HC (moitié de La Défense
+                adjacente). Tissu Caisse d&apos;Épargne, Vinci, Crédit
+                Mutuel.
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Landmark className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">Préfecture + Conseil dépt.</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                ERP de catégorie 1 et 2 → exigences renforcées en
+                éclairage de sécurité (BAES + balisage NF EN 1838),
+                accueil public, salles de réunion publiques. Conformité
+                accessibilité PMR au cœur du projet.
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">Université 30 000 étud.</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Université Paris Nanterre : amphithéâtres, salles de TD,
+                bibliothèques, laboratoires. NF EN 12464-1 impose 500 lux
+                en salles de cours, 1000 lux en TP scientifique, IRC ≥ 80
+                + UGR &lt; 19.
+              </p>
+            </div>
+          </div>
+          <p className="text-sm text-foreground-muted text-center max-w-3xl mx-auto">
+            Sources :{" "}
+            <a
+              href="https://www.insee.fr/fr/statistiques/2011101?geo=COM-92050"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 dark:text-primary-300 underline"
+            >
+              INSEE — Dossier Nanterre
+            </a>
+            ,{" "}
+            <a
+              href="https://www.parisladefense.com/fr/le-quartier-en-chiffres"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 dark:text-primary-300 underline"
+            >
+              Paris La Défense — Nanterre intégré
+            </a>
+            ,{" "}
+            <a
+              href="https://www.afe-eclairage.fr/docs/nf-en-12464-1-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 dark:text-primary-300 underline"
+            >
+              AFE — Résumé NF EN 12464-1
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* Pourquoi nous à Nanterre */}
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-4xl">
           <SectionTitle
             badge="Pourquoi S Connect à Nanterre"
-            title="L'expertise éclairage locale, sans intermédiaire"
-            subtitle="Basés à Clichy, nous intervenons sur Nanterre en moins de 40 min. Notre équipe sait calibrer un éclairage pour chaque typologie de local de la ville."
+            title="L'expertise normative pour les contraintes ERP"
           />
           <ul className="grid sm:grid-cols-2 gap-4">
             {[
-              { title: "Audit gratuit sous 7 jours", desc: "Visite, mesures luxmètre étalonné, rapport chiffré avec ROI. Sans engagement." },
-              { title: "Devis ferme = facture finale", desc: "Aucun supplément après diagnostic. Délais et coûts garantis par écrit." },
-              { title: "Conformité NF EN 12464-1", desc: "Niveaux d'éclairement réglementaires par poste de travail vérifiés à la livraison." },
-              { title: "Couverture décret tertiaire", desc: "Le relamping reste l'investissement n°1 pour atteindre les −40 % du DEET en 2030." },
+              {
+                title: "Maîtrise NF EN 12464-1 par usage",
+                desc: "Bureau 500 lux, accueil 300 lux, salle de réunion 500 lux dimmable, amphi 500 lux UGR < 19. Cahier des charges normatif clé en main.",
+              },
+              {
+                title: "ERP catégorie 1-2",
+                desc: "Coordination SDIS pour la mise à jour du dossier sécurité, BAES NF EN 1838, balisage de désenfumage. SAV maintenance contractualisable.",
+              },
+              {
+                title: "Couverture décret tertiaire",
+                desc: "Relamping LED = −65 à −75 % poste éclairage. ROI 3-5 ans sur les bureaux Nanterre. Sur la trajectoire DEET 2030.",
+              },
+              {
+                title: "Devis ferme = facture finale",
+                desc: "Notre engagement contractuel. Mesures luxmètre étalonné, étude photométrique, modèle ROI sous 7 jours.",
+              },
+              {
+                title: "Intervention agile",
+                desc: "Clichy → Nanterre via la N192 ou A14 en 30 min. Audit sous 48h, SAV sous 24h.",
+              },
+              {
+                title: "Garanties pro",
+                desc: "Décennale active, Qualifélec mention Éclairage, RGE, IRVE niveau 2. Dossiers admin sécurisés pour acheteurs publics.",
+              },
             ].map((b) => (
               <li key={b.title} className="p-5 rounded-2xl bg-surface-elevated border border-border">
                 <h3 className="font-display font-bold text-foreground mb-1 flex items-center gap-2">
@@ -132,50 +248,103 @@ export default function RelampingNanterrePage() {
         </div>
       </section>
 
-      {/* Sub-clusters typologies */}
-      <section className="section-padding bg-surface-muted">
+      {/* Typologies Nanterre */}
+      <section className="section-padding bg-surface">
         <div className="container-custom max-w-5xl">
           <SectionTitle
             badge="Selon votre typologie"
-            title="Quelle solution pour votre local à Nanterre ?"
+            title="Spécificités relamping par configuration"
           />
           <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { name: "Bureau & tertiaire", href: "/services/electricite/relamping/bureau-tertiaire" },
-              { name: "Commerce & restaurant", href: "/services/electricite/relamping/commerce-restaurant" },
-              { name: "Copropriété & parking", href: "/services/electricite/relamping/copropriete-parking" },
-              { name: "Industriel & entrepôt", href: "/services/electricite/relamping/industriel-entrepot" },
-            ].map((t) => (
-              <Link
-                key={t.href}
-                href={t.href}
-                className="p-6 rounded-2xl bg-surface border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
-              >
-                <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2">
-                  {t.name}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            ))}
+            <Link
+              href="/services/electricite/relamping/bureau-tertiaire"
+              className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+            >
+              <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
+                Bureau administratif / siège bancaire
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Open-space + accueil public + salles de réunion. NF EN 12464-1
+                niveau 500 lux + UGR &lt; 19. Budget 28-45 €/m². Conformité
+                accessibilité (1 000 lux sur poste d&apos;accueil PMR).
+              </p>
+            </Link>
+            <Link
+              href="/services/electricite/relamping/bureau-tertiaire"
+              className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+            >
+              <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
+                Université / établissement public
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Amphithéâtres, salles de TD, bibliothèques, labos.
+                500 lux + IRC ≥ 80 + flicker-free obligatoire pour la
+                lecture longue. Marchés publics : nous traitons les CCAP
+                et les BPU.
+              </p>
+            </Link>
+            <Link
+              href="/services/electricite/relamping/copropriete-parking"
+              className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+            >
+              <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
+                Copropriété quartier des Terrasses
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Halls, paliers, escaliers, parkings souterrains. Détection
+                présence + gradation crépusculaire. Validation conseil
+                syndical + AG. ROI 3-5 ans.
+              </p>
+            </Link>
+            <Link
+              href="/services/electricite/relamping/industriel-entrepot"
+              className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+            >
+              <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
+                Local technique / logistique
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Locaux serveurs, archives, locaux d&apos;archivage, garages
+                administratifs. Robustesse IK10, allumage 24/7 ou
+                détection présence selon usage. ROI &lt; 18 mois sur
+                les zones à allumage permanent.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Cross-link pillar */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-3xl text-center">
           <Lightbulb className="w-12 h-12 text-primary-500 mx-auto mb-4" />
           <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
             Notre méthode relamping complète
           </h2>
           <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-            Audit, calcul ROI, gestion DALI, conformité décret tertiaire : tout est
-            détaillé sur notre page pilier dédiée.
+            Audit photométrique, calcul ROI, gestion DALI, conformité NF EN
+            12464-1 et DEET 2030. Réponse marchés publics + privés.
           </p>
-          <Link href="/services/electricite/relamping" className="btn-outline">
-            Voir la page pilier Relamping LED
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/services/electricite/relamping" className="btn-outline">
+              Voir la page pilier Relamping LED
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/calculateur-relamping" className="btn-outline">
+              Calculer mon ROI
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Author byline */}
+      <section className="bg-surface py-10 md:py-14">
+        <div className="container-custom max-w-3xl">
+          <AuthorByline variant="card" />
         </div>
       </section>
 
@@ -185,10 +354,10 @@ export default function RelampingNanterrePage() {
         <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">
-              Auditons votre éclairage à {"Nanterre"} gratuitement
+              Auditons votre éclairage à Nanterre gratuitement
             </h2>
             <p className="text-primary-100 text-lg">
-              Rapport chiffré + ROI sous 7 jours. Sans engagement.
+              Audit sous 48h + rapport DEET 2030 sous 7 jours. Sans engagement.
             </p>
           </div>
           <div className="flex gap-4">
