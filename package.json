@@ -25,7 +25,9 @@
     "db:seed": "tsx scripts/migrate-json-to-supabase.ts",
     "db:import-mdx": "tsx scripts/import-mdx-to-db.ts",
     "assets:fetch": "tsx scripts/fetch-images.ts",
-    "assets:fetch:force": "tsx scripts/fetch-images.ts --force"
+    "assets:fetch:force": "tsx scripts/fetch-images.ts --force",
+    "brand:favicons": "tsx scripts/generate-favicons.ts",
+    "brand:og": "tsx scripts/generate-og-image.ts"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.1",

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- S Connect maskable PWA icon — safe area 80% (52x52 centered).
+       Background fills entire 64x64 canvas; content stays within 6..58. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a4a78"/>
+      <stop offset="100%" stop-color="#004775"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fee47a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fdcb28" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- full-bleed background (no rounded corners — OS handles masking) -->
+  <rect x="0" y="0" width="64" height="64" fill="url(#bg)"/>
+
+  <!-- subtle glow centered on the lightbulb accent -->
+  <circle cx="44" cy="22" r="10" fill="url(#glow)"/>
+
+  <!-- the S character (kept within 80% safe area) -->
+  <path d="M40 21c-2.4-2.2-5.6-3.4-9-3.4-5.4 0-9.6 3.2-9.6 8.4 0 4.6 3 6.8 7.8 8.4l3.8 1.2c2.6 0.8 3.8 1.6 3.8 3 0 1.6-1.6 2.6-4 2.6-3 0-5.8-1.2-8.4-3.6l-3.4 5c3.2 2.8 7.2 4.4 11.6 4.4 6 0 10.4-3.2 10.4-8.6 0-4.8-3.2-7-8.2-8.6l-3.6-1.2c-2.2-0.8-3.2-1.4-3.2-2.6 0-1.4 1.4-2.4 3.6-2.4 2.4 0 4.6 0.8 6.6 2.4z"
+        fill="#ffffff"/>
+
+  <!-- yellow lightbulb accent (also within safe area) -->
+  <circle cx="44" cy="22" r="4.2" fill="#fdcb28"/>
+  <circle cx="44" cy="22" r="1.6" fill="#fef3a8"/>
+</svg>
