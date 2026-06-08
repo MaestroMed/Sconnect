@@ -51,9 +51,9 @@ export default function RelampingFeatured() {
             {/* Floating KPI overlay */}
             <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-2">
               {[
-                { value: "−70 %", label: "consommation" },
+                { value: "−80 %", label: "consommation" },
                 { value: "3,5 ans", label: "ROI moyen" },
-                { value: "50 k h", label: "durée de vie" },
+                { value: "80 k h", label: "durée de vie" },
               ].map((k) => (
                 <div
                   key={k.label}
