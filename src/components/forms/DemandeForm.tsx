@@ -471,9 +471,9 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-6 space-y-4 p-6 bg-dark-50 rounded-xl"
+                  className="mt-6 space-y-4 p-6 bg-dark-50 dark:bg-dark-800/60 rounded-xl"
                 >
-                  <h4 className="font-semibold text-dark-900">Adresse de facturation</h4>
+                  <h4 className="font-semibold text-dark-900 dark:text-white">Adresse de facturation</h4>
                   
                   <SelectField
                     label="Type de bâtiment"
@@ -576,7 +576,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               {...register("message")}
             />
 
-            <div className="p-6 bg-dark-50 rounded-xl">
+            <div className="p-6 bg-dark-50 dark:bg-dark-800/60 rounded-xl">
               <CheckboxField
                 label="Je certifie avoir lu et accepté les conditions générales de service"
                 error={errors.consentement?.message}
@@ -584,7 +584,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               />
 
               {type === "intervention" && (
-                <p className="mt-4 text-sm text-dark-600">
+                <p className="mt-4 text-sm text-dark-600 dark:text-dark-300">
                   💳 Le règlement se fera par chèque ou via un lien de paiement
                   carte bancaire sécurisé envoyé après l&apos;intervention.
                 </p>

@@ -486,9 +486,13 @@ export default function HomePageClient({
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-br from-dark-900 via-dark-950 to-primary-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-violet-500/15 rounded-full blur-3xl animate-orb-float" />
+        {/* Ambient glows — kept STATIC. Animating blur-3xl (64px) layers of
+            this size forces the compositor to re-rasterise a huge gaussian
+            blur every frame → severe scroll jank. The motion was imperceptible
+            anyway; the premium glow remains. */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-violet-500/15 rounded-full blur-3xl" />
         <NoiseOverlay opacity={0.04} />
 
         <div className="container-custom relative z-10">
@@ -696,8 +700,9 @@ export default function HomePageClient({
 
       {/* Testimonials Section */}
       <section className="relative section-padding bg-gradient-to-br from-primary-50 to-electric-50 dark:from-dark-900 dark:to-primary-950 overflow-hidden">
-        <div className="pointer-events-none absolute -top-40 right-[-10%] w-[30rem] h-[30rem] bg-primary-400/20 dark:bg-primary-500/15 rounded-full blur-3xl animate-orb-float" />
-        <div className="pointer-events-none absolute bottom-0 left-[-10%] w-[28rem] h-[28rem] bg-electric-400/20 dark:bg-violet-500/15 rounded-full blur-3xl animate-drift" />
+        {/* Static ambient glows (no infinite animation — see Stats section note). */}
+        <div className="pointer-events-none absolute -top-40 right-[-10%] w-[30rem] h-[30rem] bg-primary-400/20 dark:bg-primary-500/15 rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-[-10%] w-[28rem] h-[28rem] bg-electric-400/20 dark:bg-violet-500/15 rounded-full blur-3xl" />
         <div className="container-custom relative z-10">
           <SectionTitle
             badge="Avis Clients"
@@ -718,8 +723,8 @@ export default function HomePageClient({
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <Link href="/avis" className="btn-primary">
-              Voir tous les avis
+            <Link href="/demande-devis" className="btn-primary">
+              Obtenir mon devis gratuit
               <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>

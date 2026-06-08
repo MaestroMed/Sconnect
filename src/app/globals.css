@@ -404,6 +404,22 @@
     mix-blend-mode: overlay;
   }
 
+  /* ── PERF: static ambient orbs ────────────────────────────────────────
+     Many sections decorate the background with large `blur-3xl` (64px
+     gaussian) orbs carrying an infinite `animate-drift/-reverse/orb-float/
+     pulse-soft`. Animating transform/opacity on a layer that big forces the
+     compositor to re-rasterise the blur every frame → multi-second scroll
+     jank (confirmed in audit). The drift was visually imperceptible anyway.
+     We neutralise the animation ONLY on large-blur orbs, in one place, so
+     the ~40 call-sites stay untouched. ParticlesLite (.particles-lite) and
+     AuroraBackdrop (.orb) use their own classes and keep their motion. */
+  .blur-3xl.animate-drift,
+  .blur-3xl.animate-drift-reverse,
+  .blur-3xl.animate-orb-float,
+  .blur-3xl.animate-pulse-soft {
+    animation: none !important;
+  }
+
   /* Radial spotlight follow-cursor (set --mx --my in px from component) */
   .spotlight {
     position: relative;
