@@ -90,8 +90,9 @@ export default function CalculateurRelampingPage() {
       {/* Hero */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <NoiseOverlay opacity={0.04} />
-        <div className="absolute top-1/4 -left-32 w-[30rem] h-[30rem] rounded-full blur-3xl animate-drift bg-electric-500/20" />
-        <div className="absolute bottom-0 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl animate-drift-reverse bg-primary-500/20" />
+        {/* Static ambient glows — no infinite blur animation (compositor cost). */}
+        <div className="absolute top-1/4 -left-32 w-[30rem] h-[30rem] rounded-full blur-3xl bg-electric-500/20" />
+        <div className="absolute bottom-0 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl bg-primary-500/20" />
 
         <div className="container-custom relative z-10">
           <div className="mb-6">

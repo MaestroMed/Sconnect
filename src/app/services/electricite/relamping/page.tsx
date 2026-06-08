@@ -44,7 +44,7 @@ import {
 export const metadata: Metadata = {
   title: "Relamping LED Paris & Île-de-France — Audit gratuit | S Connect",
   description:
-    "Spécialiste du relamping LED en Île-de-France. Audit éclairage gratuit, étude personnalisée, installation et maintenance. Jusqu'à 80% d'économies d'énergie. Aides CEE & certifications RGE.",
+    "Spécialiste du relamping LED en Île-de-France. Audit éclairage gratuit, étude personnalisée, installation et maintenance. Jusqu'à 80% d'économies d'énergie, conformité décret tertiaire 2030, certifié Qualifélec & RGE.",
   keywords: [
     "relamping LED",
     "relamping LED Paris",
@@ -127,7 +127,7 @@ const method = [
     step: "02",
     title: "Étude technique & ROI",
     icon: Calculator,
-    desc: "Simulation 3D des nouvelles luminances, dimensionnement par poste de travail (norme NF EN 12464-1), calcul des aides CEE éligibles, ROI précis sur 36 mois.",
+    desc: "Simulation 3D des nouvelles luminances, dimensionnement par poste de travail (norme NF EN 12464-1), modèle ROI précis et options de financement (leasing, éco-PTZ Pro).",
   },
   {
     step: "03",
@@ -169,7 +169,7 @@ const benefits = [
 const stats = [
   { value: "−80%", label: "d'économie d'énergie", sub: "vs halogène équivalent" },
   { value: "80 000h", label: "durée de vie LED", sub: "≈ 25 ans en bureau" },
-  { value: "18-36 mois", label: "ROI typique", sub: "incluant les aides CEE" },
+  { value: "3-7 ans", label: "ROI typique", sub: "par l'économie d'énergie" },
   { value: "−40%", label: "Décret tertiaire 2030", sub: "obligation légale" },
 ];
 
@@ -187,12 +187,12 @@ const faqs = [
   {
     question: "Quel est le ROI d'un projet de relamping ?",
     answer:
-      "Le retour sur investissement typique se situe entre 18 et 36 mois pour les projets professionnels, incluant les aides CEE (Certificats d'Économie d'Énergie). Pour un parc à forte consommation (commerce ouvert 12h/jour, parking 24h/24, industriel), le ROI tombe souvent sous 18 mois. Nous remettons une étude ROI personnalisée après chaque audit.",
+      "Depuis la suppression des fiches CEE éclairage (arrêté du 23 février 2026), le ROI se calcule sur la seule économie d'énergie. Comptez 3 à 7 ans pour un tertiaire standard, et souvent moins de 3 ans pour un parc à forte consommation (commerce 12h/jour, parking 24h/24, industriel). Nous remettons une étude ROI personnalisée après chaque audit, avec les options de financement (leasing, éco-PTZ Pro).",
   },
   {
-    question: "Le relamping LED est-il éligible aux aides CEE ?",
+    question: "Le relamping LED est-il encore aidé en 2026 ?",
     answer:
-      "Oui. Les fiches CEE BAT-EQ-127 (luminaires LED en tertiaire), BAT-EQ-130 (système de gestion d'éclairage) et IND-UT-130 (industriel) couvrent une part significative du coût matériel et installation. S Connect gère le dossier CEE de A à Z : audit éligible, dépôt, suivi, encaissement de la prime. Vous ne percevez la facture qu'après déduction de la prime.",
+      "Les fiches CEE éclairage tertiaire (BAT-EQ-127, BAT-EQ-130, IND-UT-130) ont été supprimées par l'arrêté du 23 février 2026 : il n'y a donc plus de prime CEE éclairage. En revanche, plusieurs leviers restent ouverts : leasing financier (zéro trésorerie initiale), éco-PTZ Pro et prêts verts, sur-amortissement comptable, et certaines aides régionales ponctuelles. Et le décret tertiaire (DEET) rend l'investissement de toute façon incontournable d'ici 2030. S Connect remet une étude de financement avec chaque devis.",
   },
   {
     question: "Combien de temps dure un chantier de relamping ?",
@@ -202,7 +202,7 @@ const faqs = [
   {
     question: "Quelles certifications avez-vous pour le relamping ?",
     answer:
-      "S Connect est certifié Qualifélec (mention Éclairage), RGE Quali'Eco (pour les chantiers éligibles aux aides), partenaire CEE pour les fiches BAT-EQ-127 et IND-UT-130. Tous nos chantiers bénéficient de notre garantie décennale et de la garantie constructeur sur le matériel (5 ans minimum sur les sources et drivers).",
+      "S Connect est certifié Qualifélec (mention Éclairage) et RGE Quali'Eco. Tous nos chantiers bénéficient de notre garantie décennale et de la garantie constructeur sur le matériel (5 ans minimum sur les sources et drivers).",
   },
   {
     question: "Que devient l'ancien matériel d'éclairage ?",
@@ -306,7 +306,7 @@ export default function RelampingPage() {
 
             <p className="text-xl text-white/95 mb-8 leading-relaxed max-w-xl [text-shadow:_0_2px_16px_rgba(0,0,0,0.8)]">
               Audit éclairage gratuit, étude économique, installation LED et maintenance. Jusqu&apos;à
-              80&nbsp;% d&apos;économies, prime CEE incluse, conformité décret tertiaire.
+              80&nbsp;% d&apos;économies et conformité décret tertiaire 2030.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -326,7 +326,7 @@ export default function RelampingPage() {
             <div className="flex flex-wrap items-center gap-4">
               <div className="glass-panel flex items-center gap-2 px-4 py-2 rounded-xl">
                 <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                <span className="text-sm font-semibold text-white">Aides CEE gérées</span>
+                <span className="text-sm font-semibold text-white">Conforme DEET 2030</span>
               </div>
               <div className="glass-panel flex items-center gap-2 px-4 py-2 rounded-xl">
                 <Sparkles className="w-5 h-5 text-amber-400" />
@@ -486,31 +486,31 @@ export default function RelampingPage() {
       {/* ─── Calculateur ROI interactif ─── */}
       <RelampingROICalculator />
 
-      {/* ─── Aides CEE callout ─── */}
+      {/* ─── Financement 2026 callout (post-suppression CEE) ─── */}
       <section className="section-padding bg-gradient-to-br from-emerald-50 via-surface to-primary-50 dark:from-emerald-500/10 dark:via-surface-muted dark:to-primary-500/10">
         <div className="container-custom">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
             <div>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 dark:bg-emerald-500/15 dark:border-emerald-500/30 dark:text-emerald-300 text-sm font-semibold mb-6">
                 <Sparkles className="w-4 h-4" />
-                Aides CEE 2026
+                Financement 2026
               </span>
               <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
-                Jusqu&apos;à <span className="text-emerald-600 dark:text-emerald-400">60 %</span>{" "}
-                du coût matériel financé par les CEE.
+                Financer son relamping{" "}
+                <span className="text-emerald-600 dark:text-emerald-400">sans les CEE</span>, c&apos;est possible.
               </h2>
               <p className="text-lg text-foreground-muted mb-6 leading-relaxed">
-                Les Certificats d&apos;Économie d&apos;Énergie (CEE) financent directement votre
-                projet de relamping. <strong>S&apos;Connect gère le dossier complet</strong> :
-                éligibilité, simulation, dépôt, suivi, encaissement de la prime. Vous ne payez que
-                le reste à charge.
+                Les fiches CEE éclairage tertiaire ont été supprimées par l&apos;arrêté du
+                23 février 2026. Mais le relamping reste rentable par la seule économie d&apos;énergie,
+                et <strong>plusieurs leviers de financement</strong> restent ouverts. S&apos;Connect
+                vous remet une étude de financement avec le devis.
               </p>
               <ul className="space-y-3 mb-8">
                 {[
-                  "Fiches CEE BAT-EQ-127 (tertiaire), BAT-EQ-130 (gestion), IND-UT-130 (industriel)",
-                  "Prime calculée selon kWh cumac économisés sur la durée de vie",
-                  "Versement direct sur votre compte après mise en service",
-                  "Cumulable avec l'amortissement comptable et le sur-amortissement énergétique",
+                  "Leasing financier 36-60 mois : zéro trésorerie initiale, loyer 100 % déductible",
+                  "Éco-PTZ Pro et prêts verts à taux préférentiel pour la rénovation énergétique",
+                  "Sur-amortissement / amortissement comptable de l'investissement sur 5-7 ans",
+                  "Décret tertiaire (DEET) 2030 : un investissement qui devient obligatoire — autant l'optimiser",
                 ].map((item) => (
                   <li
                     key={item}
@@ -522,7 +522,7 @@ export default function RelampingPage() {
                 ))}
               </ul>
               <Link href="/demande-devis" className="btn-primary btn-lg">
-                Demander une simulation CEE
+                Demander une étude de financement
                 <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
@@ -540,8 +540,8 @@ export default function RelampingPage() {
                   Exemple : open-space 600 m²
                 </div>
                 <div className="text-white/80 text-sm [text-shadow:_0_1px_6px_rgba(0,0,0,0.6)]">
-                  Coût total : 28 000 € · Prime CEE : 14 200 € · Reste à charge : 13 800 € · ROI :
-                  24 mois
+                  Coût : 28 000 € · Économie ≈ 7 900 €/an · ROI ≈ 3,5 ans · Économie nette 10 ans
+                  ≈ 51 000 €
                 </div>
               </div>
             </div>
@@ -596,7 +596,7 @@ export default function RelampingPage() {
             Combien votre éclairage vous coûte vraiment ?
           </h2>
           <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto [text-shadow:_0_1px_10px_rgba(0,0,0,0.5)]">
-            Audit gratuit sur site sous 7 jours. Rapport chiffré avec ROI, aides CEE éligibles et
+            Audit gratuit sur site sous 7 jours. Rapport chiffré avec ROI, options de financement et
             recommandations.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">

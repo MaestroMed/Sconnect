@@ -9,10 +9,13 @@ describe("RatingBadge", () => {
     expect(screen.getByText(/127 avis vérifiés/)).toBeInTheDocument();
   });
 
-  it("links to /avis by default", () => {
+  it("renders as a static (non-link) chip by default", () => {
     render(<RatingBadge />);
-    const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "/avis");
+    expect(screen.queryByRole("link")).toBeNull();
+    // Static variant exposes the rating via an img role + aria-label.
+    expect(
+      screen.getByRole("img", { name: /note moyenne 4\.9 sur 5/i }),
+    ).toBeInTheDocument();
   });
 
   it("renders a custom rating and review count", () => {
@@ -31,11 +34,9 @@ describe("RatingBadge", () => {
 
   it("includes a descriptive aria-label for screen readers", () => {
     render(<RatingBadge rating={4.9} reviewCount={127} />);
-    const link = screen.getByRole("link");
-    expect(link).toHaveAttribute(
-      "aria-label",
-      "Voir les avis clients : note moyenne 4.9 sur 5, 127 avis vérifiés",
-    );
+    expect(
+      screen.getByLabelText("Note moyenne 4.9 sur 5, 127 avis vérifiés"),
+    ).toBeInTheDocument();
   });
 
   it("renders 5 star icons (filled or empty)", () => {

@@ -89,7 +89,7 @@ export default function DemandeDevisPage() {
                 </p>
                 <a
                   href="tel:+33652820685"
-                  className="flex items-center gap-3 p-4 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors"
+                  className="flex items-center gap-3 p-4 bg-primary-50 dark:bg-primary-500/10 rounded-xl hover:bg-primary-100 dark:hover:bg-primary-500/20 transition-colors"
                 >
                   <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center">
                     <Phone className="w-6 h-6 text-white" />
@@ -102,7 +102,7 @@ export default function DemandeDevisPage() {
               </div>
 
               {/* Info Card */}
-              <div className="card p-6 bg-gradient-to-br from-primary-50 to-electric-50 border-primary-100">
+              <div className="card p-6 bg-gradient-to-br from-primary-50 to-electric-50 border-primary-100 dark:from-primary-500/10 dark:to-electric-500/10 dark:border-primary-500/20">
                 <h3 className="font-display font-bold text-lg text-foreground mb-4">
                   Comment ça marche ?
                 </h3>
@@ -126,8 +126,8 @@ export default function DemandeDevisPage() {
               {/* Garantie */}
               <div className="card p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
-                    <Shield className="w-7 h-7 text-green-600" />
+                  <div className="w-14 h-14 bg-green-100 dark:bg-green-500/15 rounded-xl flex items-center justify-center">
+                    <Shield className="w-7 h-7 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">Garantie décennale</h4>

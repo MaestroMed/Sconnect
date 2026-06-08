@@ -76,7 +76,7 @@ function buildOverlaySvg(): string {
   <text x="160" y="106" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="36" font-weight="800"
         letter-spacing="2" fill="#ffffff">SCONNECT</text>
   <text x="160" y="138" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="17" font-weight="500"
-        letter-spacing="1.5" fill="#89a5b2">Île-de-France · depuis 2014</text>
+        letter-spacing="1.5" fill="#89a5b2">Île-de-France · depuis 2021</text>
 
   <!-- main heading -->
   <text x="64" y="290" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="62" font-weight="800"

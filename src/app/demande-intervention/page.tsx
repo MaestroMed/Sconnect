@@ -92,14 +92,14 @@ export default function DemandeInterventionPage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="mb-6 p-4 bg-accent-50 border border-accent-200 rounded-xl">
+              <div className="mb-6 p-4 bg-accent-50 dark:bg-accent-500/10 border border-accent-200 dark:border-accent-500/30 rounded-xl">
                 <div className="flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-accent-600 shrink-0 mt-0.5" />
+                  <AlertTriangle className="w-5 h-5 text-accent-600 dark:text-accent-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-accent-800">
+                    <p className="font-semibold text-accent-800 dark:text-accent-200">
                       Demande d&apos;intervention urgente
                     </p>
-                    <p className="text-sm text-accent-700">
+                    <p className="text-sm text-accent-700 dark:text-accent-300">
                       Pour une réponse plus rapide, appelez-nous directement au{" "}
                       <a href="tel:+33652820685" className="font-bold underline">
                         06 52 82 06 85

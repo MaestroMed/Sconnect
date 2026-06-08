@@ -70,8 +70,8 @@ export default function AuthorByline({ variant = "compact", className = "" }: Au
             Mehdi Belkacem
           </Link>
           <p className="text-sm text-foreground-muted mt-0.5">
-            Fondateur S Connect France · Électricien certifié Qualifélec, RGE, IRVE niveau 2 ·
-            12 ans d&apos;expérience terrain en Île-de-France
+            Fondateur de S Connect France (depuis 2021) · Électricien certifié Qualifélec, RGE,
+            IRVE niveau 2 · 12 ans d&apos;expérience terrain en Île-de-France
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-foreground-muted">
             <span className="inline-flex items-center gap-1">

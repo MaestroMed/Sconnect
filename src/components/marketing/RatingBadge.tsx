@@ -6,8 +6,10 @@ interface RatingBadgeProps {
   rating?: number;
   /** Total review count, e.g. 127 */
   reviewCount?: number;
-  /** Where the badge links to. Default /avis, can be swapped for a Google
-   *  Business Profile URL once Mehdi gives it (env var or prop). */
+  /** Optional destination. When omitted the badge renders as a static,
+   *  non-interactive trust chip (the dedicated reviews page was removed —
+   *  pass a Google Business Profile URL here once available to turn it
+   *  back into a link). */
   href?: string;
   /** Visual variant: "dark" on darker section, "light" on white surface. */
   variant?: "dark" | "light";
@@ -15,33 +17,31 @@ interface RatingBadgeProps {
 }
 
 /**
- * Trust badge displaying the aggregate rating + review count, linking to
- * the avis page. Intended for fold-1 placement (hero or just below) to
- * give cold visitors a quick credibility signal.
+ * Trust chip displaying the aggregate rating + review count. Intended for
+ * fold-1 placement (hero or just below) to give cold visitors a quick
+ * credibility signal.
  *
- * Default values mirror the /avis stats. When the GBP URL becomes
- * available, swap `href` to it and add "sur Google" wording.
+ * Renders as a static element by default. Pass `href` (e.g. a Google
+ * Business Profile review URL) to make it a link with hover lift.
  */
 export default function RatingBadge({
   rating = 4.9,
   reviewCount = 127,
-  href = "/avis",
+  href,
   variant = "light",
   className = "",
 }: RatingBadgeProps) {
   const full = Math.floor(rating);
   const hasHalf = rating - full >= 0.4;
 
-  return (
-    <Link
-      href={href}
-      aria-label={`Voir les avis clients : note moyenne ${rating} sur 5, ${reviewCount} avis vérifiés`}
-      className={`inline-flex items-center gap-3 rounded-full px-4 py-2 transition-all hover:-translate-y-0.5 ${
-        variant === "dark"
-          ? "bg-white/8 ring-1 ring-white/15 hover:bg-white/12 text-white"
-          : "bg-surface-elevated ring-1 ring-border hover:ring-primary-300 text-foreground shadow-sm"
-      } ${className}`}
-    >
+  const base = `inline-flex items-center gap-3 rounded-full px-4 py-2 ${
+    variant === "dark"
+      ? "bg-white/8 ring-1 ring-white/15 text-white"
+      : "bg-surface-elevated ring-1 ring-border text-foreground shadow-sm"
+  } ${href ? "transition-all hover:-translate-y-0.5 " + (variant === "dark" ? "hover:bg-white/12" : "hover:ring-primary-300") : ""} ${className}`;
+
+  const content = (
+    <>
       <span className="flex items-center gap-0.5">
         {[0, 1, 2, 3, 4].map((i) => {
           const isFull = i < full;
@@ -78,6 +78,22 @@ export default function RatingBadge({
       >
         · {reviewCount} avis vérifiés
       </span>
-    </Link>
+    </>
+  );
+
+  const label = `Note moyenne ${rating} sur 5, ${reviewCount} avis vérifiés`;
+
+  if (href) {
+    return (
+      <Link href={href} aria-label={`Voir les avis clients : ${label}`} className={base}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <span role="img" aria-label={label} className={base}>
+      {content}
+    </span>
   );
 }

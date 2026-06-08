@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { Calendar, Clock, ArrowLeft, ArrowRight, User } from "lucide-react";
 import {
-  getAllPostSlugs,
+  getAllPosts,
   getPostBySlug,
   getRelatedPosts,
   formatDate,
@@ -17,9 +17,36 @@ import MDXComponents from "@/components/blog/MDXComponents";
 import NewsletterForm from "@/components/marketing/NewsletterForm";
 import ShareButtons from "@/components/blog/ShareButtons";
 
+// Article hero cover. Articles rarely ship a bespoke `cover` in frontmatter,
+// so we fall back to a relevant photo picked from the existing image library
+// by category keyword — zero new assets, zero MDX edits, every article gets a
+// photographic hero instead of a flat gradient. The gradient scrim on top
+// keeps the white headline fully readable.
+const CATEGORY_COVER: Array<[RegExp, string]> = [
+  [/serrur|blindage|porte|a2p/i, "/images/services/serrurerie-ouverture.webp"],
+  [/contrôle|controle|accès|acces|interphon|vidéophon|badge|digicode/i, "/images/services/acces-interphone.webp"],
+  [/métall|metall|portail|garde-corps|structure/i, "/images/services/metallerie-portail.webp"],
+  [/irve|borne|recharge|advenir|véhicule|vehicule/i, "/images/services/electricite-installation.webp"],
+  [/dépann|depann|urgence|disjoncteur|tableau|panne|norme|nf c 15/i, "/images/services/electricite-depannage.webp"],
+  [/relamp|éclairage|eclairage|led|dali|gtb|cee|décret|decret|deet|luminaire|ugr|irc|flicker|circadien|ia |audit|capex|leasing|rfp|operat|marché|marche/i, "/images/relamping/luxmeter-audit.webp"],
+];
+
+function coverForArticle(cover?: string, category?: string): string {
+  if (cover) return cover;
+  const hay = category ?? "";
+  for (const [re, img] of CATEGORY_COVER) {
+    if (re.test(hay)) return img;
+  }
+  return "/images/hero/hero-cinema-paris.webp";
+}
+
 export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // Only prerender PUBLISHED articles. Draft scaffolds (draft: true) must
+  // never be built or served — they would (a) break the build if their MDX
+  // is malformed and (b) violate the editorial quality-gate by going live
+  // before human editorialisation. getAllPosts() already filters drafts.
+  const posts = await getAllPosts();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 type Params = { slug: string };
@@ -43,7 +70,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 export default async function ArticlePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  if (!post) notFound();
+  // 404 on unknown slugs, and on drafts in production (preview stays open in
+  // dev so editors can proofread before flipping draft: false).
+  if (!post || (post.frontmatter.draft && process.env.NODE_ENV === "production")) notFound();
 
   const related = await getRelatedPosts(slug, 3);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -116,8 +145,18 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
         />
       )}
 
-      {/* Hero */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-primary-700 via-primary-600 to-electric-600 text-white">
+      {/* Hero — photographic cover (category fallback) under a brand gradient scrim */}
+      <header className="relative overflow-hidden bg-dark-950 text-white">
+        <Image
+          src={coverForArticle(post.frontmatter.cover, post.frontmatter.category)}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          aria-hidden
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-800/90 via-primary-700/85 to-electric-600/80" />
         <div className="absolute inset-0 bg-grid opacity-20" />
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-electric-500/30 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl" />

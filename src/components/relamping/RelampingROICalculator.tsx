@@ -152,7 +152,10 @@ export default function RelampingROICalculator() {
     const savedKwh = currentKwh - futureKwh;
     const savedEuroPerYear = savedKwh * tariff;
     const totalCostHT = surface * typo.costPerSqm;
-    const ceePrime = totalCostHT * (typo.ceePercent / 100);
+    // Fiches CEE éclairage tertiaire (BAT-EQ-127 / -130, IND-UT-130) supprimées
+    // par l'arrêté du 23 février 2026 → plus de prime CEE éclairage en 2026.
+    // Le calcul reste honnête : ROI sur le coût complet, sans subvention.
+    const ceePrime = 0;
     const remainingCost = totalCostHT - ceePrime;
     const roiMonths = savedEuroPerYear > 0 ? (remainingCost / savedEuroPerYear) * 12 : 0;
     const saving10Years = savedEuroPerYear * 10 - remainingCost;
@@ -173,7 +176,7 @@ export default function RelampingROICalculator() {
   return (
     <section
       id="calculateur-roi"
-      className="section-padding bg-gradient-to-b from-surface-muted via-surface to-surface-muted"
+      className="pt-10 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-muted via-surface to-surface-muted"
     >
       <div className="container-custom">
         <div className="max-w-3xl mx-auto text-center mb-12">
@@ -366,13 +369,17 @@ export default function RelampingROICalculator() {
               <div className="rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur">
                 <div className="flex items-center gap-2 text-amber-300 text-xs font-semibold mb-2 uppercase tracking-wider">
                   <Sparkles className="w-4 h-4" />
-                  Prime CEE estimée
+                  Investissement HT
                 </div>
                 <div className="font-display font-bold text-3xl md:text-4xl text-white tabular-nums leading-none">
-                  {fmtEuro(result.ceePrime)}
+                  {fmtEuro(result.totalCostHT)}
                 </div>
                 <div className="text-white/60 text-xs mt-2">
-                  ≈ {typo.ceePercent}% du coût matériel + pose financé par les CEE.
+                  Matériel + pose. Financement leasing ou éco-PTZ Pro possible —{" "}
+                  <Link href="/actualites/financer-relamping-led-sans-cee-2026" className="underline hover:text-white">
+                    sans CEE depuis 2026
+                  </Link>
+                  .
                 </div>
               </div>
 
@@ -385,7 +392,7 @@ export default function RelampingROICalculator() {
                   {fmtMonths(result.roiMonths)}
                 </div>
                 <div className="text-white/60 text-xs mt-2">
-                  Après déduction de la prime CEE, l&apos;économie annuelle amortit le reste à charge.
+                  L&apos;économie d&apos;énergie annuelle amortit l&apos;investissement matériel + pose.
                 </div>
               </div>
             </div>
@@ -414,18 +421,6 @@ export default function RelampingROICalculator() {
                       {fmtEuro(result.totalCostHT)}
                     </td>
                   </tr>
-                  <tr>
-                    <td className="px-5 py-3 text-emerald-200">− Prime CEE déduite</td>
-                    <td className="px-5 py-3 text-right font-display font-bold text-emerald-300 tabular-nums">
-                      −{fmtEuro(result.ceePrime)}
-                    </td>
-                  </tr>
-                  <tr className="bg-white/5">
-                    <td className="px-5 py-3 text-white font-semibold">Reste à charge HT</td>
-                    <td className="px-5 py-3 text-right font-display font-bold text-white text-lg tabular-nums">
-                      {fmtEuro(result.remainingCost)}
-                    </td>
-                  </tr>
                   <tr className="bg-emerald-500/10">
                     <td className="px-5 py-3 text-emerald-100 font-semibold">
                       Économie nette cumulée sur 10 ans
@@ -440,9 +435,11 @@ export default function RelampingROICalculator() {
 
             <p className="text-white/60 text-xs mb-6 leading-relaxed">
               Estimation basée sur les ratios moyens de nos chantiers en Île-de-France (matériel
-              Trilux / Sylvania / Philips OEM, drivers Tridonic, fiches CEE BAT-EQ-127 +
-              BAT-EQ-130 + IND-UT-130). La marge typique entre cette estimation et le devis final
-              après audit est de ± 5 %. Cours CEE pris à 0,0085 €/kWh cumac (mai 2026).
+              Trilux / Sylvania / Philips OEM, drivers Tridonic). La marge typique entre cette
+              estimation et le devis final après audit est de ± 5 %. Les fiches CEE éclairage
+              tertiaire ont été supprimées par l&apos;arrêté du 23 février 2026 : ce calcul ne
+              déduit donc aucune prime CEE — l&apos;investissement reste néanmoins rentable par
+              la seule économie d&apos;énergie, et finançable en leasing ou éco-PTZ Pro.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">

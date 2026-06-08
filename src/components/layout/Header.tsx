@@ -44,7 +44,6 @@ const navigation = [
   { name: "Services", href: "/services", hasDropdown: true },
   { name: "Réalisations", href: "/realisations" },
   { name: "Actualités", href: "/actualites" },
-  { name: "Avis Clients", href: "/avis" },
   { name: "Contact", href: "/contact" },
 ];
 
