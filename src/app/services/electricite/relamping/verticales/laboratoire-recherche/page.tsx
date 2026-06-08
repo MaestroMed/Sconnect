@@ -5,9 +5,11 @@ import {
   Lightbulb,
   ChevronRight,
   Phone,
-  MapPin,
+  FlaskConical,
   CheckCircle2,
   ArrowRight,
+  Microscope,
+  Droplets,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseOverlay } from "@/components/ui/ambient";
@@ -17,41 +19,52 @@ import {
   injectSchema,
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
+import AuthorByline from "@/components/seo/AuthorByline";
 
-// Auto-generated from seo-backlog.json item "vertical-laboratoire" on 2026-05-21.
-// Review before going live: validate the local stats, swap the hero image
-// if a city-specific one exists in /public/images/locations/.
+// EDITORIALISED 2026-06-09 — building-type page. Lab lighting: 500-1000 lux
+// benches, IRC ≥ 90 sample analysis, strict flicker-free (microscopes/cameras),
+// 5000-6500K daylight, IP54 wet zones / fume hoods.
 
 export const metadata: Metadata = {
-  title: "Relamping LED laboratoire et recherche — flicker-free, IRC 95, IP54 zones humides | S Connect",
+  title: "Relamping LED pour laboratoire et recherche — paillasse 750 lux, IRC ≥ 90, flicker-free | S Connect IDF",
   description:
-    "Spécialiste relamping LED à Laboratoire / Recherche (IDF) : audit gratuit, étude personnalisée, installation, conformité NF EN 12464-1, accompagnement décret tertiaire. Devis sous 7 jours.",
+    "Spécialiste relamping LED pour laboratoires, salles blanches et centres de recherche en Île-de-France : paillasse 500-1000 lux, IRC ≥ 90 pour l'analyse d'échantillons, flicker-free strict (microscopes, caméras), lumière du jour 5000-6500K, IP54 zones humides et sorbonnes. Audit gratuit, conformité NF EN 12464-1 et DEET 2030.",
   keywords: [
     "relamping LED laboratoire",
-    "éclairage paillasse labo", "luminaire lab IRC 95",
+    "éclairage paillasse labo LED",
+    "luminaire laboratoire IRC 90 flicker-free",
+    "éclairage salle blanche LED",
+    "DEET laboratoire 2030",
   ],
   alternates: { canonical: "/services/electricite/relamping/laboratoire-recherche" },
+  openGraph: {
+    title: "Relamping LED pour laboratoire — paillasse 750 lux, IRC ≥ 90, flicker-free",
+    description:
+      "Paillasse 500-1000 lux, IRC ≥ 90, flicker-free strict, 5000-6500K, IP54 zones humides. Audit gratuit IDF.",
+    images: ["/images/verticales/laboratoire-recherche-hero.webp"],
+    type: "website",
+  },
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 const serviceSchema = generateServiceSchema(
   {
-    name: "Relamping LED à Laboratoire / Recherche",
+    name: "Relamping LED pour laboratoire et recherche (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux, commerces, copropriétés et industriels à Laboratoire / Recherche et alentours. Conformité NF EN 12464-1 et décret tertiaire (DEET) couverts.",
+      "Audit, étude et installation relamping LED pour laboratoires, salles blanches et centres de recherche : paillasses, sorbonnes, zones humides, bureaux d'analyse. IRC ≥ 90, flicker-free, 5000-6500K, IP54, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
     provider: "S Connect",
-    areaServed: ["Laboratoire / Recherche", "Île-de-France"],
+    areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",
   },
   siteUrl,
 );
 
-export default function RelampingLaboratoireRecherchePage() {
+export default function RelampingLaboratoirePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(serviceSchema)} />
 
-      {/* Hero — Higgsfield-generated dedicated image (Ultraplan §8). */}
+      {/* Hero */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <Image
           src="/images/verticales/laboratoire-recherche-hero.webp"
@@ -72,24 +85,26 @@ export default function RelampingLaboratoireRecherchePage() {
                 { label: "Services", href: "/services" },
                 { label: "Électricité", href: "/services/electricite" },
                 { label: "Relamping LED", href: "/services/electricite/relamping" },
-                { label: "Laboratoire / Recherche" },
+                { label: "Laboratoire & recherche" },
               ]}
             />
           </div>
           <div className="max-w-2xl">
             <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-primary-500/30">
-              <MapPin className="w-8 h-8 text-white" />
+              <FlaskConical className="w-8 h-8 text-white" />
             </div>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
-              Relamping LED à {"Laboratoire / Recherche"}
+              Relamping LED pour laboratoire et recherche
             </h1>
             <p className="text-xl md:text-2xl font-medium mb-6">
-              <BulbText>Audit gratuit · ROI mesuré · Conforme NF EN 12464-1</BulbText>
+              <BulbText>Paillasse 750 lux · IRC ≥ 90 · flicker-free</BulbText>
             </p>
             <p className="text-lg text-white/90 leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              S Connect intervient sur tout Laboratoire / Recherche et la couronne immédiate. Bureaux,
-              copropriétés, commerces, industriels : nous mesurons avant de chiffrer,
-              et la facture finale = le devis.
+              En laboratoire, la lumière est un <strong>instrument de mesure</strong> :
+              elle doit révéler la vraie couleur d&apos;un échantillon (IRC ≥ 90), ne jamais
+              scintiller sous une caméra ou un microscope (flicker-free strict), et reproduire
+              la lumière du jour (5000-6500K). Sur les zones humides et les sorbonnes, on passe
+              en IP54. On intervient sans interrompre les manips en cours.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/30">
@@ -105,20 +120,69 @@ export default function RelampingLaboratoireRecherchePage() {
         </div>
       </section>
 
-      {/* Pourquoi nous pour Laboratoire / Recherche */}
+      {/* Enjeux */}
       <section className="section-padding bg-surface">
+        <div className="container-custom max-w-5xl">
+          <SectionTitle
+            badge="Les enjeux"
+            title="Quand l'éclairage conditionne la qualité de la mesure"
+            subtitle="Un labo n'a pas le droit à l'à-peu-près lumineux : la fiabilité des résultats en dépend."
+          />
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Microscope className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">Flicker-free strict</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Sous microscope, caméra ou écran d&apos;acquisition, le moindre scintillement
+                fausse l&apos;image (effet stroboscopique). On exige des sources flicker-free
+                (PstLM &lt; 0,4, SVM &lt; 0,4).
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Lightbulb className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">750 lux · 5000-6500K</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Paillasse d&apos;analyse : 500 à 1000 lux selon la finesse du travail, IRC ≥ 90
+                pour distinguer les nuances d&apos;un échantillon, température proche de la lumière
+                du jour pour ne pas biaiser la perception colorimétrique.
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Droplets className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">IP54 zones humides</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Sorbonnes, paillasses humides, salles de lavage : étanchéité IP54 minimum, résistance
+                aux vapeurs et aux nettoyages fréquents. Salle blanche : luminaires encastrés à joint.
+              </p>
+            </div>
+          </div>
+          <p className="mt-8 text-sm text-foreground-muted text-center max-w-3xl mx-auto">
+            Sources :{" "}
+            <a href="https://www.afe-eclairage.fr/" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-300 underline">AFE — éclairage des laboratoires</a>,{" "}
+            <a href="https://www.boutique.afnor.org/" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-300 underline">AFNOR — NF EN 12464-1</a>.
+          </p>
+        </div>
+      </section>
+
+      {/* Méthode */}
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-4xl">
           <SectionTitle
-            badge="Pourquoi S Connect à Laboratoire / Recherche"
-            title="L'expertise éclairage locale, sans intermédiaire"
-            subtitle="Basés à Clichy, nous intervenons sur Laboratoire / Recherche en moins de 40 min. Notre équipe sait calibrer un éclairage pour chaque typologie de local de la ville."
+            badge="Notre méthode S Connect"
+            title="Relamper un labo sans casser une manip"
           />
           <ul className="grid sm:grid-cols-2 gap-4">
             {[
-              { title: "Audit gratuit sous 7 jours", desc: "Visite, mesures luxmètre étalonné, rapport chiffré avec ROI. Sans engagement." },
-              { title: "Devis ferme = facture finale", desc: "Aucun supplément après diagnostic. Délais et coûts garantis par écrit." },
-              { title: "Conformité NF EN 12464-1", desc: "Niveaux d'éclairement réglementaires par poste de travail vérifiés à la livraison." },
-              { title: "Couverture décret tertiaire", desc: "Le relamping reste l'investissement n°1 pour atteindre les −40 % du DEET en 2030." },
+              { title: "Intervention coordonnée", desc: "Planning calé avec le responsable de labo, zone par zone, en respectant les expériences en cours et les protocoles d'accès." },
+              { title: "Devis ferme = facture finale", desc: "Audit photométrique paillasse + zones humides, mesure flicker, devis sous 7 jours. Aucun supplément." },
+              { title: "Flicker-free + IRC ≥ 90", desc: "Sources vérifiées en flicker (PstLM/SVM), IRC ≥ 90, IP54 sur zones humides. Drivers garantis 5 ans." },
+              { title: "Conformité DEET 2030", desc: "Bâtiments tertiaires de recherche > 1 000 m² : relamping = action n°1 vers les −40 %. Reporting OPERAT inclus." },
             ].map((b) => (
               <li key={b.title} className="p-5 rounded-2xl bg-surface-elevated border border-border">
                 <h3 className="font-display font-bold text-foreground mb-1 flex items-center gap-2">
@@ -132,29 +196,27 @@ export default function RelampingLaboratoireRecherchePage() {
         </div>
       </section>
 
-      {/* Sub-clusters typologies */}
-      <section className="section-padding bg-surface-muted">
+      {/* Zones */}
+      <section className="section-padding bg-surface">
         <div className="container-custom max-w-5xl">
-          <SectionTitle
-            badge="Selon votre typologie"
-            title="Quelle solution pour votre local à Laboratoire / Recherche ?"
-          />
+          <SectionTitle badge="Selon la zone" title="Chaque espace, sa cible photométrique" />
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { name: "Bureau & tertiaire", href: "/services/electricite/relamping/bureau-tertiaire" },
-              { name: "Commerce & restaurant", href: "/services/electricite/relamping/commerce-restaurant" },
-              { name: "Copropriété & parking", href: "/services/electricite/relamping/copropriete-parking" },
-              { name: "Industriel & entrepôt", href: "/services/electricite/relamping/industriel-entrepot" },
+              { name: "Paillasses d'analyse", href: "/services/electricite/relamping/bureau-tertiaire", desc: "500-1000 lux, IRC ≥ 90, flicker-free, 5000-6500K. Éclairement local renforcé au poste de travail de précision." },
+              { name: "Salle blanche / clean room", href: "/services/electricite/relamping/industriel-entrepot", desc: "Luminaires encastrés à joint, étanches, lumière uniforme sans recoin à poussière. Compatible classes ISO." },
+              { name: "Sorbonnes & zones humides", href: "/services/electricite/relamping/industriel-entrepot", desc: "IP54 minimum, résistance vapeurs et solvants, nettoyabilité. Sécurité sur les postes à risque chimique." },
+              { name: "Bureaux & salles de réunion", href: "/services/electricite/relamping/bureau-tertiaire", desc: "500 lux, UGR ≤ 19, gradation. Espaces de rédaction et de revue de données reliés aux paillasses." },
             ].map((t) => (
               <Link
-                key={t.href}
+                key={t.name}
                 href={t.href}
-                className="p-6 rounded-2xl bg-surface border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+                className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
               >
-                <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2">
+                <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
                   {t.name}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{t.desc}</p>
               </Link>
             ))}
           </div>
@@ -162,20 +224,32 @@ export default function RelampingLaboratoireRecherchePage() {
       </section>
 
       {/* Cross-link pillar */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-3xl text-center">
           <Lightbulb className="w-12 h-12 text-primary-500 mx-auto mb-4" />
           <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
             Notre méthode relamping complète
           </h2>
           <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-            Audit, calcul ROI, gestion DALI, conformité décret tertiaire : tout est
-            détaillé sur notre page pilier dédiée.
+            Audit photométrique, mesure flicker, calcul ROI, conformité décret tertiaire.
+            Tout est détaillé sur la page pilier.
           </p>
-          <Link href="/services/electricite/relamping" className="btn-outline">
-            Voir la page pilier Relamping LED
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/services/electricite/relamping" className="btn-outline">
+              Voir la page pilier Relamping LED
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/calculateur-relamping" className="btn-outline">
+              Calculer mon ROI
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Author byline */}
+      <section className="bg-surface py-10 md:py-14">
+        <div className="container-custom max-w-3xl">
+          <AuthorByline variant="card" />
         </div>
       </section>
 
@@ -185,10 +259,10 @@ export default function RelampingLaboratoireRecherchePage() {
         <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">
-              Auditons votre éclairage à {"Laboratoire / Recherche"} gratuitement
+              Auditons l&apos;éclairage de votre laboratoire
             </h2>
             <p className="text-primary-100 text-lg">
-              Rapport chiffré + ROI sous 7 jours. Sans engagement.
+              Mesure flicker + ROI par zone sous 7 jours. Intervention coordonnée, sans engagement.
             </p>
           </div>
           <div className="flex gap-4">

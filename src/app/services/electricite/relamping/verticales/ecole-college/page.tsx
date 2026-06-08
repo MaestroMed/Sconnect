@@ -5,9 +5,11 @@ import {
   Lightbulb,
   ChevronRight,
   Phone,
-  MapPin,
+  GraduationCap,
   CheckCircle2,
   ArrowRight,
+  BookOpen,
+  ShieldCheck,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseOverlay } from "@/components/ui/ambient";
@@ -17,36 +19,48 @@ import {
   injectSchema,
 } from "@/lib/structured-data";
 import BulbText from "@/components/ui/BulbText";
+import AuthorByline from "@/components/seo/AuthorByline";
 
-// Auto-generated from seo-backlog.json item "vertical-ecole" on 2026-05-20.
-// Review before going live: validate the local stats, swap the hero image
-// if a city-specific one exists in /public/images/locations/.
+// EDITORIALISED 2026-06-09 — building-type page. School lighting: 300-500 lux
+// classrooms, UGR ≤ 19, flicker-free for reading/screens, HCL benefits for
+// concentration, public procurement, BAES.
 
 export const metadata: Metadata = {
-  title: "Relamping LED école et collège — éclairage salle de classe NF EN 12464-1 (500 lux, UGR ≤ 19) | S Connect",
+  title: "Relamping LED pour école et collège — salles 300-500 lux, flicker-free, HCL | S Connect IDF",
   description:
-    "Spécialiste relamping LED à École / Collège (IDF) : audit gratuit, étude personnalisée, installation, conformité NF EN 12464-1, accompagnement décret tertiaire. Devis sous 7 jours.",
+    "Spécialiste relamping LED pour écoles, collèges et lycées en Île-de-France : salles de classe 300-500 lux, UGR ≤ 19, flicker-free pour la lecture et les écrans, éclairage circadien (HCL) bénéfique à la concentration, amphis, gymnase, cantine. Marchés publics. Audit gratuit, conformité NF EN 12464-1 et DEET 2030.",
   keywords: [
     "relamping LED école",
-    "éclairage salle de classe LED", "norme éclairage collège",
+    "éclairage salle de classe LED",
+    "éclairage scolaire flicker-free",
+    "HCL école concentration",
+    "marché public éclairage scolaire",
+    "DEET établissement scolaire 2030",
   ],
   alternates: { canonical: "/services/electricite/relamping/ecole-college" },
+  openGraph: {
+    title: "Relamping LED pour école et collège — 300-500 lux, flicker-free",
+    description:
+      "Salles 300-500 lux, UGR ≤ 19, flicker-free, HCL pour la concentration. Marchés publics. Audit gratuit IDF.",
+    images: ["/images/verticales/ecole-college-hero.webp"],
+    type: "website",
+  },
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 const serviceSchema = generateServiceSchema(
   {
-    name: "Relamping LED à École / Collège",
+    name: "Relamping LED pour école et collège (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux, commerces, copropriétés et industriels à École / Collège et alentours. Conformité NF EN 12464-1 et décret tertiaire (DEET) couverts.",
+      "Audit, étude et installation relamping LED pour établissements scolaires : salles de classe, amphithéâtres, CDI, gymnase, cantine, circulations. UGR ≤ 19, flicker-free, conformité NF EN 12464-1 et décret tertiaire 2030. Réponse marchés publics. Certifié Qualifélec + RGE.",
     provider: "S Connect",
-    areaServed: ["École / Collège", "Île-de-France"],
+    areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",
   },
   siteUrl,
 );
 
-export default function RelampingcoleCollgePage() {
+export default function RelampingEcoleCollegePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(serviceSchema)} />
@@ -72,24 +86,26 @@ export default function RelampingcoleCollgePage() {
                 { label: "Services", href: "/services" },
                 { label: "Électricité", href: "/services/electricite" },
                 { label: "Relamping LED", href: "/services/electricite/relamping" },
-                { label: "École / Collège" },
+                { label: "École & collège" },
               ]}
             />
           </div>
           <div className="max-w-2xl">
             <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-electric-500 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-primary-500/30">
-              <MapPin className="w-8 h-8 text-white" />
+              <GraduationCap className="w-8 h-8 text-white" />
             </div>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
-              Relamping LED à {"École / Collège"}
+              Relamping LED pour école et collège
             </h1>
             <p className="text-xl md:text-2xl font-medium mb-6">
-              <BulbText>Audit gratuit · ROI mesuré · Conforme NF EN 12464-1</BulbText>
+              <BulbText>300-500 lux · flicker-free · concentration</BulbText>
             </p>
             <p className="text-lg text-white/90 leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              S Connect intervient sur tout École / Collège et la couronne immédiate. Bureaux,
-              copropriétés, commerces, industriels : nous mesurons avant de chiffrer,
-              et la facture finale = le devis.
+              Dans une salle de classe, la lumière agit sur la <strong>concentration et la
+              fatigue</strong>. La norme impose 300 à 500 lux, UGR ≤ 19 et un éclairage
+              flicker-free indispensable face aux écrans. L&apos;éclairage circadien (HCL)
+              va plus loin : plus tonique le matin, plus doux l&apos;après-midi. Nous
+              intervenons pendant les vacances scolaires et traitons les marchés publics.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/demande-devis" className="btn-primary btn-lg shadow-xl shadow-primary-700/30">
@@ -105,20 +121,69 @@ export default function RelampingcoleCollgePage() {
         </div>
       </section>
 
-      {/* Pourquoi nous pour École / Collège */}
+      {/* Enjeux */}
       <section className="section-padding bg-surface">
+        <div className="container-custom max-w-5xl">
+          <SectionTitle
+            badge="Les enjeux"
+            title="La lumière, un outil pédagogique"
+            subtitle="Confort visuel des élèves, sécurité ERP, et un budget de collectivité à respecter."
+          />
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">Classes 300-500 lux</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                NF EN 12464-1 : 300 lux au primaire, 500 lux au secondaire et en TP. UGR ≤ 19
+                contre l&apos;éblouissement au tableau et sur les écrans, uniformité U0 ≥ 0,6.
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <Lightbulb className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">Flicker-free + HCL</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Le scintillement fatigue et déconcentre. Sources flicker-free obligatoires.
+                L&apos;éclairage circadien (tunable white) soutient la vigilance le matin et
+                apaise l&apos;après-midi — gains de concentration documentés.
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl bg-surface-elevated border border-border">
+              <div className="flex items-center gap-2 mb-2">
+                <ShieldCheck className="w-5 h-5 text-primary-500" />
+                <span className="font-display font-bold text-foreground">ERP + marché public</span>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                Établissement recevant du public : BAES + balisage NF EN 1838 à jour. Pour les
+                collectivités, nous répondons aux marchés publics (CCAP, BPU) avec attestations
+                Qualifélec / RGE.
+              </p>
+            </div>
+          </div>
+          <p className="mt-8 text-sm text-foreground-muted text-center max-w-3xl mx-auto">
+            Sources :{" "}
+            <a href="https://www.afe-eclairage.fr/" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-300 underline">AFE — éclairage scolaire</a>,{" "}
+            <a href="https://www.boutique.afnor.org/" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-300 underline">AFNOR — NF EN 12464-1</a>.
+          </p>
+        </div>
+      </section>
+
+      {/* Méthode */}
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-4xl">
           <SectionTitle
-            badge="Pourquoi S Connect à École / Collège"
-            title="L'expertise éclairage locale, sans intermédiaire"
-            subtitle="Basés à Clichy, nous intervenons sur École / Collège en moins de 40 min. Notre équipe sait calibrer un éclairage pour chaque typologie de local de la ville."
+            badge="Notre méthode S Connect"
+            title="Relamper un établissement scolaire sereinement"
           />
           <ul className="grid sm:grid-cols-2 gap-4">
             {[
-              { title: "Audit gratuit sous 7 jours", desc: "Visite, mesures luxmètre étalonné, rapport chiffré avec ROI. Sans engagement." },
-              { title: "Devis ferme = facture finale", desc: "Aucun supplément après diagnostic. Délais et coûts garantis par écrit." },
-              { title: "Conformité NF EN 12464-1", desc: "Niveaux d'éclairement réglementaires par poste de travail vérifiés à la livraison." },
-              { title: "Couverture décret tertiaire", desc: "Le relamping reste l'investissement n°1 pour atteindre les −40 % du DEET en 2030." },
+              { title: "Chantier pendant les vacances", desc: "Relamping concentré sur les congés scolaires pour ne pas perturber les cours. Planning calé sur le calendrier de l'établissement." },
+              { title: "Réponse marchés publics", desc: "CCAP, BPU, mémoire technique : nous traitons les marchés publics des collectivités avec rigueur et pièces à jour." },
+              { title: "UGR ≤ 19 + flicker-free", desc: "Confort visuel garanti par étude photométrique. Sources flicker-free, IRC ≥ 80, drivers garantis 5 ans." },
+              { title: "Conformité DEET 2030", desc: "Sur les bâtiments > 1 000 m², le relamping est l'action n°1 vers les −40 %. Reporting OPERAT inclus." },
             ].map((b) => (
               <li key={b.title} className="p-5 rounded-2xl bg-surface-elevated border border-border">
                 <h3 className="font-display font-bold text-foreground mb-1 flex items-center gap-2">
@@ -132,29 +197,27 @@ export default function RelampingcoleCollgePage() {
         </div>
       </section>
 
-      {/* Sub-clusters typologies */}
-      <section className="section-padding bg-surface-muted">
+      {/* Zones */}
+      <section className="section-padding bg-surface">
         <div className="container-custom max-w-5xl">
-          <SectionTitle
-            badge="Selon votre typologie"
-            title="Quelle solution pour votre local à École / Collège ?"
-          />
+          <SectionTitle badge="Selon la zone" title="Chaque espace, sa cible photométrique" />
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { name: "Bureau & tertiaire", href: "/services/electricite/relamping/bureau-tertiaire" },
-              { name: "Commerce & restaurant", href: "/services/electricite/relamping/commerce-restaurant" },
-              { name: "Copropriété & parking", href: "/services/electricite/relamping/copropriete-parking" },
-              { name: "Industriel & entrepôt", href: "/services/electricite/relamping/industriel-entrepot" },
+              { name: "Salles de classe & TP", href: "/services/electricite/relamping/bureau-tertiaire", desc: "300-500 lux, UGR ≤ 19, flicker-free, tunable white (HCL) possible. 1000 lux en TP scientifique." },
+              { name: "Amphithéâtre & CDI", href: "/services/electricite/relamping/bureau-tertiaire", desc: "500 lux, IRC ≥ 80 pour la lecture longue, gradation pour les projections. Confort sur de longues plages." },
+              { name: "Gymnase & cour", href: "/services/electricite/relamping/industriel-entrepot", desc: "Gymnase 300 lux IK10 anti-ballon (voir page dédiée), éclairage extérieur de cour et préau en détection." },
+              { name: "Cantine & circulations", href: "/services/electricite/relamping/copropriete-parking", desc: "Réfectoire 200-300 lux IRC ≥ 80, couloirs et escaliers en détection présence. BAES à jour." },
             ].map((t) => (
               <Link
-                key={t.href}
+                key={t.name}
                 href={t.href}
-                className="p-6 rounded-2xl bg-surface border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
+                className="p-6 rounded-2xl bg-surface-elevated border border-border hover:border-primary-300 dark:hover:border-primary-500 transition-colors group"
               >
-                <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2">
+                <span className="font-display font-bold text-lg text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-300 inline-flex items-center gap-2 mb-2">
                   {t.name}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{t.desc}</p>
               </Link>
             ))}
           </div>
@@ -162,20 +225,32 @@ export default function RelampingcoleCollgePage() {
       </section>
 
       {/* Cross-link pillar */}
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-surface-muted">
         <div className="container-custom max-w-3xl text-center">
           <Lightbulb className="w-12 h-12 text-primary-500 mx-auto mb-4" />
           <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
             Notre méthode relamping complète
           </h2>
           <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-            Audit, calcul ROI, gestion DALI, conformité décret tertiaire : tout est
-            détaillé sur notre page pilier dédiée.
+            Audit photométrique, calcul ROI, conformité NF EN 12464-1 et décret tertiaire,
+            réponse marchés publics. Tout est détaillé sur la page pilier.
           </p>
-          <Link href="/services/electricite/relamping" className="btn-outline">
-            Voir la page pilier Relamping LED
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/services/electricite/relamping" className="btn-outline">
+              Voir la page pilier Relamping LED
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/calculateur-relamping" className="btn-outline">
+              Calculer mon ROI
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Author byline */}
+      <section className="bg-surface py-10 md:py-14">
+        <div className="container-custom max-w-3xl">
+          <AuthorByline variant="card" />
         </div>
       </section>
 
@@ -185,10 +260,10 @@ export default function RelampingcoleCollgePage() {
         <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">
-              Auditons votre éclairage à {"École / Collège"} gratuitement
+              Auditons l&apos;éclairage de votre établissement
             </h2>
             <p className="text-primary-100 text-lg">
-              Rapport chiffré + ROI sous 7 jours. Sans engagement.
+              Rapport ROI + conformité par zone sous 7 jours. Chantier sur les vacances, sans engagement.
             </p>
           </div>
           <div className="flex gap-4">
