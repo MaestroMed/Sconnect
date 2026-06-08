@@ -40,6 +40,12 @@ function coverForArticle(cover?: string, category?: string): string {
   return "/images/hero/hero-cinema-paris.webp";
 }
 
+// Only the slugs returned by generateStaticParams exist. Any other slug
+// (drafts, typos, deleted articles) returns Next's built-in 404 WITHOUT
+// rendering the component — the bulletproof quality-gate. New articles go
+// live on the next build/deploy (standard for a static content site).
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   // Only prerender PUBLISHED articles. Draft scaffolds (draft: true) must
   // never be built or served — they would (a) break the build if their MDX
@@ -70,9 +76,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 export default async function ArticlePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  // 404 on unknown slugs, and on drafts in production (preview stays open in
-  // dev so editors can proofread before flipping draft: false).
-  if (!post || (post.frontmatter.draft && process.env.NODE_ENV === "production")) notFound();
+  // 404 on unknown slugs AND on drafts — drafts must never be publicly
+  // reachable (editorial quality-gate + some scaffolds have malformed MDX).
+  // To proofread a draft, flip `draft: false` locally. `draft` is coerced
+  // because frontmatter can yield a boolean or the string "true".
+  const isDraft = post?.frontmatter.draft === true || String(post?.frontmatter.draft) === "true";
+  if (!post || isDraft) notFound();
 
   const related = await getRelatedPosts(slug, 3);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
