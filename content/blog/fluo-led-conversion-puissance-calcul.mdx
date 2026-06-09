@@ -1,53 +1,89 @@
 ---
 title: "Convertir un tube fluo en LED : calcul de puissance équivalente sans se planter"
-excerpt: "Un T8 36 W ≠ une LED 36 W. La conversion correcte se fait par lumens. Tableau de conversion + erreurs fréquentes qui mènent à un sur-éclairage."
-date: "2026-05-20"
+excerpt: "Un T8 36 W ≠ une LED 36 W. La conversion correcte se fait en lumens, pas en watts — et on a souvent besoin de moins de flux. Tableau de conversion + erreurs fréquentes qui mènent au sur-éclairage."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Guide éclairage"
 tags: ["conversion fluo LED", "lumens", "calcul puissance"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-led-fluo-conversion-calcul`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## L'erreur de base : raisonner en watts
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Le réflexe naturel — « je remplace mon tube 36 W par une LED 36 W » — est faux. Le **watt mesure une consommation**, pas une quantité de lumière. Ce qui éclaire, c'est le **lumen** (flux lumineux). La LED produit beaucoup plus de lumens par watt que le fluo : convertir à puissance égale mène droit au **sur-éclairage** (et à la dépense inutile).
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+La bonne méthode : partir du **flux lumineux utile** dont la zone a besoin, puis choisir la LED qui le délivre.
 
-À rédiger.
+## Pourquoi on a souvent besoin de MOINS de lumens
 
-## 2. Le contexte technique / réglementaire
+Deux raisons rendent la conversion encore plus favorable que le seul ratio lm/W :
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+1. **Le fluo perd dans le ballast** : un tube T8 « 36 W » consomme en réalité ~45 W système (ballast ferromagnétique). On compare donc à la consommation réelle, pas à l'étiquette.
+2. **La LED est directionnelle** : un tube fluo émet à 360°, et une partie de la lumière est absorbée par le réflecteur/la vasque. La LED envoie le flux **là où il faut**. Résultat : à éclairement égal sur le plan de travail, un luminaire LED dédié a besoin de **moins de lumens** qu'un tube fluo.
 
-À rédiger.
+C'est pourquoi un luminaire LED conçu pour l'usage bat toujours un simple « tube LED » glissé dans l'ancien boîtier.
 
-## 3. Notre méthode S Connect
+## Tableau de conversion indicatif
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+| Tube fluo | Conso système (avec ballast) | Flux typique | Tube LED équivalent | Luminaire LED dédié |
+|---|---|---|---|---|
+| T8 18 W | ~25 W | ~1 350 lm | ~8-10 W | ~6-9 W |
+| T8 36 W | ~45 W | ~3 000-3 350 lm | ~16-20 W | ~12-16 W |
+| T8 58 W | ~70 W | ~5 000 lm | ~24-30 W | ~20-26 W |
+| T5 14 W | ~18 W | ~1 200 lm | ~7-9 W | ~6-8 W |
+| T5 28 W | ~32 W | ~2 600 lm | ~14-18 W | ~12-15 W |
+| T5 35 W | ~40 W | ~3 300 lm | ~18-22 W | ~15-19 W |
 
-À rédiger.
+Ces valeurs sont **indicatives** : le bon dimensionnement se fait par **étude photométrique** (lux cible NF EN 12464-1, géométrie du local), pas par règle de trois.
 
-## 4. Cas concret chiffré
+## La vraie référence : l'éclairement cible, pas l'ancien tube
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Avant de convertir, posez la question : **« combien de lux faut-il réellement ici ? »**
+- Bureau : ~500 lux sur le plan de travail.
+- Circulation : ~100-150 lux.
+- Atelier fin : 750-1 000 lux.
 
-À rédiger.
+On dimensionne la LED pour **atteindre cette cible**, pas pour reproduire l'éclairement (souvent excessif ou insuffisant) de l'installation fluo. Voir [norme NF EN 12464-1 : éclairement par local](/actualites/norme-nf-en-12464-1-tableau-resume).
 
-## 5. Pièges à éviter
+## Tube LED « retrofit » ou luminaire dédié ?
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **Tube LED retrofit** (avec bypass du ballast) : rapide et économique, mais conserve l'optique d'origine (pertes, UGR non maîtrisé). Acceptable en locaux non sensibles.
+- **Luminaire LED dédié** : meilleur rendement réel, UGR et IRC maîtrisés, gestion intégrable (DALI). Recommandé en bureau, commerce, santé.
 
-À rédiger.
+Le « tube pour tube » séduit par son prix, mais il plafonne la performance.
 
-## 6. FAQ
+## Pièges à éviter
 
-<!-- TODO[seo-generate]: ~142 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+1. **Convertir watt pour watt** : la garantie du sur-éclairage et de la sur-dépense.
+2. **Comparer des lumens « initiaux » à des lumens « maintenus »** : la LED se dégrade (L80/L90) ; comparez à flux maintenu, pas au flux de sortie d'usine.
+3. **Garder un tube LED sur ballast non débranché** : risque de panne et de flicker. Le bypass est la règle — voir [scintillement (flicker) et santé](/actualites/scintillement-flicker-led-sante-travail).
+4. **Oublier l'IRC et la température** : un bon nombre de lumens avec un mauvais rendu de couleur reste un mauvais éclairage — voir [pourquoi viser IRC ≥ 90](/actualites/irc-90-luminaire-led-pourquoi).
 
-À rédiger.
+## FAQ
+
+### Une LED 18 W remplace-t-elle un tube 36 W ?
+Souvent oui, voire mieux : un luminaire LED de 12-18 W peut délivrer l'éclairement utile d'un tube fluo 36 W système ~45 W. Le gain vient du rendement et de la directionnalité.
+
+### Comment connaître le flux dont j'ai besoin ?
+Par l'éclairement cible (lux) de la NF EN 12464-1 appliqué à la surface, via une étude photométrique. C'est ce qu'on calcule en audit avant tout chiffrage.
+
+### Le retrofit tube LED est-il une mauvaise idée ?
+Pas toujours : il est pertinent en locaux non sensibles et budget serré. Mais en bureau/commerce/santé, le luminaire dédié offre un bien meilleur confort et rendement.
 
 ## Pour aller plus loin
 
-- [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Tube T5 vs T8 LED : comparatif 2026](/actualites/tube-t5-t8-led-comparatif-2026)
+- [Halogène, fluo, LED : le comparatif](/actualites/halogene-fluo-led-comparatif)
+- [Norme NF EN 12464-1 : éclairement par local](/actualites/norme-nf-en-12464-1-tableau-resume)
+- [Calculer mon ROI relamping](/calculateur-relamping)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [AFE — Grandeurs photométriques](https://www.afe-eclairage.fr/)
+- [AFNOR — NF EN 12464-1](https://www.boutique.afnor.org/)
+- [ADEME — Éclairage performant](https://www.ademe.fr/)
+- Benchmark interne S Connect — conversions fluo→LED IDF 2022-2026
