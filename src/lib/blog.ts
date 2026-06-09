@@ -105,41 +105,71 @@ function dbRowToPost(row: {
   };
 }
 
-export async function getAllPostSlugs(): Promise<string[]> {
-  if (isPersistenceAvailable()) {
+// INVARIANT — les MDX de content/blog/ (git) sont LA source de vérité
+// éditoriale. La base (Supabase) ne peut qu'AJOUTER des posts créés via
+// l'admin ; elle ne doit jamais masquer, remplacer ni ressusciter un slug
+// présent dans le filesystem (un draft gité reste gated même si une copie
+// DB périmée est marquée published). La présence des env vars Supabase ne
+// doit JAMAIS conditionner la visibilité du contenu fichier : un projet
+// Supabase mort/en pause répondait [] silencieusement et a vidé tout le
+// blog en prod (0 article servi) alors que les builds locaux, sans env,
+// passaient par le filesystem et semblaient corrects.
+
+// La couche DB est best-effort : un throw ici (réseau, projet mort, config
+// partielle — createServiceClient() throw si SUPABASE_SERVICE_ROLE_KEY
+// manque) ne doit JAMAIS faire échouer le build ni vider le blog.
+async function dbPostsBestEffort(): Promise<Post[]> {
+  if (!isPersistenceAvailable()) return [];
+  try {
     const rows = await listPosts({ publishedOnly: true });
-    return rows.map((r) => r.slug);
+    return rows.map(dbRowToPost).filter((p) => !p.frontmatter.draft);
+  } catch (err) {
+    console.error(
+      "[blog] DB posts indisponibles — contenu fichier seul servi:",
+      err instanceof Error ? err.message : err,
+    );
+    return [];
   }
-  return fsGetAllSlugs();
+}
+
+export async function getAllPostSlugs(): Promise<string[]> {
+  const set = new Set(fsGetAllSlugs());
+  for (const p of await dbPostsBestEffort()) set.add(p.slug);
+  return Array.from(set);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const fsPost = fsGetPostBySlug(slug);
+  if (fsPost) return fsPost;
   if (isPersistenceAvailable()) {
-    const row = await getDbPost(slug);
-    if (row) return dbRowToPost(row);
+    try {
+      const row = await getDbPost(slug);
+      if (row) return dbRowToPost(row);
+    } catch (err) {
+      console.error(
+        "[blog] DB post indisponible:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
-  return fsGetPostBySlug(slug);
+  return null;
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  if (isPersistenceAvailable()) {
-    const rows = await listPosts({ publishedOnly: true });
-    return rows
-      .map(dbRowToPost)
-      .filter((p) => !p.frontmatter.draft)
-      .sort(
-        (a, b) =>
-          new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
-      );
-  }
-  const slugs = fsGetAllSlugs();
-  return slugs
+  const fsSlugs = fsGetAllSlugs();
+  const fsPosts = fsSlugs
     .map((slug) => fsGetPostBySlug(slug))
-    .filter((p): p is Post => p !== null && !p.frontmatter.draft)
-    .sort(
-      (a, b) =>
-        new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
-    );
+    .filter((p): p is Post => p !== null && !p.frontmatter.draft);
+
+  // Dédup sur TOUS les slugs fs (drafts compris) : un draft gité ne doit
+  // pas réapparaître via une vieille ligne DB published.
+  const known = new Set(fsSlugs);
+  const dbOnly = (await dbPostsBestEffort()).filter((p) => !known.has(p.slug));
+
+  return [...fsPosts, ...dbOnly].sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
+  );
 }
 
 export async function getRelatedPosts(slug: string, limit = 3): Promise<Post[]> {
