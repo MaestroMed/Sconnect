@@ -75,8 +75,11 @@ export default function HeroVideo({ videoSrc, videoSrcWebm, posterSrc, fallbackS
     return (
       <picture aria-hidden="true" className="pointer-events-none">
         <source srcSet={posterSrc} type="image/webp" />
-        {fallbackSrc && <img src={fallbackSrc} alt="" className="absolute inset-0 w-full h-full object-cover" />}
-        {!fallbackSrc && <img src={posterSrc} alt="" className="absolute inset-0 w-full h-full object-cover" />}
+        {/* LCP element on first paint (pre-hydration). fetchPriority/eager/async
+            make the poster discoverable + prioritised so the browser fetches it
+            immediately — fixes the "priorityHinted" LCP discovery check. */}
+        {fallbackSrc && <img src={fallbackSrc} alt="" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 w-full h-full object-cover" />}
+        {!fallbackSrc && <img src={posterSrc} alt="" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 w-full h-full object-cover" />}
       </picture>
     );
   }
