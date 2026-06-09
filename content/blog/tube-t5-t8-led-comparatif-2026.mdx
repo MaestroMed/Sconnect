@@ -1,53 +1,106 @@
 ---
 title: "Tube T5 vs T8 vs LED : le vrai comparatif 2026 (efficacité, durée, coût total)"
-excerpt: "Avant de relamper, comprendre ce qu'on remplace. Comparatif chiffré T5 vs T8 vs LED avec consommation, durée, IRC, coût total possession sur 10 ans."
-date: "2026-05-20"
+excerpt: "Avant de relamper, comprendre ce qu'on remplace. Comparatif chiffré T5 vs T8 vs tube LED : consommation, durée de vie, IRC, flicker et coût total de possession sur 10 ans."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Comparatif"
 tags: ["T5", "T8", "LED", "comparatif"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `comparison-tube-t5-t8-led`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Ce qu'on remplace, exactement
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Avant de parler relamping, il faut comprendre le parc existant. Trois technologies de tubes cohabitent encore dans le tertiaire français :
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **T8** : le vieux tube fluorescent de 26 mm de diamètre, sur ballast ferromagnétique ou électronique. Le plus répandu dans les bâtiments d'avant 2010.
+- **T5** : tube fluorescent plus fin (16 mm), plus efficace que le T8, sur ballast électronique. Posé dans les rénovations des années 2005-2015.
+- **Tube LED** : la diode, en remplacement direct (retrofit) ou en luminaire neuf.
 
-À rédiger.
+Le débat « faut-il passer en LED » est tranché depuis longtemps sur le plan technique. Reste à le chiffrer honnêtement.
 
-## 2. Le contexte technique / réglementaire
+## Le tableau comparatif
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+| Critère | T8 fluo | T5 fluo | Tube LED 2026 |
+|---|---|---|---|
+| Efficacité lumineuse | 60-80 lm/W | 90-105 lm/W | 140-200 lm/W |
+| Durée de vie | 8 000-15 000 h | 16 000-24 000 h | 50 000-80 000 h (L80) |
+| IRC | 60-85 | 80-85 | 80-95 selon gamme |
+| Allumage | Lent (préchauffage) | Lent | Instantané |
+| Flicker | Possible (ballast) | Faible | Nul si bon driver |
+| Mercure | Oui (recyclage obligatoire) | Oui | Non |
+| Chaleur dégagée | Élevée | Moyenne | Faible (−60 %) |
+| Gradation | Difficile/coûteuse | Possible | Native (DALI) |
 
-À rédiger.
+**Lecture** : la LED fait 2 à 3 fois mieux que le T8 en efficacité, dure 4 à 6 fois plus longtemps, et ne contient pas de mercure. L'écart est massif.
 
-## 3. Notre méthode S Connect
+## Le coût total de possession (TCO) sur 10 ans
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Le prix d'achat d'un tube LED est plus élevé qu'un tube fluo. Mais c'est le **coût total** qui compte : énergie + remplacements + maintenance.
 
-À rédiger.
+Exemple pour **100 tubes** allumés 2 600 h/an (10h × 5j × 52), tarif 0,25 €/kWh HT :
 
-## 4. Cas concret chiffré
+| Poste sur 10 ans | T8 (36W + ballast ≈ 45W) | Tube LED (18W) |
+|---|---|---|
+| Consommation électrique | 100 × 45W × 26 000h = 11 700 € | 100 × 18W × 26 000h = 4 680 € |
+| Remplacements tubes (durée vie) | ~6-8 remplacements + MO ≈ 4 500 € | 0 (durée 10-25 ans) |
+| **TCO 10 ans** | **≈ 16 200 €** | **≈ 4 680 € + achat** |
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Même en intégrant l'achat des tubes LED (~15-30 €/tube posé), le TCO LED est **2 à 3 fois inférieur**. Et c'est sans compter les économies de climatisation (la LED chauffe 60 % de moins).
 
-À rédiger.
+## Retrofit (tube LED dans l'ancien luminaire) ou luminaire neuf ?
 
-## 5. Pièges à éviter
+Deux stratégies de relamping, à arbitrer selon l'état du parc :
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### Le retrofit (tube LED « T8 LED »)
+- On remplace juste le tube fluo par un tube LED compatible, dans le luminaire existant.
+- **Avantage** : coût matériel + pose le plus bas, rapide.
+- **Limite** : on garde l'optique vieillissante du luminaire, l'uniformité n'est pas optimisée, et il faut neutraliser ou retirer le ballast (risque si mal fait). La gestion DALI est limitée.
+- **Quand** : luminaires récents en bon état, budget serré, ROI très court visé.
 
-À rédiger.
+### Le luminaire LED neuf
+- On remplace tout le luminaire par un modèle LED intégré.
+- **Avantage** : optique optimisée, UGR maîtrisé, DALI-2 natif, garantie complète, meilleur rendu.
+- **Limite** : coût plus élevé.
+- **Quand** : luminaires vétustes, exigence de confort (UGR, IRC), volonté de pilotage DALI, conformité NF EN 12464-1 stricte.
 
-## 6. FAQ
+**Notre conseil** : sur un parc T8 ancien avec luminaires fatigués, le luminaire neuf est presque toujours le bon arbitrage long terme. Le retrofit est une solution d'opportunité quand les luminaires sont récents.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+## Les pièges à éviter
 
-À rédiger.
+1. **Retrofit sans neutraliser le ballast** : risque électrique et surconsommation cachée. À faire dans les règles par un pro.
+2. **Tube LED « universel » bas de gamme** : compatibilité aléatoire avec le ballast existant, flicker, durée de vie courte.
+3. **Oublier le recyclage des tubes fluo** : ils contiennent du mercure, recyclage obligatoire (filière Récylum). Bordereau de suivi à conserver.
+4. **Croire qu'un T5 « c'est déjà bien »** : le T5 reste 40-50 % moins efficace que la LED, et son IRC plafonne. Le relamping reste rentable même sur parc T5.
+
+## FAQ
+
+### Mon parc est en T5, le relamping vaut-il quand même le coup ?
+Oui, mais l'économie est plus modeste que sur du T8/halogène : comptez −40 à −50 % de consommation (contre −65 à −80 % sur du T8). Le gain en durée de vie, en confort (flicker nul) et en pilotage DALI reste très significatif.
+
+### Le tube LED « plug & play » sur ballast existant, ça marche ?
+Parfois, mais c'est risqué : compatibilité ballast aléatoire, performances dégradées. On préfère le retrofit avec neutralisation du ballast (câblage direct 230V) ou le luminaire neuf.
+
+### Combien de temps dure un tube LED ?
+50 000 à 80 000 heures en L80 (80 % du flux conservé). En bureau (2 600 h/an), cela représente 20 à 30 ans. En usage 24/7, environ 6-10 ans.
+
+### Que faire des anciens tubes fluo ?
+Nous les collectons et les confions à l'éco-organisme agréé. Un bordereau de suivi de déchets vous est remis. Aucun rejet en déchetterie classique.
 
 ## Pour aller plus loin
 
+- [Halogène, fluo, LED : le comparatif complet](/actualites/halogene-fluo-led-comparatif)
+- [Prix du relamping LED en 2026](/actualites/prix-relamping-led-2026)
+- [Trilux vs Sylvania vs Hager : test terrain](/actualites/trilux-sylvania-hager-test-terrain-5-criteres)
 - [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Calculer mon ROI relamping](/calculateur-relamping)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [ADEME — Éclairage performant](https://www.ademe.fr/)
+- [AFE — Association française de l'éclairage](https://www.afe-eclairage.fr/)
+- [Récylum / écosystème — recyclage des lampes](https://www.ecosystem.eco/)
+- [AFNOR — NF EN 12464-1](https://www.boutique.afnor.org/)
+- Benchmark interne S Connect — chantiers relamping IDF 2024-2026
