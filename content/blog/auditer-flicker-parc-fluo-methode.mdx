@@ -1,53 +1,91 @@
 ---
-title: "Mesurer le scintillement (flicker) d'un parc fluo existant : notre méthode terrain"
-excerpt: "Avant de remplacer 80 luminaires, mesurer le flicker actuel pour justifier la dépense par l'impact santé/productivité. Smartphone + app gratuite, ou photomètre pro : protocole en 4 étapes."
-date: "2026-05-21"
+title: "Mesurer le scintillement d'un parc fluo existant : notre méthode terrain"
+excerpt: "Avant de remplacer 80 luminaires, mesurer le flicker actuel pour justifier la dépense par l'impact santé/productivité. Du test smartphone au photomètre pro : protocole en 4 étapes."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Méthode terrain"
 tags: ["flicker", "scintillement", "audit", "PstLM"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-21)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-audit-flicker-parc-fluo`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Pourquoi mesurer avant de remplacer
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Quand on propose un relamping pour « améliorer le confort », un DAF répond légitimement : « prouvez-le ». Mesurer le **flicker du parc fluo actuel** transforme un argument subjectif en donnée objective — et justifie la dépense par l'impact santé/productivité, au-delà des seules économies d'énergie.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Les tubes fluorescents sur ballast ferromagnétique scintillent à 100 Hz, souvent avec un PstLM élevé. C'est mesurable, et c'est un levier de décision puissant. Pour comprendre les enjeux santé, voir [scintillement (flicker) et santé au travail](/actualites/scintillement-flicker-led-sante-travail).
 
-À rédiger.
+## Le protocole en 4 étapes
 
-## 2. Le contexte technique / réglementaire
+### Étape 1 — Repérage des zones à risque
+On identifie d'abord les zones où le flicker pèse le plus :
+- Postes de travail prolongés (bureaux, lecture, écran).
+- Zones à machines tournantes (effet stroboscopique → sécurité).
+- Espaces filmés (caméras, labo vidéo).
+- Présence de personnes sensibles (santé, école).
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### Étape 2 — Pré-diagnostic smartphone
+Test rapide, gratuit, indicatif :
+1. Mode caméra / vidéo du smartphone.
+2. Viser le luminaire à l'écran.
+3. Bandes sombres qui défilent = flicker présent.
+On documente chaque zone (photo/vidéo) — utile pour le rapport.
 
-À rédiger.
+### Étape 3 — Mesure pro (PstLM / SVM)
+Pour une donnée opposable, on utilise un **photomètre/flickermètre** qui mesure :
+- **PstLM** (visibilité directe) — référence ≤ 1, idéal < 0,4.
+- **SVM** (effet stroboscopique) — référence < 0,9, idéal < 0,4.
+- La **fréquence** et le **pourcentage de modulation** (Flicker %).
 
-## 3. Notre méthode S Connect
+On relève plusieurs points par zone, on horodate, on consigne les conditions.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### Étape 4 — Rapport comparatif avant/après projeté
+On met en regard :
+- Les valeurs **mesurées** du parc fluo (souvent PstLM > 1, modulation élevée).
+- Les valeurs **garanties** des luminaires LED proposés (PstLM/SVM < 0,4).
 
-À rédiger.
+Le delta est le cœur de l'argumentaire santé/productivité, en complément du ROI énergie.
 
-## 4. Cas concret chiffré
+## Ce que révèle typiquement l'audit
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Sur un parc fluo T8 sur ballast ferromagnétique, on mesure fréquemment :
+- Modulation 30-60 % à 100 Hz.
+- PstLM > 1 sur les ballasts vieillissants.
+- Effet stroboscopique notable en présence de machines.
 
-À rédiger.
+Après relamping LED flicker-free : PstLM/SVM < 0,4, modulation quasi nulle. La différence est objectivable et défendable en comité.
 
-## 5. Pièges à éviter
+## Pièges à éviter
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+1. **Mesurer en gradation à 100 % seulement** : certains drivers scintillent surtout à bas niveau. On teste aussi en gradation.
+2. **Un seul point de mesure** : le flicker varie selon le luminaire et son âge. On échantillonne.
+3. **Confondre flicker et papillotement réseau** : un flicker lié à des chutes de tension réseau relève d'un autre diagnostic (qualité de l'alimentation).
+4. **Oublier d'horodater** : un rapport non daté/contextualisé perd sa valeur opposable.
 
-À rédiger.
+## FAQ
 
-## 6. FAQ
+### Faut-il un appareil coûteux pour mesurer le flicker ?
+Le pré-diagnostic smartphone est gratuit et suffit à repérer les pires cas. Pour une donnée opposable (rapport, comité), un flickermètre pro est nécessaire — c'est inclus dans nos audits sur zones sensibles.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+### Le flicker du fluo est-il toujours élevé ?
+Sur ballast ferromagnétique, souvent oui. Sur ballast électronique haute fréquence, le flicker est plus faible — mais l'efficacité énergétique reste loin de la LED.
 
-À rédiger.
+### Cette mesure justifie-t-elle à elle seule le relamping ?
+Elle le renforce. Combinée au ROI énergie et à la conformité DEET, elle complète un dossier d'investissement solide (voir [justifier un CAPEX relamping](/actualites/justifier-capex-relamping-comite-investissement)).
 
 ## Pour aller plus loin
 
+- [Scintillement (flicker) des LED : impact santé au bureau](/actualites/scintillement-flicker-led-sante-travail)
+- [Audit éclairage LED — la méthode S Connect](/actualites/audit-eclairage-led-methode)
+- [Justifier un CAPEX relamping à votre comité](/actualites/justifier-capex-relamping-comite-investissement)
 - [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [IEEE 1789 — Flicker recommended practices](https://standards.ieee.org/)
+- [INRS — Éclairage et santé au travail](https://www.inrs.fr/risques/eclairage.html)
+- [AFE — Mesure du flicker](https://www.afe-eclairage.fr/)
+- Benchmark interne S Connect — audits flicker IDF 2024-2026
