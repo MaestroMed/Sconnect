@@ -1,53 +1,99 @@
 ---
 title: "Détection de présence vs gradation crépusculaire : laquelle prioriser ?"
-excerpt: "Les deux économisent. La détection seule = 25-35 %, la gradation seule = 20-30 %, les deux combinées = 50-60 %. Lequel installer en premier selon votre profil."
-date: "2026-05-20"
+excerpt: "Les deux économisent. La détection seule = 25-35 %, la gradation lumière du jour = 20-30 %, les deux combinées = 50-60 %. Laquelle installer en premier selon votre profil."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Guide éclairage"
 tags: ["détection présence", "gradation", "ROI"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `comparison-detection-presence-vs-gradation`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Deux leviers d'économie, deux logiques
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Au-delà du simple passage en LED, deux systèmes de gestion font baisser la facture :
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **La détection de présence** : la lumière s'allume/s'éteint (ou passe en veilleuse) selon l'occupation.
+- **La gradation crépusculaire** (*daylight harvesting*) : la lumière module sa puissance pour compléter la lumière naturelle entrante.
 
-À rédiger.
+Les deux sont complémentaires, mais selon votre bâtiment, l'un est plus rentable que l'autre. Voici comment arbitrer.
 
-## 2. Le contexte technique / réglementaire
+## Ce que chacune apporte
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+| Système | Économie typique | Logique | Terrain idéal |
+|---|---|---|---|
+| **Détection de présence** | 25-35 % | Couper quand personne | Circulations, parkings, sanitaires, salles intermittentes |
+| **Gradation lumière du jour** | 20-30 % | Compléter la lumière naturelle | Plateaux avec grandes baies vitrées, périphérie de façade |
+| **Les deux combinées** | **50-60 %** | Couper + moduler | Tertiaire moderne lumineux à occupation variable |
 
-À rédiger.
+## Quand prioriser la détection de présence
 
-## 3. Notre méthode S Connect
+La détection est reine partout où l'éclairage est **allumé alors que personne n'est là** :
+- **Parkings souterrains** (allumés 24/7) → le levier n°1, ROI souvent < 18 mois.
+- **Circulations, escaliers, sanitaires** → occupation intermittente.
+- **Salles de réunion, archives, locaux techniques** → usage ponctuel.
+- **Copropriétés** (halls, paliers) → gisement énorme.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Si votre bâtiment a beaucoup de zones « allumées par défaut », commencez par la détection.
 
-À rédiger.
+## Quand prioriser la gradation lumière du jour
 
-## 4. Cas concret chiffré
+La gradation crépusculaire brille là où il y a **beaucoup de lumière naturelle** :
+- **Open-spaces avec grandes baies vitrées** (rapport vitré > 30 %).
+- **Plateaux en périphérie de façade**, premiers rangs côté fenêtres.
+- **Halls et atriums** très vitrés.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+La logique : pourquoi éclairer à 100 % à 14h en plein soleil ? Le système baisse la puissance des luminaires proches des fenêtres et la remonte quand le ciel se couvre.
 
-À rédiger.
+## La vraie réponse : les deux, via DALI
 
-## 5. Pièges à éviter
+Sur un tertiaire moderne, on ne choisit pas — on **combine** détection + gradation, pilotées en **DALI-2**. Le système :
+1. Coupe les zones inoccupées (détection).
+2. Module les zones occupées selon la lumière du jour (gradation).
+3. Le tout par zone, avec scénarios horaires.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+C'est ce qui amène les **50-60 % d'économies** sur le poste éclairage, au-delà du seul gain LED.
 
-À rédiger.
+## L'arbitrage pratique
 
-## 6. FAQ
+**Budget limité, un seul levier d'abord ?**
+- Bâtiment à zones « allumées par défaut » (parking, communs, circulations) → **détection en premier**.
+- Bâtiment lumineux à grandes baies → **gradation en premier**.
+- Dans le doute → la détection a généralement le ROI le plus court.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+**Budget pour bien faire ?** → les deux, en DALI-2, dès la conception du relamping (rétro-installer plus tard coûte plus cher).
 
-À rédiger.
+## Pièges à éviter
+
+1. **Détecteur mal réglé** : temporisation trop courte (lumière qui clignote au moindre arrêt) ou trop longue (économie perdue). Le réglage fin est clé.
+2. **Gradation sans capteur de luminosité correctement placé** : un capteur mal positionné module à contretemps.
+3. **Oublier la veilleuse en parking** : couper totalement peut poser un problème de sécurité ; on préfère plein feux au passage + veilleuse sinon.
+4. **Sous-zoner** : trop peu de zones = gestion grossière, économies réduites. Le DALI permet un zonage fin.
+
+## FAQ
+
+### La détection de présence convient-elle à un open-space ?
+Oui, par zones, couplée à la gradation. On évite la coupure brutale en journée : on combine présence + lumière du jour pour un confort continu.
+
+### Faut-il du DALI pour ces fonctions ?
+Pas obligatoirement pour une détection simple (capteur autonome), mais le DALI-2 permet le zonage fin, la combinaison des deux et la scénarisation — c'est l'option recommandée sur tertiaire > 500 m². Voir [DALI vs ON/OFF](/actualites/dali-vs-on-off-eclairage-tertiaire).
+
+### Quel ROI sur la détection seule en parking ?
+Souvent inférieur à 18 mois : un parking est allumé 24/7, la détection coupe 60-80 % de la consommation. C'est le meilleur ROI du relamping.
 
 ## Pour aller plus loin
 
-- [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [DALI vs ON/OFF : quand le surcoût se justifie](/actualites/dali-vs-on-off-eclairage-tertiaire)
+- [Relamping LED pour parking souterrain](/services/electricite/relamping/parking-souterrain)
+- [Décret tertiaire 2030 — stratégie sans CEE](/actualites/decret-tertiaire-eclairage-strategie-2026-sans-cee)
+- [Calculer mon ROI relamping](/calculateur-relamping)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [ADEME — Gestion de l'éclairage](https://www.ademe.fr/)
+- [AFE — Détection et gradation](https://www.afe-eclairage.fr/)
+- [CIBSE — Daylight harvesting](https://www.cibse.org/)
+- Benchmark interne S Connect — chantiers DALI IDF 2022-2026

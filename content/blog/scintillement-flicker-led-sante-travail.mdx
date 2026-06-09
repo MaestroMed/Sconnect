@@ -1,53 +1,86 @@
 ---
 title: "Scintillement (flicker) des LED : impact santé au bureau et comment l'éviter"
-excerpt: "Le flicker des LED bas de gamme provoque maux de tête, fatigue oculaire, baisse de concentration. Norme TLM, drivers flicker-free, comment vérifier soi-même."
-date: "2026-05-20"
+excerpt: "Le flicker des LED bas de gamme provoque maux de tête, fatigue oculaire et baisse de concentration. Normes (PstLM, SVM), drivers flicker-free, et comment le vérifier vous-même avec votre smartphone."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Guide éclairage"
 tags: ["flicker", "scintillement", "santé", "TLM"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-flicker-led-sante`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## Un défaut invisible… mais ressenti
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+Le **flicker** (scintillement) est une variation rapide de l'intensité lumineuse, souvent invisible à l'œil conscient mais perçue par le système visuel. Sur une LED de mauvaise qualité, le courant n'est pas parfaitement lissé par le driver, et la lumière « papillonne » à 100 Hz ou moins.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Conséquences documentées sur 8 heures de travail : **maux de tête, fatigue oculaire, baisse de concentration**, et chez les personnes sensibles, déclenchement de migraines. C'est un enjeu de santé au travail, pas un détail.
 
-À rédiger.
+## Les deux métriques à connaître
 
-## 2. Le contexte technique / réglementaire
+La qualité « flicker-free » se mesure par deux indicateurs (cadre TLM — *Temporal Light Modulation*) :
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **PstLM** (*short-term flicker*) : visibilité du scintillement direct. Cible **≤ 1**, idéalement **< 0,4**.
+- **SVM** (*Stroboscopic Visibility Measure*) : effet stroboscopique (objets en mouvement qui paraissent figés/saccadés). Cible **< 0,9**, idéalement **< 0,4**.
 
-À rédiger.
+Un bon luminaire pro 2026 affiche PstLM et SVM < 0,4. Un produit bas de gamme peut dépasser largement.
 
-## 3. Notre méthode S Connect
+## Pourquoi c'est critique dans certains lieux
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **Bureau** : 8h face à un écran sous un éclairage qui papillonne = fatigue et maux de tête cumulatifs.
+- **Laboratoire / industrie** : l'effet stroboscopique peut faire paraître une machine tournante **immobile** → danger réel. SVM strict obligatoire.
+- **Caméras / microscopes / vidéo** : le flicker apparaît à l'image (bandes, scintillement). Rédhibitoire en labo, studio, surveillance.
+- **Santé, école** : public sensible, exposition longue.
 
-À rédiger.
+## Le test à 30 secondes avec votre smartphone
 
-## 4. Cas concret chiffré
+Vous pouvez détecter un flicker grossier vous-même :
+1. Ouvrez l'appareil photo de votre smartphone (mode vidéo ou ralenti).
+2. Filmez le luminaire allumé à l'écran.
+3. Si vous voyez des **bandes sombres défiler** à l'écran → le luminaire scintille.
+4. Pas de bandes / image stable → bon signe (mais ce test ne remplace pas une mesure PstLM/SVM).
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+C'est un test indicatif utile pour repérer les pires produits avant de les déployer.
 
-À rédiger.
+## Comment garantir le flicker-free
 
-## 5. Pièges à éviter
+1. **Exiger PstLM < 0,4 et SVM < 0,4** dans le cahier des charges.
+2. **Drivers de qualité** : Tridonic, Osram, Philips, Mean Well — pas de driver no-name.
+3. **Compatibilité gradation** : un driver gradable mal apparié peut réintroduire du flicker à bas niveau. Vérifier en condition de gradation, pas seulement à 100 %.
+4. **Mesure à la réception** : sur les projets sensibles (labo, santé), on mesure le flicker en plus de l'éclairement.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+C'est exactement ce qu'on intègre dans nos audits : mesure flicker sur les zones sensibles, sélection de sources vérifiées, contrôle en gradation.
 
-À rédiger.
+## Pièges à éviter
 
-## 6. FAQ
+1. **« Je ne le vois pas, donc il n'y en a pas »** : le flicker à 100 Hz est souvent invisible consciemment mais agit quand même.
+2. **Gradation bas de gamme** : un luminaire flicker-free à 100 % peut scintiller à 20 % si le driver est médiocre.
+3. **LED « plug & play » sur ballast** : source fréquente de flicker (ballast non compatible).
+4. **Oublier les caméras** : en surveillance ou labo vidéo, le flicker ruine l'image — un point souvent découvert trop tard.
 
-<!-- TODO[seo-generate]: ~158 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+## FAQ
 
-À rédiger.
+### Le flicker est-il dangereux pour tout le monde ?
+Il fatigue tout le monde sur la durée, mais il est particulièrement problématique pour les personnes migraineuses, épileptiques photosensibles, et dans les environnements à machines tournantes (effet stroboscopique).
+
+### Toutes les LED scintillent-elles ?
+Non. Les LED pro à bon driver sont flicker-free (PstLM/SVM < 0,4). Le problème vient des produits bas de gamme et des montages plug & play hasardeux.
+
+### Comment savoir si mon éclairage actuel scintille ?
+Le test smartphone (bandes à la caméra) donne un premier indice. Pour une certitude, une mesure PstLM/SVM en audit est nécessaire.
 
 ## Pour aller plus loin
 
+- [Auditer le flicker d'un parc fluo : la méthode](/actualites/auditer-flicker-parc-fluo-methode)
+- [Relamping LED pour laboratoire (flicker-free strict)](/services/electricite/relamping/laboratoire-recherche)
+- [Pourquoi viser un IRC ≥ 90](/actualites/irc-90-luminaire-led-pourquoi)
 - [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [IEEE 1789 — Recommended practices for flicker](https://standards.ieee.org/)
+- [AFNOR — NF EN 17037 / IEC TR 61547-1 (TLM)](https://www.boutique.afnor.org/)
+- [INRS — Éclairage et santé au travail](https://www.inrs.fr/risques/eclairage.html)
+- Benchmark interne S Connect — audits flicker IDF 2024-2026
