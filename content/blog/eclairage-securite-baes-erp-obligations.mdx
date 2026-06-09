@@ -1,53 +1,96 @@
 ---
 title: "Éclairage de sécurité BAES en ERP : obligations, périodicité, sanctions"
-excerpt: "Blocs Autonomes d'Éclairage de Sécurité : où en installer, comment les tester, quand les remplacer. Décortique le règlement ERP."
-date: "2026-05-20"
+excerpt: "Blocs Autonomes d'Éclairage de Sécurité : où en installer, comment les tester, quand les remplacer. On décortique le règlement ERP et les pièges qui font tomber un avis de commission de sécurité."
+date: "2026-06-09"
 author: "Mehdi Belkacem, fondateur S Connect"
 category: "Électricité"
 tags: ["BAES", "éclairage sécurité", "ERP"]
-draft: true
+draft: false
 ---
 
-> **Note (draft auto-généré le 2026-05-20)** — Cet article a été scaffolded par `scripts/seo-generate.ts` à partir de l'item backlog `post-eclairage-securite-evacuation-baes`. Avant publication : enrichir chaque section, ajouter sources, vérifier les chiffres, retirer ce bloc et basculer `draft` à `false`.
+## À quoi sert l'éclairage de sécurité
 
-## 1. Introduction — pourquoi ce sujet aujourd'hui
+En cas de coupure de courant ou d'incendie, l'éclairage normal s'éteint. L'**éclairage de sécurité** prend le relais pour permettre l'évacuation sans panique et l'intervention des secours. Dans un ERP (Établissement Recevant du Public), il est **obligatoire** et contrôlé par la commission de sécurité.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Le matériel le plus courant : le **BAES** (Bloc Autonome d'Éclairage de Sécurité), un luminaire avec sa propre batterie qui s'allume automatiquement quand le réseau tombe.
 
-À rédiger.
+## Les deux fonctions à ne pas confondre
 
-## 2. Le contexte technique / réglementaire
+| Fonction | Rôle | Exigence | Où |
+|---|---|---|---|
+| **Évacuation (balisage)** | Indiquer les cheminements et sorties | Flux ≥ 45 lumens, 1 h d'autonomie | Sorties, changements de direction, obstacles, escaliers |
+| **Anti-panique (ambiance)** | Éviter la panique dans les grands volumes | ≥ 5 lumens/m² | Locaux pouvant recevoir plus de 50 personnes (ou ≥ 100 en étage/RdC) |
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Un même local peut exiger les deux. Le balisage guide vers la sortie ; l'ambiance évite l'écrasement dans la foule.
 
-À rédiger.
+## Où implanter les BAES d'évacuation
 
-## 3. Notre méthode S Connect
+La règle : on doit toujours **voir le prochain point lumineux**. Concrètement, un BAES :
+- À **chaque sortie** et issue de secours.
+- À **chaque changement de direction** du cheminement.
+- À **chaque obstacle** (marche, rétrécissement, porte).
+- En **haut et en bas de chaque escalier**.
+- Espacement maximal recommandé d'environ **15 m** sur les longs cheminements.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+L'implantation se valide sur plan, puis se vérifie sur site.
 
-À rédiger.
+## La périodicité des contrôles (le point qui fait tomber les ERP)
 
-## 4. Cas concret chiffré
+L'exploitant est responsable de la maintenance. Le rythme à tenir :
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- **Test fonctionnel** (allumage en mode secours) : tous les mois environ — on vérifie que chaque bloc s'allume.
+- **Test d'autonomie** (1 h sur batterie) : tous les 6 mois environ — on vérifie que la batterie tient la durée réglementaire.
+- Consignation dans le **registre de sécurité** à chaque contrôle.
 
-À rédiger.
+Les blocs équipés **SATI** (Système Automatique de Test Intégré) réalisent ces tests automatiquement et signalent les défauts par voyant — fortement recommandés pour fiabiliser le suivi.
 
-## 5. Pièges à éviter
+## Quand remplacer un BAES
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+- Batterie en fin de vie (voyant de défaut, autonomie inférieure à 1 h au test) → remplacement.
+- Bloc à lampe fluo/incandescente vieillissant → bascule en **BAES LED** (moins de consommation, batterie mieux préservée, maintenance réduite).
+- Après un sinistre ou une rénovation modifiant les cheminements → revoir l'implantation.
 
-À rédiger.
+## Les sanctions en cas de non-conformité
 
-## 6. FAQ
+L'éclairage de sécurité défaillant est un grief classique de la commission de sécurité :
+- **Avis défavorable** à la poursuite de l'exploitation.
+- Mise en demeure, voire **fermeture administrative** de l'ERP.
+- **Responsabilité pénale** de l'exploitant en cas d'accident lié à une évacuation entravée.
 
-<!-- TODO[seo-generate]: ~167 mots ici. Contenu unique, exemples chiffrés, sources, IIH (interne hyper-internal-link) vers la pillar /services/electricite/relamping. -->
+Autant dire qu'un BAES en panne n'est pas un détail de maintenance, mais un risque juridique et humain.
 
-À rédiger.
+## Pièges à éviter
+
+1. **Oublier le registre de sécurité** : sans traçabilité des tests, la conformité est réputée non démontrée.
+2. **Tester l'allumage mais jamais l'autonomie** : un bloc qui s'allume 5 minutes puis s'éteint ne sert à rien en évacuation.
+3. **Implantation « au jugé »** : un cheminement sans bloc à un changement de direction est non conforme, même si le couloir paraît éclairé.
+4. **Mélanger maintenance éclairage normal et sécurité** : ce sont deux installations distinctes, avec deux logiques de contrôle.
+
+## FAQ
+
+### Tous les ERP sont-ils concernés ?
+Oui, l'éclairage de sécurité est exigé dans les ERP, avec des modalités qui varient selon le type et la catégorie. Même un petit ERP de 5ᵉ catégorie a des obligations de balisage.
+
+### Le SATI est-il obligatoire ?
+Il n'est pas systématiquement imposé, mais il est très recommandé : il automatise les tests réglementaires et signale les défauts, ce qui sécurise le suivi et le registre.
+
+### Peut-on profiter d'un relamping pour traiter les BAES ?
+Oui, c'est le bon moment : on bascule les blocs en LED, on vérifie l'implantation et on remet à plat le registre. On l'intègre systématiquement à nos audits éclairage en ERP.
 
 ## Pour aller plus loin
 
-- [Notre service relamping LED en Île-de-France](/services/electricite/relamping)
-- [Demander un audit éclairage gratuit](/demande-devis)
+- [Décret tertiaire 2030 : l'éclairage en première ligne](/actualites/decret-tertiaire-2030-eclairage)
+- [Norme NF EN 12464-1 : éclairement par local](/actualites/norme-nf-en-12464-1-tableau-resume)
+- [Notre service mise aux normes électriques](/services/electricite/mise-aux-normes)
+- [Dépannage électrique en urgence](/services/electricite/depannage-electrique)
+- [Demander un audit gratuit](/demande-devis)
 - [Auteur — Mehdi Belkacem, fondateur S Connect](/auteur/mehdi-belkacem)
+
+---
+
+**Sources externes** :
+
+- [Légifrance — Règlement de sécurité ERP (dispositions générales)](https://www.legifrance.gouv.fr/)
+- [AFNOR — NF C 71-800 / NF EN 60598-2-22 (BAES)](https://www.boutique.afnor.org/)
+- [INRS — Éclairage de sécurité](https://www.inrs.fr/)
+- Benchmark interne S Connect — interventions ERP IDF 2022-2026
