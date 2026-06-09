@@ -107,21 +107,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
 
-  // ESLint — lint déplacé hors du build (pattern Next recommandé).
-  //
-  // Contexte : eslint-config-next@15.5 cible le flat config / ESLint 9,
-  // mais le projet est encore sur ESLint 8.57 + `.eslintrc.json` legacy.
-  // Cette combinaison fait crasher le linter du build avec
-  // « Converting circular structure to JSON » (non bloquant, mais pollue
-  // chaque log de build Vercel et ne lint en réalité rien).
-  //
-  // On skip donc ESLint pendant `next build` (logs propres + build plus
-  // rapide). Le lint reste assuré par `npm run lint` en local/CI. La vraie
-  // remise à plat (ESLint 9 + eslint.config.mjs flat) est suivie en tâche
-  // dédiée. Le typecheck (ci-dessus) reste, lui, bloquant : c'est le vrai
-  // garde-fou qualité du build.
+  // ESLint strict mode — le lint tourne pendant `next build` via la flat config
+  // (eslint.config.mjs, ESLint 9). `npm run lint` (= `eslint .`) est vert
+  // (0 erreur, warnings only), donc on garde le garde-fou : une vraie erreur
+  // ESLint fera échouer le build (et donc le deploy Vercel sur main).
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
 
   // Redirections
