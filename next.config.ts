@@ -107,9 +107,11 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
 
-  // ESLint strict mode
+  // ESLint strict mode — le lint tourne pendant `next build` via la flat config
+  // (eslint.config.mjs, ESLint 9). `npm run lint` (= `eslint .`) est vert
+  // (0 erreur, warnings only), donc on garde le garde-fou : une vraie erreur
+  // ESLint fera échouer le build (et donc le deploy Vercel sur main).
   eslint: {
-    // Ne pas ignorer les erreurs ESLint en build
     ignoreDuringBuilds: false,
   },
 
