@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | S'Connect",
   },
   description:
-    "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Audit gratuit, intervention 24h/24, devis transparent, aides CEE gérées. Particuliers et professionnels.",
+    "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Audit gratuit, intervention 24h/24, devis transparent, financement accompagné. Particuliers et professionnels.",
   keywords: [
     "électricien Île-de-France",
     "relamping LED",
@@ -193,7 +193,7 @@ export default function RootLayout({
               "@id": `${siteUrl}/#localbusiness`,
               name: "S'Connect",
               description:
-                "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Certifié Qualifélec, RGE. Aides CEE gérées.",
+                "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Certifié Qualifélec, RGE.",
               image: `${siteUrl}/og-image.jpg`,
               url: siteUrl,
               telephone: "+33-6-52-82-06-85",

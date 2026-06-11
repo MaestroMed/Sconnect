@@ -88,7 +88,7 @@ const faqs = [
   {
     question: "Le relamping est-il éligible aux CEE en industriel ?",
     answer:
-      "Oui, via la fiche IND-UT-130 (Système de luminaires à modules LED pour l'industrie). La prime CEE est calculée selon la puissance installée, les heures de fonctionnement et l'économie kWh cumac sur la durée de vie. Sur un entrepôt logistique 24/24, la prime peut couvrir 30-50 % du coût matériel + pose. Nous gérons tout le dossier.",
+      "Non — les fiches CEE éclairage, dont l'IND-UT-130, ont été supprimées par l'arrêté du 23 février 2026. Le projet se finance désormais par l'économie d'énergie elle-même : sur un entrepôt logistique 24/24, le poste éclairage baisse de 60 à 70 %, soit un ROI de 3 à 5 ans sans aucune subvention. Leasing et suramortissement restent mobilisables — nous chiffrons les deux dans l'audit.",
   },
   {
     question: "Peut-on relamper un site ICPE en production ?",

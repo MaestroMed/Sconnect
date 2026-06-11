@@ -32,7 +32,7 @@ import BulbText from "@/components/ui/BulbText";
 export const metadata: Metadata = {
   title: "Relamping LED Copropriété & Parking | Charges divisées par 5 | S Connect",
   description:
-    "Relamping LED pour copropriétés, parkings, halls et communs en Île-de-France. Détection de présence, IP65/IK10, durée de vie 80 000h. Charges d'éclairage divisées par 5. Aides CEE gérées.",
+    "Relamping LED pour copropriétés, parkings, halls et communs en Île-de-France. Détection de présence, IP65/IK10, durée de vie 80 000h. Charges d'éclairage divisées par 5. Dossier AG complet fourni.",
   keywords: [
     "relamping copropriété",
     "éclairage parking LED",
@@ -72,7 +72,7 @@ const faqs = [
   {
     question: "Faut-il un vote en AG pour un relamping en copropriété ?",
     answer:
-      "Oui. Un relamping est considéré comme des travaux d'amélioration ou de mise aux normes, votés en AG à la majorité simple (art. 24) si financés par les charges courantes, ou majorité absolue (art. 25) s'il y a un emprunt collectif. Nous fournissons systématiquement un dossier AG complet : devis, simulation aides CEE, économie annuelle estimée, ROI sur 5 et 10 ans.",
+      "Oui. Un relamping est considéré comme des travaux d'amélioration ou de mise aux normes, votés en AG à la majorité simple (art. 24) si financés par les charges courantes, ou majorité absolue (art. 25) s'il y a un emprunt collectif. Nous fournissons systématiquement un dossier AG complet : devis, économie annuelle estimée sur les charges, ROI sur 5 et 10 ans.",
   },
   {
     question: "Les parkings nécessitent-ils des LED spéciales ?",
@@ -87,12 +87,12 @@ const faqs = [
   {
     question: "Quelle économie sur les charges de copropriété ?",
     answer:
-      "Sur une copropriété parisienne moyenne (60 lots, hall + 4 paliers + parking 30 places), la consommation éclairage typique est 12 000 kWh/an, soit ~2 400 €/an de charges. Après relamping + détection : 2 000-3 000 kWh/an, ~500 €/an. Économie : ~1 900 €/an. Avec prime CEE de 30-40 %, ROI 4-6 ans selon configuration.",
+      "Sur une copropriété parisienne moyenne (60 lots, hall + 4 paliers + parking 30 places), la consommation éclairage typique est 12 000 kWh/an, soit ~2 400 €/an de charges. Après relamping + détection : 2 000-3 000 kWh/an, ~500 €/an. Économie : ~1 900 €/an, soit un ROI typique de 5 à 7 ans sur la seule baisse des charges (les primes CEE éclairage ont été supprimées en février 2026).",
   },
   {
     question: "Le syndic peut-il piloter le projet sans nous ?",
     answer:
-      "Oui, c'est le cas le plus courant. Nous travaillons directement avec le syndic pour l'audit, le dossier AG, l'exécution et le suivi des aides CEE. Les copropriétaires reçoivent le rapport synthétique pour le vote. Si vous êtes président de conseil syndical et souhaitez impliquer un AMO (assistance maîtrise d'ouvrage), nous travaillons aussi en triangulaire.",
+      "Oui, c'est le cas le plus courant. Nous travaillons directement avec le syndic pour l'audit, le dossier AG, l'exécution et le suivi du chantier. Les copropriétaires reçoivent le rapport synthétique pour le vote. Si vous êtes président de conseil syndical et souhaitez impliquer un AMO (assistance maîtrise d'ouvrage), nous travaillons aussi en triangulaire.",
   },
 ];
 

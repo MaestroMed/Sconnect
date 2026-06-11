@@ -18,7 +18,7 @@ import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Électricité Paris & IDF | Installation, Rénovation, Relamping | S Connect",
   description:
-    "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes, dépannage 24h/24 et relamping LED. Audit gratuit. Aides CEE & certifications RGE.",
+    "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes, dépannage 24h/24 et relamping LED. Audit gratuit. Certifications RGE & Qualifélec.",
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
@@ -105,8 +105,8 @@ export default function ElectricitePage() {
             </h2>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
               Audit éclairage gratuit, étude économique avec ROI précis, installation LED clé en
-              main et gestion des aides CEE. Pour bureaux, commerces, copropriétés et sites
-              industriels en Île-de-France.
+              main et plan de financement (leasing, éco-PTZ Pro). Pour bureaux, commerces,
+              copropriétés et sites industriels en Île-de-France.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -126,7 +126,7 @@ export default function ElectricitePage() {
             <div className="mt-8 flex flex-wrap items-center gap-6 text-white/70 text-sm">
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                Aides CEE gérées
+                Financement accompagné
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />

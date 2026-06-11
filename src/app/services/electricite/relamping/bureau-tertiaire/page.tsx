@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Pourquoi du DALI plutôt que du simple ON/OFF ?",
     answer:
-      "Le protocole DALI (Digital Addressable Lighting Interface) permet de gérer chaque luminaire individuellement : gradation 0-100 %, regroupement en scènes, intégration GTC/GTB. C'est la base de l'éclairage tertiaire moderne et la condition d'éligibilité aux meilleures primes CEE (fiche BAT-EQ-130).",
+      "Le protocole DALI (Digital Addressable Lighting Interface) permet de gérer chaque luminaire individuellement : gradation 0-100 %, regroupement en scènes, intégration GTC/GTB. C'est la base de l'éclairage tertiaire moderne, et le levier qui porte les économies de 50-60 % (détection + gradation) attendues dans une trajectoire décret tertiaire 2030.",
   },
   {
     question: "Combien de temps pour un relamping d'open-space 500 m² ?",
@@ -290,7 +290,7 @@ export default function RelampingBureauPage() {
               Auditons votre bureau gratuitement.
             </h2>
             <p className="text-primary-100 text-lg">
-              Rapport chiffré, ROI, aides CEE, sous 7 jours.
+              Rapport chiffré, ROI, plan de financement, sous 7 jours.
             </p>
           </div>
           <div className="flex gap-4">

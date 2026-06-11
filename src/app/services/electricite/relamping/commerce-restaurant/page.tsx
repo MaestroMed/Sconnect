@@ -59,7 +59,7 @@ const benefits = [
   {
     icon: TrendingDown,
     title: "−70 % sur 12h/jour",
-    desc: "Un commerce ouvert 12h/jour à éclairage intensif amortit un relamping en 18-24 mois, primes CEE incluses.",
+    desc: "Un commerce ouvert 12h/jour à éclairage intensif amortit un relamping en 2-4 ans par la seule économie d'énergie — sans dépendre d'aides.",
   },
   {
     icon: Lightbulb,
@@ -92,7 +92,7 @@ const faqs = [
   {
     question: "Quel ROI pour un restaurant de 80 couverts ?",
     answer:
-      "Sur un restaurant ouvert midi + soir (10h/jour), avec 40 sources halogènes + 6 suspensions, l'économie annuelle typique est de 3 500 à 5 000 €. Coût matériel + pose : 8-12 k€. Prime CEE : 35-45 % du matériel. ROI net : 16-22 mois. Et fin des changements d'ampoules hebdomadaires.",
+      "Sur un restaurant ouvert midi + soir (10h/jour), avec 40 sources halogènes + 6 suspensions, l'économie annuelle typique est de 3 500 à 5 000 €. Coût matériel + pose : 8-12 k€, soit un ROI de 2 à 3 ans par la seule économie d'énergie (les primes CEE éclairage ont été supprimées en février 2026). Et fin des changements d'ampoules hebdomadaires.",
   },
 ];
 

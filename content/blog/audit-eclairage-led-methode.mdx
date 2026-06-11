@@ -21,10 +21,10 @@ howTo:
       text: "Établir le bilan énergétique précis : puissance totale installée multipliée par les horaires d'usage et par 365 jours, multipliée par le tarif électrique réel du site."
     - name: "Dimensionnement de la solution LED"
       text: "Sélectionner les luminaires de remplacement, calculer le flux nécessaire, choisir la température de couleur (3000K, 4000K), le CRI et le système de gestion (DALI, détection de présence)."
-    - name: "Estimation des aides et certifications"
-      text: "Identifier les fiches CEE applicables (BAT-EQ-127, BAT-EQ-130, IND-UT-130) et les autres aides éventuelles (MaPrimeRénov, ADEME). Calculer le montant prévisionnel des primes."
+    - name: "Estimation du financement"
+      text: "Chiffrer le ROI par l'économie d'énergie (les fiches CEE éclairage sont supprimées depuis février 2026) et évaluer les leviers de financement adaptés : leasing, éco-PTZ Pro, sur-amortissement énergétique."
     - name: "Livraison du rapport chiffré"
-      text: "Document final avec photos avant/après simulation, plan de calepinage, devis ferme matériel et pose, ROI précis avec aides déduites et plan de phasage du chantier."
+      text: "Document final avec photos avant/après simulation, plan de calepinage, devis ferme matériel et pose, ROI précis et plan de phasage du chantier."
 ---
 
 Quand un client nous appelle pour un relamping, la question revient toujours : *"combien je vais économiser ?"*. La seule façon honnête d'y répondre, c'est de mesurer **avant** de chiffrer. Voici la méthode d'audit qu'on applique sur chaque chantier, du plus petit (boutique 80 m²) au plus gros (entrepôt logistique 8 000 m²).
@@ -98,7 +98,7 @@ DIALux génère un rapport PDF avec :
 
 Ce rapport, c'est ce qu'on envoie au client. C'est aussi ce qu'il garde dans son DOE pour prouver la conformité NF EN 12464-1 en cas d'audit social ou d'expertise judiciaire.
 
-## 6. Le calcul du ROI et de la prime CEE
+## 6. Le calcul du ROI et du financement
 
 À ce stade nous avons :
 - **Conso actuelle annuelle** = ∑ (watt × heures usage × 365 × ratio occupation) / 1000
@@ -107,14 +107,9 @@ Ce rapport, c'est ce qu'on envoie au client. C'est aussi ce qu'il garde dans son
 - **Économie € annuelle** = économie kWh × tarif électrique (en 2026 : ~0,21 €/kWh tertiaire HTB, ~0,28 €/kWh tertiaire HTA petits sites)
 - **Économie de maintenance** = nombre d'ampoules remplacées par an évitées × prix unitaire × main d'œuvre
 
-À ça s'ajoute la **prime CEE** :
-- Fiche [BAT-EQ-127](https://www.ecologie.gouv.fr/certificats-deconomies-denergie) pour les luminaires LED tertiaire
-- Fiche **BAT-EQ-130** pour les systèmes de gestion d'éclairage (détection + DALI)
-- Fiche **IND-UT-130** pour le high-bay industriel
+> **Note CEE** : jusqu'en février 2026, une prime CEE (fiches BAT-EQ-127/130, IND-UT-130) s'ajoutait à ce calcul et couvrait 30 à 45 % du coût matériel + pose. Ces fiches ont été **supprimées le 25 février 2026** : le ROI se calcule désormais sur la seule économie d'énergie + maintenance, et le financement passe par d'autres leviers (leasing, éco-PTZ Pro, sur-amortissement) — voir [financer un relamping sans CEE](/actualites/financer-relamping-led-sans-cee-2026).
 
-Le montant de la prime dépend des kWh cumac économisés sur la durée de vie. Sur un bureau 600 m² typique, la prime CEE couvre **30 à 45 % du coût matériel + pose**.
-
-Nous publions tous les chiffres dans le devis. Pas de "prime estimée à...", on calcule à l'euro près avec les fiches officielles du registre EMMY.
+Nous publions tous les chiffres dans le devis : hypothèses, tarif kWh retenu, heures d'usage. Pas d'estimation vague — le calcul est vérifiable ligne à ligne.
 
 ## 7. Le plan de pose et le phasage
 
@@ -135,10 +130,10 @@ Après audit (typiquement 5 jours ouvrés après la visite), le client reçoit :
 1. **Rapport d'audit** : relevé du parc, mesures actuelles, photos, points de vigilance tableau
 2. **Étude photométrique DIALux** : niveaux futurs, UGR, vue 3D, conformité NF EN 12464-1
 3. **Estimation économique chiffrée** : conso actuelle, conso future, gains €, gains kWh, équivalent CO2
-4. **Simulation prime CEE** : montant net, fiche utilisée, conditions
+4. **Plan de financement** : leasing vs achat, éco-PTZ Pro, sur-amortissement le cas échéant
 5. **Devis détaillé** : matériel ligne par ligne (référence, marque, prix unitaire), main d'œuvre, recyclage, garanties
 6. **Plan de pose** : implantation + phasage
-7. **ROI net après prime CEE** : mois précis de retour sur investissement
+7. **ROI net** : mois précis de retour sur investissement
 
 Tout est gratuit, sans engagement. Si vous décidez de faire le chantier ailleurs, vous gardez le rapport — il est valable.
 
