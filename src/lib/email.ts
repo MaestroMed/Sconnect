@@ -6,8 +6,15 @@ import DevisConfirmationEmail from "@/emails/DevisConfirmationEmail";
 import InterventionEmail from "@/emails/InterventionEmail";
 import InterventionConfirmationEmail from "@/emails/InterventionConfirmationEmail";
 
-const FROM_EMAIL = process.env.EMAIL_FROM || "contact@sconnectfrance.fr";
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "contact@sconnectfrance.fr";
+// Convention canonique : RESEND_FROM_EMAIL / RESEND_TO_EMAIL (alignée sur
+// les templates .env.example et le flux forgot-password). Les anciens noms
+// EMAIL_FROM / ADMIN_EMAIL restent acceptés en repli pour ne pas casser un
+// env existant. NB : le domaine de RESEND_FROM_EMAIL doit être vérifié dans
+// Resend, sinon TOUS les envois échouent.
+const FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL || process.env.EMAIL_FROM || "contact@sconnectfrance.fr";
+const ADMIN_EMAIL =
+  process.env.RESEND_TO_EMAIL || process.env.ADMIN_EMAIL || "contact@sconnectfrance.fr";
 
 let _resend: Resend | null = null;
 function getResend(): Resend {

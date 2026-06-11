@@ -55,6 +55,20 @@ export async function POST(request: NextRequest) {
     // Log l'urgence pour suivi
     console.log(`🚨 INTERVENTION URGENTE - ${validatedData.typeIntervention} à ${validatedData.ville} - Contact: ${validatedData.telephone}`);
 
+    // Une URGENCE perdue silencieusement est le pire scénario : si ni la
+    // persistance ni l'email n'ont abouti, on l'affiche et on pousse l'appel.
+    if (!submission && !emailOk) {
+      console.error('[intervention] CRITIQUE : urgence ni persistée ni emailée — échec retourné au client');
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Votre demande n'a pas pu être transmise. Pour une urgence, appelez-nous immédiatement au 06 52 82 06 85.",
+        },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Demande d\'intervention envoyée avec succès',

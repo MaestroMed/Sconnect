@@ -5,7 +5,24 @@ import fs from 'fs';
 import path from 'path';
 import { getAdminUserByEmailFromDB, isPersistenceAvailable } from './data-adapter';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'sconnect-france-secret-key-2024';
+// Fail-closed : en production, un JWT_SECRET fort est obligatoire — aucun
+// fallback committé (l'ancien fallback public permettait de forger un cookie
+// admin valide 7 jours). En dev sans env, un secret explicitement non-sûr
+// permet de travailler localement. Le throw est à l'USAGE (pas au chargement
+// du module) pour ne pas casser le build si l'env manque : c'est l'auth
+// admin qui se ferme, pas le site public.
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (process.env.NODE_ENV !== 'production') {
+    return secret || 'dev-only-insecure-jwt-secret';
+  }
+  if (!secret || secret.length < 32) {
+    throw new Error(
+      'JWT_SECRET manquant ou < 32 caractères en production — auth admin désactivée (fail-closed).',
+    );
+  }
+  return secret;
+}
 const COOKIE_NAME = 'sconnect-admin-token';
 
 interface User {
@@ -47,14 +64,16 @@ export async function verifyPassword(password: string, hashedPassword: string): 
 export function generateToken(userId: string, email: string, role: string): string {
   return jwt.sign(
     { userId, email, role },
-    JWT_SECRET,
+    getJwtSecret(),
     { expiresIn: '7d' }
   );
 }
 
 export function verifyToken(token: string): { userId: string; email: string; role: string } | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string; role: string };
+    // getJwtSecret() peut throw en prod mal configurée → catch = fail-closed
+    // (aucun token accepté), jamais fail-open.
+    const decoded = jwt.verify(token, getJwtSecret()) as { userId: string; email: string; role: string };
     return decoded;
   } catch {
     return null;
@@ -85,7 +104,13 @@ export async function authenticateUser(email: string, password: string): Promise
     }
   }
 
-  // Fallback to JSON file (dev / no-Supabase)
+  // Fallback fichier JSON : DEV UNIQUEMENT. En production, seule la base
+  // fait foi — un fichier d'utilisateurs livré dans le bundle est un
+  // backdoor (l'ancien admin-users.json committé contenait un compte au
+  // mot de passe connu, accepté même quand Supabase était configuré).
+  if (process.env.NODE_ENV === 'production') {
+    return { success: false, error: 'Email ou mot de passe incorrect' };
+  }
   const users = getUsers();
   const user = users.find(u => u.email.toLowerCase() === normalizedEmail);
   if (!user) return { success: false, error: 'Email ou mot de passe incorrect' };
@@ -122,30 +147,4 @@ export async function removeAuthCookie(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);
 }
-
-export function createInitialAdmin() {
-  const filePath = getUsersFilePath();
-  
-  // Create default admin if file doesn't exist or is empty
-  if (!fs.existsSync(filePath)) {
-    const defaultAdmin = {
-      users: [
-        {
-          id: '1',
-          email: 'admin@sconnect-france.fr',
-          password: bcrypt.hashSync('admin123', 10),
-          name: 'Administrateur',
-          role: 'admin',
-          createdAt: new Date().toISOString()
-        }
-      ]
-    };
-    
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, JSON.stringify(defaultAdmin, null, 2));
-  }
-}
-
-
-
 

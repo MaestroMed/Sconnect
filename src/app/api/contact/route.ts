@@ -46,6 +46,20 @@ export async function POST(request: NextRequest) {
       console.warn('RESEND_API_KEY non configurée — soumission persistée sans email');
     }
 
+    // Au moins un canal (persistance OU email) doit avoir abouti — sinon le
+    // message est perdu et le visiteur ne le saura jamais.
+    if (!submission && !emailOk) {
+      console.error('[contact] CRITIQUE : message ni persisté ni emailé — échec retourné au client');
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Votre message n'a pas pu être transmis. Réessayez dans un instant ou appelez-nous au 06 52 82 06 85.",
+        },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Message envoyé avec succès',

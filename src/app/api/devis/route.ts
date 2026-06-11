@@ -52,6 +52,21 @@ export async function POST(request: NextRequest) {
       console.warn('RESEND_API_KEY non configurée — devis persisté sans email');
     }
 
+    // Un lead doit avoir AU MOINS un canal (persistance OU email). Si les
+    // deux ont échoué, répondre "succès" ferait disparaître le devis sans
+    // trace pendant que le visiteur croit avoir été pris en charge.
+    if (!submission && !emailOk) {
+      console.error('[devis] CRITIQUE : lead ni persisté ni emailé — échec retourné au client');
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Votre demande n'a pas pu être transmise. Réessayez dans un instant ou appelez-nous directement au 06 52 82 06 85.",
+        },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Demande de devis envoyée avec succès',
