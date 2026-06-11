@@ -11,13 +11,18 @@ const devisSchema = z.object({
   prenom: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
   email: z.string().email('Email invalide'),
   telephone: z.string().min(10, 'Numéro de téléphone invalide'),
-  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractères"),
+  // Contrat aligné sur DemandeForm : adresse = numeroRue seul (peut être court)
+  adresse: z.string().min(1, 'Adresse requise'),
   codePostal: z.string().regex(/^\d{5}$/, 'Code postal invalide (5 chiffres)'),
   ville: z.string().min(2, 'La ville doit contenir au moins 2 caractères'),
   typeBatiment: z.string(),
   services: z.array(z.string()).min(1, 'Sélectionnez au moins un service'),
   delai: z.string(),
-  description: z.string().min(20, 'La description doit contenir au moins 20 caractères'),
+  // Le formulaire présente le message comme OPTIONNEL (schemas.ts: message
+  // optional, payload `description: data.message || ""`). Exiger 20 chars ici
+  // faisait rejeter en 400 tout prospect au message vide — lead perdu sur le
+  // formulaire de conversion. Un devis sans description reste un bon lead.
+  description: z.string().max(5000).optional().default(''),
   budget: z.string().optional(),
 });
 

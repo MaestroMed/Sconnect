@@ -11,12 +11,16 @@ const interventionSchema = z.object({
   prenom: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
   email: z.string().email('Email invalide'),
   telephone: z.string().min(10, 'Numéro de téléphone invalide'),
-  adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractères"),
+  // Contrat aligné sur DemandeForm : adresse = numeroRue seul (peut être court)
+  adresse: z.string().min(1, 'Adresse requise'),
   codePostal: z.string().regex(/^\d{5}$/, 'Code postal invalide (5 chiffres)'),
   ville: z.string().min(2, 'La ville doit contenir au moins 2 caractères'),
   typeBatiment: z.string(),
   typeIntervention: z.string(),
-  description: z.string().min(20, 'La description doit contenir au moins 20 caractères'),
+  // Aligné sur le formulaire (message optionnel) : pour une URGENCE, rejeter
+  // un lead parce que la description est vide/courte est le pire arbitrage —
+  // le rappel téléphonique est le vrai canal.
+  description: z.string().max(5000).optional().default(''),
   disponibilite: z.string(),
 });
 
