@@ -95,9 +95,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr",
-  },
+  // PAS de canonical ici : `alternates` défini dans le root layout est hérité
+  // tel quel par toute page qui ne le redéfinit pas — ~20 pages se déclaraient
+  // canoniques de la homepage (signal "doublon de la home" envoyé à Google).
+  // Le canonical est posé page par page (buildMetadata) ; la home l'a dans
+  // src/app/page.tsx.
   verification: {
     ...(process.env.GOOGLE_SITE_VERIFICATION
       ? { google: process.env.GOOGLE_SITE_VERIFICATION }

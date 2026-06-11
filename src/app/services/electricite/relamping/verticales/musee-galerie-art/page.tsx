@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "spot track DALI musée",
     "ABF éclairage musée classé",
   ],
-  alternates: { canonical: "/services/electricite/relamping/musee-galerie-art" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/musee-galerie-art" },
   openGraph: {
     title: "Relamping LED pour musée et galerie d'art — IRC ≥ 95, conservation",
     description:

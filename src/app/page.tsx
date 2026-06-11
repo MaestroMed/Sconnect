@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { getSiteConfig, getHomepage, getTestimonials, getRealizations, getBrands } from "@/lib/data-adapter";
 import HomePageClient from "@/components/home/HomePageClient";
 import { generateVideoSchema, injectSchema } from "@/lib/structured-data";
+
+// Canonical de la home — porté par la page (plus par le root layout, dont
+// l'`alternates` était hérité par toutes les pages sans canonical propre).
+// Relatif : résolu en absolu via metadataBase du root layout.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // ISR — re-render at most every 10 min. The home content (site config,
 // testimonials, brands) doesn't change second by second; static + ISR

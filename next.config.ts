@@ -10,11 +10,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   // Configuration des images optimisées
   images: {
-    // Domaines autorisés (remplacer ** par domaines spécifiques en prod)
+    // Hosts distants restreints : hostname "**" faisait de /_next/image un
+    // proxy d'optimisation ouvert (n'importe qui pouvait faire transcoder
+    // n'importe quelle image du web aux frais du compte Vercel). Le site ne
+    // sert que des images locales + (potentiellement) Supabase Storage.
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "*.supabase.co",
       },
     ],
     // Formats d'images modernes
@@ -122,6 +125,13 @@ const nextConfig: NextConfig = {
       {
         source: '/confidentialite',
         destination: '/politique-confidentialite',
+        permanent: true,
+      },
+      // Page avis supprimée volontairement — 301 vers les réalisations
+      // (plutôt qu'un 404 sec sur une URL anciennement publiée/indexée).
+      {
+        source: '/avis',
+        destination: '/realisations',
         permanent: true,
       },
     ];

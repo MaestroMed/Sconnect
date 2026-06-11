@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "ROI relamping parking",
     "pré-câblage IRVE parking",
   ],
-  alternates: { canonical: "/services/electricite/relamping/parking-souterrain" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/parking-souterrain" },
   openGraph: {
     title: "Relamping LED pour parking souterrain — IK10, détection 24/7, ROI < 18 mois",
     description:

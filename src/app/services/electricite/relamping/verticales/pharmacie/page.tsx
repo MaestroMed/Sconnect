@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "rénovation éclairage parapharmacie",
     "DEET pharmacie 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/pharmacie" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/pharmacie" },
   openGraph: {
     title: "Relamping LED pour pharmacie — IRC ≥ 90, comptoir 750 lux",
     description:

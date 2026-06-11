@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "marché public éclairage scolaire",
     "DEET établissement scolaire 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/ecole-college" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/ecole-college" },
   openGraph: {
     title: "Relamping LED pour école et collège — 300-500 lux, flicker-free",
     description:

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "éclairage cuisine professionnelle LED IP54",
     "DEET restaurant 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/restaurant" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/restaurant" },
   openGraph: {
     title: "Relamping LED pour restaurant — ambiance 2700K, IRC ≥ 90",
     description:

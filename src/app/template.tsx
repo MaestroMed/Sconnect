@@ -79,7 +79,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <SiteConfigProvider config={config}>
       <Header />
-      <main className="min-h-screen">{children}</main>
+      {/* id="main" = cible du skip-link d'accessibilité (« Aller au contenu ») */}
+      <main id="main" className="min-h-screen">{children}</main>
       <Footer />
     </SiteConfigProvider>
   );

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "rénovation éclairage galerie marchande IDF",
     "DEET centre commercial 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/centre-commercial" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/centre-commercial" },
   openGraph: {
     title: "Relamping LED en centre commercial — galeries, enseignes, parking",
     description:

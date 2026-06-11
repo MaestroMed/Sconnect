@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "luminaire gymnase haute baie LED",
     "DEET équipement sportif 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/gymnase-salle-sport" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/gymnase-salle-sport" },
   openGraph: {
     title: "Relamping LED pour gymnase — IK10, 300-750 lux, allumage instantané",
     description:

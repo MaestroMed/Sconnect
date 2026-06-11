@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "scénarisation DALI hôtel",
     "DEET hôtel 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/hotel" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/hotel" },
   openGraph: {
     title: "Relamping LED pour hôtel — lobby, chambres, couloirs 24/7",
     description:

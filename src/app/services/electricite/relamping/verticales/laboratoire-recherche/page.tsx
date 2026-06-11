@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "éclairage salle blanche LED",
     "DEET laboratoire 2030",
   ],
-  alternates: { canonical: "/services/electricite/relamping/laboratoire-recherche" },
+  alternates: { canonical: "/services/electricite/relamping/verticales/laboratoire-recherche" },
   openGraph: {
     title: "Relamping LED pour laboratoire — paillasse 750 lux, IRC ≥ 90, flicker-free",
     description:
