@@ -29,8 +29,6 @@ interface TypoConfig {
   reductionPercent: number;
   /** Material + install cost per m² of building (€ HT). */
   costPerSqm: number;
-  /** Share of total cost covered by CEE prime (%). */
-  ceePercent: number;
   /** Surface bounds suggested for the slider. */
   defaultSurface: number;
   minSurface: number;
@@ -52,7 +50,6 @@ const TYPOS: TypoConfig[] = [
     currentWPerSqm: 28, // old fluo T5/T8 with ballast losses, dense 4-tube fixtures
     reductionPercent: 65,
     costPerSqm: 50,
-    ceePercent: 40,
     defaultSurface: 600,
     minSurface: 100,
     maxSurface: 5000,
@@ -69,7 +66,6 @@ const TYPOS: TypoConfig[] = [
     currentWPerSqm: 25,
     reductionPercent: 70,
     costPerSqm: 70,
-    ceePercent: 40,
     defaultSurface: 200,
     minSurface: 50,
     maxSurface: 2000,
@@ -86,7 +82,6 @@ const TYPOS: TypoConfig[] = [
     currentWPerSqm: 5,
     reductionPercent: 75,
     costPerSqm: 8,
-    ceePercent: 45,
     defaultSurface: 1500,
     minSurface: 200,
     maxSurface: 10000,
@@ -103,7 +98,6 @@ const TYPOS: TypoConfig[] = [
     currentWPerSqm: 10,
     reductionPercent: 80,
     costPerSqm: 11,
-    ceePercent: 50,
     defaultSurface: 5000,
     minSurface: 500,
     maxSurface: 30000,

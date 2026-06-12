@@ -5,14 +5,18 @@ export default function robots(): MetadataRoute.Robots {
   
   return {
     rules: [
+      // /api/og doit rester crawlable : c'est l'endpoint des images OG
+      // dynamiques référencées par les metadata et le schema Article —
+      // le bloquer empêche Google de récupérer les images. La règle la
+      // plus spécifique (allow /api/og) gagne sur disallow /api/.
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", "/api/og"],
         disallow: ["/api/", "/admin/"],
       },
       {
         userAgent: "Googlebot",
-        allow: "/",
+        allow: ["/", "/api/og"],
         disallow: ["/api/", "/admin/"],
       },
     ],

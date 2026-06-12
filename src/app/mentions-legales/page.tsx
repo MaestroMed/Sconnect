@@ -57,7 +57,7 @@ export default function MentionsLegalesPage() {
                 <p className="mb-2"><strong>Code APE/NAF :</strong> 4321A — Travaux d&apos;installation électrique dans tous locaux</p>
                 <p className="mb-2"><strong>Siège social :</strong> 35 rue des Cailloux, 92110 Clichy</p>
                 <p className="mb-2"><strong>Téléphone :</strong> <a href="tel:+33652820685" className="text-primary-600 hover:text-primary-700">06 52 82 06 85</a></p>
-                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnect-france.fr" className="text-primary-600 hover:text-primary-700">contact@sconnect-france.fr</a></p>
+                <p className="mb-0"><strong>Email :</strong> <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a></p>
               </div>
             </div>
 
@@ -101,7 +101,7 @@ export default function MentionsLegalesPage() {
                 vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données personnelles.
               </p>
               <p>
-                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : <a href="mailto:contact@sconnect-france.fr" className="text-primary-600 hover:text-primary-700">contact@sconnect-france.fr</a>
+                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a>
               </p>
               <p>
                 Pour plus d'informations, consultez notre <Link href="/politique-confidentialite" className="text-primary-600 hover:text-primary-700 font-semibold">politique de confidentialité</Link>.

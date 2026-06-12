@@ -3,14 +3,8 @@ import { sendContactEmail } from '@/lib/email';
 import { z } from 'zod';
 import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 import { createSubmission } from '@/lib/data-adapter';
-
-// Schema de validation
-const contactSchema = z.object({
-  nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
-  email: z.string().email('Email invalide'),
-  objet: z.string().min(3, "L'objet doit contenir au moins 3 caractères"),
-  message: z.string().min(20, 'Le message doit contenir au moins 20 caractères'),
-});
+// Schéma partagé + testé par contrat (src/lib/api-schemas.test.ts).
+import { contactApiSchema as contactSchema } from '@/lib/api-schemas';
 
 export async function POST(request: NextRequest) {
   // Rate limit: 5 requests / 10 min per IP

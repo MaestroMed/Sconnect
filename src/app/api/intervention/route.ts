@@ -3,26 +3,8 @@ import { sendInterventionEmail } from '@/lib/email';
 import { z } from 'zod';
 import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 import { createSubmission } from '@/lib/data-adapter';
-
-// Schema de validation pour intervention urgente
-const interventionSchema = z.object({
-  civilite: z.enum(['M.', 'Mme', 'Mlle']),
-  nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
-  prenom: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
-  email: z.string().email('Email invalide'),
-  telephone: z.string().min(10, 'Numéro de téléphone invalide'),
-  // Contrat aligné sur DemandeForm : adresse = numeroRue seul (peut être court)
-  adresse: z.string().min(1, 'Adresse requise'),
-  codePostal: z.string().regex(/^\d{5}$/, 'Code postal invalide (5 chiffres)'),
-  ville: z.string().min(2, 'La ville doit contenir au moins 2 caractères'),
-  typeBatiment: z.string(),
-  typeIntervention: z.string(),
-  // Aligné sur le formulaire (message optionnel) : pour une URGENCE, rejeter
-  // un lead parce que la description est vide/courte est le pire arbitrage —
-  // le rappel téléphonique est le vrai canal.
-  description: z.string().max(5000).optional().default(''),
-  disponibilite: z.string(),
-});
+// Schéma partagé + testé par contrat (src/lib/api-schemas.test.ts).
+import { interventionSchema } from '@/lib/api-schemas';
 
 export async function POST(request: NextRequest) {
   // Higher limit than devis since this is urgent

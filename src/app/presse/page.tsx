@@ -40,7 +40,7 @@ const pressOrgSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Press contact",
-    email: "contact@sconnect-france.fr",
+    email: "contact@sconnectfrance.fr",
     telephone: "+33-6-52-82-06-85",
     availableLanguage: ["French", "English"],
   },
@@ -295,9 +295,9 @@ export default function PressePage() {
             Pour interview, citation ou demande spécifique. Réponse sous 48 h ouvrées.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <a href="mailto:contact@sconnect-france.fr?subject=Demande%20presse" className="btn-white btn-lg">
+            <a href="mailto:contact@sconnectfrance.fr?subject=Demande%20presse" className="btn-white btn-lg">
               <Mail className="w-5 h-5" />
-              contact@sconnect-france.fr
+              contact@sconnectfrance.fr
             </a>
             <a href="tel:+33652820685" className="btn bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary-700 btn-lg transition-colors">
               <Phone className="w-5 h-5" />

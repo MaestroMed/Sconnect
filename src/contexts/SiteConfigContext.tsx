@@ -53,7 +53,7 @@ export function useSiteConfig() {
       siteTagline: "Électricité • Contrôle d'accès • Serrurerie • Métallerie",
       phone: "06 52 82 06 85",
       phoneEmergency: "06 52 82 06 85",
-      email: "contact@sconnect-france.fr",
+      email: "contact@sconnectfrance.fr",
       address: {
         street: "35 rue des Cailloux",
         postalCode: "92110",

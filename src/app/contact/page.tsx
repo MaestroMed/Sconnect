@@ -279,7 +279,7 @@ export default function ContactPage() {
                   </li>
                   <li>
                     <a
-                      href="mailto:contact@sconnect-france.fr"
+                      href="mailto:contact@sconnectfrance.fr"
                       className="flex items-start gap-4 group"
                     >
                       <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
@@ -287,7 +287,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="font-semibold text-foreground group-hover:text-primary-600 transition-colors">
-                          contact@sconnect-france.fr
+                          contact@sconnectfrance.fr
                         </p>
                         <p className="text-sm text-foreground-muted">
                           Réponse sous 24h

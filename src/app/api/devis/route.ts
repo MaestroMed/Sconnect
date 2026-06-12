@@ -3,28 +3,9 @@ import { sendDevisEmail } from '@/lib/email';
 import { z } from 'zod';
 import { rateLimit, getClientIdentifier, rateLimitResponse } from '@/lib/rate-limit';
 import { createSubmission } from '@/lib/data-adapter';
-
-// Schema de validation (réutilise le schema existant)
-const devisSchema = z.object({
-  civilite: z.enum(['M.', 'Mme', 'Mlle']),
-  nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
-  prenom: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
-  email: z.string().email('Email invalide'),
-  telephone: z.string().min(10, 'Numéro de téléphone invalide'),
-  // Contrat aligné sur DemandeForm : adresse = numeroRue seul (peut être court)
-  adresse: z.string().min(1, 'Adresse requise'),
-  codePostal: z.string().regex(/^\d{5}$/, 'Code postal invalide (5 chiffres)'),
-  ville: z.string().min(2, 'La ville doit contenir au moins 2 caractères'),
-  typeBatiment: z.string(),
-  services: z.array(z.string()).min(1, 'Sélectionnez au moins un service'),
-  delai: z.string(),
-  // Le formulaire présente le message comme OPTIONNEL (schemas.ts: message
-  // optional, payload `description: data.message || ""`). Exiger 20 chars ici
-  // faisait rejeter en 400 tout prospect au message vide — lead perdu sur le
-  // formulaire de conversion. Un devis sans description reste un bon lead.
-  description: z.string().max(5000).optional().default(''),
-  budget: z.string().optional(),
-});
+// Schéma partagé + testé par contrat (src/lib/api-schemas.test.ts) : le
+// payload exact du formulaire doit toujours passer cette validation.
+import { devisSchema } from '@/lib/api-schemas';
 
 export async function POST(request: NextRequest) {
   const id = getClientIdentifier(request, '/api/devis');

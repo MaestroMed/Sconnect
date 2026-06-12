@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                  placeholder="admin@sconnect-france.fr"
+                  placeholder="admin@sconnectfrance.fr"
                   required
                 />
               </div>

@@ -192,11 +192,11 @@ export default async function MehdiBelkacemPage() {
                   06 52 82 06 85
                 </a>
                 <a
-                  href="mailto:contact@sconnect-france.fr"
+                  href="mailto:contact@sconnectfrance.fr"
                   className="btn glass-panel text-white hover:bg-white/15 btn-lg"
                 >
                   <Mail className="w-5 h-5" />
-                  contact@sconnect-france.fr
+                  contact@sconnectfrance.fr
                 </a>
               </div>
             </div>
