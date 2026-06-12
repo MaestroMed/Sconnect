@@ -376,7 +376,6 @@ export default function HomePageClient({
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                      priority={index < 2}
                     />
                     {/* Top-to-bottom scrim — almost solid at the bottom (text zone),
                         clear at the top (image hero). */}

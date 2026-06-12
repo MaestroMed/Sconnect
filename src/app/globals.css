@@ -655,3 +655,24 @@
     --aurora-angle: 360deg;
   }
 }
+
+/* Slide-in du bandeau cookies — remplace framer-motion (qui, importé dans le
+   root layout, embarquait ~36 kB gz dans le First Load JS de chaque page). */
+@keyframes cookieBannerIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-cookie-banner-in {
+  animation: cookieBannerIn 0.35s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-cookie-banner-in {
+    animation: none;
+  }
+}

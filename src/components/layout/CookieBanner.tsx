@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Cookie, X, Settings } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+// PAS de framer-motion ici : ce composant est monté dans le root layout, donc
+// l'importer embarquait toute la lib (~36 kB gz) dans le First Load JS de
+// CHAQUE page — pour un simple slide-in. L'animation est en CSS pur
+// (.animate-cookie-banner-in dans globals.css, reduced-motion géré).
 
 export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
@@ -96,15 +99,12 @@ export default function CookieBanner() {
     savePreferences(preferences);
   };
 
+  if (!showBanner) return null;
+
   return (
-    <AnimatePresence>
+    <>
       {showBanner && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
-        >
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-cookie-banner-in">
           <div className="container-custom max-w-6xl">
             <div className="bg-white rounded-2xl shadow-2xl border border-dark-200 p-6 md:p-8">
               {!showSettings ? (
@@ -195,6 +195,7 @@ export default function CookieBanner() {
                               setPreferences({ ...preferences, analytics: e.target.checked })
                             }
                             className="sr-only peer"
+                            aria-label="Activer les cookies analytics"
                           />
                           <div className="w-11 h-6 bg-dark-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                         </label>
@@ -216,6 +217,7 @@ export default function CookieBanner() {
                               setPreferences({ ...preferences, marketing: e.target.checked })
                             }
                             className="sr-only peer"
+                            aria-label="Activer les cookies marketing"
                           />
                           <div className="w-11 h-6 bg-dark-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                         </label>
@@ -244,9 +246,9 @@ export default function CookieBanner() {
               )}
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 

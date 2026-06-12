@@ -7,7 +7,9 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import MetaThemeColor from "@/components/theme/MetaThemeColor";
 import CookieBanner from "@/components/layout/CookieBanner";
 import StickyCallButton from "@/components/layout/StickyCallButton";
-import { getTestimonials } from "@/lib/data-service";
+import SiteShell from "@/components/layout/SiteShell";
+import { getSiteConfig } from "@/lib/data-adapter";
+import type { SiteConfigData } from "@/contexts/SiteConfigContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -111,23 +113,30 @@ export const metadata: Metadata = {
   category: "business",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 
-  // Compute aggregate rating from real testimonials (falls back to 5.0 / 0
-  // when the dataset is empty — in which case we omit the schema to avoid
-  // publishing a 0-review aggregate that Google would flag)
-  const testimonialsData = getTestimonials();
-  const verifiedReviews = testimonialsData.testimonials.filter(
-    (t) => t.verified !== false && typeof t.rating === "number",
-  );
-  const ratingSum = verifiedReviews.reduce((acc, t) => acc + t.rating, 0);
-  const reviewCount = verifiedReviews.length;
-  const ratingValue = reviewCount > 0 ? (ratingSum / reviewCount).toFixed(1) : null;
+  // Config du site lue CÔTÉ SERVEUR (Supabase si dispo, sinon JSON local) et
+  // passée au shell client — remplace le fetch /api/admin/site-config que
+  // l'ancien template.tsx déclenchait chez chaque visiteur.
+  const cfg = await getSiteConfig();
+  const shellConfig: SiteConfigData = {
+    siteName: cfg.siteName || "S Connect France",
+    siteTagline: cfg.siteTagline || "Électricité • Contrôle d'accès • Serrurerie • Métallerie",
+    phone: cfg.phone || "06 52 82 06 85",
+    phoneEmergency: cfg.phoneEmergency || cfg.phone || "06 52 82 06 85",
+    email: cfg.email || "contact@sconnectfrance.fr",
+    address: cfg.address || { street: "35 rue des Cailloux", postalCode: "92110", city: "Clichy" },
+    hours: cfg.hours || { weekdays: "Lun-Ven: 8h-19h", saturday: "Samedi: 9h-17h", emergency: "Urgences 24/7" },
+    schedule: (cfg as { schedule?: SiteConfigData["schedule"] }).schedule,
+    social: cfg.social || { facebook: "", linkedin: "", instagram: "" },
+    logoUrl: (cfg as { logoUrl?: string }).logoUrl || "",
+    logoDarkUrl: (cfg as { logoDarkUrl?: string }).logoDarkUrl || "",
+  };
 
   return (
     <html lang="fr" className={`${outfit.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
@@ -138,10 +147,9 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0ea5e9" />
         
-        {/* Preconnect to external resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+        {/* Pas de preconnect Google Fonts : next/font self-host les polices,
+            ces handshakes étaient payés pour rien à chaque visite. */}
+
         {/* Schema.org Organization */}
         <script
           type="application/ld+json"
@@ -197,7 +205,7 @@ export default function RootLayout({
               image: `${siteUrl}/og-image.jpg`,
               url: siteUrl,
               telephone: "+33-6-52-82-06-85",
-              email: "contact@sconnect-france.fr",
+              email: "contact@sconnectfrance.fr",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "35 rue des Cailloux",
@@ -288,26 +296,17 @@ export default function RootLayout({
                   },
                 ],
               },
-              ...(ratingValue && reviewCount > 0
-                ? {
-                    aggregateRating: {
-                      "@type": "AggregateRating",
-                      ratingValue,
-                      reviewCount: String(reviewCount),
-                      bestRating: "5",
-                      worstRating: "1",
-                    },
-                  }
-                : {}),
+              // Pas d'aggregateRating : la page /avis a été supprimée — une
+              // note auto-déclarée sans avis consultables sur le site viole
+              // les guidelines review snippet de Google (risque d'action
+              // manuelle). À réintroduire seulement adossée au futur GBP.
             }),
           }}
         />
 
-        {/* Schema.org WebSite for sitelinks search box.
-            SearchAction = active la sitelinks searchbox dans Google SERP
-            (les visiteurs peuvent chercher dans le site directement depuis
-            les résultats Google). Pointe vers /actualites?q={search_term}
-            qui agira comme search endpoint (à implémenter côté UI). */}
+        {/* Schema.org WebSite — sans SearchAction : l'endpoint
+            /actualites?q=… n'existe pas, déclarer une searchbox vers une
+            URL non fonctionnelle est pire que de ne rien déclarer. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -320,14 +319,6 @@ export default function RootLayout({
               description: "Expert en électricité, contrôle d'accès et serrurerie en Île-de-France",
               publisher: { "@id": `${siteUrl}/#organization` },
               inLanguage: "fr-FR",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: {
-                  "@type": "EntryPoint",
-                  urlTemplate: `${siteUrl}/actualites?q={search_term_string}`,
-                },
-                "query-input": "required name=search_term_string",
-              },
             }),
           }}
         />
@@ -338,7 +329,7 @@ export default function RootLayout({
         </a>
         <ThemeProvider>
           <MetaThemeColor />
-          {children}
+          <SiteShell config={shellConfig}>{children}</SiteShell>
           <StickyCallButton />
           <CookieBanner />
           <Toaster

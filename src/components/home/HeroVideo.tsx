@@ -70,10 +70,22 @@ export default function HeroVideo({ videoSrc, videoSrcWebm, posterSrc, fallbackS
     }
   };
 
+  // Variantes responsive du poster, dérivées par convention de nommage
+  // (poster.webp → poster-820.webp / poster-1366.webp). Le poster 1920px
+  // (263 kB pour la home) était servi tel quel sur mobile = LCP plombé ;
+  // la variante 820w fait ~24 kB.
+  const posterBase = posterSrc.replace(/\.webp$/, "");
+  const poster820 = `${posterBase}-820.webp`;
+  const poster1366 = `${posterBase}-1366.webp`;
+
   // Reduced motion or pre-hydration: show only the poster (no video fetch at all).
+  // NB : pas d'aria-hidden sur <picture> (élément qui ne supporte pas ARIA) —
+  // l'img décorative avec alt="" suffit aux lecteurs d'écran.
   if (reduce || !mounted) {
     return (
-      <picture aria-hidden="true" className="pointer-events-none">
+      <picture className="pointer-events-none">
+        <source media="(max-width: 820px)" srcSet={poster820} type="image/webp" />
+        <source media="(max-width: 1366px)" srcSet={poster1366} type="image/webp" />
         <source srcSet={posterSrc} type="image/webp" />
         {/* LCP element on first paint (pre-hydration). fetchPriority/eager/async
             make the poster discoverable + prioritised so the browser fetches it
