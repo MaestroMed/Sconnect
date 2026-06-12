@@ -260,7 +260,7 @@ export default function Footer() {
             </ul>
           </div>
           {/* Mentions légales obligatoires (loi LCEN + Code commerce). */}
-          <p className="mt-4 text-xs text-dark-500 text-center md:text-left">
+          <p className="mt-4 text-xs text-dark-400 text-center md:text-left">
             S CONNECT FRANCE — SAS au capital de 20&nbsp;000&nbsp;€ ·
             SIRET&nbsp;899&nbsp;667&nbsp;596&nbsp;00014 ·
             RCS Nanterre&nbsp;899&nbsp;667&nbsp;596 ·

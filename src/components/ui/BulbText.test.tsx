@@ -3,9 +3,14 @@ import { render, screen } from "@testing-library/react";
 import BulbText from "./BulbText";
 
 describe("BulbText", () => {
-  it("renders the full text as aria-label on the wrapper", () => {
-    render(<BulbText>Hello world</BulbText>);
-    expect(screen.getByLabelText("Hello world")).toBeInTheDocument();
+  it("exposes the full text to screen readers via an sr-only node", () => {
+    // aria-label sur un <span> générique est ignoré par ARIA — le nom
+    // accessible passe par un vrai nœud texte visually-hidden.
+    const { container } = render(<BulbText>Hello world</BulbText>);
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly?.textContent).toBe("Hello world");
+    // Les lettres animées restent masquées aux lecteurs d'écran.
+    expect(screen.getByText("Hello world")).toBeInTheDocument();
   });
 
   it("preserves word boundaries (no mid-word line breaks)", () => {

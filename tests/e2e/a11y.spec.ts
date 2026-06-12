@@ -16,7 +16,7 @@ const ROUTES = [
   "/services/controle-acces",
   "/auteur/mehdi-belkacem",
   "/realisations",
-  "/avis",
+  "/realisations",
   "/contact",
   "/actualites",
 ];

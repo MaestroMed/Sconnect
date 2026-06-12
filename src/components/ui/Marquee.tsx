@@ -36,7 +36,7 @@ export default function Marquee({
           className={cn(
             "flex shrink-0 items-center gap-12 pr-12",
             direction === "left" ? "animate-marquee-x" : "animate-marquee-x-reverse",
-            pauseOnHover && "group-hover:[animation-play-state:paused]",
+            pauseOnHover && "group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]",
           )}
         >
           {items.map((child, i) => (

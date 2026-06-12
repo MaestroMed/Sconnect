@@ -96,6 +96,10 @@ export default function Header() {
           <a
             href={`tel:${siteConfig.phone.replace(/\s/g, "").replace(/^0/, "+33")}`}
             className="flex items-center gap-2 hover:text-accent-400 transition-colors"
+            // Top bar masquée au scroll (aria-hidden) : retirer aussi le lien
+            // du parcours clavier, sinon le focus atterrit dans un élément
+            // invisible.
+            tabIndex={isScrolled ? -1 : undefined}
           >
             <Phone className="w-4 h-4" />
             <span className="font-semibold">{siteConfig.phone}</span>

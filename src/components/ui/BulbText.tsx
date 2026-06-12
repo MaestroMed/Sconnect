@@ -34,11 +34,12 @@ export default function BulbText({ children, className = "" }: BulbTextProps) {
   let i = 0;
 
   return (
-    <span
-      className={`gradient-text-living ${className}`}
-      style={{ display: "inline" }}
-      aria-label={children}
-    >
+    <span className={`gradient-text-living ${className}`} style={{ display: "inline" }}>
+      {/* Nom accessible : un vrai nœud texte (sr-only). `aria-label` sur un
+          <span> générique est ignoré par ARIA — combiné aux lettres en
+          aria-hidden, le H1 de l'accueil devenait muet pour les lecteurs
+          d'écran. */}
+      <span className="sr-only">{children}</span>
       {words.map((word, wi) => (
         <Fragment key={`w-${wi}`}>
           <span

@@ -117,16 +117,26 @@ export default function FileUpload({
     <div>
       <label className="input-label mb-2">Pièces jointes (optionnel)</label>
       
-      {/* Drop zone */}
+      {/* Drop zone — role=button + tabIndex + Enter/Espace : la zone n'était
+          cliquable qu'à la souris (input caché, aucun focus possible). */}
       <div
+        role="button"
+        tabIndex={0}
+        aria-label="Ajouter des pièces jointes — ouvre le sélecteur de fichiers"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
+        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
           isDragging
-            ? "border-primary-500 bg-primary-50"
-            : "border-dark-200 hover:border-primary-300 hover:bg-dark-50"
+            ? "border-primary-500 bg-primary-50 dark:bg-primary-500/10"
+            : "border-dark-200 dark:border-dark-700 hover:border-primary-300 hover:bg-dark-50 dark:hover:bg-dark-800/60"
         }`}
       >
         <input
@@ -136,19 +146,21 @@ export default function FileUpload({
           accept={acceptedTypes}
           onChange={(e) => handleFiles(e.target.files)}
           className="hidden"
+          tabIndex={-1}
+          aria-hidden="true"
         />
         <Upload className={`w-10 h-10 mx-auto mb-3 ${isDragging ? "text-primary-500" : "text-dark-400"}`} />
-        <p className="text-dark-700 font-medium mb-1">
+        <p className="text-dark-700 dark:text-dark-200 font-medium mb-1">
           Glissez vos fichiers ici ou cliquez pour parcourir
         </p>
-        <p className="text-sm text-dark-500">
+        <p className="text-sm text-dark-500 dark:text-dark-400">
           {maxFiles} fichiers max • {maxSizeMB}MB par fichier • PDF, JPG, PNG, DOC
         </p>
       </div>
 
       {/* Error */}
       {error && (
-        <p className="error-message mt-2">{error}</p>
+        <p role="alert" className="error-message mt-2">{error}</p>
       )}
 
       {/* File list */}
@@ -157,21 +169,21 @@ export default function FileUpload({
           {files.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-3 bg-dark-50 rounded-lg"
+              className="flex items-center justify-between p-3 bg-dark-50 dark:bg-dark-800/60 rounded-lg"
             >
               <div className="flex items-center gap-3">
                 {getFileIcon(file)}
                 <div>
-                  <p className="text-sm font-medium text-dark-900 truncate max-w-[200px] md:max-w-none">
+                  <p className="text-sm font-medium text-dark-900 dark:text-white truncate max-w-[200px] md:max-w-none">
                     {file.name}
                   </p>
-                  <p className="text-xs text-dark-500">{formatFileSize(file.size)}</p>
+                  <p className="text-xs text-dark-500 dark:text-dark-400">{formatFileSize(file.size)}</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => removeFile(index)}
-                className="p-1 hover:bg-dark-200 rounded-lg transition-colors"
+                className="p-1 hover:bg-dark-200 dark:hover:bg-dark-700 rounded-lg transition-colors"
                 aria-label={`Supprimer ${file.name}`}
               >
                 <X className="w-4 h-4 text-dark-500" />
