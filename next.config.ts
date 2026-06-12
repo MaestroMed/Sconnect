@@ -120,7 +120,25 @@ const nextConfig: NextConfig = {
 
   // Redirections
   async redirects() {
+    // Mode maintenance évalué AU BUILD (remplace l'ancien middleware.ts qui
+    // s'exécutait sur CHAQUE requête pour un no-op : une invocation edge par
+    // page vue, pour rien). Sur Vercel, changer MAINTENANCE_MODE exigeait de
+    // toute façon un redeploy — le comportement est donc identique, en 307
+    // explicite plutôt qu'un rewrite-200 (meilleur pour les crawlers).
+    const maintenance =
+      process.env.MAINTENANCE_MODE === 'true'
+        ? [
+            {
+              source:
+                '/:path((?!maintenance|admin|api|_next|favicon\\.ico|icon\\.svg|apple-touch-icon|manifest\\.json|robots\\.txt|sitemap\\.xml|images|videos|brands|fonts|\\.well-known|og-image|twitter-image).*)',
+              destination: '/maintenance',
+              permanent: false,
+            },
+          ]
+        : [];
+
     return [
+      ...maintenance,
       // Legacy legal slug
       {
         source: '/confidentialite',

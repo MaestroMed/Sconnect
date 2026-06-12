@@ -33,10 +33,13 @@ export default function TestimonialCard({
     >
       <div className="flex items-start justify-between mb-4">
         <Quote className="w-10 h-10 text-primary-200 dark:text-primary-500/40" />
-        <div className="flex gap-1">
+        {/* Note en étoiles : alternative textuelle pour les lecteurs d'écran,
+            les icônes étant purement décoratives. */}
+        <div className="flex gap-1" role="img" aria-label={`Note : ${rating} sur 5`}>
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
+              aria-hidden="true"
               className={`w-5 h-5 ${
                 i < rating
                   ? "text-accent-400 fill-accent-400"

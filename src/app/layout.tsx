@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
-import { Toaster } from "sonner";
+import LazyToaster from "@/components/ui/LazyToaster";
 import AnalyticsGate from "@/components/analytics/AnalyticsGate";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
@@ -332,15 +332,7 @@ export default async function RootLayout({
           <SiteShell config={shellConfig}>{children}</SiteShell>
           <StickyCallButton />
           <CookieBanner />
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              className:
-                "!bg-surface-elevated !text-foreground !border !border-border !shadow-xl",
-            }}
-            closeButton
-            richColors
-          />
+          <LazyToaster />
         </ThemeProvider>
         <AnalyticsGate />
       </body>
