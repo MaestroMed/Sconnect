@@ -24,6 +24,7 @@
     "seo:refresh-dates:dry": "tsx scripts/refresh-dates.ts -- --dry",
     "db:seed": "tsx scripts/migrate-json-to-supabase.ts",
     "db:import-mdx": "tsx scripts/import-mdx-to-db.ts",
+    "admin:create": "tsx scripts/create-admin.ts",
     "assets:fetch": "tsx scripts/fetch-images.ts",
     "assets:fetch:force": "tsx scripts/fetch-images.ts --force",
     "brand:favicons": "tsx scripts/generate-favicons.ts",

@@ -1,4 +1,0 @@
-{
-  "_note": "Fallback DEV uniquement (ignoré en production par src/lib/auth.ts). Ne JAMAIS committer de vrais identifiants ici — l'ancien contenu embarquait un compte au mot de passe connu, livré dans le bundle prod. Pour le dev local : ajouter un user avec un hash bcrypt généré via hashPassword().",
-  "users": []
-}

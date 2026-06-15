@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { ChevronRight, Filter, Phone } from "lucide-react";
-import { getRealizations, getSiteConfig } from "@/lib/data-service";
+// data-adapter (et non data-service JSON-only) : la page reflète ainsi le
+// back-office quand Supabase est configuré, et retombe sur le JSON committé
+// sinon. Sans ça, les réalisations éditées dans l'admin n'apparaissaient
+// jamais sur cette page (elle lisait toujours le fichier JSON).
+import { getRealizations, getSiteConfig } from "@/lib/data-adapter";
 import { buildMetadata } from "@/lib/metadata";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
@@ -22,9 +26,9 @@ export const metadata = buildMetadata({
   path: "/realisations",
 });
 
-export default function RealisationsPage() {
-  const { realizations } = getRealizations();
-  const { phone } = getSiteConfig();
+export default async function RealisationsPage() {
+  const { realizations } = await getRealizations();
+  const { phone } = await getSiteConfig();
   const phoneClean = phone.replace(/\s/g, "");
 
   return (

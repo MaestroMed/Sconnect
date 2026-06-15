@@ -48,3 +48,10 @@ test-results/
 # Outils de session (jamais commités)
 .claude/
 audit-findings.json
+
+# Identifiants admin LOCAUX (créés via `npm run admin:create`) — ne JAMAIS
+# committer de vrais identifiants. Le fichier reste sur ta machine.
+src/lib/data/admin-users.json
+
+# Uploads admin en dev local (en prod c'est Supabase Storage)
+public/uploads/
