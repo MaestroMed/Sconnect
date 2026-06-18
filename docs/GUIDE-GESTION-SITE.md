@@ -172,31 +172,57 @@ la prod, mets plutôt la photo dans `public/images/realisations/` (section 2).
 
 ---
 
-## 6. Réactiver le vrai back-office cloud (Supabase) — checklist
+## 6. Activer le vrai back-office cloud (Supabase) — procédure exacte
 
 Pour que `/admin` fonctionne **en ligne** (édition depuis n'importe où, uploads
-d'images, stockage des demandes de devis et de la newsletter) :
+d'images, stockage des demandes de devis et de la newsletter). Fais les étapes
+**dans l'ordre**.
 
-1. **Créer un projet Supabase** (gratuit) sur https://supabase.com.
-2. **Créer le schéma** : dans le SQL Editor de Supabase, exécuter les fichiers
-   du dépôt, dans cet ordre :
-   - `supabase/schema.sql`
-   - `supabase/migrations/001_phase2_tables.sql`
-   - `supabase/storage-policies.sql` (et `fix-storage-policies.sql` si besoin)
-   - (`supabase/seed.sql` pour des données d'exemple — optionnel)
-3. **Créer le bucket de stockage** nommé exactement **`sconnectfrance`** (public),
-   pour les images uploadées.
-4. **Renseigner les variables dans Vercel** (Settings → Environment Variables) :
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-   - `JWT_SECRET` = une chaîne aléatoire ≥ 32 caractères (`openssl rand -base64 48`)
-5. **Importer les données existantes** dans Supabase :
-   - `npm run db:seed` (réalisations, services, témoignages, etc. depuis les JSON)
-   - `npm run db:import-mdx` (les 52 articles)
-6. **Créer le compte admin en base** : ajouter une ligne dans la table
-   `admin_users` (email + hash bcrypt — générable via le script `create-admin`
-   puis copié, ou directement en SQL).
+### A. Côté Supabase (dans ton navigateur)
+1. Dans ton projet Supabase → **SQL Editor** → **New query**.
+2. Ouvre le fichier **`supabase/SETUP.sql`** du dépôt, copie **tout**, colle, **Run**.
+   → Ça crée toutes les tables, les sécurités, **et** le bucket d'images
+   `sconnectfrance`. (Re-jouable sans risque. N'utilise PAS les vieux
+   `schema.sql`/`seed.sql` : ils contiennent de fausses données et un mauvais
+   nom de bucket.)
+3. **Project Settings → API** : note ces 3 valeurs :
+   - `Project URL` → ira dans `NEXT_PUBLIC_SUPABASE_URL`
+   - `anon public` key → ira dans `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `service_role` key (secrète !) → ira dans `SUPABASE_SERVICE_ROLE_KEY`
+
+### B. Côté ton ordinateur (fichier `.env.local`)
+Crée/édite le fichier `.env.local` à la racine du projet (gitignoré, reste chez toi)
+avec **au minimum** :
+```
+NEXT_PUBLIC_SUPABASE_URL=...        (Project URL)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...   (anon public)
+SUPABASE_SERVICE_ROLE_KEY=...       (service_role)
+```
+Puis, dans le terminal, charge les vraies données et crée ton compte admin :
+```bash
+npm run db:seed                                   # vraies données (réalisations, etc.)
+npm run db:import-mdx                             # (optionnel) les 52 articles
+npm run admin:create -- ton@email.fr "TonMotDePasse"   # crée l'admin DANS Supabase
+```
+> Claude peut lancer ces 3 commandes pour toi une fois `.env.local` rempli.
+
+### C. Côté Vercel (Settings → Environment Variables, pour la PROD)
+Ajoute ces variables (Production), puis **redéploie** :
+| Variable | Valeur |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon public |
+| `SUPABASE_SERVICE_ROLE_KEY` | service_role (secret) |
+| `JWT_SECRET` | une chaîne aléatoire ≥ 32 caractères (Claude t'en a généré une) |
+| `RESEND_API_KEY` | ta clé Resend |
+| `RESEND_FROM_EMAIL` | `contact@sconnectfrance.fr` (domaine **vérifié** dans Resend) |
+| `RESEND_TO_EMAIL` | l'adresse où recevoir les demandes |
+
+Une fois redéployé : `https://sconnectfrance.fr/admin/login` fonctionne avec le
+compte créé à l'étape B.
+
+> Tant que ces variables ne sont pas mises, **rien n'est cassé** : le site lit les
+> fichiers JSON/MDX committés. C'est juste l'édition « cloud » qui attend.
 7. **Redéployer**. `/admin/login` fonctionne alors en ligne.
 
 > Tant que Supabase n'est pas restauré, **rien n'est cassé** : le site lit les

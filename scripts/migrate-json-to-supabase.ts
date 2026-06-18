@@ -249,10 +249,13 @@ async function migrateBrands() {
 async function migrateAdminUsers() {
   const json = readJson<any>('admin-users.json')
   for (const u of json.users ?? json ?? []) {
-    if (!u.email || !u.passwordHash) continue
+    // Le fichier local écrit le hash dans `password` (cf. create-admin.ts) ;
+    // on accepte aussi `passwordHash` par tolérance.
+    const passwordHash = u.password ?? u.passwordHash
+    if (!u.email || !passwordHash) continue
     const row = {
       email: u.email,
-      password_hash: u.passwordHash,
+      password_hash: passwordHash,
       name: u.name ?? 'Admin',
       role: u.role ?? 'admin',
     }
