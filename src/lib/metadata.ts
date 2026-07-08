@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
-const SITE_NAME = "S'Connect";
+const SITE_NAME = "S Connect France";
 const DEFAULT_DESCRIPTION =
   "Expert en installation électrique, systèmes de contrôle d'accès et serrurerie en Île-de-France. Intervention rapide 24h/24, devis gratuit.";
 

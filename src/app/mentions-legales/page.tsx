@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Building2, Scale, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Mentions Légales | S'Connect",
-  description: "Mentions légales de S'Connect - Informations légales et réglementaires de l'entreprise.",
+  title: "Mentions Légales | S Connect France",
+  description: "Mentions légales de S Connect France - Informations légales et réglementaires de l'entreprise.",
   robots: {
     index: true,
     follow: true,
@@ -125,7 +125,7 @@ export default function MentionsLegalesPage() {
                 mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes.
               </p>
               <p>
-                S'Connect ne pourra être tenu responsable des dommages directs et indirects causés au matériel de l'utilisateur,
+                S Connect France ne pourra être tenu responsable des dommages directs et indirects causés au matériel de l'utilisateur,
                 lors de l'accès au site, et résultant soit de l'utilisation d'un matériel ne répondant pas aux spécifications techniques requises,
                 soit de l'apparition d'un bug ou d'une incompatibilité.
               </p>

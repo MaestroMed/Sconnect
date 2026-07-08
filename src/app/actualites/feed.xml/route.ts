@@ -24,7 +24,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>S'Connect — Actualités &amp; conseils</title>
+    <title>S Connect France — Actualités &amp; conseils</title>
     <link>${siteUrl}/actualites</link>
     <description>Actualités, guides et conseils en électricité, contrôle d'accès, serrurerie et métallerie.</description>
     <language>fr-FR</language>

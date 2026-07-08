@@ -4,11 +4,11 @@ import PricingTable from "@/components/marketing/PricingTable";
 import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
-  title: "Mise aux Normes Électriques NF C 15-100 | S'Connect",
+  title: "Mise aux Normes Électriques NF C 15-100 | S Connect France",
   description: "Mise en conformité électrique NF C 15-100 en Île-de-France. Diagnostic complet, mise à la terre, protections différentielles, certificat Consuel. Devis gratuit.",
   keywords: ["mise aux normes électrique", "NF C 15-100", "conformité électrique", "diagnostic électrique", "Consuel", "protection différentielle", "mise à la terre"],
   openGraph: {
-    title: "Mise aux Normes Électriques NF C 15-100 | S'Connect",
+    title: "Mise aux Normes Électriques NF C 15-100 | S Connect France",
     description: "Mise en conformité électrique selon la norme NF C 15-100. Diagnostic et travaux en Île-de-France.",
     images: ["/og-image.jpg"],
   },

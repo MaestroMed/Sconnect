@@ -101,7 +101,7 @@ export async function sendDevisEmail(data: {
   );
   await sendEmail({
     to: data.email,
-    subject: "Confirmation de votre demande de devis - S'Connect",
+    subject: "Confirmation de votre demande de devis - S Connect France",
     html: confirmHtml,
   });
 
@@ -140,7 +140,7 @@ export async function sendInterventionEmail(data: {
   );
   await sendEmail({
     to: data.email,
-    subject: "Votre demande d'intervention urgente - S'Connect",
+    subject: "Votre demande d'intervention urgente - S Connect France",
     html: confirmHtml,
   });
 

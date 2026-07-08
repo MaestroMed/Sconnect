@@ -7,11 +7,11 @@ import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
-  title: "Fabrication de Portes Métalliques Sur Mesure | S'Connect",
+  title: "Fabrication de Portes Métalliques Sur Mesure | S Connect France",
   description: "Fabrication et pose de portes métalliques sur mesure en Île-de-France : portes d'entrée, de garage, techniques et coupe-feu en acier. Conception personnalisée. Devis gratuit.",
   keywords: ["porte métallique", "fabrication porte acier", "porte sur mesure", "porte garage métallique", "porte coupe-feu", "porte technique"],
   openGraph: {
-    title: "Fabrication de Portes Métalliques | S'Connect",
+    title: "Fabrication de Portes Métalliques | S Connect France",
     description: "Portes métalliques sur mesure : entrée, garage, coupe-feu. Fabrication et pose en Île-de-France.",
     images: ["/og-image.jpg"],
   },

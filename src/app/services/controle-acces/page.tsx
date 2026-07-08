@@ -21,7 +21,7 @@ const controleAccesSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
-  title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S'Connect",
+  title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S Connect France",
   description: "Installation professionnelle de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes pour immeubles, entreprises et particuliers. Devis gratuit.",
   keywords: [
     "contrôle accès",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "sécurité immeuble",
   ],
   openGraph: {
-    title: "Contrôle d'Accès | Interphonie & Badges | S'Connect",
+    title: "Contrôle d'Accès | Interphonie & Badges | S Connect France",
     description: "Installation de systèmes de contrôle d'accès : interphonie, badges, digicodes. Intervention rapide en Île-de-France.",
     images: ["/og-image.jpg"],
     type: "website",

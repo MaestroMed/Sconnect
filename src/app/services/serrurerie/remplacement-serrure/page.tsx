@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Remplacement de Serrure | Pose & Installation | S'Connect",
+  title: "Remplacement de Serrure | Pose & Installation | S Connect France",
   description: "Remplacement et installation de serrures en Île-de-France. Serrures certifiées A2P, multipoints, haute sécurité. Devis gratuit, pose rapide par serrurier professionnel.",
   keywords: ["remplacement serrure", "pose serrure", "serrure A2P", "serrure multipoints", "changement serrure", "serrure sécurité", "installation serrure"],
   openGraph: {
-    title: "Remplacement de Serrure | S'Connect",
+    title: "Remplacement de Serrure | S Connect France",
     description: "Installation et remplacement de serrures certifiées. Intervention rapide en Île-de-France.",
     images: ["/og-image.jpg"],
   },

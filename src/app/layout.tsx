@@ -26,8 +26,8 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr"),
   title: {
-    default: "S'Connect | Électricité, Contrôle d'Accès & Serrurerie en Île-de-France",
-    template: "%s | S'Connect",
+    default: "S Connect France | Électricité, Contrôle d'Accès & Serrurerie en Île-de-France",
+    template: "%s | S Connect France",
   },
   description:
     "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Audit gratuit, intervention 24h/24, devis transparent, financement accompagné. Particuliers et professionnels.",
@@ -56,8 +56,8 @@ export const metadata: Metadata = {
     "badge accès",
   ],
   authors: [{ name: "S Connect France" }],
-  creator: "S'Connect",
-  publisher: "S'Connect",
+  creator: "S Connect France",
+  publisher: "S Connect France",
   formatDetection: {
     email: false,
     address: false,
@@ -67,8 +67,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr",
-    siteName: "S'Connect",
-    title: "S'Connect | Électricité, Contrôle d'Accès & Serrurerie",
+    siteName: "S Connect France",
+    title: "S Connect France | Électricité, Contrôle d'Accès & Serrurerie",
     description:
       "Expert en installation électrique, systèmes de contrôle d'accès et serrurerie en Île-de-France. Intervention rapide, devis gratuit.",
     images: [
@@ -76,13 +76,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "S'Connect - Électricité, Contrôle d'Accès, Serrurerie",
+        alt: "S Connect France - Électricité, Contrôle d'Accès, Serrurerie",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "S'Connect | Électricité, Contrôle d'Accès & Serrurerie",
+    title: "S Connect France | Électricité, Contrôle d'Accès & Serrurerie",
     description: "Expert en électricité, contrôle d'accès et serrurerie en Île-de-France",
     images: ["/og-image.jpg"],
   },

@@ -21,7 +21,7 @@ const metallerieSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
-  title: "Métallerie | Fabrication Portails, Portes & Structures Métalliques | S'Connect",
+  title: "Métallerie | Fabrication Portails, Portes & Structures Métalliques | S Connect France",
   description: "Métallerie professionnelle en Île-de-France : fabrication sur mesure de portails, portes métalliques, garde-corps et structures en acier. Devis gratuit, pose incluse.",
   keywords: [
     "métallerie",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "soudure acier",
   ],
   openGraph: {
-    title: "Métallerie | Portails & Structures sur Mesure | S'Connect",
+    title: "Métallerie | Portails & Structures sur Mesure | S Connect France",
     description: "Fabrication et pose de portails, portes métalliques et structures en acier. Travail sur mesure en Île-de-France.",
     images: ["/og-image.jpg"],
     type: "website",

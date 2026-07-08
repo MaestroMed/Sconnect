@@ -94,7 +94,7 @@ function dbRowToPost(row: {
       title: row.title,
       excerpt: row.excerpt ?? "",
       date: row.published_at ?? row.updated_at,
-      author: row.author ?? "Équipe S'Connect",
+      author: row.author ?? "Équipe S Connect France",
       cover: row.cover_url ?? undefined,
       tags: row.tags ?? [],
       draft: !row.published,

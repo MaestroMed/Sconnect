@@ -7,7 +7,7 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Conditions générales",
   description:
-    "Conditions générales de vente et de service de S'Connect : objet, prix, délais, garanties, litiges.",
+    "Conditions générales de vente et de service de S Connect France : objet, prix, délais, garanties, litiges.",
   path: "/conditions-generales",
 });
 

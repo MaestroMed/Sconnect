@@ -38,7 +38,7 @@ export default function NewPostPage() {
           cover_url: "",
           body_mdx: "",
           tags: [],
-          author: "Équipe S'Connect",
+          author: "Équipe S Connect France",
           published: false,
           published_at: null,
         }}

@@ -7,11 +7,11 @@ import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
-  title: "Structures Métalliques | Garde-corps, Escaliers, Verrières | S'Connect",
+  title: "Structures Métalliques | Garde-corps, Escaliers, Verrières | S Connect France",
   description: "Conception et réalisation de structures métalliques en Île-de-France : garde-corps, escaliers métalliques, verrières, pergolas, charpentes. Fabrication sur mesure. Devis gratuit.",
   keywords: ["structure métallique", "garde-corps", "escalier métallique", "verrière", "pergola", "charpente métallique", "ferronnerie art"],
   openGraph: {
-    title: "Structures Métalliques Sur Mesure | S'Connect",
+    title: "Structures Métalliques Sur Mesure | S Connect France",
     description: "Garde-corps, escaliers, verrières et structures métalliques personnalisées en Île-de-France.",
     images: ["/og-image.jpg"],
   },

@@ -15,7 +15,7 @@ const CATEGORY_COLORS: Record<string, { from: string; to: string; accent: string
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const title = searchParams.get("title") || "S'Connect";
+  const title = searchParams.get("title") || "S Connect France";
   const category = searchParams.get("category") || "";
   const type = searchParams.get("type") || "website";
   const colors = CATEGORY_COLORS[category] ?? CATEGORY_COLORS.default;

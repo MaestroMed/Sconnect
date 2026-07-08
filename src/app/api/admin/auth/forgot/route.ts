@@ -49,11 +49,11 @@ export async function POST(request: NextRequest) {
       const resend = new Resend(resendKey);
       try {
         await resend.emails.send({
-          from: `S'Connect Admin <${fromEmail}>`,
+          from: `S Connect France Admin <${fromEmail}>`,
           to: [user.email],
           subject: 'Réinitialisation de votre mot de passe',
           html: `<p>Bonjour ${user.name ?? ''},</p>
-<p>Vous avez demandé la réinitialisation de votre mot de passe administrateur S'Connect.</p>
+<p>Vous avez demandé la réinitialisation de votre mot de passe administrateur S Connect France.</p>
 <p>Cliquez sur le lien ci-dessous (valable 1 heure) :</p>
 <p><a href="${resetUrl}">${resetUrl}</a></p>
 <p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet email.</p>`,

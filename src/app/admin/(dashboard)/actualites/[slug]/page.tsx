@@ -47,7 +47,7 @@ export default async function EditPostPage({
           cover_url: post.cover_url ?? "",
           body_mdx: post.body_mdx,
           tags: post.tags ?? [],
-          author: post.author ?? "Équipe S'Connect",
+          author: post.author ?? "Équipe S Connect France",
           published: post.published,
           published_at: post.published_at,
         }}

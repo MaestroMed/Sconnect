@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Blindage de Porte | Porte Blindée A2P | S'Connect",
+  title: "Blindage de Porte | Porte Blindée A2P | S Connect France",
   description: "Blindage de porte et installation de portes blindées certifiées A2P en Île-de-France. Sécurisation maximale de votre logement. Devis gratuit, pose professionnelle.",
   keywords: ["blindage porte", "porte blindée", "porte A2P", "sécurisation porte", "bloc porte blindé", "renforcement porte", "porte sécurisée"],
   openGraph: {
-    title: "Blindage de Porte | Sécurité Maximale | S'Connect",
+    title: "Blindage de Porte | Sécurité Maximale | S Connect France",
     description: "Installation de portes blindées et blindage de portes existantes. Certifications A2P.",
     images: ["/og-image.jpg"],
   },

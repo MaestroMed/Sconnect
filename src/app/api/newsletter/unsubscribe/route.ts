@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
 <style>body{font-family:system-ui,sans-serif;max-width:520px;margin:80px auto;padding:24px;text-align:center;color:#1f2937}h1{color:#0ea5e9}</style>
 </head><body>
 <h1>Désabonnement confirmé</h1>
-<p>Votre adresse a été retirée de la liste S'Connect. Vous ne recevrez plus nos communications.</p>
+<p>Votre adresse a été retirée de la liste S Connect France. Vous ne recevrez plus nos communications.</p>
 <p><a href="/">Retour à l'accueil</a></p>
 </body></html>`
 

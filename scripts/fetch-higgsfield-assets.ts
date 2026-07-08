@@ -83,9 +83,9 @@ const ALT_BY_SLUG: Record<string, string> = {
   "zone-paris": "Paris vue aérienne blue hour — Tour Eiffel + Seine",
   "zone-clichy": "Clichy (92) — rue résidentielle blue hour",
   "zone-idf": "Île-de-France vue aérienne — Paris + La Défense + petite couronne",
-  "team-equipe": "Équipe S'Connect — trois techniciens experts",
-  "team-technicien": "Technicien S'Connect en intervention",
-  "team-vehicule": "Véhicule d'intervention S'Connect — rue parisienne",
+  "team-equipe": "Équipe S Connect France — trois techniciens experts",
+  "team-technicien": "Technicien S Connect France en intervention",
+  "team-vehicule": "Véhicule d'intervention S Connect France — rue parisienne",
 };
 
 const CATEGORY_FROM_DIR = (target_dir: string): string => {

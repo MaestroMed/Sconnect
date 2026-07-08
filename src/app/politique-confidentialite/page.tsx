@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Shield, Lock, Eye, Database } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Politique de Confidentialité | S'Connect",
-  description: "Politique de confidentialité et protection des données personnelles de S'Connect - Conformité RGPD.",
+  title: "Politique de Confidentialité | S Connect France",
+  description: "Politique de confidentialité et protection des données personnelles de S Connect France - Conformité RGPD.",
   robots: { index: true, follow: true },
 };
 
@@ -38,7 +38,7 @@ export default function PolitiqueConfidentialitePage() {
           <div className="prose prose-lg max-w-none">
             <div className="bg-primary-50 border-l-4 border-primary-600 p-6 rounded-r-xl mb-12">
               <p className="m-0">
-                S'Connect accorde une grande importance à la protection de vos données personnelles.
+                S Connect France accorde une grande importance à la protection de vos données personnelles.
                 Cette politique explique comment nous collectons, utilisons et protégeons vos informations.
               </p>
             </div>
@@ -49,7 +49,7 @@ export default function PolitiqueConfidentialitePage() {
                 <Database className="w-6 h-6 text-primary-600" />
                 <h2 className="text-2xl font-bold text-foreground m-0">Responsable du traitement</h2>
               </div>
-              <p><strong>S'Connect</strong></p>
+              <p><strong>S Connect France</strong></p>
               <p>Email : <a href="mailto:contact@sconnectfrance.fr" className="text-primary-600 hover:text-primary-700">contact@sconnectfrance.fr</a></p>
             </div>
 

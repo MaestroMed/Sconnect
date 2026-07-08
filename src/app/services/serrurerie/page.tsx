@@ -21,7 +21,7 @@ const serrurerieSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
-  title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S'Connect",
+  title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S Connect France",
   description: "Services de serrurerie professionnelle en Île-de-France : ouverture de porte 24h/24, remplacement de serrure, blindage de porte. Intervention rapide, devis gratuit. Serrurier certifié.",
   keywords: [
     "serrurier",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "serrure bloquée",
   ],
   openGraph: {
-    title: "Serrurerie 24h/24 | Ouverture & Blindage | S'Connect",
+    title: "Serrurerie 24h/24 | Ouverture & Blindage | S Connect France",
     description: "Intervention rapide en serrurerie : ouverture de porte, remplacement de serrure, blindage. Disponible 24h/24.",
     images: ["/og-image.jpg"],
     type: "website",
