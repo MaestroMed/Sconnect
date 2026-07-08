@@ -44,6 +44,23 @@ const legalLinks = [
   { name: "Conditions générales", href: "/conditions-generales" },
 ];
 
+// Hubs des services locaux (pages /[service] listant toutes les communes IDF).
+// Liste statique pour éviter d'importer le dataset côté client.
+const LOCAL_HUBS = [
+  { label: "Relamping LED IDF", href: "/relamping-led" },
+  { label: "Électricien IDF", href: "/electricien" },
+  { label: "Mise aux normes électrique", href: "/mise-aux-normes-electrique" },
+  { label: "Borne de recharge IRVE", href: "/borne-recharge-irve" },
+  { label: "Serrurier IDF", href: "/serrurier" },
+  { label: "Ouverture de porte", href: "/ouverture-porte" },
+  { label: "Blindage de porte", href: "/blindage-porte" },
+  { label: "Changement de serrure", href: "/changement-serrure" },
+  { label: "Interphonie & vidéophonie", href: "/interphonie" },
+  { label: "Contrôle d'accès", href: "/controle-acces" },
+  { label: "Portail & motorisation", href: "/portail-metallique" },
+  { label: "Garde-corps & métallerie", href: "/garde-corps" },
+];
+
 export default function Footer() {
   const siteConfig = useSiteConfig();
   
@@ -221,6 +238,22 @@ export default function Footer() {
             </div>
             <NewsletterForm source="footer" />
           </div>
+        </div>
+
+        {/* Interventions en Île-de-France — hubs de services locaux (maillage
+            interne : chaque page du site pointe vers les 12 hubs, qui listent
+            à leur tour toutes les communes). */}
+        <div className="mt-12 pt-8 border-t border-dark-800">
+          <h3 className="font-display font-bold text-lg mb-4">Interventions en Île-de-France</h3>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-dark-300">
+            {LOCAL_HUBS.map((h) => (
+              <li key={h.href}>
+                <Link href={h.href} className="hover:text-primary-400 transition-colors">
+                  {h.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Certifications */}
