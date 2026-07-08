@@ -64,3 +64,19 @@ export function tierText(c: Commune): string {
 
 export const nearbyText = (c: Commune) =>
   c.nearby.map((n) => n.nom).join(", ");
+
+// Densité réelle (hab/km²) → qualifie le tissu urbain, différent pour chaque
+// commune. Rend même les petites communes non interchangeables.
+export function densiteText(c: Commune): string {
+  const d = c.densite;
+  if (!d) return "";
+  const qual =
+    d >= 15000
+      ? "un tissu urbain très dense (immeubles et copropriétés)"
+      : d >= 6000
+        ? "un tissu urbain dense"
+        : d >= 2500
+          ? "une densité moyenne, à l'habitat mixte"
+          : "un habitat aéré, plutôt pavillonnaire";
+  return `${nf.format(d)} hab/km² — ${qual}`;
+}

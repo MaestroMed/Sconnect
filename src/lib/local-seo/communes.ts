@@ -14,6 +14,7 @@ export interface Commune {
   interventionMin: number; // temps d'intervention estimé (min)
   profile: "tertiaire-dense" | "tertiaire" | "mixte" | "residentiel";
   nearby: { slug: string; nom: string }[];
+  densite?: number; // habitants/km² (INSEE population / superficie API Géo)
 }
 
 export const COMMUNES = communesData as Commune[];
@@ -49,7 +50,7 @@ export const deptNom = (dept: string) => DEPT_NOM[dept] ?? "Île-de-France";
  *   Vague 4 : ≥ 5 000 hab  → 377 communes (× 12 = 4 524)  [matrice complète]
  */
 export const WAVE_MIN_POPULATION = Number(
-  process.env.NEXT_PUBLIC_LOCALSEO_MIN_POP ?? 50000,
+  process.env.NEXT_PUBLIC_LOCALSEO_MIN_POP ?? 5000,
 );
 
 export function publishedCommunes(): Commune[] {

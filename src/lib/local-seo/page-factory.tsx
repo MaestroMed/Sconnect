@@ -13,7 +13,7 @@ import {
   type Commune,
 } from "./communes";
 import { requireService, SERVICES, type LocalService } from "./services";
-import { popText, distanceText, interventionPhrase, parcText } from "./descriptors";
+import { popText, distanceText, interventionPhrase, parcText, densiteText } from "./descriptors";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 const PHONE = "06 52 82 06 85";
@@ -257,9 +257,10 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
             <Stat value={`${String(c.distanceKm).replace(".", ",")} km`} label="de notre atelier" />
           </div>
           <p className="text-foreground-muted leading-relaxed mb-4">
-            {c.nom} compte {popText(c)} et se caractérise par {parcText(c)}. Nos équipes couvrent
-            l'ensemble de la commune ({c.cp}) et du {deptNom(c.dept)} — {distanceText(c)}, nous
-            assurons {interventionPhrase(c)} et un devis clair, sans surprise sur la facture.
+            {c.nom} compte {popText(c)}{c.densite ? ` (${densiteText(c)})` : ""} et se caractérise
+            par {parcText(c)}. Nos équipes couvrent l'ensemble de la commune ({c.cp}) et du{" "}
+            {deptNom(c.dept)} — {distanceText(c)}, nous assurons {interventionPhrase(c)} et un devis
+            clair, sans surprise sur la facture.
           </p>
           <ul className="space-y-2">
             {service.points.map((pt) => (
