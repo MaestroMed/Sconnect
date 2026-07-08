@@ -248,6 +248,105 @@ export default function PresentationPage() {
       {/* Certifications — shared showcase band */}
       <CertificationsBand background="surface" />
 
+      {/* Fiche entreprise + fondateur — signaux E-E-A-T vérifiables */}
+      <section className="section-padding bg-surface-muted">
+        <div className="container-custom">
+          <SectionTitle
+            badge="Qui sommes-nous"
+            title="Une entreprise identifiée et responsable"
+            subtitle="S Connect France est une société immatriculée, joignable et couverte. Voici nos informations légales, vérifiables au registre du commerce."
+          />
+
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 max-w-5xl mx-auto">
+            {/* Fondateur */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="card p-8 flex flex-col"
+            >
+              <div className="flex items-center gap-4 mb-5">
+                <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-border shrink-0">
+                  <Image
+                    src="/images/team/team-technicien.webp"
+                    alt="Mehdi Belkacem, fondateur de S Connect France"
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-xl text-foreground">
+                    Mehdi Belkacem
+                  </h3>
+                  <p className="text-foreground-muted text-sm">
+                    Fondateur · Artisan-électricien, spécialiste relamping LED
+                  </p>
+                </div>
+              </div>
+              <p className="text-foreground-muted leading-relaxed mb-6">
+                S Connect France a été fondée en 2021 à Clichy. Notre approche : de
+                l&apos;artisanat électrique de niveau ingénieur — audit chiffré,
+                mesures réelles (lux, IRC, UGR), devis transparent — pour les
+                particuliers comme pour les bureaux, commerces, copropriétés et
+                sites industriels d&apos;Île-de-France.
+              </p>
+              <Link
+                href="/auteur/mehdi-belkacem"
+                className="btn-outline mt-auto w-fit"
+              >
+                Le parcours du fondateur
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Fiche légale */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="card p-8"
+            >
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-500 to-electric-500 flex items-center justify-center text-white shrink-0 shadow-lg">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  Fiche entreprise
+                </h3>
+              </div>
+              <dl className="space-y-2.5 text-sm">
+                {[
+                  ["Raison sociale", "S Connect France (SAS)"],
+                  ["SIRET", "899 667 596 00014"],
+                  ["RCS", "Nanterre 899 667 596"],
+                  ["Code APE", "4321A — Installation électrique"],
+                  ["Siège", "35 rue des Cailloux, 92110 Clichy"],
+                  ["Assurance", "Responsabilité civile + garantie décennale"],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-0.5 sm:gap-4 border-b border-border/60 pb-2.5 last:border-0 last:pb-0"
+                  >
+                    <dt className="text-foreground-muted shrink-0">{k}</dt>
+                    <dd className="font-medium text-foreground sm:text-right">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="text-xs text-foreground-muted mt-5">
+                Informations reprises de nos{" "}
+                <Link href="/mentions-legales" className="text-primary-600 hover:text-primary-700 dark:text-primary-300 font-medium">
+                  mentions légales
+                </Link>
+                .
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Pourquoi nous choisir */}
       <section className="section-padding bg-gradient-to-br from-primary-600 to-electric-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-10" />
