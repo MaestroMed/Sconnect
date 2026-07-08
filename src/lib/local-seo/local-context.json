@@ -178,5 +178,95 @@
     "zones": ["Bagatelle", "Saint-James", "Les Sablons", "Île de la Jatte", "Longchamp", "Peretti", "Dulud-Laffitte"],
     "transports": "Métro ligne 1 (Les Sablons, Pont de Neuilly, Porte Maillot en limite), RER C et E à Porte Maillot, proximité immédiate du quartier d'affaires de La Défense.",
     "angle": "Angle standing et patrimoine : serrurerie de sûreté haut de gamme, contrôle d'accès et interventions électriques soignées dans l'haussmannien de prestige et les copropriétés, plus le tertiaire tourné vers La Défense."
+  },
+  "sarcelles": {
+    "paragraphe": "Sous-préfecture du Val-d'Oise, Sarcelles est marquée par l'un des plus grands « grands ensembles » de France, la ZUP de Sarcelles-Lochères édifiée entre 1955 et 1970 (plus de 12 000 logements). Près de huit logements sur dix datent de cette période, ce qui concentre les besoins de réhabilitation sur le parc social et les copropriétés. La commune fait l'objet d'un programme de rénovation urbaine (ANRU) et conserve aussi des secteurs pavillonnaires plus anciens autour de Sarcelles-Village. Cette dualité grand ensemble / pavillonnaire structure fortement la demande de services techniques du bâtiment.",
+    "zones": ["Grand ensemble de Sarcelles-Lochères (ZUP)", "Les Flanades", "Sarcelles-Village (centre historique)", "Les Chardonnerettes", "Les Rosiers-Chantepie", "Les Sablons"],
+    "transports": "Desserte par le RER D (gares de Sarcelles – Saint-Brice et Garges – Sarcelles) et par le tramway T5 (Saint-Denis – Garges-Sarcelles) qui traverse le grand ensemble ; réseau de bus dense vers Garges, Villiers-le-Bel et Roissy.",
+    "angle": "Territoire dominé par le parc social et les copropriétés du grand ensemble : forte demande de mise aux normes électriques, de relamping LED des parties communes et de contrôle d'accès (interphonie, VDI, serrurerie de halls)."
+  },
+  "clamart": {
+    "paragraphe": "Clamart juxtapose un Haut-Clamart historique très pavillonnaire et un habitat collectif majoritaire (plus de 70 % d'appartements), avec des programmes récents comme l'écoquartier du Panorama (ZAC du Panorama). Le sud de la ville, autour de Trivaux–La Garenne et du Petit-Clamart, associe pavillons, cités des années 1960 et projets de rénovation urbaine. La commune accueille l'hôpital Antoine-Béclère (AP-HP, CHU) et l'hôpital militaire Percy, deux gros établissements de santé. Copropriétés neuves, maisons individuelles et tertiaire hospitalier y coexistent.",
+    "zones": ["Centre-ville / Haut-Clamart", "Le Petit-Clamart", "Jardin Parisien", "Trivaux–La Garenne", "ZAC / écoquartier du Panorama", "Quartier de la Gare", "Percy"],
+    "transports": "Gare de Clamart sur le Transilien ligne N (Paris-Montparnasse en une dizaine de minutes), tramway T6 (Châtillon – Viroflay, arrêt Hôpital Béclère) et tramway T10 ; future gare Clamart de la ligne 15 Sud du Grand Paris Express.",
+    "angle": "Tissu mixte maisons individuelles / copropriétés et programmes neufs de l'écoquartier : dépannage et rénovation électrique pavillonnaire côté Haut-Clamart, relamping et contrôle d'accès pour les résidences récentes et le tertiaire."
+  },
+  "bobigny": {
+    "paragraphe": "Préfecture de la Seine-Saint-Denis, Bobigny concentre un pôle administratif et judiciaire important (préfecture, cité administrative, tribunal) ainsi que l'hôpital Avicenne (AP-HP). Le centre-ville est composé de grands ensembles sur dalle (Karl-Marx, Paul-Éluard, Chemin-Vert, Salvador-Allende) et la commune compte plusieurs quartiers en rénovation urbaine, dont la cité de l'Abreuvoir et le quartier de l'Étoile (ANRU/NPNRU). La ville est desservie par le métro 5 et le tramway T1 et attend l'arrivée de la ligne 15 Est du Grand Paris Express. Entre tertiaire institutionnel et parc social, les besoins en second œuvre technique y sont soutenus.",
+    "zones": ["Centre-ville (Karl-Marx, Paul-Éluard, Chemin-Vert, Salvador-Allende)", "Cité de l'Abreuvoir", "Quartier de l'Étoile", "Édouard-Vaillant", "Pont-de-Bondy", "Grémillon"],
+    "transports": "Terminus de la ligne 5 du métro à Bobigny – Pablo Picasso (et station Bobigny – Pantin – Raymond Queneau), tramway T1 (Saint-Denis – Noisy-le-Sec) ; arrivée programmée de la ligne 15 Est du Grand Paris Express.",
+    "angle": "Pôle administratif et hospitalier (préfecture, cité administrative, tribunal, hôpital Avicenne) doublé de grands ensembles : enjeux de contrôle d'accès, de métallerie et de mise en sécurité ERP, de relamping tertiaire et de serrurerie pour bailleurs."
+  },
+  "meaux": {
+    "paragraphe": "Sous-préfecture et commune la plus peuplée de Seine-et-Marne, Meaux associe une cité épiscopale historique (cathédrale Saint-Étienne, palais épiscopal, souvenir de Bossuet) et de vastes quartiers d'habitat social des années 1960. Les quartiers de Beauval et Pierre-Collinet, qui regroupent une large part de la population, font l'objet depuis 2004 d'un important programme de rénovation urbaine (ANRU/NPNRU) avec démolitions et reconstructions. La ville dispose d'un grand centre hospitalier (Grand Hôpital de l'Est Francilien, site de Meaux) et s'étire le long de la boucle de la Marne et du canal de l'Ourcq. Patrimoine tertiaire de sous-préfecture et grand parc social y cohabitent.",
+    "zones": ["Cité épiscopale / centre historique", "Grand ensemble de Beauval", "Pierre-Collinet", "Dunant", "Bords de Marne et canal de l'Ourcq"],
+    "transports": "Gare de Meaux sur le Transilien ligne P (Paris-Est) et TER vers l'est francilien ; accès autoroutier par l'A140 raccordée à l'A4 ; réseau de bus urbain dense.",
+    "angle": "Entre patrimoine ERP/tertiaire de sous-préfecture et vaste parc social en rénovation (Beauval, Pierre-Collinet) : besoins de serrurerie-métallerie, de contrôle d'accès de résidences et de relamping des parties communes."
+  },
+  "maisons-alfort": {
+    "paragraphe": "Maisons-Alfort est une ville résidentielle dense du Val-de-Marne, dominée par les immeubles et copropriétés (plus de 70 % d'appartements), en bordure de la Marne. Le quartier d'Alfort abrite l'École nationale vétérinaire d'Alfort (EnvA), établissement fondé en 1765, ainsi que le siège de l'ANSES, agence de sécurité sanitaire. La commune s'organise en plusieurs quartiers (Alfort, Vert-de-Maisons, Les Juilliottes, Liberté, Charentonneau) et reste bien reliée par le métro 8 et le RER D. Le tissu de copropriétés et d'équipements institutionnels y génère des besoins réguliers de maintenance technique.",
+    "zones": ["Alfort (École vétérinaire)", "Le Vert-de-Maisons", "Les Juilliottes", "Liberté", "Charentonneau", "Centre-ville", "Bords de Marne"],
+    "transports": "Trois stations de la ligne 8 du métro (Maisons-Alfort – Stade, Maisons-Alfort – Les Juilliottes, École Vétérinaire de Maisons-Alfort), RER D à la gare de Maisons-Alfort – Alfortville et future gare Vert de Maisons de la ligne 15 Sud du Grand Paris Express.",
+    "angle": "Ville de copropriétés denses et d'équipements institutionnels (École vétérinaire d'Alfort, ANSES) : mise aux normes électriques et relamping des parties communes, interphonie/contrôle d'accès et serrurerie de copropriété."
+  },
+  "chelles": {
+    "paragraphe": "Plus grande ville de Seine-et-Marne (environ 55 000 habitants), Chelles juxtapose un vaste tissu pavillonnaire (Les Coudreaux, Mont-Chalâts) et plusieurs grands ensembles hérités des décennies de construction, notamment dans le secteur Chantreine. La ZAC de l'Aulnoy a converti d'anciennes emprises ferroviaires SNCF en un quartier de logements greffé au centre commercial Terre-Ciel, tandis que le secteur du Clos-Roger, le long de la RN34, concentre l'activité industrielle. L'arrivée de la ligne 16 du Grand Paris Express à la gare de Chelles-Gournay accélère la densification et la rénovation autour du pôle gare.",
+    "zones": ["Centre-ville et quartier de la Gare", "Les Coudreaux", "Mont-Chalâts", "Chantreine", "ZAC de l'Aulnoy / Terre-Ciel", "Le Clos-Roger (zone industrielle)"],
+    "transports": "Gare de Chelles-Gournay (RER E et Transilien ligne P) ; future ligne 16 du Grand Paris Express au même pôle.",
+    "angle": "Un parc mixte pavillonnaire et copropriétés de grands ensembles, propice aux mises aux normes électriques et au relamping LED des parties communes."
+  },
+  "corbeil-essonnes": {
+    "paragraphe": "Ancienne cité industrielle sur la Seine, Corbeil-Essonnes conserve un patrimoine productif marquant avec les Grands Moulins de Corbeil et la présence d'acteurs comme Safran et l'imprimerie Hélio, à proximité du pôle Génopole d'Évry. La ville compte plusieurs quartiers prioritaires en rénovation urbaine — Les Tarterêts (projet d'intérêt national, NPNRU), Montconseil, La Nacelle et Rive Droite — où bailleurs et copropriétés multiplient réhabilitations et opérations de démolition-reconstruction. Le Centre Hospitalier Sud-Francilien y constitue un pôle d'emploi et d'équipement majeur du sud francilien.",
+    "zones": ["Les Tarterêts (NPNRU)", "Montconseil", "La Nacelle", "Rive Droite", "Centre ancien / Grands Moulins", "ZAC de la Montagne des Glaises", "Essonnes-Robinson"],
+    "transports": "RER D aux gares de Corbeil-Essonnes (terminus de branche) et d'Essonnes-Robinson ; proximité du pôle d'Évry-Courcouronnes et de Génopole.",
+    "angle": "Patrimoine industriel et grands ensembles en rénovation : terrain porteur pour la métallerie, la serrurerie et le contrôle d'accès des bailleurs sociaux."
+  },
+  "fontenay-sous-bois": {
+    "paragraphe": "Fontenay-sous-Bois s'organise autour de Val de Fontenay, l'un des plus grands pôles tertiaires de l'est parisien : tours de bureaux, campus de la Société Générale (Les Dunes, immeuble Sakura), implantations d'AXA, BNP Paribas et RATP, ainsi qu'un pôle numérique du ministère des Finances. Le reste de la commune mêle grands ensembles en renouvellement urbain (Les Larris, La Redoute), habitat collectif (Les Alouettes, Le Village) et secteurs pavillonnaires. Desservi par les RER A et E et appelé à recevoir la ligne 15 Est du Grand Paris Express, le pôle de Val de Fontenay connaît une mutation continue entre bureaux neufs et conversions résidentielles.",
+    "zones": ["Val de Fontenay (pôle tertiaire)", "Les Larris", "La Redoute", "Les Alouettes", "Le Village", "Bois-Cadet", "Le Plateau (pavillonnaire)"],
+    "transports": "RER A et RER E à Val de Fontenay, RER A à la gare de Fontenay-sous-Bois, nombreuses lignes de bus ; future ligne 15 Est du Grand Paris Express.",
+    "angle": "Un pôle tertiaire dense où dominent le relamping LED, la maintenance électrique et le contrôle d'accès des immeubles de bureaux."
+  },
+  "saint-ouen-sur-seine": {
+    "paragraphe": "Ancienne ville industrielle de la première couronne, Saint-Ouen-sur-Seine connaît une mutation profonde : l'écoquartier des Docks s'étend sur une centaine d'hectares — près d'un quart de la commune — mêlant logements neufs, bureaux et équipements en bord de Seine. La ville conserve son célèbre marché aux Puces (secteur Garibaldi-Debain-Michelet) et son Vieux Saint-Ouen, tout en préparant l'accueil du futur CHU Grand Paris Nord à l'horizon 2030. Le prolongement de la ligne 14 (stations Saint-Ouen et Mairie de Saint-Ouen) et une desserte dense en font un territoire à forte production de logements et de tertiaire neufs.",
+    "zones": ["Écoquartier des Docks", "Vieux Saint-Ouen", "Debain-Michelet", "Les Puces / Garibaldi", "Arago-Pasteur-Zola", "Centre-ville / Cordon", "Le Landy"],
+    "transports": "Métro ligne 14 (Saint-Ouen, Mairie de Saint-Ouen) et ligne 13 (Garibaldi, Mairie de Saint-Ouen), RER C à la gare de Saint-Ouen, tramway T3b.",
+    "angle": "Friches en reconversion et programmes neufs des Docks : forte demande de métallerie, de contrôle d'accès et d'équipements électriques sur logements et tertiaire récents."
+  },
+  "epinay-sur-seine": {
+    "paragraphe": "Épinay-sur-Seine, dans Plaine Commune, est structurée par de vastes grands ensembles — Orgemont à l'ouest, La Source-Les Presles à l'est — engagés dans un long processus de rénovation urbaine ANRU/NPNRU, de l'ordre de 400 M€ mobilisés. Ces quartiers d'habitat social, où coexistent barres, tours et zones pavillonnaires, font l'objet de réhabilitations, démolitions et reconstructions étalées jusqu'à la fin de la décennie. La commune s'appuie sur le tramway T8, le T11 Express et la ligne H du Transilien pour désenclaver ses secteurs.",
+    "zones": ["Orgemont", "La Source - Les Presles", "Centre-ville", "Le Cygne d'Enghien", "Les Écondeaux"],
+    "transports": "Tramway T8 (terminus Épinay-Orgemont), T11 Express et ligne H du Transilien (gares Épinay-sur-Seine et Épinay-Villetaneuse).",
+    "angle": "Grands ensembles ANRU en réhabilitation : besoins soutenus en serrurerie, contrôle d'accès et relamping des halls et parties communes."
+  },
+  "sartrouville": {
+    "paragraphe": "Grande ville des Yvelines (environ 51 000 habitants), Sartrouville juxtapose un vaste tissu pavillonnaire, notamment au sud (Vaudoire, Plaine, Dix-Arpents), et le grand ensemble du Plateau organisé autour du quartier des Indes (Cité des Indes). Ce dernier est engagé dans un programme de rénovation urbaine ANRU de longue durée (NPNRU), avec démolitions-reconstructions de logements sociaux et diversification de l'habitat vers l'accession et l'individuel. Le centre-ville, les copropriétés et les bords de Seine complètent ce profil très résidentiel. La demande y est portée à la fois par les maisons individuelles et par les parties communes de copropriétés et de bailleurs.",
+    "zones": ["Quartier des Indes (Le Plateau)", "Centre-ville / quartier de la gare", "Le Vieux Pays", "La Plaine", "La Vaudoire", "Les Richebourgs", "Bords de Seine"],
+    "transports": "RER A (branches Cergy et Poissy) et Transilien ligne L vers Paris-Saint-Lazare ; à terme, prolongement du tram T11 (Tangentielle Nord / Tram Express Nord) dont Sartrouville doit devenir le terminus ouest.",
+    "angle": "Habitat mixte pavillonnaire et copropriétés/logement social en rénovation : dominante serrurerie, contrôle d'accès et relamping LED des parties communes."
+  },
+  "sevran": {
+    "paragraphe": "Ville populaire de Seine-Saint-Denis marquée par d'importants quartiers prioritaires — Beaudottes, Rougemont et Montceleux-Pont-Blanc — engagés dans la rénovation urbaine ANRU 2 avec démolitions-reconstructions de plusieurs centaines de logements. Son passé industriel se lit dans l'ancienne poudrerie nationale (active de 1873 à 1973), devenue le parc forestier de la Poudrerie. La commune se transforme autour de l'arrivée de la ligne 16 du Grand Paris Express, qui desservira les deux gares du territoire. L'habitat y est dominé par les grands ensembles et le parc de bailleurs sociaux, avec de fortes copropriétés.",
+    "zones": ["Beaudottes", "Rougemont", "Montceleux-Pont-Blanc", "Centre-ville / Sevran-Livry", "Freinville", "Parc forestier de la Poudrerie", "Bords du canal de l'Ourcq"],
+    "transports": "RER B avec deux gares, Sevran-Beaudottes et Sevran-Livry ; future ligne 16 du Grand Paris Express aux deux gares.",
+    "angle": "Parc de logement social et copropriétés en rénovation ANRU : enjeu fort de contrôle d'accès, serrurerie et remise à niveau électrique/relamping des parties communes."
+  },
+  "massy": {
+    "paragraphe": "Pôle majeur du sud francilien, Massy conjugue un important quartier d'affaires tertiaire (Atlantis, autour du pôle multimodal) et un tissu résidentiel dense mêlant grands ensembles, comme Massy-Opéra, et pavillonnaire. Le hub Massy-Palaiseau réunit gare TGV, RER B et RER C, ce qui a nourri le développement de ZAC et parcs d'activités : Vilmorin, Atlantis, la Bonde et Massy-Europe. La ville accueille aussi l'Opéra de Massy et de nombreux sièges et bureaux d'entreprises. Cette densité tertiaire coexiste avec un habitat collectif et pavillonnaire varié.",
+    "zones": ["Atlantis (quartier d'affaires)", "ZAC Vilmorin", "Massy-Opéra", "Parc d'activités Massy-Europe", "ZAC de la Bonde", "Centre-ville / Bièvre-Poterne", "Villaine-Vilgénis"],
+    "transports": "Pôle multimodal Massy-Palaiseau (TGV, RER B, RER C, gare routière) et gare Massy-Verrières (RER C) ; tram T12 depuis 2023 vers Évry-Courcouronnes ; à terme, ligne 18 du Grand Paris Express.",
+    "angle": "Forte densité de bureaux et de tertiaire : dominante contrôle d'accès, courants faibles et relamping LED des surfaces tertiaires, complétée par les copropriétés résidentielles."
+  },
+  "gennevilliers": {
+    "paragraphe": "Gennevilliers est structurée par le port de Gennevilliers, premier port fluvial d'Île-de-France, et par sa vaste zone industrielle et logistique de plusieurs centaines d'hectares regroupant des milliers d'établissements et des dizaines de milliers d'emplois. La ville compte aussi de grands ensembles, dont le quartier du Luth, engagé dans une opération de rénovation urbaine (ZAC multisites du Luth), et des secteurs plus résidentiels comme le Village ou Chandon. Bien reliée par le métro 13 et le tramway T1, elle mêle activité industrielle et portuaire et habitat social. Ce profil génère une demande à la fois industrielle/logistique et résidentielle collective.",
+    "zones": ["Port de Gennevilliers / zone industrielle", "Le Luth", "Le Village", "Les Grésillons", "Les Agnettes", "Chandon", "Les Courtilles"],
+    "transports": "Métro ligne 13 (Les Courtilles, Les Agnettes, Gabriel Péri), tramway T1 et RER C (gares Les Grésillons et Gennevilliers).",
+    "angle": "Poids de l'industrie, de la logistique et du port : dominante métallerie, serrurerie de sûreté et courants forts/faibles pour sites d'activité et entrepôts, en plus des grands ensembles en rénovation."
+  },
+  "bondy": {
+    "paragraphe": "Bondy associe un tissu pavillonnaire, plutôt au sud, et de grands ensembles au nord, de part et d'autre du canal de l'Ourcq qui traverse la ville. Plusieurs secteurs (centre-ville, quartier Nord, Blanqui, La Sablière) font l'objet d'une importante rénovation urbaine ANRU/NPNRU, accompagnée de projets d'aménagement le long du canal (ZAC des Rives de l'Ourcq). La commune est desservie par le RER E et constitue le terminus du tram-train T4. L'habitat y est dominé par les copropriétés et le logement social, aux côtés du pavillonnaire.",
+    "zones": ["Centre-ville", "Quartier Nord", "Blanqui", "La Sablière", "ZAC des Rives de l'Ourcq", "Bords du canal de l'Ourcq"],
+    "transports": "RER E (gare de Bondy) et tram-train T4 dont Bondy est le terminus, avec branches vers Aulnay-sous-Bois et l'hôpital de Montfermeil via Gargan.",
+    "angle": "Grands ensembles et copropriétés en rénovation, plus pavillonnaire : dominante contrôle d'accès, serrurerie et relamping des parties communes."
   }
 }
