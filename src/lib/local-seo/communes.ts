@@ -1,4 +1,5 @@
 import communesData from "./communes.json";
+import { getLocalContext } from "./local-context";
 
 export interface Commune {
   code: string; // code INSEE
@@ -59,4 +60,27 @@ export function publishedCommunes(): Commune[] {
 
 export function isPublished(c: Commune): boolean {
   return c.population >= WAVE_MIN_POPULATION;
+}
+
+/**
+ * INDEXABILITÉ — source de vérité unique (factory noindex + hub + sitemap).
+ *
+ * Une commune n'est exposée à l'indexation Google QUE si elle possède un
+ * contexte local RÉEL et unique (entrée dans local-context.json). Les pages
+ * sans contexte restent servies (ISR 200) pour le trafic direct/pub mais en
+ * noindex, pour ne jamais gonfler le ratio de pages minces (risque de démotion
+ * SITEWIDE sur le programmatique à faible variation — Core Update 21 mai 2026).
+ *
+ * Invariant : « enrichi ⟺ indexé ». Ajouter une commune à local-context.json
+ * l'indexe automatiquement (noindex levé + entrée sitemap + lien hub), sans
+ * toucher au code. Les 45 communes tier A sont toutes enrichies ; l'ouverture
+ * du tier B se fait vague par vague en enrichissant, pas en changeant un seuil.
+ */
+export function isIndexableCommune(c: Commune): boolean {
+  return isPublished(c) && Boolean(getLocalContext(c.slug));
+}
+
+/** Communes indexables (enrichies) — pour le sitemap et le maillage des hubs. */
+export function indexableCommunes(): Commune[] {
+  return COMMUNES.filter(isIndexableCommune);
 }

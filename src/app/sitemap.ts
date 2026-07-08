@@ -4,7 +4,7 @@ import path from "node:path";
 import { getAllPosts } from "@/lib/blog";
 import { getRealizations } from "@/lib/data-service";
 import { SERVICES } from "@/lib/local-seo/services";
-import { publishedCommunes } from "@/lib/local-seo/communes";
+import { indexableCommunes } from "@/lib/local-seo/communes";
 
 /**
  * Auto-discover relamping location + vertical sub-pages so the sitemap
@@ -369,11 +369,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // automatiquement la vague active. Reste sous la limite de 50 000 URLs même
   // à pleine échelle (~4 600 URLs), donc pas de sharding nécessaire.
   // ANTI-DÉSINDEXATION : on ne soumet à Google que les pages INDEXABLES —
-  // les 12 hubs + les communes tier A (grandes villes). La longue traîne
-  // (tier B/C/D) est en noindex (cf. page-factory) tant que son contenu n'est
-  // pas enrichi ; l'exposer au sitemap inviterait Google à crawler des pages
-  // minces et dégraderait la qualité perçue du site entier.
-  const indexableCommunes = publishedCommunes().filter((c) => c.tier === "A");
+  // les 12 hubs + les communes ENRICHIES (contexte local réel, cf.
+  // isIndexableCommune). La longue traîne non enrichie est en noindex (cf.
+  // page-factory) ; l'exposer au sitemap inviterait Google à crawler des pages
+  // minces et dégraderait la qualité perçue du site entier. Le sitemap suit
+  // donc automatiquement l'avancée de l'enrichissement, sans édition manuelle.
+  const communesToIndex = indexableCommunes();
   const localSeoPages: MetadataRoute.Sitemap = [];
   for (const s of SERVICES) {
     localSeoPages.push({
@@ -382,7 +383,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     });
-    for (const c of indexableCommunes) {
+    for (const c of communesToIndex) {
       localSeoPages.push({
         url: `${baseUrl}/${s.key}/${c.slug}`,
         lastModified: now,

@@ -9,6 +9,8 @@ import {
   getCommune,
   publishedCommunes,
   isPublished,
+  isIndexableCommune,
+  indexableCommunes,
   deptNom,
   type Commune,
 } from "./communes";
@@ -51,12 +53,13 @@ export function makeLocalService(serviceKey: string) {
       path: `/${service.key}/${c.slug}`,
       image: service.image,
       imageAlt: service.imageAlt(c),
-      // ANTI-DÉSINDEXATION : seules les grandes communes (tier A) sont indexées.
-      // La longue traîne (B/C/D) reste servie (ISR, 200) pour le trafic direct/pub
-      // mais en noindex tant que le contenu n'est pas enrichi à ≥60% unique —
-      // sinon le ratio de pages minces risque une démotion SITEWIDE (Core Update
-      // du 21 mai 2026 sur le programmatique à faible variation).
-      noindex: c.tier !== "A",
+      // ANTI-DÉSINDEXATION : indexé ⟺ la commune possède un contexte local réel
+      // et unique (cf. isIndexableCommune). La longue traîne non enrichie reste
+      // servie (ISR, 200) pour le trafic direct/pub mais en noindex tant que le
+      // contenu n'est pas ≥60% unique — sinon le ratio de pages minces risque une
+      // démotion SITEWIDE (Core Update du 21 mai 2026 sur le programmatique à
+      // faible variation). Enrichir une commune l'indexe automatiquement.
+      noindex: !isIndexableCommune(c),
       keywords: [
         `${service.nom.toLowerCase()} ${c.nom}`,
         `${service.nomMetier} ${c.nom}`,
@@ -94,10 +97,10 @@ export function makeServiceHub(serviceKey: string) {
   });
 
   function Page() {
-    // Hub : ne lister que les communes INDEXABLES (tier A) — sinon 377 liens
-    // par hub dépassent le plafond de ~150 liens/page et diluent le crawl vers
-    // des pages noindex. La longue traîne reste accessible par URL directe.
-    const communes = publishedCommunes().filter((c) => c.tier === "A");
+    // Hub : ne lister que les communes INDEXABLES (enrichies) — sinon les liens
+    // par hub dépassent le plafond raisonnable et diluent le crawl vers des
+    // pages noindex. La longue traîne reste accessible par URL directe.
+    const communes = indexableCommunes();
     const byDept = new Map<string, Commune[]>();
     for (const c of communes) {
       if (!byDept.has(c.dept)) byDept.set(c.dept, []);
