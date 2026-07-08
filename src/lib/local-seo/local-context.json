@@ -88,5 +88,95 @@
     "zones": ["Rueil-sur-Seine (quartier d'affaires)", "Centre-Ville", "Plaine-Gare", "Belle-Rive", "Plateau / Mont-Valérien", "Buzenval", "Bord de Seine"],
     "transports": "RER A (gare de Rueil-Malmaison), nombreuses lignes de bus, autoroute A86 en tunnel, et future gare du Grand Paris Express (ligne 15 Ouest, Rueil-Suresnes-Mont-Valérien).",
     "angle": "Contrôle d'accès, relamping et maintenance électrique des sièges tertiaires de Rueil-sur-Seine, complétés par le dépannage serrurerie du pavillonnaire et des copropriétés."
+  },
+  "champigny-sur-marne": {
+    "paragraphe": "Champigny-sur-Marne juxtapose un habitat très contrasté : de vastes grands ensembles des années 1960 (Bois l'Abbé, Les Mordacs), plusieurs fois inscrits en rénovation urbaine ANRU, et de larges secteurs pavillonnaires (Cœuilly, Le Plant, Polangis) hérités des lotissements du début du XXe siècle. La commune accueille l'un des grands chantiers du Grand Paris Express, avec les futures gares de Champigny Centre (lignes 15 Sud et 15 Est) et de Bry-Villiers-Champigny, ainsi que le centre d'exploitation de la ligne 15 Sud, moteur de la ZAC des Simonettes et de nouveaux programmes de bureaux et de logements. Le parc de copropriétés et de logements sociaux, souvent en réhabilitation, y côtoie des zones d'activité et un tissu de commerces de proximité.",
+    "zones": ["Le Bois l'Abbé", "Les Mordacs", "Cœuilly", "Le Plant", "Centre-ville / Coteaux", "Les Boullereaux / Quatre-Cités", "ZAC des Simonettes", "Le Plateau"],
+    "transports": "RER A (gare de Champigny) et RER E (Les Boullereaux-Champigny) ; futures gares du Grand Paris Express Champigny Centre (lignes 15 Sud et 15 Est) et Bry-Villiers-Champigny (interconnexion RER E / Transilien P) ; accès direct par l'A4.",
+    "angle": "Profil dominant : réhabilitation et sécurisation des parties communes de copropriétés et de bailleurs sociaux — relamping LED des communs, interphonie et contrôle d'accès."
+  },
+  "saint-maur-des-fosses": {
+    "paragraphe": "Enserrée dans la dernière boucle de la Marne, Saint-Maur-des-Fossés est une commune résidentielle aisée, très majoritairement pavillonnaire, avec des quartiers cossus comme Le Parc et La Varenne, prisés pour leurs maisons de caractère en bord de Marne. Le tissu est celui d'une ville de propriétaires, ponctuée de pôles de commerces de proximité animés (marché de La Varenne, rues commerçantes autour des mairies annexes) plutôt que de grands ensembles. La demande y est portée par l'habitat individuel et les petites copropriétés résidentielles.",
+    "zones": ["La Varenne", "Le Parc", "Adamville", "Le Vieux Saint-Maur", "Champignol", "Saint-Maur-Créteil (centre)", "La Pie"],
+    "transports": "Quatre gares du RER A (Saint-Maur-Créteil, Le Parc de Saint-Maur, Champigny, La Varenne-Chennevières) ; future gare de la ligne 15 Sud du Grand Paris Express à Saint-Maur-Créteil.",
+    "angle": "Profil dominant : sécurité résidentielle haut de gamme et métallerie sur-mesure pour maisons individuelles — serrurerie haute sûreté, blindage, portails et grilles, contrôle d'accès."
+  },
+  "noisy-le-grand": {
+    "paragraphe": "Ville-centre de Marne-la-Vallée, Noisy-le-Grand concentre l'un des principaux pôles tertiaires de l'est francilien autour du quartier d'affaires du Mont d'Est, structuré par la gare du RER A et le centre commercial Les Arcades. Le secteur se densifie avec les opérations Maille Horizon Nord et Sud, quartiers mixtes mêlant bureaux et logements, tandis que le parc d'activités des Richardets accueille PME et activités. L'arrivée des lignes 15 et 16 du Grand Paris Express à la gare de Noisy-Champs renforce cette vocation tertiaire, aux côtés de quartiers résidentiels et de grands ensembles (Le Pavé Neuf, Le Champy).",
+    "zones": ["Mont d'Est", "Maille Horizon Nord", "Maille Horizon Sud", "Les Arcades", "Le Pavé Neuf", "Le Champy", "Parc d'activités des Richardets", "Noisy-Champs"],
+    "transports": "RER A (gares Noisy-le-Grand – Mont d'Est et Noisy-Champs) ; futures lignes 15 et 16 du Grand Paris Express à la gare de Noisy-Champs ; accès direct par l'A4.",
+    "angle": "Profil dominant : services aux immeubles de bureaux et au tertiaire — relamping LED, contrôle d'accès professionnel et maintenance des parties communes."
+  },
+  "drancy": {
+    "paragraphe": "Drancy est une commune populaire de Seine-Saint-Denis marquée par un important parc de grands ensembles et de logements sociaux — dont la Cité de la Muette, considérée comme le premier grand ensemble de France — largement engagé dans des programmes de rénovation urbaine ANRU (cités Jules Auffret, Pierre Sémard, du Nord et Gaston Roulaud). La ville affiche une réelle vitalité commerciale, avec plusieurs milliers d'entreprises et de commerces, et des quartiers prioritaires en transformation (Avenir Parisien, Économie-Les Oiseaux). Le parc de copropriétés et de bailleurs, souvent ancien, y génère des besoins récurrents de mise aux normes et de sécurisation des parties communes.",
+    "zones": ["Cité de la Muette", "Cité Gaston Roulaud", "Avenir Parisien", "Économie-Les Oiseaux", "Cité Jules Auffret", "Cité Pierre Sémard", "Cité du Nord", "Centre-ville"],
+    "transports": "RER B (gare de Drancy), Transilien ligne K et tramway T1 (en extension vers Drancy) ; proximité du T11 Express au Bourget.",
+    "angle": "Profil dominant : efficacité énergétique et sécurisation du parc social et des copropriétés — relamping LED des communs, vidéophonie et contrôle d'accès."
+  },
+  "cergy": {
+    "paragraphe": "Cœur de la ville nouvelle de Cergy-Pontoise et siège de la préfecture du Val-d'Oise, Cergy conjugue un vaste pôle tertiaire — le Grand Centre, environ 250 000 m² de bureaux accueillant de grands employeurs (3M, EDF, CIC…) — une université (CY Cergy Paris Université) et des zones d'activité comme la Plaine des Linandes. Son urbanisme planifié se déploie autour de trois gares RER A / Transilien, de Cergy-Préfecture à Cergy-le-Haut, avec des quartiers étagés mêlant collectifs, équipements publics et pavillonnaire. Cette mixité tertiaire, universitaire et résidentielle génère des besoins variés en immeubles de bureaux, équipements et copropriétés.",
+    "zones": ["Grand Centre (Cergy-Préfecture)", "Axe Majeur-Horloge", "Cergy-Saint-Christophe", "Cergy-le-Haut", "Les Hauts-de-Cergy", "Cergy-Village", "Plaine des Linandes", "Coteaux"],
+    "transports": "RER A et Transilien ligne L (Paris-Saint-Lazare) via trois gares : Cergy-Préfecture, Cergy-Saint-Christophe et Cergy-le-Haut ; liaison directe vers La Défense.",
+    "angle": "Profil dominant : services aux surfaces tertiaires, équipements publics et zones d'activité de l'agglomération — relamping LED, contrôle d'accès et métallerie."
+  },
+  "levallois-perret": {
+    "paragraphe": "Levallois-Perret est la commune la plus densément peuplée de France (environ 28 000 habitants/km²), avec un tissu urbain très serré de rues étroites et d'immeubles collectifs. Ancienne ville industrielle (usines Citroën, 2CV produite jusqu'en 1988), elle s'est massivement reconvertie vers le tertiaire et concentre de nombreux sièges sociaux et immeubles de bureaux le long de la Seine. Une part importante du parc est constituée de copropriétés récentes, issues des opérations de rénovation menées par la SEMARELP (immeubles aux normes HQE). Cette densité de bureaux et de copropriétés génère des besoins soutenus en contrôle d'accès, serrurerie d'immeuble et éclairage tertiaire.",
+    "zones": ["Front-de-Seine", "Front de Villiers", "Collange", "Eiffel", "Front de Neuilly", "Front de Paris", "Quartier de l'Europe (place Georges-Pompidou)"],
+    "transports": "Métro ligne 3 (Pont de Levallois-Bécon, Anatole France, Louise Michel), Transilien ligne L à la gare de Clichy-Levallois, RER C à Pereire-Levallois en limite, tram T3b à proximité et réseau de bus dont la navette municipale Les Abeilles.",
+    "angle": "Densité de sièges tertiaires et de copropriétés récentes : priorité au contrôle d'accès et à la serrurerie d'immeubles."
+  },
+  "issy-les-moulineaux": {
+    "paragraphe": "Issy-les-Moulineaux est un pôle tertiaire majeur du Val de Seine, siège de grands groupes (siège mondial d'Orange dans le bâtiment Bridge, campus Microsoft) et fortement orienté médias et technologies. La commune a mené plusieurs opérations d'aménagement d'ampleur : écoquartier du Fort d'Issy (ancien site militaire, livré en 2013), ZAC du Val de Seine et le complexe Issy Cœur de Ville livré en 2022 (bureaux, logements, commerces). Le tissu mêle immeubles de bureaux, logements neufs et secteurs résidentiels des Hauts d'Issy. Cet équilibre bureaux/logements neufs alimente une demande en relamping LED de plateaux tertiaires et en contrôle d'accès de résidences.",
+    "zones": ["Val de Seine / Les Arches", "Fort d'Issy", "Les Hauts d'Issy", "Les Épinettes", "Centre-ville / Corentin Celton", "Les Îles / La Ferme", "Issy Cœur de Ville"],
+    "transports": "Métro ligne 12 (Mairie d'Issy, Corentin Celton), tram T2 (Porte d'Issy, Issy-Val de Seine, Jacques-Henri Lartigue, Les Moulineaux), RER C (Issy-Val-de-Seine, Issy) et future gare de la ligne 15 du Grand Paris Express.",
+    "angle": "Immeubles de bureaux et écoquartiers neufs : relamping LED tertiaire et contrôle d'accès dominent."
+  },
+  "evry-courcouronnes": {
+    "paragraphe": "Évry-Courcouronnes, née en 2019 de la fusion d'Évry et Courcouronnes, est la préfecture de l'Essonne et une ancienne ville nouvelle marquée par ses grands ensembles, dont l'emblématique quartier des Pyramides classé quartier prioritaire. La ville concentre des équipements structurants : cathédrale de la Résurrection, université d'Évry, cluster de biotechnologies Genopole, centre administratif et grand pôle commercial. Le bâti mêle grands ensembles et copropriétés des années 1970-1980, tertiaire administratif et campus universitaire, avec un vaste programme de rénovation urbaine engagé. Ce parc collectif vieillissant en rénovation appelle des interventions de serrurerie, de contrôle d'accès et de remise aux normes électriques.",
+    "zones": ["Les Pyramides", "Évry-Village", "Courcouronnes-Centre", "Le Bras-de-Fer / Genopole", "Évry 2 (centre commercial)", "Centre urbain"],
+    "transports": "RER D (plusieurs gares dont Évry-Courcouronnes Centre et Le Bras-de-Fer Évry-Génopole), tramway T12 en service depuis décembre 2023, autoroute A6 et route nationale 7.",
+    "angle": "Grands ensembles et copropriétés en rénovation : serrurerie, contrôle d'accès et remise aux normes électriques au premier plan."
+  },
+  "ivry-sur-seine": {
+    "paragraphe": "Ivry-sur-Seine est une ancienne ville industrielle en pleine mutation, marquée par la désindustrialisation engagée dès les années 1960 (fermeture d'usines majeures comme SKF). Elle porte aujourd'hui l'opération Ivry Confluences, environ 145 hectares près de la confluence Seine-Marne, présentée comme la plus grande opération de rénovation urbaine du Val-de-Marne. La commune reste populaire, avec une forte présence de logement social (30,6 % de HLM en 2019) et une architecture des années 1970 signée Renaudie et Gailhoustet. Cette reconversion de friches en quartiers mixtes, associée à un parc social et à des copropriétés, ouvre des besoins en métallerie, serrurerie et contrôle d'accès de résidences.",
+    "zones": ["Ivry-Port", "Ivry Confluences", "Centre-ville", "Petit-Ivry", "Monmousseau-Vérollot", "Marat-Parmentier", "Louis-Bertrand – Mirabeau – Sémard"],
+    "transports": "Métro ligne 7 (dont Mairie d'Ivry), RER C à la gare d'Ivry-sur-Seine, tram T9 et projet de T Zen 5.",
+    "angle": "Friches industrielles reconverties et parc social dense : métallerie, serrurerie et contrôle d'accès de résidences."
+  },
+  "clichy": {
+    "paragraphe": "Clichy est une commune très dense des Hauts-de-Seine (environ 20 900 habitants/km²), limitrophe de l'écoquartier Clichy-Batignolles (Paris 17e) et siège de grands groupes comme L'Oréal et BiC. Son tissu mêle bureaux tertiaires, copropriétés anciennes (Art nouveau, Art déco) et opérations récentes menées sur d'anciennes emprises industrielles. Plusieurs secteurs se renouvellent : ZAC Entrée de Ville, Berges de Seine et Bac d'Asnières, avec des aménagements comme le parc des Impressionnistes. Ce mélange de sièges tertiaires et de copropriétés denses en rénovation soutient une demande continue en contrôle d'accès, serrurerie et éclairage de bureaux.",
+    "zones": ["Centre-ville", "Bac d'Asnières – Valiton – Fournier", "Berges de Seine – Quartier Nord", "Victor-Hugo – République", "Entrée de Ville", "Moreuil – Gambetta"],
+    "transports": "Métro ligne 13 (Mairie de Clichy) et ligne 14 (Porte de Clichy), Transilien ligne L à la gare de Clichy-Levallois, tram T3b (Porte de Clichy, Épinettes-Pouchet) et RER C à proximité.",
+    "angle": "Sièges tertiaires et copropriétés denses sur ancien tissu industriel : contrôle d'accès, serrurerie et relamping LED de bureaux."
+  },
+  "antony": {
+    "paragraphe": "Antony présente un tissu majoritairement pavillonnaire — maisons en meulière, villas Art déco — doublé de copropriétés des années 1960 aujourd'hui en rénovation, notamment dans le quartier prioritaire du Noyer-Doré. Le pôle de la Croix-de-Berny concentre bureaux et la grande résidence universitaire Jean-Zay, tandis qu'Antonypole développe une zone d'activités tertiaire et industrielle au sud, à proximité d'Orly. L'une des communes les plus peuplées des Hauts-de-Seine, elle mêle ainsi habitat individuel de standing, grands ensembles et immobilier professionnel.",
+    "zones": ["Croix-de-Berny", "Antonypole", "Centre-ville / Mounié", "Pajeaud", "Noyer-Doré", "Les Baconnets", "Coulée verte", "Les Rabats"],
+    "transports": "RER B (gares d'Antony, La Croix de Berny, Fontaine-Michalon, Les Baconnets), RER C (Chemin d'Antony), tramway T10, Orlyval vers l'aéroport d'Orly ; future station de la ligne 18 du Grand Paris Express à Antonypole.",
+    "angle": "Marché double : sécurisation et relamping des copropriétés et résidences (dont la cité universitaire), et interventions électriques et contrôle d'accès pour le tertiaire de la Croix-de-Berny et d'Antonypole."
+  },
+  "le-blanc-mesnil": {
+    "paragraphe": "Le Blanc-Mesnil combine de grands ensembles d'après-guerre en rénovation urbaine — quartier des Tilleuls, secteur nord Pont-Yblon — et un tissu pavillonnaire ancien autour du Vieux Pays. La commune conserve d'importantes zones d'activités industrielles, logistiques et commerciales, notamment le quartier de la Molette appelé à muter. Sa position aux portes de l'aéroport du Bourget et entre les autoroutes A1 et A3 en fait un pôle d'emploi et d'entreposage.",
+    "zones": ["Vieux Pays", "Les Tilleuls", "La Molette", "Pont-Yblon (secteur Nord)", "Quartier de la gare (Sémard)", "Secteur Abbé-Niort"],
+    "transports": "RER B (gare du Blanc-Mesnil), gare de Drancy à proximité ; à venir, les gares du Grand Paris Express (ligne 16 au Blanc-Mesnil, ligne 17 au Bourget) ; accès direct aux autoroutes A1 et A3.",
+    "angle": "Angle sécurité et parties communes : serrurerie, blindage et contrôle d'accès pour le parc social et les copropriétés, relamping et mise en conformité électrique des bâtiments collectifs et des locaux d'activité."
+  },
+  "pantin": {
+    "paragraphe": "Ancienne commune ouvrière et industrielle, Pantin connaît depuis les années 1990 l'une des plus fortes dynamiques de gentrification d'Île-de-France. Les bords du canal de l'Ourcq concentrent des reconversions emblématiques : les Grands Moulins réhabilités en bureaux (BNP Paribas Securities Services) et les Magasins généraux devenus siège de l'agence de publicité BETC. La ville accueille aussi des implantations de maisons de luxe — ateliers Hermès, laboratoires de recherche Chanel — aux côtés de quartiers populaires comme les Quatre-Chemins et le grand ensemble des Courtillières.",
+    "zones": ["Bords du canal de l'Ourcq / Grands Moulins", "Quatre-Chemins", "Église", "Mairie-Hoche", "Petit Pantin - Les Limites", "Les Courtillières"],
+    "transports": "Métro ligne 5 (Hoche, Église de Pantin, Bobigny - Pantin - Raymond Queneau), RER E (gare de Pantin), tramway T3b à proximité (station Ella Fitzgerald).",
+    "angle": "Double cible haut de gamme et collectif : relamping LED et contrôle d'accès pour les bureaux tertiaires et lofts reconvertis du canal, métallerie et sécurisation pour les copropriétés récentes comme pour le parc ancien."
+  },
+  "villejuif": {
+    "paragraphe": "Villejuif s'affirme comme un pôle santé et biotechnologies majeur du sud parisien, structuré autour de l'Institut Gustave-Roussy — premier centre de lutte contre le cancer en Europe — et des hôpitaux Paul-Brousse et Paul-Guiraud. La ZAC Campus Grand Parc, près de 80 hectares au pied des nouvelles gares du Grand Paris Express, y déploie un cluster d'oncologie mêlant recherche, tertiaire, formation et logements, avec ses premiers occupants (dont Sanofi et le Paris-Saclay Cancer Cluster). Ce plateau en pleine mutation côtoie les quartiers pavillonnaires du Haut-Villejuif et les grands ensembles hérités des années 1950-1970.",
+    "zones": ["Campus Grand Parc", "Haut-Villejuif", "Bas-Villejuif", "Monsivry", "Les Sorrières", "Gournay", "ZAC de l'Épi d'or"],
+    "transports": "Métro ligne 7 (Léo Lagrange, Paul Vaillant-Couturier, Louis Aragon), ligne 14 prolongée jusqu'à Villejuif - Gustave Roussy (2025), future ligne 15 du Grand Paris Express, tramway T7 (terminus Louis Aragon).",
+    "angle": "Angle tertiaire technique exigeant : électricité, relamping LED et contrôle d'accès pour établissements de santé, laboratoires et immeubles de bureaux du Campus Grand Parc, sans négliger la sécurisation du résidentiel."
+  },
+  "neuilly-sur-seine": {
+    "paragraphe": "Neuilly-sur-Seine est l'une des communes les plus aisées de France, marquée par un habitat de grand standing : immeubles haussmanniens, hôtels particuliers et résidences de luxe le long de l'avenue Charles-de-Gaulle et dans les quartiers de Bagatelle ou Saint-James. Sa frontière ouest avec La Défense et sa proximité immédiate de Paris en font aussi un secteur d'emploi tertiaire dense. L'île de la Jatte, autrefois industrielle, s'est fortement valorisée et accueille désormais bureaux et logements haut de gamme.",
+    "zones": ["Bagatelle", "Saint-James", "Les Sablons", "Île de la Jatte", "Longchamp", "Peretti", "Dulud-Laffitte"],
+    "transports": "Métro ligne 1 (Les Sablons, Pont de Neuilly, Porte Maillot en limite), RER C et E à Porte Maillot, proximité immédiate du quartier d'affaires de La Défense.",
+    "angle": "Angle standing et patrimoine : serrurerie de sûreté haut de gamme, contrôle d'accès et interventions électriques soignées dans l'haussmannien de prestige et les copropriétés, plus le tertiaire tourné vers La Défense."
   }
 }
