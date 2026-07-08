@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { getAllPosts } from "@/lib/blog";
 import { getRealizations } from "@/lib/data-service";
+import { SERVICES } from "@/lib/local-seo/services";
+import { publishedCommunes } from "@/lib/local-seo/communes";
 
 /**
  * Auto-discover relamping location + vertical sub-pages so the sitemap
@@ -362,6 +364,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // Pages locales programmatiques (service × commune) + hubs de service.
+  // Publiées par vagues (cf. WAVE_MIN_POPULATION) — le sitemap reflète
+  // automatiquement la vague active. Reste sous la limite de 50 000 URLs même
+  // à pleine échelle (~4 600 URLs), donc pas de sharding nécessaire.
+  const communes = publishedCommunes();
+  const localSeoPages: MetadataRoute.Sitemap = [];
+  for (const s of SERVICES) {
+    localSeoPages.push({
+      url: `${baseUrl}/${s.key}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.75,
+    });
+    for (const c of communes) {
+      localSeoPages.push({
+        url: `${baseUrl}/${s.key}/${c.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: c.tier === "A" ? 0.7 : c.tier === "B" ? 0.6 : 0.5,
+      });
+    }
+  }
+
   return [
     ...mainPages,
     ...electricitePages,
@@ -371,5 +396,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogPages,
     ...realizationPages,
     ...legalPages,
+    ...localSeoPages,
   ];
 }
