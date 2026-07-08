@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     "digicode",
     "badge accès",
   ],
-  authors: [{ name: "S'Connect" }],
+  authors: [{ name: "S Connect France" }],
   creator: "S'Connect",
   publisher: "S'Connect",
   formatDetection: {
@@ -158,7 +158,7 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "@id": `${siteUrl}/#organization`,
-              name: "S'Connect",
+              name: "S Connect France",
               url: siteUrl,
               logo: {
                 "@type": "ImageObject",
@@ -199,7 +199,7 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": ["Electrician", "Locksmith", "LocalBusiness"],
               "@id": `${siteUrl}/#localbusiness`,
-              name: "S'Connect",
+              name: "S Connect France",
               description:
                 "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Certifié Qualifélec, RGE.",
               image: `${siteUrl}/og-image.jpg`,
@@ -315,7 +315,7 @@ export default async function RootLayout({
               "@type": "WebSite",
               "@id": `${siteUrl}/#website`,
               url: siteUrl,
-              name: "S'Connect",
+              name: "S Connect France",
               description: "Expert en électricité, contrôle d'accès et serrurerie en Île-de-France",
               publisher: { "@id": `${siteUrl}/#organization` },
               inLanguage: "fr-FR",

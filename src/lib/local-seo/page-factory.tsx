@@ -41,13 +41,21 @@ export function makeLocalService(serviceKey: string) {
   async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
     const { commune: slug } = await params;
     const c = getCommune(slug);
-    if (!c || !isPublished(c)) return { title: "Page introuvable" };
+    // Slug inconnu → noindex explicite (le rendu ISR renvoie 200 « soft-404 » ;
+    // au moins Google ne l'indexe pas).
+    if (!c || !isPublished(c)) return { title: "Page introuvable", robots: { index: false, follow: false } };
     return buildMetadata({
       title: `${service.nom} à ${c.nom} (${c.cp})`,
       description: `${service.nom} à ${c.nom} : ${service.accroche} Intervention depuis Clichy (${c.interventionMin} min), devis gratuit. S Connect, artisan en ${deptNom(c.dept)}.`,
       path: `/${service.key}/${c.slug}`,
       image: service.image,
       imageAlt: service.imageAlt(c),
+      // ANTI-DÉSINDEXATION : seules les grandes communes (tier A) sont indexées.
+      // La longue traîne (B/C/D) reste servie (ISR, 200) pour le trafic direct/pub
+      // mais en noindex tant que le contenu n'est pas enrichi à ≥60% unique —
+      // sinon le ratio de pages minces risque une démotion SITEWIDE (Core Update
+      // du 21 mai 2026 sur le programmatique à faible variation).
+      noindex: c.tier !== "A",
       keywords: [
         `${service.nom.toLowerCase()} ${c.nom}`,
         `${service.nomMetier} ${c.nom}`,
@@ -85,7 +93,10 @@ export function makeServiceHub(serviceKey: string) {
   });
 
   function Page() {
-    const communes = publishedCommunes();
+    // Hub : ne lister que les communes INDEXABLES (tier A) — sinon 377 liens
+    // par hub dépassent le plafond de ~150 liens/page et diluent le crawl vers
+    // des pages noindex. La longue traîne reste accessible par URL directe.
+    const communes = publishedCommunes().filter((c) => c.tier === "A");
     const byDept = new Map<string, Commune[]>();
     for (const c of communes) {
       if (!byDept.has(c.dept)) byDept.set(c.dept, []);
@@ -154,27 +165,23 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
     return nc && isPublished(nc);
   });
 
+  // UNE entité LocalBusiness canonique pour tout le site (déclarée dans
+  // layout.tsx, @id /#localbusiness). Chaque page émet un Service qui la
+  // RÉFÉRENCE, au lieu de déclarer 4660 LocalBusiness distincts (signal de
+  // spam à l'échelle). FAQPage conservé comme signal (le rich result FAQ est
+  // mort depuis le 7 mai 2026, mais reste lu par les moteurs IA).
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": service.schemaType,
-        "@id": `${SITE}/${service.key}/${c.slug}#business`,
-        name: `S Connect — ${service.nom} à ${c.nom}`,
+        "@type": "Service",
+        "@id": `${SITE}/${service.key}/${c.slug}#service`,
+        name: `${service.nom} à ${c.nom}`,
+        serviceType: service.nom,
         description: `${service.nom} à ${c.nom} (${c.cp}) et dans tout le ${deptNom(c.dept)}. ${service.accroche}`,
         url: `${SITE}/${service.key}/${c.slug}`,
-        telephone: PHONE_TEL,
-        image: `${SITE}${service.image}`,
         areaServed: { "@type": "City", name: c.nom, postalCode: c.cp },
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "35 rue des Cailloux",
-          addressLocality: "Clichy",
-          postalCode: "92110",
-          addressRegion: "Île-de-France",
-          addressCountry: "FR",
-        },
-        provider: { "@type": "LocalBusiness", name: "S Connect France", telephone: PHONE_TEL },
+        provider: { "@id": `${SITE}/#localbusiness` },
       },
       {
         "@type": "FAQPage",

@@ -242,9 +242,9 @@ export default function HomePageClient({
 
         <div className="container-custom relative z-10 py-20 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            // initial={false} : le H1 (candidat LCP texte) est peint à pleine
+            // opacité immédiatement — le fade 0→1 différait le LCP de ~0,8s.
+            initial={false}
             className="max-w-2xl"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/25 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-md">

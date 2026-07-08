@@ -111,7 +111,7 @@ export function generateServiceSchema(service: ServiceSchema, baseUrl: string) {
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": baseUrl,
-      "servicePhone": process.env.NEXT_PUBLIC_PHONE || "+33100000000",
+      "servicePhone": process.env.NEXT_PUBLIC_PHONE || "+33652820685",
     },
   };
 }

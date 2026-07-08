@@ -368,21 +368,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Publiées par vagues (cf. WAVE_MIN_POPULATION) — le sitemap reflète
   // automatiquement la vague active. Reste sous la limite de 50 000 URLs même
   // à pleine échelle (~4 600 URLs), donc pas de sharding nécessaire.
-  const communes = publishedCommunes();
+  // ANTI-DÉSINDEXATION : on ne soumet à Google que les pages INDEXABLES —
+  // les 12 hubs + les communes tier A (grandes villes). La longue traîne
+  // (tier B/C/D) est en noindex (cf. page-factory) tant que son contenu n'est
+  // pas enrichi ; l'exposer au sitemap inviterait Google à crawler des pages
+  // minces et dégraderait la qualité perçue du site entier.
+  const indexableCommunes = publishedCommunes().filter((c) => c.tier === "A");
   const localSeoPages: MetadataRoute.Sitemap = [];
   for (const s of SERVICES) {
     localSeoPages.push({
       url: `${baseUrl}/${s.key}`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.75,
+      priority: 0.8,
     });
-    for (const c of communes) {
+    for (const c of indexableCommunes) {
       localSeoPages.push({
         url: `${baseUrl}/${s.key}/${c.slug}`,
         lastModified: now,
         changeFrequency: "monthly",
-        priority: c.tier === "A" ? 0.7 : c.tier === "B" ? 0.6 : 0.5,
+        priority: 0.6,
       });
     }
   }

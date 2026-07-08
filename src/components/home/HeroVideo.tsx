@@ -47,8 +47,19 @@ export default function HeroVideo({ videoSrc, videoSrcWebm, posterSrc, fallbackS
   const reduce = useReducedMotion();
   const [mounted, setMounted] = useState(false);
   const [paused, setPaused] = useState(false);
+  // Sous 820px (mobile/tablette étroite), on NE monte PAS la vidéo hero : elle
+  // streame ~1,67 Mo et plombe le LCP. On sert uniquement le poster 820 (~24 kB).
+  // L'indexation mobile-first de Google voit donc une page légère.
+  const [isDesktop, setIsDesktop] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    const mq = window.matchMedia("(min-width: 820px)");
+    setIsDesktop(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     const v = ref.current;
@@ -78,10 +89,12 @@ export default function HeroVideo({ videoSrc, videoSrcWebm, posterSrc, fallbackS
   const poster820 = `${posterBase}-820.webp`;
   const poster1366 = `${posterBase}-1366.webp`;
 
-  // Reduced motion or pre-hydration: show only the poster (no video fetch at all).
+  // Poster seul (aucune vidéo) : reduced-motion, pré-hydratation, OU mobile
+  // (< 820px). Sur mobile c'est LE levier LCP : pas de <video>, pas de play(),
+  // poster 820 de ~24 kB au lieu de streamer 1,67 Mo.
   // NB : pas d'aria-hidden sur <picture> (élément qui ne supporte pas ARIA) —
   // l'img décorative avec alt="" suffit aux lecteurs d'écran.
-  if (reduce || !mounted) {
+  if (reduce || !mounted || !isDesktop) {
     return (
       <picture className="pointer-events-none">
         <source media="(max-width: 820px)" srcSet={poster820} type="image/webp" />
