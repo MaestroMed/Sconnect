@@ -80,7 +80,7 @@ export default async function RealizationDetailPage({
       ? realization.image
       : `${siteUrl}${realization.image}`,
     locationCreated: { "@type": "Place", name: realization.location },
-    creator: { "@type": "Organization", name: "S'Connect", "@id": `${siteUrl}/#organization` },
+    creator: { "@type": "Organization", name: "S Connect France", "@id": `${siteUrl}/#organization` },
   };
 
   const hasCompare =

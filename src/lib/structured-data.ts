@@ -71,7 +71,8 @@ export function generateReviewSchema(review: ReviewSchema, baseUrl: string) {
     "@type": "Review",
     "itemReviewed": {
       "@type": "LocalBusiness",
-      "name": "S'Connect",
+      "@id": `${baseUrl}/#localbusiness`,
+      "name": "S Connect France",
       "url": baseUrl,
     },
     "reviewRating": {
@@ -154,7 +155,7 @@ export function generateAggregateRatingSchema(data: {
     "itemReviewed": {
       "@type": "LocalBusiness",
       "@id": `${data.baseUrl}/#localbusiness`,
-      "name": "S'Connect",
+      "name": "S Connect France",
     },
     "ratingValue": data.ratingValue.toFixed(1),
     "reviewCount": data.reviewCount,
@@ -190,7 +191,7 @@ export function generateOfferSchema(data: {
     "seller": {
       "@type": "LocalBusiness",
       "@id": `${data.baseUrl}/#localbusiness`,
-      "name": "S'Connect",
+      "name": "S Connect France",
     },
   };
 }

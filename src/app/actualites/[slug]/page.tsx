@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
 
   // Author can be a real person (Mehdi) or fallback to the org. When we
   // recognise a known person we link to their author page → boosts E-E-A-T.
-  const authorString = post.frontmatter.author || "S'Connect";
+  const authorString = post.frontmatter.author || "S Connect France";
   const isMehdi = authorString.toLowerCase().includes("mehdi");
   const authorSchema = isMehdi
     ? {
@@ -108,7 +108,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
     publisher: {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "S'Connect",
+      name: "S Connect France",
       logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` },
     },
     datePublished: post.frontmatter.date,

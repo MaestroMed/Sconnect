@@ -159,6 +159,20 @@ export default async function RootLayout({
               "@type": "Organization",
               "@id": `${siteUrl}/#organization`,
               name: "S Connect France",
+              legalName: "S Connect France",
+              alternateName: "S'Connect",
+              foundingDate: "2021",
+              founder: {
+                "@type": "Person",
+                "@id": `${siteUrl}/auteur/mehdi-belkacem#person`,
+                name: "Mehdi Belkacem",
+                jobTitle: "Fondateur",
+              },
+              employee: {
+                "@type": "Person",
+                name: "Selim Sebbana",
+                jobTitle: "Président",
+              },
               url: siteUrl,
               logo: {
                 "@type": "ImageObject",
@@ -248,7 +262,7 @@ export default async function RootLayout({
               ],
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
-                name: "Services S'Connect",
+                name: "Services S Connect France",
                 itemListElement: [
                   {
                     "@type": "OfferCatalog",

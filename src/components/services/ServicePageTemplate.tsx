@@ -180,7 +180,7 @@ export default function ServicePageTemplate({
     {
       name: title,
       description,
-      provider: "S'Connect",
+      provider: "S Connect France",
       areaServed: zones,
       priceRange: "€€",
     },
