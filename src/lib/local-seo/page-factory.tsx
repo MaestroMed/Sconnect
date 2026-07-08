@@ -14,6 +14,7 @@ import {
 } from "./communes";
 import { requireService, SERVICES, type LocalService } from "./services";
 import { popText, distanceText, interventionPhrase, parcText, densiteText } from "./descriptors";
+import { getLocalContext } from "./local-context";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 const PHONE = "06 52 82 06 85";
@@ -155,6 +156,7 @@ export function makeServiceHub(serviceKey: string) {
 
 function LocalServiceView({ service, c }: { service: LocalService; c: Commune }) {
   const faqs = service.faq(c);
+  const ctx = getLocalContext(c.slug);
   const otherServices = SERVICES.filter(
     (s) => s.key !== service.key && (s.metier === service.metier || s.intent === service.intent),
   ).slice(0, 4);
@@ -292,6 +294,34 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
           </ul>
         </div>
       </section>
+
+      {/* Contexte local RÉEL (recherché par commune) — le contenu unique qui
+          fait passer la page au-dessus du seuil de qualité. N'apparaît que si
+          la commune a été enrichie. */}
+      {ctx && (
+        <section className="pb-14">
+          <div className="container-custom max-w-3xl">
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">
+              {service.nom} à {c.nom} : le terrain
+            </h2>
+            <p className="text-foreground-muted leading-relaxed mb-4">{ctx.paragraphe}</p>
+            {ctx.angle && (
+              <p className="text-foreground-muted leading-relaxed mb-4">{ctx.angle}</p>
+            )}
+            {ctx.zones && ctx.zones.length > 0 && (
+              <p className="text-foreground-muted leading-relaxed mb-4">
+                <span className="font-semibold text-foreground">Zones et quartiers desservis à {c.nom} :</span>{" "}
+                {ctx.zones.join(", ")}.
+              </p>
+            )}
+            {ctx.transports && (
+              <p className="text-foreground-muted leading-relaxed">
+                <span className="font-semibold text-foreground">Accès :</span> {ctx.transports}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       <section className="pb-14">

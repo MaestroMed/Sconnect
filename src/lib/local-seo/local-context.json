@@ -1,0 +1,92 @@
+{
+  "paris": {
+    "paragraphe": "Paris concentre le premier pôle tertiaire d'Europe avec son Quartier Central des Affaires (QCA) réparti sur les 8e, 9e, 16e et 17e arrondissements, où se côtoient sièges sociaux, banques et cabinets de conseil, auxquels s'ajoute le pôle Montparnasse sur la rive gauche. Ce parc de bureaux, souvent logé dans de l'haussmannien restructuré, alimente une forte demande de relamping LED avec détection de présence pour répondre aux exigences du décret tertiaire. En parallèle, le tissu très dense de copropriétés haussmanniennes impose un entretien régulier des halls, parties communes et accès. Le maillage commercial de rue génère enfin un besoin continu de serrurerie et de rideaux métalliques.",
+    "zones": ["Quartier Central des Affaires (8e-9e-17e)", "Opéra-Bourse (2e-9e)", "Madeleine", "Étoile-Champs-Élysées", "Montparnasse (14e-15e)", "Sentier"],
+    "transports": "Réseau métro très dense (14 lignes) complété par les RER A à E et de grandes gares (Saint-Lazare, Gare du Nord, Montparnasse), plus les tramways de ceinture T2/T3.",
+    "angle": "Relamping tertiaire des immeubles de bureaux et mise en conformité des parties communes de copropriétés haussmanniennes."
+  },
+  "saint-denis": {
+    "paragraphe": "La Plaine Saint-Denis, ancienne plus grande zone industrielle d'Europe, s'est muée en un pôle tertiaire majeur du Grand Paris avec près de 200 000 m² de bureaux et de nombreux sièges, autour du Stade de France. Le quartier d'affaires Pleyel monte en puissance avec la rénovation de la tour Pleyel et l'ouverture de la gare Saint-Denis Pleyel, futur nœud le plus fréquenté du Grand Paris Express. En parallèle, la ville conserve un centre ancien autour de la Basilique et de vastes grands ensembles et copropriétés (Franc-Moisin, Floréal) qui appellent contrôle d'accès et interphonie. Ce contraste crée une double demande : relamping et courants faibles côté tertiaire, sécurisation des accès côté habitat collectif.",
+    "zones": ["La Plaine Saint-Denis", "Pleyel", "Stade de France", "Centre-ville / Basilique", "Franc-Moisin", "Confluence-Port"],
+    "transports": "Métro 13 et 12, RER D (Gare de Saint-Denis, Stade de France) et RER B (La Plaine-Stade de France), tramways T1 et T8, et la nouvelle gare Saint-Denis Pleyel (lignes 14/15/16/17).",
+    "angle": "Relamping tertiaire de La Plaine et contrôle d'accès/interphonie sur les grands ensembles et copropriétés."
+  },
+  "boulogne-billancourt": {
+    "paragraphe": "Deuxième ville d'Île-de-France, Boulogne-Billancourt accueille environ 17 000 entreprises et de nombreux sièges, avec une forte concentration dans les médias et les télécoms. Le quartier du Trapèze, sur l'écoquartier Île Seguin-Rives de Seine issu des anciennes usines Renault, aligne des immeubles de bureaux récents et héberge notamment beIN Sports, L'Équipe et Orange. Ce parc tertiaire neuf et haut de gamme, doublé de programmes résidentiels récents, tire la demande vers le relamping performant et le contrôle d'accès. Le reste de la ville, dense et résidentiel, complète par de la serrurerie et de la métallerie de copropriété.",
+    "zones": ["Le Trapèze", "Île Seguin", "Pont de Sèvres", "Billancourt", "Marcel Sembat", "Parchamp-Albert Kahn", "Silly-Gallieni", "Centre-ville"],
+    "transports": "Métro 9 (Marcel Sembat, Billancourt, Pont de Sèvres) et métro 10 (Boulogne Jean Jaurès, Pont de Saint-Cloud), tramway T2 reliant Pont de Sèvres à La Défense.",
+    "angle": "Relamping tertiaire des immeubles de bureaux du Trapèze et contrôle d'accès sur les résidences récentes."
+  },
+  "montreuil": {
+    "paragraphe": "Cinquième ville d'Île-de-France, Montreuil présente des quartiers très contrastés, du Bas-Montreuil peuplé d'ateliers, lofts et PME créatives jusqu'aux Murs à pêches et aux hauts de la ville plus résidentiels. La ville se distingue par un tissu artisanal et créatif dense (ébénistes, céramistes, sérigraphes) installé dans de nombreux petits locaux d'activité et bâti ancien. Ce parc mêlant ateliers, commerces de la Croix-de-Chavaux et copropriétés appelle beaucoup de serrurerie, de métallerie et de sécurisation d'accès. Les opérations récentes du haut Montreuil, portées par l'arrivée du métro 11, y ajoutent des besoins de mise aux normes.",
+    "zones": ["Bas-Montreuil", "Croix-de-Chavaux / Centre-ville", "Murs à pêches (Signac)", "Bel-Air-Grands Pêchers", "La Boissière", "Villiers-Barbusse", "Ruffins-Montreau"],
+    "transports": "Métro 9 (Robespierre, Croix-de-Chavaux, Mairie de Montreuil) reliant Paris intra-muros, et métro 11 desservant le haut Montreuil depuis juin 2024 (Montreuil-Hôpital, La Dhuys).",
+    "angle": "Serrurerie et métallerie sur bâti ancien, ateliers et copropriétés, avec contrôle d'accès en habitat dense."
+  },
+  "argenteuil": {
+    "paragraphe": "Argenteuil est structurée par le Val d'Argent (Nord et Sud), l'un des plus grands ensembles de France, issu d'une ZUP construite entre 1965 et 1976 et comptant plus de 8 000 logements. Ce vaste parc de logements collectifs et de copropriétés, complété par le secteur d'Orgemont à l'est, fait l'objet d'un remodelage urbain de type ANRU et concentre les besoins de contrôle d'accès, d'interphonie et de mise aux normes. En périphérie, un important tissu pavillonnaire soutient une demande de serrurerie et de métallerie résidentielle. La ville conserve par ailleurs une zone industrielle héritée de la ZUP.",
+    "zones": ["Val d'Argent Nord", "Val d'Argent Sud", "Orgemont", "Centre-ville", "Les Coteaux", "Champioux", "Zone industrielle du Val"],
+    "transports": "Transilien ligne J depuis Paris Saint-Lazare avec les gares d'Argenteuil et du Val d'Argenteuil, complété par le réseau de bus.",
+    "angle": "Contrôle d'accès, interphonie et mise aux normes des grands ensembles et copropriétés du Val d'Argent, serrurerie/métallerie en zones pavillonnaires."
+  },
+  "nanterre": {
+    "paragraphe": "Préfecture des Hauts-de-Seine et deuxième ville la plus peuplée du département, Nanterre accueille sur son territoire une partie du quartier d'affaires de La Défense, avec de nombreux sièges sociaux et immeubles de bureaux. Elle abrite aussi l'université Paris-Nanterre (plus de 30 000 étudiants) et d'importants équipements administratifs (préfecture, tribunaux, archives départementales). Le tissu y est très contrasté : secteurs tertiaires à l'ouest, zone industrielle et logistique du Chemin-de-l'Île à l'est, grands ensembles au nord et zones pavillonnaires sur le Plateau Mont-Valérien. De vastes opérations d'aménagement sont en cours, notamment Les Groues (76 ha) à proximité immédiate de La Défense.",
+    "zones": ["La Défense (secteur nanterrois)", "Quartier de l'Université", "Chemin-de-l'Île", "Petit-Nanterre", "Plateau Mont-Valérien", "Le Vieux-Pont", "Champs-Pierreux", "Les Groues"],
+    "transports": "RER A (Nanterre-Ville, Nanterre-Préfecture, Nanterre-Université), RER E prolongé jusqu'à Nanterre-La-Folie, tramway T2 vers La Défense, et à terme la ligne 15 Ouest du Grand Paris Express.",
+    "angle": "Cœur du pôle d'affaires de La Défense : dominante électricité tertiaire, relamping LED de bureaux et contrôle d'accès d'immeubles, complétée par la serrurerie de copropriétés."
+  },
+  "vitry-sur-seine": {
+    "paragraphe": "Commune la plus peuplée du Val-de-Marne, Vitry-sur-Seine se caractérise par de nombreux grands ensembles des années 1960-1970 et un parc de logement social important, aujourd'hui concernés par un Nouveau Programme de Renouvellement Urbain. Son ancien front industriel des bords de Seine, Les Ardoines, connaît une profonde mutation dans le cadre de l'opération d'intérêt national Orly-Rungis–Seine-Amont, avec l'arrivée d'une gare de la ligne 15 Sud. Plusieurs ZAC structurent ce renouvellement, notamment Rouget-de-Lisle le long de la RD5 et Seine-Gare-Vitry. La ville conserve des poches d'activité et des copropriétés variées, du plateau pavillonnaire au Port-à-l'Anglais.",
+    "zones": ["Les Ardoines (OIN Seine-Amont)", "ZAC Seine-Gare-Vitry", "ZAC Rouget-de-Lisle (RD5)", "Centre-ville (Robespierre)", "Port-à-l'Anglais", "Plateau / Moulin-Vert", "Balzac"],
+    "transports": "RER C (Vitry-sur-Seine et Les Ardoines), tramways T9 sur la RD5 et T7 sur le plateau, et prochainement la ligne 15 Sud du Grand Paris Express à la gare des Ardoines.",
+    "angle": "Grands ensembles et copropriétés en rénovation urbaine, zones d'activité en mutation : dominante métallerie, serrurerie et contrôle d'accès pour bailleurs et syndics."
+  },
+  "asnieres-sur-seine": {
+    "paragraphe": "Ville dense du nord des Hauts-de-Seine, Asnières-sur-Seine mêle une vieille ville près du château et de la gare, des quartiers résidentiels bourgeois (Bécon-les-Bruyères), des grands ensembles (Les Agnettes, Les Grésillons) et d'importantes zones tertiaires et d'activité. Elle accueille des ZAC de bureaux, dont la ZAC Parc d'affaires (environ 170 000 m²), le renouvellement des anciens terrains industriels PSA sur le Quartier de Seine, ainsi que les ateliers historiques Louis Vuitton. Le tissu commercial et artisanal y est dense et la proportion de copropriétés particulièrement élevée.",
+    "zones": ["Vieille ville", "Bécon-les-Bruyères", "Les Agnettes", "Les Grésillons", "Quartier de Seine (ex-PSA)", "ZAC Parc d'affaires", "Bords de Seine", "Le Château"],
+    "transports": "Gare d'Asnières-sur-Seine (Transilien J et L), métro 13 (Les Agnettes, Gabriel-Péri), tramway T1 (Asnières–Les Courtilles), RER C à proximité (Les Grésillons).",
+    "angle": "Tissu urbain très dense et mixte : demande polyvalente, du dépannage serrurerie en copropriété au relamping et contrôle d'accès tertiaire."
+  },
+  "creteil": {
+    "paragraphe": "Préfecture du Val-de-Marne, Créteil concentre de très grands équipements : le centre commercial régional Créteil Soleil, le CHU Henri-Mondor et l'hôpital Albert-Chenevier, l'université Paris-Est Créteil (UPEC) et de nombreux services administratifs. Largement conçue dans les années 1970 autour de son lac et de la préfecture, la ville associe grands ensembles (Mont-Mesly) et quartiers plus récents. Elle conserve aussi un ancien village et des secteurs pavillonnaires. Le pôle de L'Échat, autour de l'hôpital Henri-Mondor, se renforce avec l'arrivée de la ligne 15 Sud.",
+    "zones": ["Mont-Mesly", "Créteil-Village", "L'Échat (pôle santé Henri-Mondor)", "Le Palais / Préfecture", "La Croix-des-Mèches", "Les Bleuets–Bordières", "Front-de-Lac"],
+    "transports": "Métro ligne 8 (Créteil-L'Échat, Créteil-Université, Créteil-Préfecture, Pointe-du-Lac), bus en site propre TVM, et prochainement la ligne 15 Sud à Créteil-L'Échat.",
+    "angle": "Ville-préfecture aux grands équipements (Créteil Soleil, CHU Henri-Mondor, UPEC) et grands ensembles : dominante contrôle d'accès et relamping d'ERP et de tertiaire."
+  },
+  "colombes": {
+    "paragraphe": "Ville populeuse des Hauts-de-Seine, Colombes juxtapose de vastes zones pavillonnaires, plusieurs grands ensembles en rénovation (Petit-Colombes, Fossés-Jean, Europe) et des secteurs tertiaires accueillant des sièges d'entreprises comme Arkema. Trois quartiers font l'objet de projets de rénovation urbaine pilotés par l'ANRU, dont le Petit-Colombes. La ville garde un héritage industriel et sportif marqué, illustré par le stade Yves-du-Manoir. Son parc de logements mêle de nombreuses copropriétés et une part importante de logement social.",
+    "zones": ["Petit-Colombes", "Fossés-Jean / Bouviers", "Europe (gare du Stade)", "Centre-ville", "Île-Marante", "Les Grèves", "Gabriel-Péri"],
+    "transports": "Gares Transilien ligne J (Colombes et Le Stade), tramway T2 (prolongé jusqu'à Bezons, à dix minutes de La Défense) et, à terme, le prolongement du T1 vers le Petit-Colombes.",
+    "angle": "Équilibre entre grands ensembles en rénovation ANRU et zones pavillonnaires/tertiaires : dominante serrurerie-métallerie et contrôle d'accès pour bailleurs et copropriétés."
+  },
+  "aubervilliers": {
+    "paragraphe": "Ancienne ville industrielle du nord parisien née le long du canal Saint-Denis, Aubervilliers connaît une profonde mutation : friches et anciennes usines laissent place à des ZAC tertiaires et à des programmes de logements. Le tissu bâti mêle grands ensembles, copropriétés souvent anciennes et locaux d'activité, avec une large part du territoire en quartier prioritaire. L'arrivée du Campus Condorcet et le développement du secteur Canal-Porte d'Aubervilliers renforcent la dynamique de rénovation. Ce contexte génère de forts besoins de mise aux normes électriques et de sécurisation dans un parc immobilier hétérogène.",
+    "zones": ["Centre-Ville", "La Maladrerie", "Le Landy", "Villette-Quatre-Chemins", "ZAC Canal-Porte d'Aubervilliers", "Parc du Millénaire", "Campus Condorcet", "Fort d'Aubervilliers"],
+    "transports": "Métro 7 (Fort d'Aubervilliers, Aubervilliers-Pantin Quatre Chemins) et métro 12 prolongé (Aimé Césaire, Mairie d'Aubervilliers), proximité des RER B et E, tramway T3b, avec la future ligne 15 Est.",
+    "angle": "Mise aux normes électriques et sécurisation d'un parc de copropriétés et de locaux d'activité anciens en pleine rénovation urbaine."
+  },
+  "aulnay-sous-bois": {
+    "paragraphe": "Aulnay-sous-Bois est une ville contrastée : un nord marqué par de grands ensembles, dont la cité de la Rose des Vents (les « 3000 »), et de vastes zones d'activité et logistiques, face à un sud pavillonnaire plus aisé organisé autour du Vieux Pays. L'habitat individuel représente une large part du territoire et les zones industrielles y sont importantes. La fermeture de l'usine PSA/Citroën en 2013 a ouvert un vaste chantier de reconversion, tandis que les quartiers nord font l'objet d'un renouvellement urbain. Le tissu commercial est ancré par le centre commercial Parinor et des zones d'activité comme Garonor.",
+    "zones": ["La Rose des Vents (cité des 3000)", "Vieux Pays", "Chanteloup", "Nonneville", "Zone logistique Garonor", "Centre commercial Parinor", "Ancien site industriel PSA", "Quartier de la gare"],
+    "transports": "RER B et Transilien K (gare d'Aulnay-sous-Bois), tramway T4, future ligne 16 du Grand Paris Express (gare Aulnay), à proximité des autoroutes A1 et A3.",
+    "angle": "Double marché : contrôle d'accès et serrurerie de sécurité pour les grands ensembles et zones logistiques du nord, dépannage électricité et serrurerie pour le pavillonnaire du sud."
+  },
+  "versailles": {
+    "paragraphe": "Ville royale au patrimoine exceptionnel, Versailles associe le domaine du château, un secteur historique protégé et un dense tissu résidentiel bourgeois d'immeubles anciens et d'hôtels particuliers, surtout dans les quartiers Notre-Dame et Saint-Louis. Autour de ce cœur haussmannien s'étendent des secteurs plus pavillonnaires comme Montreuil et Porchefontaine, ainsi que le pôle militaire et technologique de Satory. Le centre-ville concentre un fort tissu commercial et de nombreuses administrations, la commune étant préfecture des Yvelines. Ce bâti ancien et souvent classé impose des interventions soignées et réglementées.",
+    "zones": ["Notre-Dame", "Saint-Louis", "Montreuil", "Clagny-Glatigny", "Porchefontaine", "Chantiers", "Satory", "Bernard-de-Jussieu"],
+    "transports": "Trois gares : Versailles-Chantiers (RER C, Transilien N et U), Versailles Château Rive Gauche (RER C) et Versailles Rive Droite (Transilien L).",
+    "angle": "Interventions patrimoniales soignées sur bâti ancien et haussmannien — métallerie, serrurerie et rénovation électrique en copropriété historique."
+  },
+  "courbevoie": {
+    "paragraphe": "Commune la plus dense des Hauts-de-Seine, Courbevoie voit son sud occupé par une partie du quartier d'affaires de La Défense (partagé avec Puteaux, Nanterre et La Garenne-Colombes), avec ses tours de bureaux et sièges de multinationales. Le reste de la ville forme un tissu résidentiel très dense, composé en grande majorité d'appartements, du haussmannien au contemporain, autour de Bécon et du cœur de ville. Le Faubourg de l'Arche, ancienne ZAC Danton, assure la jonction avec La Défense. Ce profil mêle immobilier tertiaire de grande hauteur et copropriétés résidentielles serrées.",
+    "zones": ["Faubourg de l'Arche", "Bécon-les-Bruyères", "Cœur de Ville (Marceau-République)", "Gambetta", "Quartier de La Défense (partie Courbevoie)", "Bords de Seine"],
+    "transports": "Transilien L (gares Courbevoie et Bécon-les-Bruyères), accès immédiat à La Défense (RER A et E, métro 1, tramway T2), métro 3 à Pont de Levallois-Bécon.",
+    "angle": "Relamping LED, maintenance électrique tertiaire et contrôle d'accès des immeubles de bureaux, complétés par les interventions en copropriété dense."
+  },
+  "rueil-malmaison": {
+    "paragraphe": "Plus vaste commune des Hauts-de-Seine, Rueil-Malmaison est un pôle tertiaire de l'Ouest parisien structuré par le quartier d'affaires Rueil-sur-Seine, qui accueille notamment le siège mondial de Schneider Electric. La ville reste très résidentielle, mêlant pavillonnaire, copropriétés et ensembles HLM comme Plaine-Gare, autour d'un centre-ville commerçant et d'un patrimoine marqué par le château de Malmaison. Les espaces boisés de Saint-Cucufa et le Mont-Valérien encadrent le tissu urbain. Ce mélange de sièges d'entreprises et d'habitat varié crée des besoins tertiaires comme résidentiels.",
+    "zones": ["Rueil-sur-Seine (quartier d'affaires)", "Centre-Ville", "Plaine-Gare", "Belle-Rive", "Plateau / Mont-Valérien", "Buzenval", "Bord de Seine"],
+    "transports": "RER A (gare de Rueil-Malmaison), nombreuses lignes de bus, autoroute A86 en tunnel, et future gare du Grand Paris Express (ligne 15 Ouest, Rueil-Suresnes-Mont-Valérien).",
+    "angle": "Contrôle d'accès, relamping et maintenance électrique des sièges tertiaires de Rueil-sur-Seine, complétés par le dépannage serrurerie du pavillonnaire et des copropriétés."
+  }
+}
