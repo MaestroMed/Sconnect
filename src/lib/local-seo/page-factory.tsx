@@ -27,8 +27,15 @@ interface RouteParams {
 export function makeLocalService(serviceKey: string) {
   const service = requireService(serviceKey);
 
+  // Pré-génère au BUILD uniquement les grandes communes (tier A ≥ 50k) —
+  // sinon générer 4500 pages statiques sature la mémoire du build Vercel.
+  // Le reste (tier B/C/D) est rendu À LA DEMANDE (ISR, dynamicParams=true)
+  // puis mis en cache : toutes les communes restent servies en 200, mais le
+  // build reste léger et rapide.
   function generateStaticParams() {
-    return publishedCommunes().map((c) => ({ commune: c.slug }));
+    return publishedCommunes()
+      .filter((c) => c.tier === "A")
+      .map((c) => ({ commune: c.slug }));
   }
 
   async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
@@ -57,7 +64,13 @@ export function makeLocalService(serviceKey: string) {
     return <LocalServiceView service={service} c={c} />;
   }
 
-  return { generateStaticParams, generateMetadata, Page, dynamicParams: false as const };
+  return {
+    generateStaticParams,
+    generateMetadata,
+    Page,
+    dynamicParams: true as const, // longue traîne rendue à la demande (ISR)
+    revalidate: 604800, // 7 jours
+  };
 }
 
 // ---- HUB de service : /[service] liste les communes (maillage + page régionale) ----
