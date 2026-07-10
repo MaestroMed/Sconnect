@@ -29,11 +29,19 @@ function getResend(): Resend {
   return _resend;
 }
 
+/** Pièce jointe transmise à Resend (contenu en base64, sans préfixe data:). */
+export interface EmailAttachment {
+  filename: string;
+  content: string; // base64
+  contentType?: string;
+}
+
 export interface SendEmailOptions {
   to: string | string[];
   subject: string;
   html: string;
   replyTo?: string;
+  attachments?: EmailAttachment[];
 }
 
 export async function sendEmail(options: SendEmailOptions) {
@@ -44,6 +52,15 @@ export async function sendEmail(options: SendEmailOptions) {
       subject: options.subject,
       html: options.html,
       replyTo: options.replyTo,
+      ...(options.attachments && options.attachments.length > 0
+        ? {
+            attachments: options.attachments.map((a) => ({
+              filename: a.filename,
+              content: a.content,
+              ...(a.contentType ? { contentType: a.contentType } : {}),
+            })),
+          }
+        : {}),
     });
     return { success: true, data };
   } catch (error) {
@@ -81,15 +98,19 @@ export async function sendDevisEmail(data: {
   delai: string;
   description: string;
   budget?: string;
+  attachments?: EmailAttachment[];
 }) {
   const phoneEmergency = process.env.NEXT_PUBLIC_PHONE_EMERGENCY;
 
   const adminHtml = await render(DevisRequestEmail(data));
+  // Les pièces jointes (photos, plans) ne partent qu'à l'artisan, pas dans
+  // l'e-mail de confirmation client.
   const adminResult = await sendEmail({
     to: ADMIN_EMAIL,
     subject: `[Devis] Nouvelle demande - ${data.services.join(", ")}`,
     html: adminHtml,
     replyTo: data.email,
+    attachments: data.attachments,
   });
 
   const confirmHtml = await render(
@@ -121,6 +142,7 @@ export async function sendInterventionEmail(data: {
   typeIntervention: string;
   description: string;
   disponibilite: string;
+  attachments?: EmailAttachment[];
 }) {
   const phoneEmergency = process.env.NEXT_PUBLIC_PHONE_EMERGENCY;
 
@@ -130,6 +152,7 @@ export async function sendInterventionEmail(data: {
     subject: `🚨 URGENT - Intervention ${data.typeIntervention} à ${data.ville}`,
     html: adminHtml,
     replyTo: data.email,
+    attachments: data.attachments,
   });
 
   const confirmHtml = await render(

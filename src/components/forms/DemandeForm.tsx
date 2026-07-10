@@ -31,6 +31,31 @@ interface DemandeFormProps {
   type: "devis" | "intervention";
 }
 
+// Cumul max des pièces jointes envoyées en base64 dans le corps JSON. Au-delà,
+// la requête dépasse la limite de body de la plateforme (~4,5 Mo après +33%
+// d'overhead base64) et échouerait AVANT d'atteindre l'API → lead perdu.
+const MAX_TOTAL_ATTACH_BYTES = 3 * 1024 * 1024;
+
+type LeadAttachment = { filename: string; content: string; contentType: string };
+
+/** Lit un fichier en base64 (sans le préfixe data:) pour l'envoi JSON. */
+function fileToAttachment(file: File): Promise<LeadAttachment> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      const comma = result.indexOf(",");
+      resolve({
+        filename: file.name,
+        content: comma >= 0 ? result.slice(comma + 1) : result,
+        contentType: file.type || "application/octet-stream",
+      });
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
 const civiliteOptions = [
   { value: "M.", label: "Monsieur" },
   { value: "Mme", label: "Madame" },
@@ -192,7 +217,23 @@ export default function DemandeForm({ type }: DemandeFormProps) {
     try {
       // Préparer les données selon le type de demande
       const apiEndpoint = type === "devis" ? "/api/devis" : "/api/intervention";
-      
+
+      // Pièces jointes → base64. Garde-fou taille AVANT l'envoi : un dépassement
+      // ferait échouer toute la demande côté plateforme (lead perdu).
+      let attachments: LeadAttachment[] = [];
+      if (files.length > 0) {
+        const totalRaw = files.reduce((n, f) => n + f.size, 0);
+        if (totalRaw > MAX_TOTAL_ATTACH_BYTES) {
+          setSubmitStatus("error");
+          toast.error("Pièces jointes trop lourdes", {
+            description:
+              "Limitez-les à 3 Mo au total (ou envoyez-les par e-mail après). Votre demande n'a pas été envoyée.",
+          });
+          return;
+        }
+        attachments = await Promise.all(files.map(fileToAttachment));
+      }
+
       // Mapper les données du formulaire au format attendu par l'API
       const requestData = type === "devis" ? {
         civilite: data.civilite,
@@ -223,25 +264,19 @@ export default function DemandeForm({ type }: DemandeFormProps) {
         disponibilite: data.urgence === "urgence" ? "Immédiatement" : "Selon disponibilités",
       };
 
-      // Envoyer à l'API
+      // Envoyer à l'API (données + pièces jointes base64 dans le même corps)
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestData),
+        body: JSON.stringify({ ...requestData, attachments }),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
         throw new Error(result.error || 'Erreur lors de l\'envoi');
-      }
-
-      // TODO: Upload files if any (voir étape upload d'images)
-      if (files.length > 0) {
-        console.log('Files à uploader:', files);
-        // L'upload de fichiers sera implémenté dans la phase d'optimisation
       }
 
       setSubmitStatus("success");
@@ -592,9 +627,16 @@ export default function DemandeForm({ type }: DemandeFormProps) {
             </div>
 
             {submitStatus === "error" && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-red-700">
-                <AlertCircle className="w-5 h-5 shrink-0" />
-                <p>Une erreur est survenue. Veuillez réessayer.</p>
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 text-red-700">
+                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                <p>
+                  L&apos;envoi n&apos;a pas abouti. Réessayez, ou appelez-nous
+                  directement au{" "}
+                  <a href="tel:+33652820685" className="font-semibold underline">
+                    06 52 82 06 85
+                  </a>{" "}
+                  — nous prenons votre demande par téléphone.
+                </p>
               </div>
             )}
           </motion.div>

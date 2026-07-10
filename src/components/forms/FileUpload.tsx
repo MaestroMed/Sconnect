@@ -8,13 +8,17 @@ interface FileUploadProps {
   maxFiles?: number;
   acceptedTypes?: string;
   maxSizeMB?: number;
+  /** Cumul max de toutes les pièces (Mo) — borne l'envoi base64 sous la
+   *  limite de body de la plateforme (~4,5 Mo). */
+  maxTotalMB?: number;
 }
 
 export default function FileUpload({
   onFilesChange,
-  maxFiles = 10,
+  maxFiles = 4,
   acceptedTypes = ".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx",
-  maxSizeMB = 5,
+  maxSizeMB = 3,
+  maxTotalMB = 3,
 }: FileUploadProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -69,10 +73,15 @@ export default function FileUpload({
       }
 
       const updatedFiles = [...files, ...validFiles];
+      const totalBytes = updatedFiles.reduce((n, f) => n + f.size, 0);
+      if (totalBytes > maxTotalMB * 1024 * 1024) {
+        setError(`Le cumul des pièces jointes dépasse ${maxTotalMB} Mo — retirez-en ou compressez-les.`);
+        return;
+      }
       setFiles(updatedFiles);
       onFilesChange(updatedFiles);
     },
-    [files, maxFiles, maxSizeMB, acceptedTypes, onFilesChange]
+    [files, maxFiles, maxSizeMB, maxTotalMB, acceptedTypes, onFilesChange]
   );
 
   const removeFile = (index: number) => {
@@ -154,7 +163,7 @@ export default function FileUpload({
           Glissez vos fichiers ici ou cliquez pour parcourir
         </p>
         <p className="text-sm text-dark-500 dark:text-dark-400">
-          {maxFiles} fichiers max • {maxSizeMB}MB par fichier • PDF, JPG, PNG, DOC
+          {maxFiles} fichiers max • {maxTotalMB} Mo au total • PDF, JPG, PNG, DOC
         </p>
       </div>
 

@@ -14,6 +14,19 @@ import { z } from 'zod';
  * être appliquée AUSSI côté client (sinon le test de contrat échouera).
  */
 
+/**
+ * Pièce jointe transmise en base64 dans le corps JSON. Bornée (max 4 fichiers,
+ * ~3 Mo cumulés côté client + garde serveur dans la route) pour rester sous la
+ * limite de body de la plateforme (~4,5 Mo) — au-delà, la requête échouerait
+ * AVANT d'atteindre la route et le lead serait perdu.
+ */
+export const mailAttachmentSchema = z.object({
+  filename: z.string().min(1).max(200),
+  content: z.string().min(1), // base64 (sans préfixe data:)
+  contentType: z.string().max(120).optional(),
+});
+export type MailAttachment = z.infer<typeof mailAttachmentSchema>;
+
 export const devisSchema = z.object({
   civilite: z.enum(['M.', 'Mme', 'Mlle']),
   nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
@@ -32,6 +45,7 @@ export const devisSchema = z.object({
   // bon lead — ne jamais le rejeter pour ça.
   description: z.string().max(5000).optional().default(''),
   budget: z.string().optional(),
+  attachments: z.array(mailAttachmentSchema).max(4).optional().default([]),
 });
 
 export const interventionSchema = z.object({
@@ -49,6 +63,7 @@ export const interventionSchema = z.object({
   // le pire arbitrage — le rappel téléphonique est le vrai canal.
   description: z.string().max(5000).optional().default(''),
   disponibilite: z.string(),
+  attachments: z.array(mailAttachmentSchema).max(4).optional().default([]),
 });
 
 export const contactApiSchema = z.object({

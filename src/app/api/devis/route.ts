@@ -17,18 +17,36 @@ export async function POST(request: NextRequest) {
     // Parse et valide les données
     const body = await request.json();
     const validatedData = devisSchema.parse(body);
+    const { attachments = [], ...lead } = validatedData;
+
+    // Garde-fou : le client borne déjà à ~3 Mo, mais si le cumul base64
+    // dépasse la marge de sécurité on transmet le lead SANS les pièces —
+    // perdre le lead à cause d'une photo trop lourde serait le pire arbitrage.
+    const MAX_ATTACH_BYTES = 3_500_000;
+    const totalBytes = attachments.reduce((n, a) => n + a.content.length, 0);
+    const safeAttachments = totalBytes <= MAX_ATTACH_BYTES ? attachments : [];
+    if (attachments.length && safeAttachments.length === 0) {
+      console.warn(`[devis] pièces jointes ignorées (cumul ${totalBytes} o > ${MAX_ATTACH_BYTES})`);
+    }
+
+    // Persistance : on ne stocke QUE les métadonnées des pièces (jamais le
+    // base64, qui gonflerait la base et les logs).
+    const persistedPayload = {
+      ...lead,
+      attachments: attachments.map((a) => ({ filename: a.filename, contentType: a.contentType })),
+    };
 
     const submission = await createSubmission({
       type: 'devis',
-      payload: validatedData as unknown as Record<string, unknown>,
-      contact_name: `${validatedData.prenom} ${validatedData.nom}`.trim(),
-      contact_email: validatedData.email,
-      contact_phone: validatedData.telephone,
+      payload: persistedPayload as unknown as Record<string, unknown>,
+      contact_name: `${lead.prenom} ${lead.nom}`.trim(),
+      contact_email: lead.email,
+      contact_phone: lead.telephone,
     });
 
     let emailOk = true;
     if (process.env.RESEND_API_KEY) {
-      const result = await sendDevisEmail(validatedData);
+      const result = await sendDevisEmail({ ...lead, attachments: safeAttachments });
       if (!result.success) {
         emailOk = false;
         console.error('Erreur envoi email devis:', result.error);
@@ -42,7 +60,9 @@ export async function POST(request: NextRequest) {
     // deux ont échoué, répondre "succès" ferait disparaître le devis sans
     // trace pendant que le visiteur croit avoir été pris en charge.
     if (!submission && !emailOk) {
-      console.error('[devis] CRITIQUE : lead ni persisté ni emailé — échec retourné au client');
+      // Log de secours : le lead complet (sans base64) reste récupérable dans
+      // les logs de la plateforme le temps de réparer le canal e-mail.
+      console.error('[devis] CRITIQUE : lead ni persisté ni emailé —', JSON.stringify(persistedPayload));
       return NextResponse.json(
         {
           success: false,
