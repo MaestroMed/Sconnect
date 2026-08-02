@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
 import LazyToaster from "@/components/ui/LazyToaster";
 import AnalyticsGate from "@/components/analytics/AnalyticsGate";
+import ConversionTracking from "@/components/analytics/ConversionTracking";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import MetaThemeColor from "@/components/theme/MetaThemeColor";
@@ -349,6 +350,7 @@ export default async function RootLayout({
           <LazyToaster />
         </ThemeProvider>
         <AnalyticsGate />
+        <ConversionTracking />
       </body>
     </html>
   );
