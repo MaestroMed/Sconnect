@@ -25,7 +25,9 @@ const heroVideoSchema = generateVideoSchema({
   description:
     "Vue cinématographique d'une fenêtre parisienne au crépuscule. Hero animé de S Connect, artisan électricien, serrurier, métallier et spécialiste contrôle d'accès à Clichy.",
   thumbnailUrl: "/images/hero/hero-cinema-paris.webp",
-  uploadDate: "2026-05-10",
+  // ISO 8601 complet avec fuseau : la Search Console signalait « il manque le
+  // fuseau horaire » et « valeur de date et heure incorrecte » sur une date nue.
+  uploadDate: "2026-05-10T09:00:00+02:00",
   duration: "PT6S",
   contentUrl: `${siteUrl}/videos/hero-paris-window.mp4`,
   baseUrl: siteUrl,
