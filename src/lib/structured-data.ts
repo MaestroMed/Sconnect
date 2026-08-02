@@ -203,6 +203,12 @@ export function generateVideoSchema(data: {
   name: string;
   description: string;
   thumbnailUrl: string;
+  /**
+   * ISO 8601 **avec fuseau horaire** — `2026-05-10T09:00:00+02:00`.
+   * Une date nue (`2026-05-10`) est acceptée par Google mais déclenche deux
+   * avertissements dans la Search Console : fuseau manquant et valeur de date
+   * et heure incorrecte.
+   */
   uploadDate: string;
   duration?: string;
   contentUrl: string;

@@ -256,7 +256,8 @@ const videoSchema = generateVideoSchema({
   description:
     "Visualisation Seedance d'une ampoule LED moderne s'allumant progressivement. Illustration du service de relamping LED proposé par S Connect en Île-de-France.",
   thumbnailUrl: "/images/hero/relamping-lightbulb.webp",
-  uploadDate: "2026-05-12",
+  // ISO 8601 complet avec fuseau — voir la note dans src/app/page.tsx.
+  uploadDate: "2026-05-12T09:00:00+02:00",
   duration: "PT5S",
   contentUrl: `${siteUrl}/videos/relamping-lightbulb.mp4`,
   baseUrl: siteUrl,
