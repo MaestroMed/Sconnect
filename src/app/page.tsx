@@ -7,7 +7,15 @@ import { generateVideoSchema, injectSchema } from "@/lib/structured-data";
 // l'`alternates` était hérité par toutes les pages sans canonical propre).
 // Relatif : résolu en absolu via metadataBase du root layout.
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    // Répété ici car cet `alternates` remplace entièrement celui du layout.
+    types: {
+      "application/rss+xml": [
+        { url: "/actualites/feed.xml", title: "Actualités S Connect France" },
+      ],
+    },
+  },
 };
 
 // ISR — re-render at most every 10 min. The home content (site config,
