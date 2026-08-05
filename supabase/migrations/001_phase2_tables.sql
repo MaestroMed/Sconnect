@@ -28,7 +28,7 @@ CREATE INDEX IF NOT EXISTS idx_submissions_type ON submissions (type);
 
 ALTER TABLE submissions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Service role full access" ON submissions;
-CREATE POLICY "Service role full access" ON submissions FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Service role full access" ON submissions FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP TRIGGER IF EXISTS update_submissions_updated_at ON submissions;
 CREATE TRIGGER update_submissions_updated_at
@@ -53,7 +53,7 @@ CREATE INDEX IF NOT EXISTS idx_newsletter_status ON newsletter_subscribers (stat
 
 ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Service role full access" ON newsletter_subscribers;
-CREATE POLICY "Service role full access" ON newsletter_subscribers FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Service role full access" ON newsletter_subscribers FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP TRIGGER IF EXISTS update_newsletter_subscribers_updated_at ON newsletter_subscribers;
 CREATE TRIGGER update_newsletter_subscribers_updated_at
@@ -82,9 +82,9 @@ CREATE INDEX IF NOT EXISTS idx_posts_tags ON posts USING GIN (tags);
 
 ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Public read published" ON posts;
-CREATE POLICY "Public read published" ON posts FOR SELECT USING (published = true);
+CREATE POLICY "Public read published" ON posts FOR SELECT TO anon, authenticated USING (published = true);
 DROP POLICY IF EXISTS "Service role full access" ON posts;
-CREATE POLICY "Service role full access" ON posts FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Service role full access" ON posts FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP TRIGGER IF EXISTS update_posts_updated_at ON posts;
 CREATE TRIGGER update_posts_updated_at
@@ -107,4 +107,4 @@ CREATE INDEX IF NOT EXISTS idx_password_reset_expires ON password_reset_tokens (
 
 ALTER TABLE password_reset_tokens ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Service role full access" ON password_reset_tokens;
-CREATE POLICY "Service role full access" ON password_reset_tokens FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Service role full access" ON password_reset_tokens FOR ALL TO service_role USING (true) WITH CHECK (true);
