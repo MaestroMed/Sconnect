@@ -27,14 +27,14 @@ export default function CookieBanner() {
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
       // Afficher la bannière après un court délai
-      setTimeout(() => setShowBanner(true), 1000);
-    } else {
-      // Charger les préférences sauvegardées
-      try {
-        setPreferences(JSON.parse(consent));
-      } catch (e) {
-        console.error("Erreur chargement préférences cookies:", e);
-      }
+      const t = setTimeout(() => setShowBanner(true), 1000);
+      return () => clearTimeout(t);
+    }
+    // Charger les préférences sauvegardées
+    try {
+      setPreferences(JSON.parse(consent));
+    } catch (e) {
+      console.error("Erreur chargement préférences cookies:", e);
     }
   }, []);
 
@@ -84,7 +84,11 @@ export default function CookieBanner() {
   return (
     <>
       {showBanner && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-cookie-banner-in">
+        <div
+          role="region"
+          aria-label="Consentement cookies"
+          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-cookie-banner-in"
+        >
           <div className="container-custom max-w-6xl">
             <div className="bg-surface-elevated rounded-2xl shadow-2xl border border-border p-6 md:p-8">
               {!showSettings ? (

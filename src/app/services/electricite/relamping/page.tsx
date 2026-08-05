@@ -503,7 +503,7 @@ export default function RelampingPage() {
               <p className="text-lg text-foreground-muted mb-6 leading-relaxed">
                 Les fiches CEE éclairage tertiaire ont été supprimées par l&apos;arrêté du
                 23 février 2026. Mais le relamping reste rentable par la seule économie d&apos;énergie,
-                et <strong>plusieurs leviers de financement</strong> restent ouverts. S&apos;Connect
+                et <strong>plusieurs leviers de financement</strong> restent ouverts. S Connect France
                 vous remet une étude de financement avec le devis.
               </p>
               <ul className="space-y-3 mb-8">

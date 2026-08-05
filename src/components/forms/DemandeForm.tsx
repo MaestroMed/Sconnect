@@ -334,6 +334,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
+        role="status"
         className="card p-12 text-center"
       >
         <div className="w-20 h-20 mx-auto bg-green-100 dark:bg-green-500/15 rounded-full flex items-center justify-center mb-6">
@@ -370,7 +371,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
             <div
               className={`flex items-center gap-2 ${
                 currentStep === step.id
-                  ? "text-primary-600"
+                  ? "text-primary-600 dark:text-primary-400"
                   : currentStep > step.id
                   ? "text-green-600 dark:text-green-400"
                   : "text-foreground-muted"

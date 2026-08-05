@@ -60,7 +60,7 @@ export default function ConditionsGeneralesPage() {
               </h2>
               <p>
                 Les présentes conditions générales régissent les relations
-                contractuelles entre la société S&apos;Connect, ci-après
+                contractuelles entre la société S Connect France, ci-après
                 dénommée « le Prestataire », et toute personne physique ou
                 morale, ci-après dénommée « le Client », qui fait appel à ses
                 services d&apos;électricité, de contrôle d&apos;accès, de

@@ -75,7 +75,7 @@ export default function MobileNav({ navigation, services, phone, schedule }: Mob
         >
           <Dialog.Title className="sr-only">Navigation principale</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Menu de navigation du site S&apos;Connect France
+            Menu de navigation du site S Connect France
           </Dialog.Description>
 
           <div className="flex items-center justify-between px-4 py-4 border-b border-border">

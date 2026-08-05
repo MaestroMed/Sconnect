@@ -123,7 +123,7 @@ export default function ContactPage() {
                 </h2>
 
                 {submitStatus === "success" ? (
-                  <div className="text-center py-12">
+                  <div className="text-center py-12" role="status">
                     <div className="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/15 rounded-full flex items-center justify-center mb-4">
                       <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
                     </div>

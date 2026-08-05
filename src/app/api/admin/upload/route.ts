@@ -41,6 +41,11 @@ function detectImageType(buffer: Buffer): { contentType: string; extension: stri
   if (buffer.subarray(4, 12).toString('ascii') === 'ftypavif') {
     return { contentType: 'image/avif', extension: 'avif' }
   }
+  // SVG (XML texte) : balise <svg dans les premiers Ko — testé en dernier,
+  // après les signatures binaires. Nécessaire : les logos du site sont des SVG.
+  if (buffer.subarray(0, 4096).toString('utf8').toLowerCase().includes('<svg')) {
+    return { contentType: 'image/svg+xml', extension: 'svg' }
+  }
   return null
 }
 
@@ -76,7 +81,7 @@ export async function POST(request: NextRequest) {
     const detected = detectImageType(buffer)
     if (!detected) {
       return NextResponse.json(
-        { error: 'Le fichier doit être une image (JPEG, PNG, GIF, WebP ou AVIF)' },
+        { error: 'Le fichier doit être une image (JPEG, PNG, GIF, WebP, AVIF ou SVG)' },
         { status: 400 }
       )
     }

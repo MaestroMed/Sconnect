@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
               </div>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <div style={{ color: "white", fontSize: 32, fontWeight: 800, letterSpacing: -0.5 }}>
-                  S&apos;Connect
+                  S Connect France
                 </div>
                 <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 18, letterSpacing: 2 }}>
                   FRANCE

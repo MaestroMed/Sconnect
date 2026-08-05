@@ -83,7 +83,7 @@ export default function NewsletterForm({
               className="mt-0.5"
             />
             <span>
-              J&apos;accepte de recevoir les emails de S&apos;Connect. Désinscription en
+              J&apos;accepte de recevoir les emails de S Connect France. Désinscription en
               1 clic via chaque email. Voir notre{" "}
               <a href="/politique-confidentialite" className="underline">
                 politique de confidentialité
@@ -141,7 +141,7 @@ export default function NewsletterForm({
           className="mt-0.5"
         />
         <span>
-          J&apos;accepte de recevoir les emails de S&apos;Connect (désinscription en 1 clic).
+          J&apos;accepte de recevoir les emails de S Connect France (désinscription en 1 clic).
         </span>
       </label>
     </form>

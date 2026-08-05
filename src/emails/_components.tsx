@@ -78,7 +78,7 @@ export function Shell({
               }}
             >
               <Text style={{ margin: 0 }}>
-                S&apos;Connect — Électricité, Contrôle d&apos;accès &amp; Serrurerie
+                S Connect France — Électricité, Contrôle d&apos;accès &amp; Serrurerie
               </Text>
               <Text style={{ margin: 0 }}>Île-de-France · Intervention 24h/24</Text>
             </Section>
