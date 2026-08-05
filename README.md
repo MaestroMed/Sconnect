@@ -131,9 +131,9 @@ Voir `env.example.txt` pour la liste complète.
 1. **Connecter le repo GitHub** au projet Vercel.
 2. **Configurer les secrets** dans Project Settings → Environment Variables (Production + Preview) :
    - **Critiques** : `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_EMAIL`, `JWT_SECRET` (≥32 chars random)
-   - **Recommandés** : `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_PHONE_EMERGENCY`, `NEXT_PUBLIC_GA_ID`
+   - **Recommandés** : `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_PHONE_EMERGENCY`, `NEXT_PUBLIC_GA4_ID`
    - **Optionnels** : `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`, `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`, `WHATSAPP_NUMBER`, `MAINTENANCE_MODE`, `BREVO_API_KEY`, `RESEND_AUDIENCE_ID`
-3. **Préparer Supabase** : créer le projet, exécuter `supabase/schema.sql` puis `supabase/storage-policies.sql`, puis `npm run db:seed` pour peupler les tables initiales.
+3. **Préparer Supabase** : créer le projet, exécuter `supabase/SETUP.sql` (structure + RLS + bucket, re-jouable sans danger), puis `npm run db:seed` pour peupler les tables initiales.
 4. **Premier admin** : si la table `admin_users` est vide, définir `ADMIN_BOOTSTRAP_EMAIL` + `ADMIN_BOOTSTRAP_PASSWORD_HASH` (bcrypt) dans les env vars Vercel pour permettre la première connexion.
 5. **Déployer** : `git push` sur la branche principale déclenche le build automatique.
 6. **Post-déploiement** :
