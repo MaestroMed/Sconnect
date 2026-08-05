@@ -1,0 +1,920 @@
+diff --git a/.env.example b/.env.example
+index d4d6d42..fec2006 100644
+--- a/.env.example
++++ b/.env.example
+@@ -30,24 +30,40 @@ RESEND_TO_EMAIL=contact@sconnectfrance.fr
+ JWT_SECRET=
+ 
+ # --- Analytics (chargés uniquement après consentement cookies) ---
+-NEXT_PUBLIC_GA_ID=
+-NEXT_PUBLIC_GTM_ID=
++# UNE SEULE variable : AnalyticsGate charge GA4 avec NEXT_PUBLIC_GA4_ID.
++# (Les anciennes NEXT_PUBLIC_GA_ID / GTM_ID alimentaient un second chargeur
++# gtag dans le CookieBanner, supprimé — ne pas les réintroduire.)
++NEXT_PUBLIC_GA4_ID=
+ 
+ # --- Monitoring (optionnel — Sentry inactif si non rempli) ---
+ SENTRY_DSN=
++# DSN côté navigateur (sentry.client.config.ts) — souvent le même que SENTRY_DSN
++NEXT_PUBLIC_SENTRY_DSN=
+ SENTRY_AUTH_TOKEN=
+ SENTRY_ORG=
+ SENTRY_PROJECT=
++# Taux d'échantillonnage des traces (0 à 1, défaut raisonnable : 0.1)
++SENTRY_TRACES_SAMPLE_RATE=
+ 
+ # --- SEO verification (optionnel) ---
+ GOOGLE_SITE_VERIFICATION=
+ BING_SITE_VERIFICATION=
+ 
+-# --- Intégrations optionnelles ---
+-WHATSAPP_NUMBER=
+-BREVO_API_KEY=
+-RESEND_AUDIENCE_ID=
++# --- Coordonnées affichées (repli sur site-config.json si vides) ---
++NEXT_PUBLIC_PHONE=
++NEXT_PUBLIC_PHONE_EMERGENCY=
++
++# --- IndexNow (soumission Bing/Yandex) ---
+ INDEXNOW_KEY=
++# Jeton bearer exigé par POST /api/indexnow (protège l'endpoint du spam)
++INDEXNOW_TRIGGER_TOKEN=
++
++# --- SEO local (optionnel) ---
++# Population minimale pour publier une page commune (défaut dans le code)
++NEXT_PUBLIC_LOCALSEO_MIN_POP=
++
++# --- Divers ---
++MAINTENANCE_MODE=
+ 
+ # --- Maintenance toggle ---
+ MAINTENANCE_MODE=false
+diff --git a/README.md b/README.md
+index 043b609..974c126 100644
+--- a/README.md
++++ b/README.md
+@@ -131,9 +131,9 @@ Voir `env.example.txt` pour la liste complète.
+ 1. **Connecter le repo GitHub** au projet Vercel.
+ 2. **Configurer les secrets** dans Project Settings → Environment Variables (Production + Preview) :
+    - **Critiques** : `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_EMAIL`, `JWT_SECRET` (≥32 chars random)
+-   - **Recommandés** : `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_PHONE_EMERGENCY`, `NEXT_PUBLIC_GA_ID`
++   - **Recommandés** : `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_PHONE_EMERGENCY`, `NEXT_PUBLIC_GA4_ID`
+    - **Optionnels** : `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`, `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`, `WHATSAPP_NUMBER`, `MAINTENANCE_MODE`, `BREVO_API_KEY`, `RESEND_AUDIENCE_ID`
+-3. **Préparer Supabase** : créer le projet, exécuter `supabase/schema.sql` puis `supabase/storage-policies.sql`, puis `npm run db:seed` pour peupler les tables initiales.
++3. **Préparer Supabase** : créer le projet, exécuter `supabase/SETUP.sql` (un seul fichier : tables, RLS, bucket), puis `npm run db:seed` pour peupler les tables initiales.
+ 4. **Premier admin** : si la table `admin_users` est vide, définir `ADMIN_BOOTSTRAP_EMAIL` + `ADMIN_BOOTSTRAP_PASSWORD_HASH` (bcrypt) dans les env vars Vercel pour permettre la première connexion.
+ 5. **Déployer** : `git push` sur la branche principale déclenche le build automatique.
+ 6. **Post-déploiement** :
+diff --git a/docs/GUIDE-GESTION-SITE.md b/docs/GUIDE-GESTION-SITE.md
+index b427ea7..3a4f248 100644
+--- a/docs/GUIDE-GESTION-SITE.md
++++ b/docs/GUIDE-GESTION-SITE.md
+@@ -182,9 +182,11 @@ d'images, stockage des demandes de devis et de la newsletter). Fais les étapes
+ 1. Dans ton projet Supabase → **SQL Editor** → **New query**.
+ 2. Ouvre le fichier **`supabase/SETUP.sql`** du dépôt, copie **tout**, colle, **Run**.
+    → Ça crée toutes les tables, les sécurités, **et** le bucket d'images
+-   `sconnectfrance`. (Re-jouable sans risque. N'utilise PAS les vieux
+-   `schema.sql`/`seed.sql` : ils contiennent de fausses données et un mauvais
+-   nom de bucket.)
++   `sconnectfrance`. (Re-jouable sans risque — les anciens `schema.sql`/
++   `seed.sql` dangereux ont été supprimés du dépôt.)
++   **Si la base a été installée avant août 2026, re-exécute SETUP.sql** :
++   il corrige les policies RLS qui laissaient la clé publique `anon` écrire
++   dans toutes les tables (dont `admin_users` et les demandes clients).
+ 3. **Project Settings → API** : note ces 3 valeurs :
+    - `Project URL` → ira dans `NEXT_PUBLIC_SUPABASE_URL`
+    - `anon public` key → ira dans `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+diff --git a/next.config.ts b/next.config.ts
+index 492455f..8c009a2 100644
+--- a/next.config.ts
++++ b/next.config.ts
+@@ -27,7 +27,9 @@ const nextConfig: NextConfig = {
+     // Tailles d'images pour les layouts
+     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+     // Minimums pour optimisation
+-    minimumCacheTTL: 60,
++    // 31 jours : les images optimisées sont immuables en pratique (les
++    // fichiers de public/ changent de nom quand ils changent de contenu).
++    minimumCacheTTL: 2678400,
+   },
+ 
+   // Headers de sécurité et performance
+@@ -38,9 +40,21 @@ const nextConfig: NextConfig = {
+     //   A follow-up step would migrate these to nonces via middleware.
+     // - connect-src includes Supabase, Resend, Vercel Analytics + Speed Insights,
+     //   Google Analytics/Tag Manager.
++    // unsafe-eval uniquement en dev (React Refresh / turbopack l'exigent) —
++    // le runtime de prod Next n'utilise pas eval, le retirer coûte zéro.
++    const scriptSrc = [
++      "'self'",
++      "'unsafe-inline'",
++      process.env.NODE_ENV !== 'production' && "'unsafe-eval'",
++      'https://www.googletagmanager.com',
++      'https://www.google-analytics.com',
++    ]
++      .filter(Boolean)
++      .join(' ');
++
+     const csp = [
+       "default-src 'self'",
+-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
++      `script-src ${scriptSrc}`,
+       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+       "img-src 'self' data: blob: https:",
+       "font-src 'self' https://fonts.gstatic.com data:",
+@@ -80,6 +94,14 @@ const nextConfig: NextConfig = {
+           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+         ],
+       },
++      // Assets de public/ (images 16 Mo, vidéos 11 Mo) : sans ce header,
++      // Vercel sert max-age=0 → tout re-téléchargé à chaque visite.
++      {
++        source: '/:prefix(images|videos|brands)/:path*',
++        headers: [
++          { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
++        ],
++      },
+     ];
+   },
+ 
+@@ -145,6 +167,13 @@ const nextConfig: NextConfig = {
+         destination: '/politique-confidentialite',
+         permanent: true,
+       },
++      // /a-propos : redirection HTTP 308 (la page faisait un permanentRedirect()
++      // au rendu = 200 + meta refresh, invisible pour les crawlers).
++      {
++        source: '/a-propos',
++        destination: '/presentation',
++        permanent: true,
++      },
+       // Page avis supprimée volontairement — 301 vers les réalisations
+       // (plutôt qu'un 404 sec sur une URL anciennement publiée/indexée).
+       {
+diff --git a/package.json b/package.json
+index 8ff5ba7..2db0ad9 100644
+--- a/package.json
++++ b/package.json
+@@ -52,8 +52,6 @@
+     "@tiptap/pm": "^3.22.3",
+     "@tiptap/react": "^3.22.3",
+     "@tiptap/starter-kit": "^3.22.3",
+-    "@vercel/analytics": "^2.0.1",
+-    "@vercel/speed-insights": "^2.0.0",
+     "autoprefixer": "^10.4.20",
+     "bcryptjs": "^3.0.3",
+     "class-variance-authority": "^0.7.1",
+diff --git a/public/manifest.json b/public/manifest.json
+index 11e2fab..90b2fce 100644
+--- a/public/manifest.json
++++ b/public/manifest.json
+@@ -1,6 +1,6 @@
+ {
+-  "name": "S'Connect France",
+-  "short_name": "S'Connect",
++  "name": "S Connect France",
++  "short_name": "S Connect",
+   "description": "Électricité, contrôle d'accès, serrurerie et métallerie à Clichy et Île-de-France. Intervention rapide 24h/24.",
+   "start_url": "/",
+   "scope": "/",
+diff --git a/src/app/api/admin/upload/route.ts b/src/app/api/admin/upload/route.ts
+index 0b8e279..3d891f0 100644
+--- a/src/app/api/admin/upload/route.ts
++++ b/src/app/api/admin/upload/route.ts
+@@ -1,8 +1,36 @@
+ import { NextRequest, NextResponse } from 'next/server'
+ import { getAuthenticatedUser } from '@/lib/auth'
+-import { writeFile, mkdir } from 'fs/promises'
+-import { existsSync } from 'fs'
+-import path from 'path'
++
++// Types d'images autorisés : le MIME est vérifié par MAGIC BYTES (le
++// file.type envoyé par le client est falsifiable) et le Content-Type stocké
++// est celui détecté, pas celui déclaré.
++const ALLOWED_IMAGE_TYPES: Record<string, { ext: string; magic: (b: Buffer) => boolean }> = {
++  'image/jpeg': { ext: 'jpg', magic: (b) => b.length > 2 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
++  'image/png': { ext: 'png', magic: (b) => b.length > 7 && b.readUInt32BE(0) === 0x89504e47 },
++  'image/webp': {
++    ext: 'webp',
++    magic: (b) => b.length > 11 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP',
++  },
++  'image/gif': { ext: 'gif', magic: (b) => b.length > 5 && ['GIF87a', 'GIF89a'].includes(b.toString('ascii', 0, 6)) },
++  'image/svg+xml': {
++    ext: 'svg',
++    // SVG = XML texte : présence d'une balise <svg dans les premiers Ko.
++    magic: (b) => b.slice(0, 4096).toString('utf8').toLowerCase().includes('<svg'),
++  },
++}
++
++function detectImageType(buffer: Buffer): { mime: string; ext: string } | null {
++  for (const [mime, { ext, magic }] of Object.entries(ALLOWED_IMAGE_TYPES)) {
++    if (magic(buffer)) return { mime, ext }
++  }
++  return null
++}
++
++// Dossiers de destination whitelistés — `folder` vient du formulaire client.
++const ALLOWED_FOLDERS = new Set([
++  'general', 'logos', 'hero', 'services', 'realizations', 'brands',
++  'testimonials', 'media', 'posts',
++])
+ 
+ // Check if Supabase is configured
+ function isSupabaseConfigured(): boolean {
+@@ -11,27 +39,6 @@ function isSupabaseConfigured(): boolean {
+   return Boolean(url && key && url.includes('supabase'))
+ }
+ 
+-// Save file locally
+-async function saveLocally(file: File, folder: string): Promise<string> {
+-  const extension = file.name.split('.').pop() || 'png'
+-  const uniqueFilename = `${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`
+-  
+-  const uploadsDir = path.join(process.cwd(), 'public', 'uploads', folder)
+-  
+-  // Create directory if it doesn't exist
+-  if (!existsSync(uploadsDir)) {
+-    await mkdir(uploadsDir, { recursive: true })
+-  }
+-
+-  const filePath = path.join(uploadsDir, uniqueFilename)
+-  const arrayBuffer = await file.arrayBuffer()
+-  const buffer = Buffer.from(arrayBuffer)
+-  
+-  await writeFile(filePath, buffer)
+-  
+-  return `/uploads/${folder}/${uniqueFilename}`
+-}
+-
+ export async function POST(request: NextRequest) {
+   console.log('Upload request received')
+   
+@@ -51,13 +58,12 @@ export async function POST(request: NextRequest) {
+       return NextResponse.json({ error: 'Aucun fichier fourni' }, { status: 400 })
+     }
+ 
+-    console.log('File received:', { name: file.name, type: file.type, size: file.size, folder })
+-
+-    // Validate file type
+-    if (!file.type.startsWith('image/')) {
+-      return NextResponse.json({ error: 'Le fichier doit être une image' }, { status: 400 })
++    if (!ALLOWED_FOLDERS.has(folder)) {
++      return NextResponse.json({ error: 'Dossier de destination invalide' }, { status: 400 })
+     }
+ 
++    console.log('File received:', { name: file.name, type: file.type, size: file.size, folder })
++
+     // Validate file size (max 5MB for Vercel)
+     if (file.size > 5 * 1024 * 1024) {
+       return NextResponse.json({ error: 'Le fichier ne doit pas dépasser 5MB' }, { status: 400 })
+@@ -66,8 +72,16 @@ export async function POST(request: NextRequest) {
+     // Read file content into buffer before any async operations
+     const arrayBuffer = await file.arrayBuffer()
+     const buffer = Buffer.from(arrayBuffer)
+-    const extension = file.name.split('.').pop() || 'png'
+-    const contentType = file.type
++
++    // Type réel détecté sur le contenu — pas le MIME déclaré par le client.
++    const detected = detectImageType(buffer)
++    if (!detected) {
++      return NextResponse.json(
++        { error: 'Le fichier doit être une image (JPEG, PNG, WebP, GIF ou SVG)' },
++        { status: 400 },
++      )
++    }
++    const { mime: contentType, ext: extension } = detected
+ 
+     // Try Supabase Storage if configured
+     if (isSupabaseConfigured()) {
+@@ -83,7 +97,7 @@ export async function POST(request: NextRequest) {
+           .from('sconnectfrance')
+           .upload(filePath, buffer, {
+             contentType,
+-            upsert: true
++            upsert: false,
+           })
+         
+         if (error) {
+diff --git a/src/app/api/og/route.tsx b/src/app/api/og/route.tsx
+index fbf4d94..f0ca07c 100644
+--- a/src/app/api/og/route.tsx
++++ b/src/app/api/og/route.tsx
+@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
+               </div>
+               <div style={{ display: "flex", flexDirection: "column" }}>
+                 <div style={{ color: "white", fontSize: 32, fontWeight: 800, letterSpacing: -0.5 }}>
+-                  S&apos;Connect
++                  S Connect France
+                 </div>
+                 <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 18, letterSpacing: 2 }}>
+                   FRANCE
+diff --git a/src/app/auteur/mehdi-belkacem/page.tsx b/src/app/auteur/mehdi-belkacem/page.tsx
+index 896ce3f..83263fd 100644
+--- a/src/app/auteur/mehdi-belkacem/page.tsx
++++ b/src/app/auteur/mehdi-belkacem/page.tsx
+@@ -20,7 +20,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
+ import { getAllPosts, formatDate } from "@/lib/blog";
+ 
+ export const metadata: Metadata = {
+-  title: "Mehdi Belkacem — Fondateur S Connect | Expert relamping LED en IDF",
++  title: "Mehdi Belkacem — Expert relamping LED en Île-de-France",
+   description:
+     "Fondateur de S Connect France en 2021. Électricien spécialisé relamping LED, certifié Qualifélec et IRVE. Audits éclairage et accompagnement décret tertiaire pour bureaux, commerces, copropriétés et industriels en Île-de-France.",
+   alternates: { canonical: "/auteur/mehdi-belkacem" },
+diff --git a/src/app/calculateur-relamping/page.tsx b/src/app/calculateur-relamping/page.tsx
+index 6714aed..cf6d2dd 100644
+--- a/src/app/calculateur-relamping/page.tsx
++++ b/src/app/calculateur-relamping/page.tsx
+@@ -19,7 +19,7 @@ import {
+ } from "@/lib/structured-data";
+ 
+ export const metadata: Metadata = {
+-  title: "Calculateur relamping LED gratuit — économies, prime, ROI | S Connect",
++  title: "Calculateur relamping LED gratuit — économies, prime, ROI",
+   description:
+     "Estimez en 30 secondes les économies, le coût et le ROI de votre projet relamping LED. 4 typologies (bureau, commerce, copropriété, industriel), calcul des aides post-CEE 2026. Devis ferme sur demande.",
+   keywords: [
+diff --git a/src/app/conditions-generales/page.tsx b/src/app/conditions-generales/page.tsx
+index c77d819..29b9e59 100644
+--- a/src/app/conditions-generales/page.tsx
++++ b/src/app/conditions-generales/page.tsx
+@@ -60,7 +60,7 @@ export default function ConditionsGeneralesPage() {
+               </h2>
+               <p>
+                 Les présentes conditions générales régissent les relations
+-                contractuelles entre la société S&apos;Connect, ci-après
++                contractuelles entre la société S Connect France, ci-après
+                 dénommée « le Prestataire », et toute personne physique ou
+                 morale, ci-après dénommée « le Client », qui fait appel à ses
+                 services d&apos;électricité, de contrôle d&apos;accès, de
+diff --git a/src/app/contact/page.tsx b/src/app/contact/page.tsx
+index 4a5eeef..31c5678 100644
+--- a/src/app/contact/page.tsx
++++ b/src/app/contact/page.tsx
+@@ -2,7 +2,7 @@
+ 
+ import { useState } from "react";
+ import Link from "next/link";
+-import { motion } from "framer-motion";
++import { motion, useReducedMotion } from "framer-motion";
+ import {
+   Phone,
+   Mail,
+@@ -17,6 +17,7 @@ import {
+ } from "lucide-react";
+ import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
+ import BulbText from "@/components/ui/BulbText";
++import { InputField, TextareaField } from "@/components/forms/FormField";
+ 
+ export default function ContactPage() {
+   const [formState, setFormState] = useState({
+@@ -27,6 +28,11 @@ export default function ContactPage() {
+   });
+   const [errors, setErrors] = useState<Record<string, string>>({});
+   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
++  const reduceMotion = useReducedMotion();
++  const sideCard = (delay: number) =>
++    reduceMotion
++      ? { initial: false as const, animate: { opacity: 1, x: 0 } }
++      : { initial: { opacity: 0, x: 20 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.5, delay } };
+ 
+   const validate = () => {
+     const newErrors: Record<string, string> = {};
+@@ -86,11 +92,9 @@ export default function ContactPage() {
+ 
+         <div className="container-custom relative z-10">
+           <div className="max-w-3xl">
+-            <motion.div
+-              initial={{ opacity: 0, y: 20 }}
+-              animate={{ opacity: 1, y: 0 }}
+-              transition={{ duration: 0.5 }}
+-            >
++            {/* initial={false} : le fade 0→1 SSR retardait le LCP (H1 invisible
++                jusqu'à hydratation) — même correctif que sur la home. */}
++            <motion.div initial={false} animate={{ opacity: 1, y: 0 }}>
+               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
+                 <Mail className="w-4 h-4" />
+                 Contact
+@@ -113,20 +117,15 @@ export default function ContactPage() {
+           <div className="grid lg:grid-cols-3 gap-12">
+             {/* Form */}
+             <div className="lg:col-span-2">
+-              <motion.div
+-                initial={{ opacity: 0, y: 20 }}
+-                animate={{ opacity: 1, y: 0 }}
+-                transition={{ duration: 0.5 }}
+-                className="card p-6 md:p-8"
+-              >
++              <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="card p-6 md:p-8">
+                 <h2 className="font-display font-bold text-2xl text-foreground mb-6">
+                   Envoyez-nous un message
+                 </h2>
+ 
+                 {submitStatus === "success" ? (
+-                  <div className="text-center py-12">
+-                    <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
+-                      <CheckCircle2 className="w-8 h-8 text-green-600" />
++                  <div className="text-center py-12" role="status">
++                    <div className="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/15 rounded-full flex items-center justify-center mb-4">
++                      <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
+                     </div>
+                     <h3 className="font-display font-bold text-xl text-foreground mb-2">
+                       Message envoyé !
+@@ -144,83 +143,71 @@ export default function ContactPage() {
+                 ) : (
+                   <form onSubmit={handleSubmit} className="space-y-6">
+                     <div className="grid md:grid-cols-2 gap-4">
+-                      <div>
+-                        <label className="input-label">
+-                          Nom <span className="text-red-500">*</span>
+-                        </label>
+-                        <input
+-                          type="text"
+-                          className={`input-field ${errors.nom ? "input-error" : ""}`}
+-                          placeholder="Votre nom"
+-                          value={formState.nom}
+-                          onChange={(e) =>
+-                            setFormState({ ...formState, nom: e.target.value })
+-                          }
+-                        />
+-                        {errors.nom && (
+-                          <p className="error-message">{errors.nom}</p>
+-                        )}
+-                      </div>
+-                      <div>
+-                        <label className="input-label">
+-                          Email <span className="text-red-500">*</span>
+-                        </label>
+-                        <input
+-                          type="email"
+-                          className={`input-field ${errors.email ? "input-error" : ""}`}
+-                          placeholder="votre@email.com"
+-                          value={formState.email}
+-                          onChange={(e) =>
+-                            setFormState({ ...formState, email: e.target.value })
+-                          }
+-                        />
+-                        {errors.email && (
+-                          <p className="error-message">{errors.email}</p>
+-                        )}
+-                      </div>
+-                    </div>
+-
+-                    <div>
+-                      <label className="input-label">
+-                        Objet <span className="text-red-500">*</span>
+-                      </label>
+-                      <input
++                      <InputField
++                        label="Nom"
++                        required
+                         type="text"
+-                        className={`input-field ${errors.objet ? "input-error" : ""}`}
+-                        placeholder="Objet de votre message"
+-                        value={formState.objet}
++                        name="nom"
++                        autoComplete="name"
++                        placeholder="Votre nom"
++                        value={formState.nom}
++                        error={errors.nom}
+                         onChange={(e) =>
+-                          setFormState({ ...formState, objet: e.target.value })
++                          setFormState({ ...formState, nom: e.target.value })
+                         }
+                       />
+-                      {errors.objet && (
+-                        <p className="error-message">{errors.objet}</p>
+-                      )}
+-                    </div>
+-
+-                    <div>
+-                      <label className="input-label">
+-                        Message <span className="text-red-500">*</span>
+-                      </label>
+-                      <textarea
+-                        className={`input-field min-h-[150px] resize-y ${
+-                          errors.message ? "input-error" : ""
+-                        }`}
+-                        placeholder="Décrivez votre demande..."
+-                        value={formState.message}
++                      <InputField
++                        label="Email"
++                        required
++                        type="email"
++                        name="email"
++                        autoComplete="email"
++                        placeholder="votre@email.com"
++                        value={formState.email}
++                        error={errors.email}
+                         onChange={(e) =>
+-                          setFormState({ ...formState, message: e.target.value })
++                          setFormState({ ...formState, email: e.target.value })
+                         }
+                       />
+-                      {errors.message && (
+-                        <p className="error-message">{errors.message}</p>
+-                      )}
+                     </div>
+ 
++                    <InputField
++                      label="Objet"
++                      required
++                      type="text"
++                      name="objet"
++                      placeholder="Objet de votre message"
++                      value={formState.objet}
++                      error={errors.objet}
++                      onChange={(e) =>
++                        setFormState({ ...formState, objet: e.target.value })
++                      }
++                    />
++
++                    <TextareaField
++                      label="Message"
++                      required
++                      name="message"
++                      className="min-h-[150px]"
++                      placeholder="Décrivez votre demande..."
++                      value={formState.message}
++                      error={errors.message}
++                      onChange={(e) =>
++                        setFormState({ ...formState, message: e.target.value })
++                      }
++                    />
++
+                     {submitStatus === "error" && (
+-                      <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-red-700">
+-                        <AlertCircle className="w-5 h-5 shrink-0" />
+-                        <p>Une erreur est survenue. Veuillez réessayer.</p>
++                      <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl flex items-start gap-3 text-red-700 dark:text-red-400">
++                        <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
++                        <p>
++                          L&apos;envoi n&apos;a pas abouti. Réessayez, ou appelez-nous
++                          directement au{" "}
++                          <a href="tel:+33652820685" className="font-semibold underline">
++                            06 52 82 06 85
++                          </a>
++                          .
++                        </p>
+                       </div>
+                     )}
+ 
+@@ -249,12 +236,7 @@ export default function ContactPage() {
+             {/* Sidebar */}
+             <div className="space-y-6">
+               {/* Coordonnées */}
+-              <motion.div
+-                initial={{ opacity: 0, x: 20 }}
+-                animate={{ opacity: 1, x: 0 }}
+-                transition={{ duration: 0.5, delay: 0.1 }}
+-                className="card p-6"
+-              >
++              <motion.div {...sideCard(0.1)} className="card p-6">
+                 <h3 className="font-display font-bold text-lg text-foreground mb-6">
+                   Nos coordonnées
+                 </h3>
+@@ -327,12 +309,7 @@ export default function ContactPage() {
+               </motion.div>
+ 
+               {/* Map */}
+-              <motion.div
+-                initial={{ opacity: 0, x: 20 }}
+-                animate={{ opacity: 1, x: 0 }}
+-                transition={{ duration: 0.5, delay: 0.2 }}
+-                className="card overflow-hidden"
+-              >
++              <motion.div {...sideCard(0.2)} className="card overflow-hidden">
+                 <div className="aspect-square bg-surface-muted relative">
+                   <iframe
+                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10488.988459788897!2d2.2958!3d48.9022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f6bf8f4a6e7%3A0x40b82c3688c9460!2s92110%20Clichy!5e0!3m2!1sfr!2sfr!4v1234567890"
+@@ -360,9 +337,7 @@ export default function ContactPage() {
+ 
+               {/* Urgence */}
+               <motion.div
+-                initial={{ opacity: 0, x: 20 }}
+-                animate={{ opacity: 1, x: 0 }}
+-                transition={{ duration: 0.5, delay: 0.3 }}
++                {...sideCard(0.3)}
+                 className="card p-6 bg-gradient-to-br from-accent-500 to-orange-500 text-white"
+               >
+                 <div className="flex items-center gap-4 mb-4">
+diff --git a/src/app/cookies/page.tsx b/src/app/cookies/page.tsx
+index 4025374..a583f01 100644
+--- a/src/app/cookies/page.tsx
++++ b/src/app/cookies/page.tsx
+@@ -3,7 +3,8 @@ import Link from "next/link";
+ import { ArrowLeft, Cookie } from "lucide-react";
+ 
+ export const metadata: Metadata = {
+-  title: "Politique Cookies | S Connect France",
++  alternates: { canonical: "/cookies" },
++  title: "Politique Cookies",
+   description: "Politique d'utilisation des cookies sur le site S Connect France - Gestion et paramétrage des cookies.",
+   robots: { index: true, follow: true },
+ };
+diff --git a/src/app/demande-devis/page.tsx b/src/app/demande-devis/page.tsx
+index bcefb5f..d6ddad0 100644
+--- a/src/app/demande-devis/page.tsx
++++ b/src/app/demande-devis/page.tsx
+@@ -5,6 +5,7 @@ import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
+ import BulbText from "@/components/ui/BulbText";
+ 
+ export const metadata: Metadata = {
++  alternates: { canonical: "/demande-devis" },
+   title: "Demande de Devis Gratuit",
+   description:
+     "Demandez un devis gratuit et sans engagement pour vos travaux électriques à Clichy et Île-de-France. Réponse sous 24h.",
+diff --git a/src/app/demande-intervention/page.tsx b/src/app/demande-intervention/page.tsx
+index d52fc90..5f3d1f0 100644
+--- a/src/app/demande-intervention/page.tsx
++++ b/src/app/demande-intervention/page.tsx
+@@ -4,6 +4,7 @@ import DemandeForm from "@/components/forms/DemandeForm";
+ import { NoiseOverlay } from "@/components/ui/ambient";
+ 
+ export const metadata: Metadata = {
++  alternates: { canonical: "/demande-intervention" },
+   title: "Demande d'Intervention Urgente",
+   description:
+     "Demande d'intervention électrique urgente à Clichy et Île-de-France. Électricien disponible 24h/24, 7j/7. Intervention sous 2h.",
+diff --git a/src/app/etudes-de-cas/page.tsx b/src/app/etudes-de-cas/page.tsx
+index 67046a6..862c034 100644
+--- a/src/app/etudes-de-cas/page.tsx
++++ b/src/app/etudes-de-cas/page.tsx
+@@ -20,7 +20,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
+ import BulbText from "@/components/ui/BulbText";
+ 
+ export const metadata: Metadata = {
+-  title: "Études de cas relamping LED — chantiers réels chiffrés | S Connect Île-de-France",
++  title: "Études de cas relamping LED — chantiers réels chiffrés",
+   description:
+     "3 études de cas relamping LED documentées : plateau de bureaux 1500 m² Boulogne (ROI 3,5 ans), copropriété 24 lots Clichy (économies parties communes), restaurant Paris 9e (IRC > 90 + ambiance). Chiffres réels, conditions techniques, retours client.",
+   keywords: [
+diff --git a/src/app/globals.css b/src/app/globals.css
+index 4ea411f..7e676d9 100644
+--- a/src/app/globals.css
++++ b/src/app/globals.css
+@@ -205,7 +205,7 @@
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+     color: transparent;
+-    animation: gradientTextShift 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
++    animation: gradientTextShift 11s cubic-bezier(0.65, 0, 0.35, 1) 4;
+     will-change: background-position;
+   }
+ 
+@@ -227,7 +227,7 @@
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+     color: transparent;
+-    animation: gradientTextShift 13s cubic-bezier(0.65, 0, 0.35, 1) infinite;
++    animation: gradientTextShift 13s cubic-bezier(0.65, 0, 0.35, 1) 4;
+     will-change: background-position;
+   }
+ 
+@@ -257,7 +257,7 @@
+       bulbBurst 0.95s cubic-bezier(0.22, 1, 0.36, 1)
+         calc(var(--i, 0) * 0.06s + 0.3s) forwards,
+       bulbBreath 4.2s ease-in-out
+-        calc(var(--i, 0) * 0.06s + 1.5s) infinite;
++        calc(var(--i, 0) * 0.06s + 1.5s) 3;
+   }
+ 
+   @keyframes bulbBurst {
+@@ -326,7 +326,7 @@
+   }
+ 
+   .error-message {
+-    @apply text-sm text-red-600 mt-1;
++    @apply text-sm text-red-600 dark:text-red-400 mt-1;
+   }
+ 
+   /* Badge */
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+index 54068d1..abc596a 100644
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -2,6 +2,7 @@ import type { Metadata } from "next";
+ import { Outfit, Space_Grotesk } from "next/font/google";
+ import LazyToaster from "@/components/ui/LazyToaster";
+ import AnalyticsGate from "@/components/analytics/AnalyticsGate";
++import ConversionTracking from "@/components/analytics/ConversionTracking";
+ import "./globals.css";
+ import { ThemeProvider } from "@/components/theme/ThemeProvider";
+ import MetaThemeColor from "@/components/theme/MetaThemeColor";
+@@ -24,6 +25,16 @@ const spaceGrotesk = Space_Grotesk({
+ });
+ 
+ export const metadata: Metadata = {
++  // Autodiscovery du flux RSS (le flux existait sans être découvrable).
++  // UNIQUEMENT `types` — surtout pas de `canonical` ici (voir la note plus
++  // bas : un canonical défini au layout serait hérité par ~20 pages).
++  alternates: {
++    types: {
++      "application/rss+xml": [
++        { url: "/actualites/feed.xml", title: "Actualités S Connect France" },
++      ],
++    },
++  },
+   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr"),
+   title: {
+     default: "S Connect France | Électricité, Contrôle d'Accès & Serrurerie en Île-de-France",
+@@ -349,6 +360,7 @@ export default async function RootLayout({
+           <LazyToaster />
+         </ThemeProvider>
+         <AnalyticsGate />
++        <ConversionTracking />
+       </body>
+     </html>
+   );
+diff --git a/src/app/lexique-eclairage/page.tsx b/src/app/lexique-eclairage/page.tsx
+index b0c4a79..ac2e381 100644
+--- a/src/app/lexique-eclairage/page.tsx
++++ b/src/app/lexique-eclairage/page.tsx
+@@ -7,7 +7,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
+ import BulbText from "@/components/ui/BulbText";
+ 
+ export const metadata: Metadata = {
+-  title: "Lexique éclairage LED — 50 termes pro à connaître | S Connect",
++  title: "Lexique éclairage LED — 50 termes pro à connaître",
+   description:
+     "Lux, UGR, IRC, CCT, DALI, IP65, IK10, LM-80, TM-30, OPERAT… Le lexique complet des acronymes éclairage tertiaire que tout décideur, architecte ou syndic devrait maîtriser avant un relamping LED.",
+   keywords: [
+diff --git a/src/app/maintenance/page.tsx b/src/app/maintenance/page.tsx
+index 1ca1bc4..d2f51ce 100644
+--- a/src/app/maintenance/page.tsx
++++ b/src/app/maintenance/page.tsx
+@@ -2,7 +2,7 @@ import { Wrench, Phone } from "lucide-react";
+ import { getSiteConfig } from "@/lib/data-service";
+ 
+ export const metadata = {
+-  title: "Maintenance · S Connect France",
++  title: "Maintenance",
+   robots: { index: false, follow: false },
+ };
+ 
+diff --git a/src/app/mentions-legales/page.tsx b/src/app/mentions-legales/page.tsx
+index b03a15f..8c22485 100644
+--- a/src/app/mentions-legales/page.tsx
++++ b/src/app/mentions-legales/page.tsx
+@@ -3,7 +3,8 @@ import Link from "next/link";
+ import { ArrowLeft, Building2, Scale, Shield } from "lucide-react";
+ 
+ export const metadata: Metadata = {
+-  title: "Mentions Légales | S Connect France",
++  alternates: { canonical: "/mentions-legales" },
++  title: "Mentions Légales",
+   description: "Mentions légales de S Connect France - Informations légales et réglementaires de l'entreprise.",
+   robots: {
+     index: true,
+diff --git a/src/app/not-found.tsx b/src/app/not-found.tsx
+index d3490a6..a38e656 100644
+--- a/src/app/not-found.tsx
++++ b/src/app/not-found.tsx
+@@ -1,10 +1,11 @@
+ "use client";
+ 
+ import Link from "next/link";
+-import { motion } from "framer-motion";
++import { motion, useReducedMotion } from "framer-motion";
+ import { Home, ArrowLeft, Search, Zap } from "lucide-react";
+ 
+ export default function NotFound() {
++  const reduceMotion = useReducedMotion();
+   return (
+     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-surface to-surface-muted">
+       <div className="container-custom">
+@@ -20,7 +21,7 @@ export default function NotFound() {
+                 404
+               </span>
+               <motion.div
+-                animate={{ rotate: [0, 10, -10, 10, 0] }}
++                animate={reduceMotion ? undefined : { rotate: [0, 10, -10, 10, 0] }}
+                 transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+               >
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index b56293a..1a4da9c 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -25,7 +25,9 @@ const heroVideoSchema = generateVideoSchema({
+   description:
+     "Vue cinématographique d'une fenêtre parisienne au crépuscule. Hero animé de S Connect, artisan électricien, serrurier, métallier et spécialiste contrôle d'accès à Clichy.",
+   thumbnailUrl: "/images/hero/hero-cinema-paris.webp",
+-  uploadDate: "2026-05-10",
++  // ISO 8601 complet avec fuseau : la Search Console signalait « il manque le
++  // fuseau horaire » et « valeur de date et heure incorrecte » sur une date nue.
++  uploadDate: "2026-05-10T09:00:00+02:00",
+   duration: "PT6S",
+   contentUrl: `${siteUrl}/videos/hero-paris-window.mp4`,
+   baseUrl: siteUrl,
+diff --git a/src/app/politique-confidentialite/page.tsx b/src/app/politique-confidentialite/page.tsx
+index cfb886a..1b40085 100644
+--- a/src/app/politique-confidentialite/page.tsx
++++ b/src/app/politique-confidentialite/page.tsx
+@@ -3,7 +3,8 @@ import Link from "next/link";
+ import { ArrowLeft, Shield, Lock, Eye, Database } from "lucide-react";
+ 
+ export const metadata: Metadata = {
+-  title: "Politique de Confidentialité | S Connect France",
++  alternates: { canonical: "/politique-confidentialite" },
++  title: "Politique de Confidentialité",
+   description: "Politique de confidentialité et protection des données personnelles de S Connect France - Conformité RGPD.",
+   robots: { index: true, follow: true },
+ };
+diff --git a/src/app/presse/page.tsx b/src/app/presse/page.tsx
+index b9e410d..18b1df4 100644
+--- a/src/app/presse/page.tsx
++++ b/src/app/presse/page.tsx
+@@ -8,7 +8,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
+ import BulbText from "@/components/ui/BulbText";
+ 
+ export const metadata: Metadata = {
+-  title: "Espace presse — kit, photos, citations | S Connect France",
++  title: "Espace presse — kit, photos, citations",
+   description:
+     "Journalistes, blogueurs, organismes professionnels : retrouvez ici le kit presse S Connect France, les logos haute définition, les photos d'intervention, la biographie du fondateur Mehdi Belkacem et les éléments de langage validés.",
+   alternates: { canonical: "/presse" },
+diff --git a/src/app/services/controle-acces/badges-digicodes/page.tsx b/src/app/services/controle-acces/badges-digicodes/page.tsx
+index 6eb36ca..5bc8bb5 100644
+--- a/src/app/services/controle-acces/badges-digicodes/page.tsx
++++ b/src/app/services/controle-acces/badges-digicodes/page.tsx
+@@ -2,6 +2,9 @@ import { Metadata } from "next";
+ import ServicePageTemplate from "@/components/services/ServicePageTemplate";
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/controle-acces/badges-digicodes" },
+   title: "Badges & Digicodes | Contrôle d'Accès RFID | S Connect France",
+   description: "Installation de systèmes de contrôle d'accès par badges RFID et digicodes en Île-de-France. Solutions professionnelles pour entreprises, copropriétés, bureaux. Devis gratuit.",
+   keywords: ["badge RFID", "digicode", "contrôle accès badge", "lecteur badge", "système accès", "badge proximité", "gestion accès"],
+diff --git a/src/app/services/controle-acces/interphonie-videophonie/page.tsx b/src/app/services/controle-acces/interphonie-videophonie/page.tsx
+index 3fdac8a..d5875e3 100644
+--- a/src/app/services/controle-acces/interphonie-videophonie/page.tsx
++++ b/src/app/services/controle-acces/interphonie-videophonie/page.tsx
+@@ -2,6 +2,9 @@ import { Metadata } from "next";
+ import ServicePageTemplate from "@/components/services/ServicePageTemplate";
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/controle-acces/interphonie-videophonie" },
+   title: "Interphonie & Vidéophonie | Installation & Dépannage | S Connect France",
+   description: "Installation et dépannage d'interphones et vidéophones en Île-de-France. Systèmes audio et vidéo pour copropriétés, particuliers, entreprises. Devis gratuit, intervention rapide.",
+   keywords: ["interphone", "vidéophone", "interphonie", "vidéophonie", "installation interphone", "dépannage interphone", "interphone copropriété", "visiophone"],
+diff --git a/src/app/services/controle-acces/page.tsx b/src/app/services/controle-acces/page.tsx
+index 231aa20..689e2b7 100644
+--- a/src/app/services/controle-acces/page.tsx
++++ b/src/app/services/controle-acces/page.tsx
+@@ -21,6 +21,9 @@ const controleAccesSchema = generateServiceSchema(
+ );
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/controle-acces" },
+   title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S Connect France",
+   description: "Installation professionnelle de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes pour immeubles, entreprises et particuliers. Devis gratuit.",
+   keywords: [
+diff --git a/src/app/services/electricite/depannage-electrique/page.tsx b/src/app/services/electricite/depannage-electrique/page.tsx
+index 1002535..d8975de 100644
+--- a/src/app/services/electricite/depannage-electrique/page.tsx
++++ b/src/app/services/electricite/depannage-electrique/page.tsx
+@@ -4,6 +4,9 @@ import PricingTable from "@/components/marketing/PricingTable";
+ import { getPricing } from "@/lib/data/pricing";
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/electricite/depannage-electrique" },
+   title: "Dépannage Électrique Urgent 24h/24 | S Connect France",
+   description: "Dépannage électrique urgent 24h/24, 7j/7 en Île-de-France. Intervention rapide sous 2h : panne de courant, court-circuit, disjoncteur qui saute. Électricien disponible jour et nuit.",
+   keywords: ["dépannage électrique", "électricien urgence", "panne électrique", "court-circuit", "disjoncteur qui saute", "dépannage 24h", "urgence électrique"],
+diff --git a/src/app/services/electricite/installation-renovation/page.tsx b/src/app/services/electricite/installation-renovation/page.tsx
+index 4d4ea69..94e732b 100644
+--- a/src/app/services/electricite/installation-renovation/page.tsx
++++ b/src/app/services/electricite/installation-renovation/page.tsx
+@@ -4,6 +4,9 @@ import PricingTable from "@/components/marketing/PricingTable";
+ import { getPricing } from "@/lib/data/pricing";
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/electricite/installation-renovation" },
+   title: "Installation & Rénovation Électrique | S Connect France",
+   description: "Installation et rénovation électrique complète en Île-de-France. Création de réseaux, tableaux électriques, éclairage LED, prises, bornes de recharge. Devis gratuit, intervention rapide.",
+   keywords: ["installation électrique", "rénovation électrique", "tableau électrique", "éclairage LED", "borne recharge", "électricien installation", "mise en service électrique"],
+diff --git a/src/app/services/electricite/mise-aux-normes/page.tsx b/src/app/services/electricite/mise-aux-normes/page.tsx
+index 37d4fea..86508d3 100644
+--- a/src/app/services/electricite/mise-aux-normes/page.tsx
++++ b/src/app/services/electricite/mise-aux-normes/page.tsx
+@@ -4,6 +4,9 @@ import PricingTable from "@/components/marketing/PricingTable";
+ import { getPricing } from "@/lib/data/pricing";
+ 
+ export const metadata: Metadata = {
++  // Canonical explicite : sans lui, la page hérite du canonical du
++  // layout /services et se déclare duplicata → risque de désindexation.
++  alternates: { canonical: "/services/electricite/mise-aux-normes" },
+   title: "Mise aux Normes Électriques NF C 15-100 | S Connect France",
+   description: "Mise en conformité électrique NF C 15-100 en Île-de-France. Diagnostic complet, mise à la terre, protections différentielles, certificat Consuel. Devis gratuit.",
+   keywords: ["mise aux normes électrique", "NF C 15-100", "conformité électrique", "diagnostic électrique", "Consuel", "protection différentielle", "mise à la terre"],
