@@ -20,7 +20,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
-  title: "Études de cas relamping LED — chantiers réels chiffrés | S Connect Île-de-France",
+  title: "Études de cas relamping LED — chantiers réels chiffrés",
   description:
     "3 études de cas relamping LED documentées : plateau de bureaux 1500 m² Boulogne (ROI 3,5 ans), copropriété 24 lots Clichy (économies parties communes), restaurant Paris 9e (IRC > 90 + ambiance). Chiffres réels, conditions techniques, retours client.",
   keywords: [

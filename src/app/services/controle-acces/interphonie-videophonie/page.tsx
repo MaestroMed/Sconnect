@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/controle-acces/interphonie-videophonie" },
   title: "Interphonie & Vidéophonie | Installation & Dépannage | S Connect France",
   description: "Installation et dépannage d'interphones et vidéophones en Île-de-France. Systèmes audio et vidéo pour copropriétés, particuliers, entreprises. Devis gratuit, intervention rapide.",
   keywords: ["interphone", "vidéophone", "interphonie", "vidéophonie", "installation interphone", "dépannage interphone", "interphone copropriété", "visiophone"],

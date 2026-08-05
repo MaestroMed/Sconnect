@@ -54,7 +54,9 @@ export function buildMetadata({
       canonical: url,
     },
     robots: noindex
-      ? { index: false, follow: false }
+      // follow: true même en noindex — un noindex,nofollow coupe la
+      // transmission du maillage interne traversant ces pages.
+      ? { index: false, follow: true }
       : {
           index: true,
           follow: true,

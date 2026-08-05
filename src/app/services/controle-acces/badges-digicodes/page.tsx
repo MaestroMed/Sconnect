@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/controle-acces/badges-digicodes" },
   title: "Badges & Digicodes | Contrôle d'Accès RFID | S Connect France",
   description: "Installation de systèmes de contrôle d'accès par badges RFID et digicodes en Île-de-France. Solutions professionnelles pour entreprises, copropriétés, bureaux. Devis gratuit.",
   keywords: ["badge RFID", "digicode", "contrôle accès badge", "lecteur badge", "système accès", "badge proximité", "gestion accès"],

@@ -5,6 +5,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 
 export const metadata: Metadata = {
   title: "Demande d'Intervention Urgente",
+  alternates: { canonical: "/demande-intervention" },
   description:
     "Demande d'intervention électrique urgente à Clichy et Île-de-France. Électricien disponible 24h/24, 7j/7. Intervention sous 2h.",
 };

@@ -21,6 +21,7 @@ const controleAccesSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/controle-acces" },
   title: "Contrôle d'Accès | Interphonie, Badges & Digicodes | S Connect France",
   description: "Installation professionnelle de systèmes de contrôle d'accès en Île-de-France : interphonie, vidéophonie, badges et digicodes pour immeubles, entreprises et particuliers. Devis gratuit.",
   keywords: [

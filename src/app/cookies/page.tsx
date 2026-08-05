@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Cookie } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Politique Cookies | S Connect France",
+  title: "Politique Cookies",
+  alternates: { canonical: "/cookies" },
   description: "Politique d'utilisation des cookies sur le site S Connect France - Gestion et paramétrage des cookies.",
   robots: { index: true, follow: true },
 };
