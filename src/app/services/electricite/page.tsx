@@ -16,6 +16,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 import { generateServiceSchema, injectSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/electricite" },
   title: "Électricité Paris & IDF | Installation, Rénovation, Relamping | S Connect",
   description:
     "Services d'électricité à Clichy et Île-de-France : installation, rénovation, mise aux normes, dépannage 24h/24 et relamping LED. Audit gratuit. Certifications RGE & Qualifélec.",

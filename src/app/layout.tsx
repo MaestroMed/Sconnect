@@ -102,7 +102,15 @@ export const metadata: Metadata = {
   // tel quel par toute page qui ne le redéfinit pas — ~20 pages se déclaraient
   // canoniques de la homepage (signal "doublon de la home" envoyé à Google).
   // Le canonical est posé page par page (buildMetadata) ; la home l'a dans
-  // src/app/page.tsx.
+  // src/app/page.tsx. Le `types` RSS ci-dessous est sans canonical justement
+  // pour ça — ne JAMAIS ajouter `canonical` dans cet objet.
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/actualites/feed.xml", title: "Actualités S Connect France" },
+      ],
+    },
+  },
   verification: {
     ...(process.env.GOOGLE_SITE_VERIFICATION
       ? { google: process.env.GOOGLE_SITE_VERIFICATION }

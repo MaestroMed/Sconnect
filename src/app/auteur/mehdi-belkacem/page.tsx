@@ -20,7 +20,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 import { getAllPosts, formatDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Mehdi Belkacem — Fondateur S Connect | Expert relamping LED en IDF",
+  title: "Mehdi Belkacem — Fondateur, expert relamping LED en IDF",
   description:
     "Fondateur de S Connect France en 2021. Électricien spécialisé relamping LED, certifié Qualifélec et IRVE. Audits éclairage et accompagnement décret tertiaire pour bureaux, commerces, copropriétés et industriels en Île-de-France.",
   alternates: { canonical: "/auteur/mehdi-belkacem" },

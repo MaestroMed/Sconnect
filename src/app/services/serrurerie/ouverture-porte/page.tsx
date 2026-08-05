@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/serrurerie/ouverture-porte" },
   title: "Ouverture de Porte 24h/24 | Serrurier Urgent | S Connect France",
   description: "Ouverture de porte claquée, bloquée ou fermée à clé en Île-de-France. Intervention rapide 24h/24, 7j/7. Sans casse dans 95% des cas. Serrurier professionnel.",
   keywords: ["ouverture porte", "porte claquée", "serrurier urgence", "porte bloquée", "clé cassée", "ouverture sans casse", "serrurier 24h"],

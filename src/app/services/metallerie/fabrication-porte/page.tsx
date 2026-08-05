@@ -7,6 +7,7 @@ import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/metallerie/fabrication-porte" },
   title: "Fabrication de Portes Métalliques Sur Mesure | S Connect France",
   description: "Fabrication et pose de portes métalliques sur mesure en Île-de-France : portes d'entrée, de garage, techniques et coupe-feu en acier. Conception personnalisée. Devis gratuit.",
   keywords: ["porte métallique", "fabrication porte acier", "porte sur mesure", "porte garage métallique", "porte coupe-feu", "porte technique"],

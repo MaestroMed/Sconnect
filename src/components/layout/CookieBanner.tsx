@@ -7,6 +7,11 @@ import { Cookie, X, Settings } from "lucide-react";
 // l'importer embarquait toute la lib (~36 kB gz) dans le First Load JS de
 // CHAQUE page — pour un simple slide-in. L'animation est en CSS pur
 // (.animate-cookie-banner-in dans globals.css, reduced-motion géré).
+//
+// PAS de chargement de scripts ici non plus : c'est AnalyticsGate qui monte
+// GA4 (NEXT_PUBLIC_GA4_ID) en écoutant "cookie-consent:updated". L'ancien
+// loadScripts (NEXT_PUBLIC_GA_ID / GTM) faisait doublon et chargeait un
+// second gtag hors consentement géré.
 
 export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
@@ -22,56 +27,31 @@ export default function CookieBanner() {
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
       // Afficher la bannière après un court délai
-      setTimeout(() => setShowBanner(true), 1000);
-    } else {
-      // Charger les préférences sauvegardées
-      try {
-        const savedPrefs = JSON.parse(consent);
-        setPreferences(savedPrefs);
-        loadScripts(savedPrefs);
-      } catch (e) {
-        console.error("Erreur chargement préférences cookies:", e);
-      }
+      const t = setTimeout(() => setShowBanner(true), 1000);
+      return () => clearTimeout(t);
+    }
+    // Charger les préférences sauvegardées
+    try {
+      setPreferences(JSON.parse(consent));
+    } catch (e) {
+      console.error("Erreur chargement préférences cookies:", e);
     }
   }, []);
 
-  const loadScripts = (prefs: typeof preferences) => {
-    // Charger Google Analytics si autorisé
-    if (prefs.analytics && process.env.NEXT_PUBLIC_GA_ID) {
-      const script = document.createElement("script");
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
-      script.async = true;
-      document.head.appendChild(script);
-
-      script.onload = () => {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(...args: any[]) {
-          window.dataLayer.push(args);
-        }
-        gtag("js", new Date());
-        gtag("config", process.env.NEXT_PUBLIC_GA_ID);
-      };
-    }
-
-    // Charger GTM si autorisé
-    if (prefs.marketing && process.env.NEXT_PUBLIC_GTM_ID) {
-      (function (w: any, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s) as HTMLScriptElement,
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode!.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", process.env.NEXT_PUBLIC_GTM_ID);
-    }
-  };
+  // Ré-ouverture depuis le bouton « Gérer les cookies » du footer (CNIL :
+  // retirer son consentement doit rester possible à tout moment).
+  useEffect(() => {
+    const openSettings = () => {
+      setShowSettings(true);
+      setShowBanner(true);
+    };
+    window.addEventListener("cookie-consent:open", openSettings);
+    return () => window.removeEventListener("cookie-consent:open", openSettings);
+  }, []);
 
   const savePreferences = (prefs: typeof preferences) => {
     localStorage.setItem("cookie-consent", JSON.stringify(prefs));
     setPreferences(prefs);
-    loadScripts(prefs);
     setShowBanner(false);
     setShowSettings(false);
     // Notify AnalyticsGate (and any other consumer) so they can flip
@@ -104,27 +84,31 @@ export default function CookieBanner() {
   return (
     <>
       {showBanner && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-cookie-banner-in">
+        <div
+          role="region"
+          aria-label="Consentement cookies"
+          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-cookie-banner-in"
+        >
           <div className="container-custom max-w-6xl">
-            <div className="bg-white rounded-2xl shadow-2xl border border-dark-200 p-6 md:p-8">
+            <div className="bg-surface-elevated rounded-2xl shadow-2xl border border-border p-6 md:p-8">
               {!showSettings ? (
                 <>
                   {/* Bannière simple */}
                   <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
-                        <Cookie className="w-6 h-6 text-primary-600" />
+                      <div className="w-12 h-12 bg-primary-100 dark:bg-primary-500/15 rounded-xl flex items-center justify-center">
+                        <Cookie className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                       </div>
                     </div>
-                    
+
                     <div className="flex-1">
-                      <h3 className="font-display font-bold text-lg text-dark-900 mb-2">
+                      <h3 className="font-display font-bold text-lg text-foreground mb-2">
                         Nous utilisons des cookies
                       </h3>
-                      <p className="text-dark-600 text-sm md:text-base">
+                      <p className="text-foreground-muted text-sm md:text-base">
                         Nous utilisons des cookies pour améliorer votre expérience sur notre site.
                         Certains sont nécessaires au fonctionnement, d'autres nous aident à analyser notre audience.{" "}
-                        <Link href="/cookies" className="text-primary-600 hover:text-primary-700 font-semibold">
+                        <Link href="/cookies" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 font-semibold">
                           En savoir plus
                         </Link>
                       </p>
@@ -157,12 +141,12 @@ export default function CookieBanner() {
                 <>
                   {/* Paramètres détaillés */}
                   <div className="flex justify-between items-start mb-6">
-                    <h3 className="font-display font-bold text-xl text-dark-900">
+                    <h3 className="font-display font-bold text-xl text-foreground">
                       Paramètres des cookies
                     </h3>
                     <button
                       onClick={() => setShowSettings(false)}
-                      className="text-dark-400 hover:text-dark-600 transition-colors"
+                      className="p-2.5 -m-2.5 rounded-lg text-foreground-muted hover:text-foreground transition-colors"
                       aria-label="Fermer les paramètres"
                     >
                       <X className="w-5 h-5" />
@@ -171,22 +155,22 @@ export default function CookieBanner() {
 
                   <div className="space-y-4 mb-6">
                     {/* Cookies nécessaires */}
-                    <div className="border border-dark-200 rounded-xl p-4">
+                    <div className="border border-border rounded-xl p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-dark-900">Cookies nécessaires</h4>
-                        <span className="text-xs bg-dark-100 text-dark-600 px-3 py-1 rounded-full font-medium">
+                        <h4 className="font-semibold text-foreground">Cookies nécessaires</h4>
+                        <span className="text-xs bg-surface-muted text-foreground-muted px-3 py-1 rounded-full font-medium">
                           Toujours actifs
                         </span>
                       </div>
-                      <p className="text-sm text-dark-600">
+                      <p className="text-sm text-foreground-muted">
                         Ces cookies sont indispensables au fonctionnement du site et ne peuvent être désactivés.
                       </p>
                     </div>
 
                     {/* Cookies analytics */}
-                    <div className="border border-dark-200 rounded-xl p-4">
+                    <div className="border border-border rounded-xl p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-dark-900">Cookies analytics</h4>
+                        <h4 className="font-semibold text-foreground">Cookies analytics</h4>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input
                             type="checkbox"
@@ -197,18 +181,18 @@ export default function CookieBanner() {
                             className="sr-only peer"
                             aria-label="Activer les cookies analytics"
                           />
-                          <div className="w-11 h-6 bg-dark-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                          <div className="w-11 h-6 bg-dark-200 dark:bg-dark-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                         </label>
                       </div>
-                      <p className="text-sm text-dark-600">
+                      <p className="text-sm text-foreground-muted">
                         Ces cookies nous permettent de mesurer l'audience et d'améliorer le site (Google Analytics).
                       </p>
                     </div>
 
                     {/* Cookies marketing */}
-                    <div className="border border-dark-200 rounded-xl p-4">
+                    <div className="border border-border rounded-xl p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-dark-900">Cookies marketing</h4>
+                        <h4 className="font-semibold text-foreground">Cookies marketing</h4>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input
                             type="checkbox"
@@ -219,10 +203,10 @@ export default function CookieBanner() {
                             className="sr-only peer"
                             aria-label="Activer les cookies marketing"
                           />
-                          <div className="w-11 h-6 bg-dark-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                          <div className="w-11 h-6 bg-dark-200 dark:bg-dark-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                         </label>
                       </div>
-                      <p className="text-sm text-dark-600">
+                      <p className="text-sm text-foreground-muted">
                         Ces cookies permettent de vous proposer des publicités pertinentes (Google Ads, Facebook).
                       </p>
                     </div>
@@ -250,11 +234,4 @@ export default function CookieBanner() {
       )}
     </>
   );
-}
-
-// Augmenter le type Window pour TypeScript
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
 }

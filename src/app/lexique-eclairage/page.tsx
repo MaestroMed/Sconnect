@@ -7,7 +7,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
-  title: "Lexique éclairage LED — 50 termes pro à connaître | S Connect",
+  title: "Lexique éclairage LED — 50 termes pro à connaître",
   description:
     "Lux, UGR, IRC, CCT, DALI, IP65, IK10, LM-80, TM-30, OPERAT… Le lexique complet des acronymes éclairage tertiaire que tout décideur, architecte ou syndic devrait maîtriser avant un relamping LED.",
   keywords: [

@@ -163,11 +163,12 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
   const otherServices = SERVICES.filter(
     (s) => s.key !== service.key && (s.metier === service.metier || s.intent === service.intent),
   ).slice(0, 4);
-  // Ne lier que vers des communes RÉELLEMENT publiées (la vague active), sinon
-  // le lien pointe vers une page non générée (404).
+  // Ne lier que vers des communes INDEXABLES (enrichies) : un lien interne
+  // vers une page publiée mais noindex gaspille le crawl et dilue le maillage
+  // (et un slug non publié serait carrément un 404).
   const nearby = c.nearby.filter((n) => {
     const nc = getCommune(n.slug);
-    return nc && isPublished(nc);
+    return nc && isIndexableCommune(nc);
   });
 
   // UNE entité LocalBusiness canonique pour tout le site (déclarée dans

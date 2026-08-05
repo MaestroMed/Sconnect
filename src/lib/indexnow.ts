@@ -3,8 +3,9 @@
  *
  * Status (May 2026):
  * - ✅ Bing, Yandex, Naver, Seznam — accept IndexNow pings
- * - ❌ Google does NOT accept IndexNow; still relies on the sitemap +
- *   crawl. We ping Google's sitemap endpoint separately.
+ * - ❌ Google does NOT accept IndexNow ; son endpoint de ping sitemap
+ *   (google.com/ping) est mort depuis 2024 (404). Pour Google : sitemap
+ *   à jour + lastmod, c'est tout.
  *
  * How it works:
  *   1. Generate (or load) a key (UUID-like, 8-128 hex chars).
@@ -20,7 +21,6 @@
 const DEFAULT_KEY = "13f8c0a4e7b34f2b9c5e6a8d1f7c2e90";
 const HOST = "sconnectfrance.fr";
 const ENDPOINT = "https://api.indexnow.org/IndexNow";
-const GOOGLE_PING = "https://www.google.com/ping?sitemap=";
 const BING_PING = "https://www.bing.com/ping?sitemap=";
 
 interface PingResult {
@@ -33,10 +33,6 @@ interface PingResult {
 /**
  * Submit one or many URLs to IndexNow. Returns per-engine results.
  * IndexNow API: POST { host, key, keyLocation, urlList[] }.
- *
- * Note: Google ignored. For Google notification we ping its sitemap
- * endpoint with the full sitemap URL — Google then re-crawls and picks
- * up the new entries via lastmod.
  */
 export async function submitToIndexNow(urls: string[]): Promise<PingResult[]> {
   const results: PingResult[] = [];
@@ -62,20 +58,8 @@ export async function submitToIndexNow(urls: string[]): Promise<PingResult[]> {
     });
   }
 
-  // 2) Google sitemap ping (legacy but still effective)
+  // 2) Bing sitemap ping (belt + suspenders)
   const sitemapUrl = `https://${host}/sitemap.xml`;
-  try {
-    const res = await fetch(`${GOOGLE_PING}${encodeURIComponent(sitemapUrl)}`);
-    results.push({ engine: "google-sitemap", ok: res.ok, status: res.status });
-  } catch (e) {
-    results.push({
-      engine: "google-sitemap",
-      ok: false,
-      error: e instanceof Error ? e.message : "unknown",
-    });
-  }
-
-  // 3) Bing sitemap ping (belt + suspenders)
   try {
     const res = await fetch(`${BING_PING}${encodeURIComponent(sitemapUrl)}`);
     results.push({ engine: "bing-sitemap", ok: res.ok, status: res.status });

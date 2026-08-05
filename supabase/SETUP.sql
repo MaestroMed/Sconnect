@@ -238,6 +238,9 @@ BEGIN
 END $$;
 
 -- =================== ROW LEVEL SECURITY + POLICIES ===================
+-- IMPORTANT : chaque policy est scopée avec TO. Sans clause TO, une policy
+-- s'applique à TOUS les rôles — y compris `anon` (la clé publique du
+-- navigateur), qui pourrait alors lire/écrire admin_users, submissions, etc.
 DO $$
 DECLARE t TEXT;
 BEGIN
@@ -247,9 +250,9 @@ BEGIN
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY;', t);
     EXECUTE format('DROP POLICY IF EXISTS "Public read" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Public read" ON %I FOR SELECT USING (true);', t);
+    EXECUTE format('CREATE POLICY "Public read" ON %I FOR SELECT TO anon, authenticated USING (true);', t);
     EXECUTE format('DROP POLICY IF EXISTS "Service write" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL USING (true) WITH CHECK (true);', t);
+    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL TO service_role USING (true) WITH CHECK (true);', t);
   END LOOP;
 
   -- Tables privées : accès service role uniquement (API admin)
@@ -258,15 +261,15 @@ BEGIN
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY;', t);
     EXECUTE format('DROP POLICY IF EXISTS "Service write" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL USING (true) WITH CHECK (true);', t);
+    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL TO service_role USING (true) WITH CHECK (true);', t);
   END LOOP;
 
   -- posts : lecture publique des articles publiés + écriture service
   EXECUTE 'ALTER TABLE posts ENABLE ROW LEVEL SECURITY;';
   EXECUTE 'DROP POLICY IF EXISTS "Public read published" ON posts;';
-  EXECUTE 'CREATE POLICY "Public read published" ON posts FOR SELECT USING (published = true);';
+  EXECUTE 'CREATE POLICY "Public read published" ON posts FOR SELECT TO anon, authenticated USING (published = true);';
   EXECUTE 'DROP POLICY IF EXISTS "Service write" ON posts;';
-  EXECUTE 'CREATE POLICY "Service write" ON posts FOR ALL USING (true) WITH CHECK (true);';
+  EXECUTE 'CREATE POLICY "Service write" ON posts FOR ALL TO service_role USING (true) WITH CHECK (true);';
 END $$;
 
 -- ===================== STOCKAGE DES IMAGES ==========================
@@ -277,16 +280,16 @@ ON CONFLICT (id) DO UPDATE SET public = true;
 
 DROP POLICY IF EXISTS "sconnectfrance_public_read" ON storage.objects;
 CREATE POLICY "sconnectfrance_public_read" ON storage.objects
-  FOR SELECT USING (bucket_id = 'sconnectfrance');
+  FOR SELECT TO anon, authenticated USING (bucket_id = 'sconnectfrance');
 DROP POLICY IF EXISTS "sconnectfrance_service_insert" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_insert" ON storage.objects
-  FOR INSERT WITH CHECK (bucket_id = 'sconnectfrance');
+  FOR INSERT TO service_role WITH CHECK (bucket_id = 'sconnectfrance');
 DROP POLICY IF EXISTS "sconnectfrance_service_update" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_update" ON storage.objects
-  FOR UPDATE USING (bucket_id = 'sconnectfrance');
+  FOR UPDATE TO service_role USING (bucket_id = 'sconnectfrance');
 DROP POLICY IF EXISTS "sconnectfrance_service_delete" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_delete" ON storage.objects
-  FOR DELETE USING (bucket_id = 'sconnectfrance');
+  FOR DELETE TO service_role USING (bucket_id = 'sconnectfrance');
 
 -- =====================================================================
 -- ✓ Terminé. Étapes suivantes (en local, voir docs/GUIDE-GESTION-SITE.md) :

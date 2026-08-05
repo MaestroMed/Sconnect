@@ -2,10 +2,12 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 
 interface RatingBadgeProps {
-  /** Numeric rating, e.g. 4.9 */
-  rating?: number;
-  /** Total review count, e.g. 127 */
-  reviewCount?: number;
+  /** Note moyenne RÉELLE, calculée depuis les témoignages affichés sur le
+   *  site — jamais de valeur par défaut en dur (afficher une note inventée
+   *  = pratique commerciale trompeuse, art. L121-2 C. conso / DGCCRF). */
+  rating: number;
+  /** Nombre RÉEL d'avis (même source que rating). */
+  reviewCount: number;
   /** Optional destination. When omitted the badge renders as a static,
    *  non-interactive trust chip (the dedicated reviews page was removed —
    *  pass a Google Business Profile URL here once available to turn it
@@ -25,8 +27,8 @@ interface RatingBadgeProps {
  * Business Profile review URL) to make it a link with hover lift.
  */
 export default function RatingBadge({
-  rating = 4.9,
-  reviewCount = 127,
+  rating,
+  reviewCount,
   href,
   variant = "light",
   className = "",
@@ -76,12 +78,12 @@ export default function RatingBadge({
           variant === "dark" ? "text-white/70" : "text-foreground-muted"
         }`}
       >
-        · {reviewCount} avis vérifiés
+        · {reviewCount} avis clients
       </span>
     </>
   );
 
-  const label = `Note moyenne ${rating} sur 5, ${reviewCount} avis vérifiés`;
+  const label = `Note moyenne ${rating.toFixed(1)} sur 5, ${reviewCount} avis clients`;
 
   if (href) {
     return (

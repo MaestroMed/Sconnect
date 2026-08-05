@@ -182,9 +182,11 @@ d'images, stockage des demandes de devis et de la newsletter). Fais les étapes
 1. Dans ton projet Supabase → **SQL Editor** → **New query**.
 2. Ouvre le fichier **`supabase/SETUP.sql`** du dépôt, copie **tout**, colle, **Run**.
    → Ça crée toutes les tables, les sécurités, **et** le bucket d'images
-   `sconnectfrance`. (Re-jouable sans risque. N'utilise PAS les vieux
-   `schema.sql`/`seed.sql` : ils contiennent de fausses données et un mauvais
-   nom de bucket.)
+   `sconnectfrance`. (Re-jouable sans risque — les anciens `schema.sql`/
+   `seed.sql` dangereux ont été supprimés du dépôt.)
+   **Si la base a été installée avant août 2026, re-exécute SETUP.sql** :
+   il corrige les policies RLS qui laissaient la clé publique `anon` écrire
+   dans toutes les tables (dont `admin_users` et les demandes clients).
 3. **Project Settings → API** : note ces 3 valeurs :
    - `Project URL` → ira dans `NEXT_PUBLIC_SUPABASE_URL`
    - `anon public` key → ira dans `NEXT_PUBLIC_SUPABASE_ANON_KEY`

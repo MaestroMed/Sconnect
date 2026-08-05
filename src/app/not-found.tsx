@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Home, ArrowLeft, Search, Zap } from "lucide-react";
 
 export default function NotFound() {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-surface to-surface-muted">
       <div className="container-custom">
@@ -20,7 +21,7 @@ export default function NotFound() {
                 404
               </span>
               <motion.div
-                animate={{ rotate: [0, 10, -10, 10, 0] }}
+                animate={reduceMotion ? undefined : { rotate: [0, 10, -10, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
               >

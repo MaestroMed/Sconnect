@@ -7,6 +7,7 @@ import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/metallerie/fabrication-portail" },
   title: "Fabrication de Portails Sur Mesure | Portails Coulissants & Battants | S Connect France",
   description: "Fabrication et installation de portails sur mesure en Île-de-France : portails coulissants, battants, motorisés en acier, aluminium ou fer forgé. Conception, fabrication, pose. Devis gratuit.",
   keywords: ["fabrication portail", "portail sur mesure", "portail coulissant", "portail battant", "portail motorisé", "portail acier", "portail fer forgé"],

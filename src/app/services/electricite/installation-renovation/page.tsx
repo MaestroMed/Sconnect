@@ -4,6 +4,7 @@ import PricingTable from "@/components/marketing/PricingTable";
 import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/electricite/installation-renovation" },
   title: "Installation & Rénovation Électrique | S Connect France",
   description: "Installation et rénovation électrique complète en Île-de-France. Création de réseaux, tableaux électriques, éclairage LED, prises, bornes de recharge. Devis gratuit, intervention rapide.",
   keywords: ["installation électrique", "rénovation électrique", "tableau électrique", "éclairage LED", "borne recharge", "électricien installation", "mise en service électrique"],

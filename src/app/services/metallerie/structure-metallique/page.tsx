@@ -7,6 +7,7 @@ import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/metallerie/structure-metallique" },
   title: "Structures Métalliques | Garde-corps, Escaliers, Verrières | S Connect France",
   description: "Conception et réalisation de structures métalliques en Île-de-France : garde-corps, escaliers métalliques, verrières, pergolas, charpentes. Fabrication sur mesure. Devis gratuit.",
   keywords: ["structure métallique", "garde-corps", "escalier métallique", "verrière", "pergola", "charpente métallique", "ferronnerie art"],

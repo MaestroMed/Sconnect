@@ -26,8 +26,10 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     // Tailles d'images pour les layouts
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Minimums pour optimisation
-    minimumCacheTTL: 60,
+    // 31 jours : les images du site sont des assets versionnés qui ne
+    // changent pas — 60s forçait Vercel à re-optimiser (et re-facturer)
+    // les mêmes images en boucle.
+    minimumCacheTTL: 2678400,
   },
 
   // Headers de sécurité et performance
@@ -36,11 +38,15 @@ const nextConfig: NextConfig = {
     // - 'unsafe-inline' kept on script for the Schema.org JSON-LD injections
     //   and the Next.js runtime (which uses inline scripts for hydration).
     //   A follow-up step would migrate these to nonces via middleware.
+    // - 'unsafe-eval' n'est nécessaire qu'en dev (React Refresh / eval des
+    //   source maps) — en production il annule une grande partie de la
+    //   protection XSS du CSP.
     // - connect-src includes Supabase, Resend, Vercel Analytics + Speed Insights,
     //   Google Analytics/Tag Manager.
+    const isDev = process.env.NODE_ENV === 'development';
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https:",
       "font-src 'self' https://fonts.gstatic.com data:",
@@ -78,6 +84,17 @@ const nextConfig: NextConfig = {
         source: '/_next/static/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Assets médias servis depuis /public : sans ce header ils partent
+      // avec un cache court et sont re-téléchargés à chaque visite.
+      {
+        source: '/:prefix(images|videos|brands)/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
         ],
       },
     ];
@@ -143,6 +160,13 @@ const nextConfig: NextConfig = {
       {
         source: '/confidentialite',
         destination: '/politique-confidentialite',
+        permanent: true,
+      },
+      // La page /a-propos faisait un permanentRedirect() au rendu (= 200 +
+      // meta refresh côté crawler) — un vrai 308 au niveau HTTP est propre.
+      {
+        source: '/a-propos',
+        destination: '/presentation',
         permanent: true,
       },
       // Page avis supprimée volontairement — 301 vers les réalisations

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Building2, Scale, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Mentions Légales | S Connect France",
+  title: "Mentions Légales",
+  alternates: { canonical: "/mentions-legales" },
   description: "Mentions légales de S Connect France - Informations légales et réglementaires de l'entreprise.",
   robots: {
     index: true,

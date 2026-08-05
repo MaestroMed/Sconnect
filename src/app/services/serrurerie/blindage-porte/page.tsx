@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/serrurerie/blindage-porte" },
   title: "Blindage de Porte | Porte Blindée A2P | S Connect France",
   description: "Blindage de porte et installation de portes blindées certifiées A2P en Île-de-France. Sécurisation maximale de votre logement. Devis gratuit, pose professionnelle.",
   keywords: ["blindage porte", "porte blindée", "porte A2P", "sécurisation porte", "bloc porte blindé", "renforcement porte", "porte sécurisée"],

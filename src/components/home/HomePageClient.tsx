@@ -89,7 +89,8 @@ interface HomePageClientProps {
   brands: Array<{
     id: string;
     name: string;
-    logo: string;
+    // null = pas de fichier logo (BrandChip affiche le nom en fallback)
+    logo: string | null;
   }>;
 }
 
@@ -216,6 +217,14 @@ export default function HomePageClient({
   const displayedTestimonials = testimonials.slice(0, 4);
   const displayedRealizations = realizations.slice(0, 6);
 
+  // Note et volume RÉELS, dérivés des témoignages — pas de chiffres en dur
+  // (une note inventée = avis trompeurs au sens DGCCRF).
+  const reviewCount = testimonials.length;
+  const ratingAverage =
+    reviewCount > 0
+      ? Math.round((testimonials.reduce((sum, t) => sum + t.rating, 0) / reviewCount) * 10) / 10
+      : 0;
+
   return (
     <>
       {/* Hero Section — full-bleed cinematic video (Apple-like).
@@ -301,7 +310,9 @@ export default function HomePageClient({
                   <span className="text-sm font-semibold text-white">IRVE</span>
                 </div>
               </div>
-              <RatingBadge variant="dark" />
+              {reviewCount > 0 && (
+                <RatingBadge variant="dark" rating={ratingAverage} reviewCount={reviewCount} />
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-6 text-white/70">

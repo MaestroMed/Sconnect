@@ -19,7 +19,7 @@ import {
 } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Calculateur relamping LED gratuit — économies, prime, ROI | S Connect",
+  title: "Calculateur relamping LED gratuit — économies, prime, ROI",
   description:
     "Estimez en 30 secondes les économies, le coût et le ROI de votre projet relamping LED. 4 typologies (bureau, commerce, copropriété, industriel), calcul des aides post-CEE 2026. Devis ferme sur demande.",
   keywords: [

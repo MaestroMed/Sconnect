@@ -13,13 +13,6 @@ type FAQItem = {
   answer: string;
 };
 
-type ReviewSchema = {
-  author: string;
-  rating: number;
-  text: string;
-  date: string;
-};
-
 type ServiceSchema = {
   name: string;
   description: string;
@@ -59,34 +52,6 @@ export function generateFAQSchema(faqs: FAQItem[]) {
         "text": faq.answer,
       },
     })),
-  };
-}
-
-/**
- * Génère un Review schema
- */
-export function generateReviewSchema(review: ReviewSchema, baseUrl: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "LocalBusiness",
-      "@id": `${baseUrl}/#localbusiness`,
-      "name": "S Connect France",
-      "url": baseUrl,
-    },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": review.rating,
-      "bestRating": "5",
-      "worstRating": "1",
-    },
-    "author": {
-      "@type": "Person",
-      "name": review.author,
-    },
-    "reviewBody": review.text,
-    "datePublished": review.date,
   };
 }
 
@@ -138,61 +103,6 @@ export function generateHowToSchema(data: {
       "text": step.text,
       ...(step.image && { "image": `${data.baseUrl}${step.image}` }),
     })),
-  };
-}
-
-/**
- * Génère un AggregateRating schema
- */
-export function generateAggregateRatingSchema(data: {
-  ratingValue: number;
-  reviewCount: number;
-  baseUrl: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    "itemReviewed": {
-      "@type": "LocalBusiness",
-      "@id": `${data.baseUrl}/#localbusiness`,
-      "name": "S Connect France",
-    },
-    "ratingValue": data.ratingValue.toFixed(1),
-    "reviewCount": data.reviewCount,
-    "bestRating": "5",
-    "worstRating": "1",
-  };
-}
-
-/**
- * Génère un Product/Service Offer schema
- */
-export function generateOfferSchema(data: {
-  name: string;
-  description: string;
-  price?: string;
-  priceCurrency?: string;
-  availability?: string;
-  baseUrl: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Offer",
-    "itemOffered": {
-      "@type": "Service",
-      "name": data.name,
-      "description": data.description,
-    },
-    ...(data.price && {
-      "price": data.price,
-      "priceCurrency": data.priceCurrency || "EUR",
-    }),
-    "availability": data.availability || "https://schema.org/InStock",
-    "seller": {
-      "@type": "LocalBusiness",
-      "@id": `${data.baseUrl}/#localbusiness`,
-      "name": "S Connect France",
-    },
   };
 }
 

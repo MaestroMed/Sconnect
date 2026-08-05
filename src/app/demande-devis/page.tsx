@@ -6,6 +6,7 @@ import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
   title: "Demande de Devis Gratuit",
+  alternates: { canonical: "/demande-devis" },
   description:
     "Demandez un devis gratuit et sans engagement pour vos travaux électriques à Clichy et Île-de-France. Réponse sous 24h.",
 };

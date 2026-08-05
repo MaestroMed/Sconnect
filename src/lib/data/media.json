@@ -1,13 +1,8 @@
 {
-  "logo": "/images/logo.png",
-  "logo_white": "/images/logo-white.png",
+  "logo": "/logo.png",
+  "logo_white": "/images/logo_only_white.svg",
   "favicon": "/favicon.ico",
-  "hero_image": "/images/hero-homepage.jpg",
-  "og_image": "/images/og-image.jpg",
+  "hero_image": "/images/hero/hero-cinema-paris-1366.webp",
+  "og_image": "/og-image.jpg",
   "partners": []
 }
-
-
-
-
-

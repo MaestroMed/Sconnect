@@ -2,7 +2,7 @@ import { Wrench, Phone } from "lucide-react";
 import { getSiteConfig } from "@/lib/data-service";
 
 export const metadata = {
-  title: "Maintenance · S Connect France",
+  title: "Maintenance",
   robots: { index: false, follow: false },
 };
 

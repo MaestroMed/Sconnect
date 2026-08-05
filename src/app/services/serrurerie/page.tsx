@@ -21,6 +21,7 @@ const serrurerieSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/serrurerie" },
   title: "Serrurerie | Ouverture de Porte, Remplacement & Blindage | S Connect France",
   description: "Services de serrurerie professionnelle en Île-de-France : ouverture de porte 24h/24, remplacement de serrure, blindage de porte. Intervention rapide, devis gratuit. Serrurier certifié.",
   keywords: [

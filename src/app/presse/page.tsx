@@ -8,7 +8,7 @@ import { NoiseOverlay } from "@/components/ui/ambient";
 import BulbText from "@/components/ui/BulbText";
 
 export const metadata: Metadata = {
-  title: "Espace presse — kit, photos, citations | S Connect France",
+  title: "Espace presse — kit, photos, citations",
   description:
     "Journalistes, blogueurs, organismes professionnels : retrouvez ici le kit presse S Connect France, les logos haute définition, les photos d'intervention, la biographie du fondateur Mehdi Belkacem et les éléments de langage validés.",
   alternates: { canonical: "/presse" },

@@ -21,6 +21,7 @@ const metallerieSchema = generateServiceSchema(
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/metallerie" },
   title: "Métallerie | Fabrication Portails, Portes & Structures Métalliques | S Connect France",
   description: "Métallerie professionnelle en Île-de-France : fabrication sur mesure de portails, portes métalliques, garde-corps et structures en acier. Devis gratuit, pose incluse.",
   keywords: [

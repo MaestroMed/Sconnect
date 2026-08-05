@@ -4,6 +4,7 @@ import PricingTable from "@/components/marketing/PricingTable";
 import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/electricite/depannage-electrique" },
   title: "Dépannage Électrique Urgent 24h/24 | S Connect France",
   description: "Dépannage électrique urgent 24h/24, 7j/7 en Île-de-France. Intervention rapide sous 2h : panne de courant, court-circuit, disjoncteur qui saute. Électricien disponible jour et nuit.",
   keywords: ["dépannage électrique", "électricien urgence", "panne électrique", "court-circuit", "disjoncteur qui saute", "dépannage 24h", "urgence électrique"],

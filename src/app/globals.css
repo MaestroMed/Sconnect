@@ -205,7 +205,9 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: gradientTextShift 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    /* 4 itérations puis stop : un shimmer infinite sur l'élément LCP (H1)
+       repaint en permanence — coût CPU/batterie pour rien après ~45 s. */
+    animation: gradientTextShift 11s cubic-bezier(0.65, 0, 0.35, 1) 4;
     will-change: background-position;
   }
 
@@ -227,7 +229,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: gradientTextShift 13s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: gradientTextShift 13s cubic-bezier(0.65, 0, 0.35, 1) 4;
     will-change: background-position;
   }
 
@@ -240,7 +242,7 @@
 
      Two independent animations on each .bulb-letter :
        1. bulbBurst  : one-shot, fill-forwards — locks letter at SETTLED
-       2. bulbBreath : infinite, starts after burst finishes
+       2. bulbBreath : 3 itérations, starts after burst finishes
      Per-letter stagger via the --i CSS variable injected by the React
      component (60 ms between letters, +300 ms initial delay). */
   .bulb-letter {
@@ -257,7 +259,7 @@
       bulbBurst 0.95s cubic-bezier(0.22, 1, 0.36, 1)
         calc(var(--i, 0) * 0.06s + 0.3s) forwards,
       bulbBreath 4.2s ease-in-out
-        calc(var(--i, 0) * 0.06s + 1.5s) infinite;
+        calc(var(--i, 0) * 0.06s + 1.5s) 3;
   }
 
   @keyframes bulbBurst {
@@ -326,7 +328,7 @@
   }
 
   .error-message {
-    @apply text-sm text-red-600 mt-1;
+    @apply text-sm text-red-600 dark:text-red-400 mt-1;
   }
 
   /* Badge */

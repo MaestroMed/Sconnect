@@ -290,6 +290,17 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                {/* Exigence CNIL : le retrait du consentement doit être aussi
+                    simple que son octroi — accès permanent aux réglages. */}
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent("cookie-consent:open"))}
+                  className="hover:text-white transition-colors"
+                >
+                  Gérer les cookies
+                </button>
+              </li>
             </ul>
           </div>
           {/* Mentions légales obligatoires (loi LCEN + Code commerce). */}

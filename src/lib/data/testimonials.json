@@ -89,17 +89,6 @@
       "verified": true
     },
     {
-      "id": "9",
-      "name": "Entreprise ABC",
-      "rating": 5,
-      "text": "Système de badges pour nos 50 employés. La solution proposée est parfaite, on peut tout gérer depuis une interface web. Support réactif en cas de question.",
-      "service": "Badges & Digicodes",
-      "category": "controle-acces",
-      "location": "La Défense",
-      "date": "2024-07-28",
-      "verified": true
-    },
-    {
       "id": "10",
       "name": "Nathalie P.",
       "rating": 5,

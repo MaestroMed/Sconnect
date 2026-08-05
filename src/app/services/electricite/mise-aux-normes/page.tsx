@@ -4,6 +4,7 @@ import PricingTable from "@/components/marketing/PricingTable";
 import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/electricite/mise-aux-normes" },
   title: "Mise aux Normes Électriques NF C 15-100 | S Connect France",
   description: "Mise en conformité électrique NF C 15-100 en Île-de-France. Diagnostic complet, mise à la terre, protections différentielles, certificat Consuel. Devis gratuit.",
   keywords: ["mise aux normes électrique", "NF C 15-100", "conformité électrique", "diagnostic électrique", "Consuel", "protection différentielle", "mise à la terre"],

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Shield, Lock, Eye, Database } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Politique de Confidentialité | S Connect France",
+  title: "Politique de Confidentialité",
+  alternates: { canonical: "/politique-confidentialite" },
   description: "Politique de confidentialité et protection des données personnelles de S Connect France - Conformité RGPD.",
   robots: { index: true, follow: true },
 };

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ServicePageTemplate from "@/components/services/ServicePageTemplate";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/serrurerie/remplacement-serrure" },
   title: "Remplacement de Serrure | Pose & Installation | S Connect France",
   description: "Remplacement et installation de serrures en Île-de-France. Serrures certifiées A2P, multipoints, haute sécurité. Devis gratuit, pose rapide par serrurier professionnel.",
   keywords: ["remplacement serrure", "pose serrure", "serrure A2P", "serrure multipoints", "changement serrure", "serrure sécurité", "installation serrure"],
