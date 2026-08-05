@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -56,10 +56,12 @@ function fileToAttachment(file: File): Promise<LeadAttachment> {
   });
 }
 
+// « Mademoiselle » est banni des formulaires administratifs depuis 2012
+// (circulaire n° 5575/SG) — l'option est retirée ; « Mlle » reste accepté
+// dans le schéma pour ne pas invalider les anciens brouillons.
 const civiliteOptions = [
   { value: "M.", label: "Monsieur" },
   { value: "Mme", label: "Madame" },
-  { value: "Mlle", label: "Mademoiselle" },
 ];
 
 const typeBatimentOptions = [
@@ -101,6 +103,29 @@ export default function DemandeForm({ type }: DemandeFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [files, setFiles] = useState<File[]>([]);
+  const reduceMotion = useReducedMotion();
+
+  // Transitions d'étapes : annulées si prefers-reduced-motion.
+  const stepMotion = reduceMotion
+    ? { initial: false as const, animate: { opacity: 1, x: 0 } }
+    : {
+        initial: { opacity: 0, x: 20 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -20 },
+      };
+
+  // Au changement d'étape, le focus part sur le titre de la nouvelle étape
+  // (sinon il reste sur le bouton « Suivant » et un lecteur d'écran n'annonce
+  // rien). Callback ref : avec AnimatePresence mode="wait", le nouveau titre
+  // ne monte qu'après l'animation de sortie — un useEffect sur currentStep
+  // viserait un nœud pas encore monté.
+  const shouldFocusTitleRef = useRef(false);
+  const stepTitleRef = useCallback((node: HTMLHeadingElement | null) => {
+    if (node && shouldFocusTitleRef.current) {
+      shouldFocusTitleRef.current = false;
+      node.focus();
+    }
+  }, []);
 
   const {
     register,
@@ -178,21 +203,28 @@ export default function DemandeForm({ type }: DemandeFormProps) {
     return () => window.clearTimeout(handle);
   }, [watchedValues, isDirty, submitStatus, storageKey]);
 
+  // shouldFocus : en cas d'erreur, le focus va directement sur le premier
+  // champ invalide au lieu de rester sur le bouton « Suivant ».
   const validateStep = async (step: number): Promise<boolean> => {
     switch (step) {
       case 1:
-        return await trigger(["civilite", "nom", "prenom", "email", "telephone"]);
+        return await trigger(["civilite", "nom", "prenom", "email", "telephone"], {
+          shouldFocus: true,
+        });
       case 2:
-        return await trigger([
-          "adresseIntervention.typeBatiment",
-          "adresseIntervention.numeroRue",
-          "adresseIntervention.codePostal",
-          "adresseIntervention.ville",
-        ]);
+        return await trigger(
+          [
+            "adresseIntervention.typeBatiment",
+            "adresseIntervention.numeroRue",
+            "adresseIntervention.codePostal",
+            "adresseIntervention.ville",
+          ],
+          { shouldFocus: true },
+        );
       case 3:
-        return await trigger(["services", "urgence"]);
+        return await trigger(["services", "urgence"], { shouldFocus: true });
       case 4:
-        return await trigger(["consentement"]);
+        return await trigger(["consentement"], { shouldFocus: true });
       default:
         return true;
     }
@@ -201,12 +233,14 @@ export default function DemandeForm({ type }: DemandeFormProps) {
   const nextStep = async () => {
     const isValid = await validateStep(currentStep);
     if (isValid && currentStep < 4) {
+      shouldFocusTitleRef.current = true;
       setCurrentStep((prev) => prev + 1);
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
+      shouldFocusTitleRef.current = true;
       setCurrentStep((prev) => prev - 1);
     }
   };
@@ -298,17 +332,17 @@ export default function DemandeForm({ type }: DemandeFormProps) {
   if (submitStatus === "success") {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="card p-12 text-center"
       >
-        <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-6">
-          <CheckCircle2 className="w-10 h-10 text-green-600" />
+        <div className="w-20 h-20 mx-auto bg-green-100 dark:bg-green-500/15 rounded-full flex items-center justify-center mb-6">
+          <CheckCircle2 className="w-10 h-10 text-green-600 dark:text-green-400" />
         </div>
-        <h2 className="font-display font-bold text-2xl text-dark-900 mb-4">
+        <h2 className="font-display font-bold text-2xl text-foreground mb-4">
           Demande envoyée avec succès !
         </h2>
-        <p className="text-dark-600 max-w-md mx-auto mb-8">
+        <p className="text-foreground-muted max-w-md mx-auto mb-8">
           Nous avons bien reçu votre demande de {type === "devis" ? "devis" : "d'intervention"}.
           Notre équipe vous contactera dans les plus brefs délais.
         </p>
@@ -321,17 +355,25 @@ export default function DemandeForm({ type }: DemandeFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="card p-6 md:p-8">
-      {/* Progress Steps */}
-      <div className="flex items-center justify-between mb-8 overflow-x-auto pb-4">
+      {/* Progress Steps — <ol> + aria-current : la progression est une vraie
+          liste ordonnée pour les technologies d'assistance. */}
+      <ol
+        aria-label="Étapes de la demande"
+        className="flex items-center justify-between mb-8 overflow-x-auto pb-4"
+      >
         {steps.map((step, index) => (
-          <div key={step.id} className="flex items-center">
+          <li
+            key={step.id}
+            aria-current={currentStep === step.id ? "step" : undefined}
+            className="flex items-center"
+          >
             <div
               className={`flex items-center gap-2 ${
                 currentStep === step.id
                   ? "text-primary-600"
                   : currentStep > step.id
-                  ? "text-green-600"
-                  : "text-dark-400"
+                  ? "text-green-600 dark:text-green-400"
+                  : "text-foreground-muted"
               }`}
             >
               <div
@@ -340,7 +382,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                     ? "bg-primary-600 text-white"
                     : currentStep > step.id
                     ? "bg-green-600 text-white"
-                    : "bg-dark-100 text-dark-500"
+                    : "bg-surface-muted text-foreground-muted"
                 }`}
               >
                 {currentStep > step.id ? (
@@ -350,29 +392,31 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 )}
               </div>
               <span className="font-medium hidden sm:inline">{step.title}</span>
+              <span className="sr-only">
+                {currentStep > step.id ? " (terminée)" : currentStep === step.id ? " (étape en cours)" : ""}
+              </span>
             </div>
             {index < steps.length - 1 && (
               <div
+                aria-hidden="true"
                 className={`w-8 sm:w-16 h-0.5 mx-2 ${
-                  currentStep > step.id ? "bg-green-600" : "bg-dark-200"
+                  currentStep > step.id ? "bg-green-600" : "bg-border"
                 }`}
               />
             )}
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       <AnimatePresence mode="wait">
         {/* Step 1: Coordonnées */}
         {currentStep === 1 && (
-          <motion.div
-            key="step1"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <h3 className="font-display font-bold text-xl text-dark-900 mb-6">
+          <motion.div key="step1" {...stepMotion} className="space-y-6">
+            <h3
+              ref={stepTitleRef}
+              tabIndex={-1}
+              className="font-display font-bold text-xl text-foreground mb-6 focus:outline-none"
+            >
               Vos coordonnées
             </h3>
 
@@ -381,6 +425,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               required
               options={civiliteOptions}
               placeholder="Sélectionnez..."
+              autoComplete="honorific-prefix"
               error={errors.civilite?.message}
               {...register("civilite")}
             />
@@ -390,6 +435,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 label="Nom"
                 required
                 placeholder="Dupont"
+                autoComplete="family-name"
                 error={errors.nom?.message}
                 {...register("nom")}
               />
@@ -397,6 +443,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 label="Prénom"
                 required
                 placeholder="Jean"
+                autoComplete="given-name"
                 error={errors.prenom?.message}
                 {...register("prenom")}
               />
@@ -408,6 +455,8 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 type="email"
                 required
                 placeholder="jean.dupont@email.com"
+                autoComplete="email"
+                inputMode="email"
                 error={errors.email?.message}
                 {...register("email")}
               />
@@ -416,6 +465,8 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 type="tel"
                 required
                 placeholder="06 12 34 56 78"
+                autoComplete="tel"
+                inputMode="tel"
                 error={errors.telephone?.message}
                 {...register("telephone")}
               />
@@ -424,6 +475,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
             <InputField
               label="Société / Organisme (optionnel)"
               placeholder="Nom de votre entreprise"
+              autoComplete="organization"
               error={errors.societe?.message}
               {...register("societe")}
             />
@@ -432,14 +484,12 @@ export default function DemandeForm({ type }: DemandeFormProps) {
 
         {/* Step 2: Adresse */}
         {currentStep === 2 && (
-          <motion.div
-            key="step2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <h3 className="font-display font-bold text-xl text-dark-900 mb-6">
+          <motion.div key="step2" {...stepMotion} className="space-y-6">
+            <h3
+              ref={stepTitleRef}
+              tabIndex={-1}
+              className="font-display font-bold text-xl text-foreground mb-6 focus:outline-none"
+            >
               Adresse d&apos;intervention
             </h3>
 
@@ -456,6 +506,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               label="Numéro et rue"
               required
               placeholder="12 rue de la République"
+              autoComplete="address-line1"
               error={errors.adresseIntervention?.numeroRue?.message}
               {...register("adresseIntervention.numeroRue")}
             />
@@ -465,6 +516,8 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 label="Code postal"
                 required
                 placeholder="92110"
+                autoComplete="postal-code"
+                inputMode="numeric"
                 error={errors.adresseIntervention?.codePostal?.message}
                 {...register("adresseIntervention.codePostal")}
               />
@@ -472,6 +525,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                 label="Ville"
                 required
                 placeholder="Clichy"
+                autoComplete="address-level2"
                 error={errors.adresseIntervention?.ville?.message}
                 {...register("adresseIntervention.ville")}
               />
@@ -495,7 +549,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               />
             </div>
 
-            <div className="border-t border-dark-100 pt-6">
+            <div className="border-t border-border pt-6">
               <CheckboxField
                 label="L'adresse de facturation est identique à l'adresse d'intervention"
                 {...register("facturationIdentique")}
@@ -503,13 +557,13 @@ export default function DemandeForm({ type }: DemandeFormProps) {
 
               {!facturationIdentique && (
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
+                  initial={reduceMotion ? false : { opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-6 space-y-4 p-6 bg-dark-50 dark:bg-dark-800/60 rounded-xl"
+                  exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
+                  className="mt-6 space-y-4 p-6 bg-surface-muted rounded-xl"
                 >
-                  <h4 className="font-semibold text-dark-900 dark:text-white">Adresse de facturation</h4>
-                  
+                  <h4 className="font-semibold text-foreground">Adresse de facturation</h4>
+
                   <SelectField
                     label="Type de bâtiment"
                     required
@@ -522,6 +576,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                     label="Numéro et rue"
                     required
                     placeholder="12 rue de la République"
+                    autoComplete="billing address-line1"
                     {...register("adresseFacturation.numeroRue")}
                   />
 
@@ -530,12 +585,15 @@ export default function DemandeForm({ type }: DemandeFormProps) {
                       label="Code postal"
                       required
                       placeholder="92110"
+                      autoComplete="billing postal-code"
+                      inputMode="numeric"
                       {...register("adresseFacturation.codePostal")}
                     />
                     <InputField
                       label="Ville"
                       required
                       placeholder="Clichy"
+                      autoComplete="billing address-level2"
                       {...register("adresseFacturation.ville")}
                     />
                   </div>
@@ -547,15 +605,13 @@ export default function DemandeForm({ type }: DemandeFormProps) {
 
         {/* Step 3: Services */}
         {currentStep === 3 && (
-          <motion.div
-            key="step3"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-8"
-          >
+          <motion.div key="step3" {...stepMotion} className="space-y-8">
             <div>
-              <h3 className="font-display font-bold text-xl text-dark-900 mb-6">
+              <h3
+                ref={stepTitleRef}
+                tabIndex={-1}
+                className="font-display font-bold text-xl text-foreground mb-6 focus:outline-none"
+              >
                 Services souhaités
               </h3>
 
@@ -592,14 +648,12 @@ export default function DemandeForm({ type }: DemandeFormProps) {
 
         {/* Step 4: Détails */}
         {currentStep === 4 && (
-          <motion.div
-            key="step4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <h3 className="font-display font-bold text-xl text-dark-900 mb-6">
+          <motion.div key="step4" {...stepMotion} className="space-y-6">
+            <h3
+              ref={stepTitleRef}
+              tabIndex={-1}
+              className="font-display font-bold text-xl text-foreground mb-6 focus:outline-none"
+            >
               Informations complémentaires
             </h3>
 
@@ -611,15 +665,27 @@ export default function DemandeForm({ type }: DemandeFormProps) {
               {...register("message")}
             />
 
-            <div className="p-6 bg-dark-50 dark:bg-dark-800/60 rounded-xl">
+            <div className="p-6 bg-surface-muted rounded-xl">
               <CheckboxField
-                label="Je certifie avoir lu et accepté les conditions générales de service"
+                label={
+                  <>
+                    Je certifie avoir lu et accepté les{" "}
+                    <Link
+                      href="/conditions-generales"
+                      target="_blank"
+                      rel="noopener"
+                      className="text-primary-600 dark:text-primary-400 underline underline-offset-2 hover:text-primary-700"
+                    >
+                      conditions générales de service
+                    </Link>
+                  </>
+                }
                 error={errors.consentement?.message}
                 {...register("consentement")}
               />
 
               {type === "intervention" && (
-                <p className="mt-4 text-sm text-dark-600 dark:text-dark-300">
+                <p className="mt-4 text-sm text-foreground-muted">
                   💳 Le règlement se fera par chèque ou via un lien de paiement
                   carte bancaire sécurisé envoyé après l&apos;intervention.
                 </p>
@@ -627,7 +693,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
             </div>
 
             {submitStatus === "error" && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 text-red-700">
+              <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl flex items-start gap-3 text-red-700 dark:text-red-300">
                 <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
                 <p>
                   L&apos;envoi n&apos;a pas abouti. Réessayez, ou appelez-nous
@@ -644,7 +710,7 @@ export default function DemandeForm({ type }: DemandeFormProps) {
       </AnimatePresence>
 
       {/* Navigation */}
-      <div className="flex justify-between mt-8 pt-6 border-t border-dark-100">
+      <div className="flex justify-between mt-8 pt-6 border-t border-border">
         {currentStep > 1 ? (
           <button type="button" onClick={prevStep} className="btn-ghost">
             Précédent

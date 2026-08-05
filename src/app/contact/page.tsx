@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Phone,
   Mail,
@@ -17,8 +17,10 @@ import {
 } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import BulbText from "@/components/ui/BulbText";
+import { InputField, TextareaField } from "@/components/forms/FormField";
 
 export default function ContactPage() {
+  const reduceMotion = useReducedMotion();
   const [formState, setFormState] = useState({
     nom: "",
     email: "",
@@ -86,11 +88,9 @@ export default function ContactPage() {
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            {/* initial={false} : le H1 (candidat LCP) doit être visible dès le
+                premier paint SSR, pas après un fade 0→1. */}
+            <motion.div initial={false} animate={{ opacity: 1, y: 0 }}>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-sm">
                 <Mail className="w-4 h-4" />
                 Contact
@@ -114,9 +114,8 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-2">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
                 className="card p-6 md:p-8"
               >
                 <h2 className="font-display font-bold text-2xl text-foreground mb-6">
@@ -125,8 +124,8 @@ export default function ContactPage() {
 
                 {submitStatus === "success" ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-green-600" />
+                    <div className="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/15 rounded-full flex items-center justify-center mb-4">
+                      <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
                     </div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">
                       Message envoyé !
@@ -144,83 +143,72 @@ export default function ContactPage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="input-label">
-                          Nom <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          className={`input-field ${errors.nom ? "input-error" : ""}`}
-                          placeholder="Votre nom"
-                          value={formState.nom}
-                          onChange={(e) =>
-                            setFormState({ ...formState, nom: e.target.value })
-                          }
-                        />
-                        {errors.nom && (
-                          <p className="error-message">{errors.nom}</p>
-                        )}
-                      </div>
-                      <div>
-                        <label className="input-label">
-                          Email <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          className={`input-field ${errors.email ? "input-error" : ""}`}
-                          placeholder="votre@email.com"
-                          value={formState.email}
-                          onChange={(e) =>
-                            setFormState({ ...formState, email: e.target.value })
-                          }
-                        />
-                        {errors.email && (
-                          <p className="error-message">{errors.email}</p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="input-label">
-                        Objet <span className="text-red-500">*</span>
-                      </label>
-                      <input
+                      <InputField
+                        label="Nom"
+                        required
                         type="text"
-                        className={`input-field ${errors.objet ? "input-error" : ""}`}
-                        placeholder="Objet de votre message"
-                        value={formState.objet}
+                        name="nom"
+                        autoComplete="name"
+                        placeholder="Votre nom"
+                        value={formState.nom}
+                        error={errors.nom}
                         onChange={(e) =>
-                          setFormState({ ...formState, objet: e.target.value })
+                          setFormState({ ...formState, nom: e.target.value })
                         }
                       />
-                      {errors.objet && (
-                        <p className="error-message">{errors.objet}</p>
-                      )}
+                      <InputField
+                        label="Email"
+                        required
+                        type="email"
+                        name="email"
+                        autoComplete="email"
+                        inputMode="email"
+                        placeholder="votre@email.com"
+                        value={formState.email}
+                        error={errors.email}
+                        onChange={(e) =>
+                          setFormState({ ...formState, email: e.target.value })
+                        }
+                      />
                     </div>
 
-                    <div>
-                      <label className="input-label">
-                        Message <span className="text-red-500">*</span>
-                      </label>
-                      <textarea
-                        className={`input-field min-h-[150px] resize-y ${
-                          errors.message ? "input-error" : ""
-                        }`}
-                        placeholder="Décrivez votre demande..."
-                        value={formState.message}
-                        onChange={(e) =>
-                          setFormState({ ...formState, message: e.target.value })
-                        }
-                      />
-                      {errors.message && (
-                        <p className="error-message">{errors.message}</p>
-                      )}
-                    </div>
+                    <InputField
+                      label="Objet"
+                      required
+                      type="text"
+                      name="objet"
+                      placeholder="Objet de votre message"
+                      value={formState.objet}
+                      error={errors.objet}
+                      onChange={(e) =>
+                        setFormState({ ...formState, objet: e.target.value })
+                      }
+                    />
+
+                    <TextareaField
+                      label="Message"
+                      required
+                      name="message"
+                      className="min-h-[150px]"
+                      placeholder="Décrivez votre demande..."
+                      value={formState.message}
+                      error={errors.message}
+                      onChange={(e) =>
+                        setFormState({ ...formState, message: e.target.value })
+                      }
+                    />
 
                     {submitStatus === "error" && (
-                      <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-red-700">
-                        <AlertCircle className="w-5 h-5 shrink-0" />
-                        <p>Une erreur est survenue. Veuillez réessayer.</p>
+                      <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl flex items-start gap-3 text-red-700 dark:text-red-300">
+                        <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                        <p>
+                          Une erreur est survenue. Réessayez, ou appelez-nous
+                          directement au{" "}
+                          <a href="tel:+33652820685" className="font-semibold underline">
+                            06 52 82 06 85
+                          </a>
+                          .
+                        </p>
                       </div>
                     )}
 
@@ -250,7 +238,7 @@ export default function ContactPage() {
             <div className="space-y-6">
               {/* Coordonnées */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="card p-6"
@@ -328,7 +316,7 @@ export default function ContactPage() {
 
               {/* Map */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="card overflow-hidden"
@@ -360,7 +348,7 @@ export default function ContactPage() {
 
               {/* Urgence */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="card p-6 bg-gradient-to-br from-accent-500 to-orange-500 text-white"

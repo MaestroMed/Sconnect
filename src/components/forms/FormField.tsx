@@ -1,9 +1,11 @@
 "use client";
 
-import { forwardRef, useId, InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { forwardRef, useId, InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes, ReactNode } from "react";
 
 interface BaseFieldProps {
-  label: string;
+  // ReactNode (pas string) : permet un vrai lien dans un libellé de case à
+  // cocher (ex. « j'accepte les <Link>CGV</Link> »).
+  label: ReactNode;
   error?: string;
   required?: boolean;
 }
