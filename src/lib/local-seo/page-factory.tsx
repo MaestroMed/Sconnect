@@ -14,7 +14,7 @@ import {
   deptNom,
   type Commune,
 } from "./communes";
-import { requireService, SERVICES, type LocalService } from "./services";
+import { requireService, localHref, SERVICES, type LocalService } from "./services";
 import { popText, distanceText, interventionPhrase, parcText, densiteText } from "./descriptors";
 import { getLocalContext } from "./local-context";
 
@@ -47,10 +47,15 @@ export function makeLocalService(serviceKey: string) {
     // Slug inconnu → noindex explicite (le rendu ISR renvoie 200 « soft-404 » ;
     // au moins Google ne l'indexe pas).
     if (!c || !isPublished(c)) return { title: "Page introuvable", robots: { index: false, follow: false } };
+    // ANTI-CANNIBALISATION : si la ville possède une page artisanale
+    // /services/** (cluster relamping), la page usine se déclare duplicata en
+    // pointant son canonical (et og:url) vers elle — un seul candidat au
+    // ranking sur « service + ville », les signaux se consolident.
+    const handcrafted = service.handcrafted?.[c.slug];
     return buildMetadata({
       title: `${service.nom} à ${c.nom} (${c.cp})`,
       description: `${service.nom} à ${c.nom} : ${service.accroche} Intervention depuis Clichy (${c.interventionMin} min), devis gratuit. S Connect, artisan en ${deptNom(c.dept)}.`,
-      path: `/${service.key}/${c.slug}`,
+      path: handcrafted ?? `/${service.key}/${c.slug}`,
       image: service.image,
       imageAlt: service.imageAlt(c),
       // ANTI-DÉSINDEXATION : indexé ⟺ la commune possède un contexte local réel
@@ -59,7 +64,9 @@ export function makeLocalService(serviceKey: string) {
       // contenu n'est pas ≥60% unique — sinon le ratio de pages minces risque une
       // démotion SITEWIDE (Core Update du 21 mai 2026 sur le programmatique à
       // faible variation). Enrichir une commune l'indexe automatiquement.
-      noindex: !isIndexableCommune(c),
+      // Cas handcrafted : jamais noindex — le canonical fait la consolidation,
+      // combiner les deux signaux serait contradictoire.
+      noindex: handcrafted ? false : !isIndexableCommune(c),
       keywords: [
         `${service.nom.toLowerCase()} ${c.nom}`,
         `${service.nomMetier} ${c.nom}`,
@@ -85,13 +92,18 @@ export function makeLocalService(serviceKey: string) {
   };
 }
 
-// ---- HUB de service : /[service] liste les communes (maillage + page régionale) ----
+// ---- HUB de service : /[service] = ANNUAIRE des communes desservies ----
+// ANTI-CANNIBALISATION (décision du 5 août 2026) : le hub ne porte AUCUN
+// contenu commercial — ni prestations, ni argumentaire — pour ne pas
+// concurrencer la page pilier /services/** sur la requête générique. Son rôle :
+// (1) annuaire de communes (maillage vers les pages locales), (2) renvoi
+// explicite vers la page service complète.
 export function makeServiceHub(serviceKey: string) {
   const service = requireService(serviceKey);
 
   const metadata: Metadata = buildMetadata({
-    title: `${service.nom} en Île-de-France`,
-    description: `${service.nom} : ${service.accroche} S Connect intervient dans toute l'Île-de-France depuis Clichy. Trouvez votre commune, devis gratuit.`,
+    title: `${service.nom} : communes desservies en Île-de-France`,
+    description: `Toutes les communes où S Connect intervient pour ${service.nom.toLowerCase()} en Île-de-France, depuis Clichy (92). Temps d'intervention et page locale dédiée par commune.`,
     path: `/${service.key}`,
     image: service.image,
   });
@@ -114,33 +126,50 @@ export function makeServiceHub(serviceKey: string) {
           <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-dark-950/40" />
           <div className="container-custom relative py-14 md:py-20">
             <Breadcrumbs light items={[{ label: service.nom }]} />
-            <h1 className="font-display font-bold text-3xl md:text-5xl mt-6 mb-4">{service.nom} en Île-de-France</h1>
-            <p className="text-lg md:text-xl text-white/85 max-w-2xl mb-6">{service.accroche}</p>
+            <h1 className="font-display font-bold text-3xl md:text-5xl mt-6 mb-4">
+              {service.nom} : communes desservies en Île-de-France
+            </h1>
+            <p className="text-lg md:text-xl text-white/85 max-w-2xl mb-6">
+              Intervention depuis Clichy (92) dans {communes.length} communes. Trouvez la vôtre
+              ci-dessous, ou consultez la page complète du service.
+            </p>
             <div className="flex flex-wrap gap-3">
-              <a href={`tel:${PHONE_TEL}`} className="btn-primary btn-lg"><Phone className="w-5 h-5" /> {PHONE}</a>
-              <Link href="/demande-devis" className="btn glass-panel text-white hover:bg-white/15 btn-lg">Devis gratuit</Link>
+              <Link href={service.servicePage} className="btn-primary btn-lg">
+                Tout sur {service.nom.toLowerCase()} <ChevronRight className="w-5 h-5" />
+              </Link>
+              <a href={`tel:${PHONE_TEL}`} className="btn glass-panel text-white hover:bg-white/15 btn-lg">
+                <Phone className="w-5 h-5" /> {PHONE}
+              </a>
             </div>
           </div>
         </section>
         <section className="section-padding">
           <div className="container-custom max-w-5xl">
-            <p className="text-lg text-foreground-muted leading-relaxed mb-4">
-              S Connect assure {service.nom.toLowerCase()} dans toute l'Île-de-France, depuis notre atelier de Clichy (92).
-              Sélectionnez votre commune pour une page dédiée : temps d'intervention, prestations et devis gratuit.
+            {/* Renvoi pilier : le contenu commercial (prestations, prix, méthode)
+                vit sur /services/** — pas ici. */}
+            <Link
+              href={service.servicePage}
+              className="flex items-start gap-3 p-5 mb-10 rounded-xl border border-primary-300 dark:border-primary-500/40 bg-primary-50 dark:bg-primary-500/10 hover:border-primary-500 transition-colors"
+            >
+              <CheckCircle2 className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+              <span className="text-foreground">
+                <span className="font-semibold">{service.nom} — la page complète</span>{" "}
+                <span className="text-foreground-muted">
+                  : prestations, méthode, prix et FAQ. Cette page-ci est l'annuaire des communes desservies.
+                </span>
+              </span>
+            </Link>
+            <p className="text-lg text-foreground-muted leading-relaxed mb-8">
+              S Connect intervient depuis son atelier de Clichy (92) dans toute l'Île-de-France.
+              Chaque commune ci-dessous a sa page dédiée : temps d'intervention réel, contexte
+              local et demande de devis.
             </p>
-            <ul className="grid md:grid-cols-2 gap-2 mb-10">
-              {service.prestations.map((p) => (
-                <li key={p} className="flex items-start gap-2 text-foreground-muted">
-                  <CheckCircle2 className="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" />{p}
-                </li>
-              ))}
-            </ul>
             {depts.map((d) => (
               <div key={d} className="mb-8">
                 <h2 className="font-display font-bold text-xl mb-3">{deptNom(d)} ({d})</h2>
                 <div className="flex flex-wrap gap-2">
                   {byDept.get(d)!.sort((a, b) => b.population - a.population).map((c) => (
-                    <Link key={c.slug} href={`/${service.key}/${c.slug}`}
+                    <Link key={c.slug} href={localHref(service, c.slug)}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-muted border border-border text-sm hover:border-primary-400 hover:text-primary-600 transition-colors">
                       <MapPin className="w-3.5 h-3.5" /> {c.nom}
                     </Link>
@@ -160,6 +189,9 @@ export function makeServiceHub(serviceKey: string) {
 function LocalServiceView({ service, c }: { service: LocalService; c: Commune }) {
   const faqs = service.faq(c);
   const ctx = getLocalContext(c.slug);
+  // Page artisanale /services/** couvrant déjà cette ville : le canonical
+  // pointe dessus (cf. generateMetadata) et on l'affiche en bandeau.
+  const handcrafted = service.handcrafted?.[c.slug];
   const otherServices = SERVICES.filter(
     (s) => s.key !== service.key && (s.metier === service.metier || s.intent === service.intent),
   ).slice(0, 4);
@@ -246,6 +278,27 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
           </div>
         </div>
       </section>
+
+      {/* Bandeau vers la page artisanale quand la ville en a une : c'est ELLE
+          le pilier (canonical), on y route les visiteurs et le maillage. */}
+      {handcrafted && (
+        <section className="pt-10">
+          <div className="container-custom max-w-3xl">
+            <Link
+              href={handcrafted}
+              className="flex items-start gap-3 p-5 rounded-xl border border-primary-300 dark:border-primary-500/40 bg-primary-50 dark:bg-primary-500/10 hover:border-primary-500 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+              <span className="text-foreground">
+                <span className="font-semibold">Page complète : {service.nom} à {c.nom}</span>{" "}
+                <span className="text-foreground-muted">
+                  — méthode, prix, références chantiers et FAQ détaillée.
+                </span>
+              </span>
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Intro différenciée */}
       <section className="section-padding">
@@ -359,7 +412,7 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
                 {nearby.map((n) => (
                   <li key={n.slug}>
                     <Link
-                      href={`/${service.key}/${n.slug}`}
+                      href={localHref(service, n.slug)}
                       className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700"
                     >
                       <MapPin className="w-4 h-4" /> {service.nom} à {n.nom}
@@ -375,7 +428,7 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
               {otherServices.map((s) => (
                 <li key={s.key}>
                   <Link
-                    href={`/${s.key}/${c.slug}`}
+                    href={localHref(s, c.slug)}
                     className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700"
                   >
                     <ChevronRight className="w-4 h-4" /> {s.nom} à {c.nom}

@@ -26,6 +26,15 @@ export interface LocalService {
   ctaLabel: string;
   infoDelai: string;
   infoPrix: string;
+  /** Page /services/** équivalente (le pilier commercial). ANTI-CANNIBALISATION :
+   *  le hub /[service] est un ANNUAIRE de communes qui renvoie vers cette page
+   *  pour le contenu commercial — les deux ne doivent pas viser la même requête. */
+  servicePage: string;
+  /** Communes dont la requête « service + ville » est déjà couverte par une
+   *  page artisanale /services/** (cluster relamping) : la page usine pose un
+   *  canonical vers elle et tous les liens internes (hub, communes voisines,
+   *  autres services) pointent directement sur la page artisanale. */
+  handcrafted?: Record<string, string>;
   /** Alt text UNIQUE par page (jamais la même chaîne d'une commune à l'autre). */
   imageAlt: (c: Commune) => string;
   /** Paragraphe d'intro différencié par les données réelles de la commune. */
@@ -34,11 +43,30 @@ export interface LocalService {
   faq: (c: Commune) => { q: string; a: string }[];
 }
 
+/** URL locale d'un couple service × commune, en tenant compte des pages
+ *  artisanales : si la ville a sa page /services/**, c'est ELLE qu'on lie. */
+export const localHref = (s: LocalService, slug: string) =>
+  s.handcrafted?.[slug] ?? `/${s.key}/${slug}`;
+
 const IMG = "/images/services";
 
 export const SERVICES: LocalService[] = [
   {
     key: "relamping-led",
+    servicePage: "/services/electricite/relamping",
+    handcrafted: {
+      "paris": "/services/electricite/relamping/paris",
+      "boulogne-billancourt": "/services/electricite/relamping/boulogne-billancourt",
+      "clichy": "/services/electricite/relamping/clichy",
+      "courbevoie": "/services/electricite/relamping/courbevoie",
+      "issy-les-moulineaux": "/services/electricite/relamping/issy-les-moulineaux",
+      "levallois-perret": "/services/electricite/relamping/levallois-perret",
+      "nanterre": "/services/electricite/relamping/nanterre",
+      "neuilly-sur-seine": "/services/electricite/relamping/neuilly-sur-seine",
+      "puteaux": "/services/electricite/relamping/puteaux",
+      "saint-denis": "/services/electricite/relamping/saint-denis",
+      "asnieres-sur-seine": "/services/electricite/relamping/asnieres-sur-seine",
+    },
     metier: "electricite",
     intent: "projet",
     nom: "Relamping LED",
@@ -82,6 +110,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "electricien",
+    servicePage: "/services/electricite",
     metier: "electricite",
     intent: "urgence",
     nom: "Électricien",
@@ -124,6 +153,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "mise-aux-normes-electrique",
+    servicePage: "/services/electricite/mise-aux-normes",
     metier: "electricite",
     intent: "projet",
     nom: "Mise aux normes électrique",
@@ -162,6 +192,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "borne-recharge-irve",
+    servicePage: "/services/electricite/borne-irve",
     metier: "electricite",
     intent: "projet",
     nom: "Borne de recharge IRVE",
@@ -200,6 +231,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "serrurier",
+    servicePage: "/services/serrurerie",
     metier: "serrurerie",
     intent: "urgence",
     nom: "Serrurier",
@@ -242,6 +274,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "ouverture-porte",
+    servicePage: "/services/serrurerie/ouverture-porte",
     metier: "serrurerie",
     intent: "urgence",
     nom: "Ouverture de porte",
@@ -280,6 +313,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "blindage-porte",
+    servicePage: "/services/serrurerie/blindage-porte",
     metier: "serrurerie",
     intent: "projet",
     nom: "Blindage de porte",
@@ -318,6 +352,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "changement-serrure",
+    servicePage: "/services/serrurerie/remplacement-serrure",
     metier: "serrurerie",
     intent: "projet",
     nom: "Changement de serrure",
@@ -356,6 +391,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "interphonie",
+    servicePage: "/services/controle-acces/interphonie-videophonie",
     metier: "controle-acces",
     intent: "projet",
     nom: "Interphonie & vidéophonie",
@@ -394,6 +430,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "controle-acces",
+    servicePage: "/services/controle-acces",
     metier: "controle-acces",
     intent: "projet",
     nom: "Contrôle d'accès (badges & digicodes)",
@@ -432,6 +469,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "portail-metallique",
+    servicePage: "/services/metallerie/fabrication-portail",
     metier: "metallerie",
     intent: "projet",
     nom: "Portail & motorisation",
@@ -470,6 +508,7 @@ export const SERVICES: LocalService[] = [
   },
   {
     key: "garde-corps",
+    servicePage: "/services/metallerie/structure-metallique",
     metier: "metallerie",
     intent: "projet",
     nom: "Garde-corps & métallerie",

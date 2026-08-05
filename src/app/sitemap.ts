@@ -384,6 +384,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     });
     for (const c of communesToIndex) {
+      // Une ville couverte par une page artisanale /services/** n'expose pas
+      // sa page usine au sitemap : elle canonicalise vers l'artisanale (déjà
+      // listée dans la section relamping) — un sitemap ne liste que des URLs
+      // canoniques.
+      if (s.handcrafted?.[c.slug]) continue;
       localSeoPages.push({
         url: `${baseUrl}/${s.key}/${c.slug}`,
         lastModified: now,
