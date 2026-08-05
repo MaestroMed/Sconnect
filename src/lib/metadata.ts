@@ -52,6 +52,15 @@ export function buildMetadata({
     ...(keywords && keywords.length > 0 ? { keywords } : {}),
     alternates: {
       canonical: url,
+      // Autodiscovery RSS sur toutes les pages buildMetadata : un `alternates`
+      // défini par une page REMPLACE entièrement celui du root layout (pas de
+      // deep-merge) — sans cette ligne, poser un canonical faisait disparaître
+      // le lien vers le flux.
+      types: {
+        "application/rss+xml": [
+          { url: "/actualites/feed.xml", title: "Actualités S Connect France" },
+        ],
+      },
     },
     robots: noindex
       // follow: true même en noindex — un noindex,nofollow coupe la
