@@ -1,0 +1,583 @@
+diff --git a/src/components/marketing/CertificationsBand.tsx b/src/components/marketing/CertificationsBand.tsx
+index 5318c3b..6b4979a 100644
+--- a/src/components/marketing/CertificationsBand.tsx
++++ b/src/components/marketing/CertificationsBand.tsx
+@@ -29,7 +29,6 @@ const CERTIFICATIONS: Certification[] = [
+     name: "Qualifélec",
+     description: "Qualification des entreprises d'électricité",
+     icon: Award,
+-    logo: "/images/certifications/qualifelec.png",
+     color: "primary",
+   },
+   {
+@@ -37,7 +36,6 @@ const CERTIFICATIONS: Certification[] = [
+     name: "RGE",
+     description: "Reconnu Garant de l'Environnement",
+     icon: Shield,
+-    logo: "/images/certifications/rge.png",
+     color: "emerald",
+   },
+   {
+@@ -45,7 +43,6 @@ const CERTIFICATIONS: Certification[] = [
+     name: "IRVE",
+     description: "Installation de bornes de recharge VE",
+     icon: Zap,
+-    logo: "/images/certifications/irve.png",
+     color: "accent",
+   },
+   {
+@@ -53,7 +50,6 @@ const CERTIFICATIONS: Certification[] = [
+     name: "Garantie Décennale",
+     description: "Protection de vos travaux pendant 10 ans",
+     icon: CheckCircle2,
+-    logo: "/images/certifications/decennale.png",
+     color: "orange",
+   },
+ ];
+diff --git a/src/components/marketing/NewsletterForm.tsx b/src/components/marketing/NewsletterForm.tsx
+index 855ecf5..ec75ce1 100644
+--- a/src/components/marketing/NewsletterForm.tsx
++++ b/src/components/marketing/NewsletterForm.tsx
+@@ -83,7 +83,7 @@ export default function NewsletterForm({
+               className="mt-0.5"
+             />
+             <span>
+-              J&apos;accepte de recevoir les emails de S&apos;Connect. Désinscription en
++              J&apos;accepte de recevoir les emails de S Connect France. Désinscription en
+               1 clic via chaque email. Voir notre{" "}
+               <a href="/politique-confidentialite" className="underline">
+                 politique de confidentialité
+@@ -141,7 +141,7 @@ export default function NewsletterForm({
+           className="mt-0.5"
+         />
+         <span>
+-          J&apos;accepte de recevoir les emails de S&apos;Connect (désinscription en 1 clic).
++          J&apos;accepte de recevoir les emails de S Connect France (désinscription en 1 clic).
+         </span>
+       </label>
+     </form>
+diff --git a/src/components/marketing/RatingBadge.test.tsx b/src/components/marketing/RatingBadge.test.tsx
+index 2c838aa..5234ec9 100644
+--- a/src/components/marketing/RatingBadge.test.tsx
++++ b/src/components/marketing/RatingBadge.test.tsx
+@@ -3,14 +3,14 @@ import { render, screen } from "@testing-library/react";
+ import RatingBadge from "./RatingBadge";
+ 
+ describe("RatingBadge", () => {
+-  it("renders default 4.9/127 wording when no props are supplied", () => {
+-    render(<RatingBadge />);
+-    expect(screen.getByText("4.9/5")).toBeInTheDocument();
+-    expect(screen.getByText(/127 avis vérifiés/)).toBeInTheDocument();
++  it("renders the supplied rating and review count", () => {
++    render(<RatingBadge rating={4.6} reviewCount={42} />);
++    expect(screen.getByText("4.6/5")).toBeInTheDocument();
++    expect(screen.getByText(/42 avis clients/)).toBeInTheDocument();
+   });
+ 
+   it("renders as a static (non-link) chip by default", () => {
+-    render(<RatingBadge />);
++    render(<RatingBadge rating={4.9} reviewCount={9} />);
+     expect(screen.queryByRole("link")).toBeNull();
+     // Static variant exposes the rating via an img role + aria-label.
+     expect(
+@@ -18,14 +18,10 @@ describe("RatingBadge", () => {
+     ).toBeInTheDocument();
+   });
+ 
+-  it("renders a custom rating and review count", () => {
+-    render(<RatingBadge rating={4.6} reviewCount={42} />);
+-    expect(screen.getByText("4.6/5")).toBeInTheDocument();
+-    expect(screen.getByText(/42 avis vérifiés/)).toBeInTheDocument();
+-  });
+-
+   it("supports a custom href (e.g. future GBP URL)", () => {
+-    render(<RatingBadge href="https://g.page/r/CabcDef123" />);
++    render(
++      <RatingBadge rating={4.9} reviewCount={9} href="https://g.page/r/CabcDef123" />,
++    );
+     expect(screen.getByRole("link")).toHaveAttribute(
+       "href",
+       "https://g.page/r/CabcDef123",
+@@ -33,9 +29,9 @@ describe("RatingBadge", () => {
+   });
+ 
+   it("includes a descriptive aria-label for screen readers", () => {
+-    render(<RatingBadge rating={4.9} reviewCount={127} />);
++    render(<RatingBadge rating={4.9} reviewCount={9} />);
+     expect(
+-      screen.getByLabelText("Note moyenne 4.9 sur 5, 127 avis vérifiés"),
++      screen.getByLabelText("Note moyenne 4.9 sur 5, 9 avis clients"),
+     ).toBeInTheDocument();
+   });
+ 
+diff --git a/src/components/marketing/RatingBadge.tsx b/src/components/marketing/RatingBadge.tsx
+index d5856e6..6ea8edf 100644
+--- a/src/components/marketing/RatingBadge.tsx
++++ b/src/components/marketing/RatingBadge.tsx
+@@ -2,10 +2,11 @@ import Link from "next/link";
+ import { Star } from "lucide-react";
+ 
+ interface RatingBadgeProps {
+-  /** Numeric rating, e.g. 4.9 */
+-  rating?: number;
+-  /** Total review count, e.g. 127 */
+-  reviewCount?: number;
++  /** Note moyenne RÉELLE (calculée sur les avis affichés) — pas de défaut :
++   *  une note inventée en dur est un risque juridique (avis trompeurs). */
++  rating: number;
++  /** Nombre d'avis réel. */
++  reviewCount: number;
+   /** Optional destination. When omitted the badge renders as a static,
+    *  non-interactive trust chip (the dedicated reviews page was removed —
+    *  pass a Google Business Profile URL here once available to turn it
+@@ -25,8 +26,8 @@ interface RatingBadgeProps {
+  * Business Profile review URL) to make it a link with hover lift.
+  */
+ export default function RatingBadge({
+-  rating = 4.9,
+-  reviewCount = 127,
++  rating,
++  reviewCount,
+   href,
+   variant = "light",
+   className = "",
+@@ -76,12 +77,12 @@ export default function RatingBadge({
+           variant === "dark" ? "text-white/70" : "text-foreground-muted"
+         }`}
+       >
+-        · {reviewCount} avis vérifiés
++        · {reviewCount} avis clients
+       </span>
+     </>
+   );
+ 
+-  const label = `Note moyenne ${rating} sur 5, ${reviewCount} avis vérifiés`;
++  const label = `Note moyenne ${rating} sur 5, ${reviewCount} avis clients`;
+ 
+   if (href) {
+     return (
+diff --git a/src/components/services/CategoryLandingHero.tsx b/src/components/services/CategoryLandingHero.tsx
+index ec6e680..96c342d 100644
+--- a/src/components/services/CategoryLandingHero.tsx
++++ b/src/components/services/CategoryLandingHero.tsx
+@@ -91,12 +91,9 @@ export default function CategoryLandingHero({
+           <Breadcrumbs items={[{ label: "Services", href: "/services" }, { label: breadcrumbLabel }]} light />
+         </div>
+         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] items-center">
+-          <motion.div
+-            initial={{ opacity: 0, y: 20 }}
+-            animate={{ opacity: 1, y: 0 }}
+-            transition={{ duration: 0.5 }}
+-            className="max-w-2xl"
+-          >
++          {/* initial={false} : le fade 0→1 sérialisé en SSR retardait le LCP
++              (H1 invisible jusqu'à hydratation) — même correctif que la home. */}
++          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-2xl">
+             <div className={`w-16 h-16 bg-gradient-to-br ${theme.iconGradient} rounded-2xl flex items-center justify-center mb-6 shadow-xl ${theme.iconShadow}`}>
+               <Icon className="w-8 h-8 text-white" />
+             </div>
+@@ -116,12 +113,7 @@ export default function CategoryLandingHero({
+               </Link>
+             </div>
+           </motion.div>
+-          <motion.div
+-            initial={{ opacity: 0, x: 30 }}
+-            animate={{ opacity: 1, x: 0 }}
+-            transition={{ duration: 0.7, delay: 0.15 }}
+-            className="relative hidden lg:block"
+-          >
++          <motion.div initial={false} animate={{ opacity: 1, x: 0 }} className="relative hidden lg:block">
+             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+               <Image
+                 src={heroImage.webp}
+diff --git a/src/components/services/ServicePageTemplate.tsx b/src/components/services/ServicePageTemplate.tsx
+index ac1e01b..92dfa3b 100644
+--- a/src/components/services/ServicePageTemplate.tsx
++++ b/src/components/services/ServicePageTemplate.tsx
+@@ -209,12 +209,10 @@ export default function ServicePageTemplate({
+             <Breadcrumbs items={breadcrumbItems} light />
+           </div>
+           <div className={`grid gap-10 items-center ${heroImage ? "lg:grid-cols-[1.15fr_1fr]" : "lg:grid-cols-1"}`}>
+-            <motion.div
+-              initial={{ opacity: 0, y: 20 }}
+-              animate={{ opacity: 1, y: 0 }}
+-              transition={{ duration: 0.5 }}
+-              className="max-w-2xl"
+-            >
++            {/* initial={false} : le fade 0→1 sérialisé en SSR retardait le
++                LCP (H1 + image invisibles jusqu'à hydratation) — même
++                correctif que la home (HomePageClient). */}
++            <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-2xl">
+               <div className={`w-16 h-16 bg-gradient-to-br ${theme.iconGradient} rounded-2xl flex items-center justify-center mb-6 shadow-xl ${theme.iconShadow}`}>
+                 <Icon className="w-8 h-8 text-white" />
+               </div>
+@@ -243,12 +241,7 @@ export default function ServicePageTemplate({
+             </motion.div>
+ 
+             {heroImage && (
+-              <motion.div
+-                initial={{ opacity: 0, x: 30 }}
+-                animate={{ opacity: 1, x: 0 }}
+-                transition={{ duration: 0.7, delay: 0.15 }}
+-                className="relative hidden lg:block"
+-              >
++              <motion.div initial={false} animate={{ opacity: 1, x: 0 }} className="relative hidden lg:block">
+                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                   <Image
+                     src={heroImage.webp}
+diff --git a/src/components/ui/RealizationCard.tsx b/src/components/ui/RealizationCard.tsx
+index 4847e62..0ce1309 100644
+--- a/src/components/ui/RealizationCard.tsx
++++ b/src/components/ui/RealizationCard.tsx
+@@ -51,6 +51,7 @@ export default function RealizationCard({
+               src={image}
+               alt={title}
+               fill
++          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+               className="object-cover group-hover:scale-110 transition-transform duration-500"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+diff --git a/src/emails/_components.tsx b/src/emails/_components.tsx
+index a55cb48..5eade27 100644
+--- a/src/emails/_components.tsx
++++ b/src/emails/_components.tsx
+@@ -78,7 +78,7 @@ export function Shell({
+               }}
+             >
+               <Text style={{ margin: 0 }}>
+-                S&apos;Connect — Électricité, Contrôle d&apos;accès &amp; Serrurerie
++                S Connect France — Électricité, Contrôle d&apos;accès &amp; Serrurerie
+               </Text>
+               <Text style={{ margin: 0 }}>Île-de-France · Intervention 24h/24</Text>
+             </Section>
+diff --git a/src/lib/data/brands.json b/src/lib/data/brands.json
+index 79fdc07..c2299c8 100644
+--- a/src/lib/data/brands.json
++++ b/src/lib/data/brands.json
+@@ -53,7 +53,7 @@
+       "name": "Aiphone",
+       "category": "controle-acces",
+       "description": "Leader mondial de l'interphonie et de la vidéophonie professionnelle.",
+-      "logo": "/brands/aiphone.svg",
++      "logo": null,
+       "website": "https://www.aiphone.fr"
+     },
+     {
+@@ -61,7 +61,7 @@
+       "name": "Dahua",
+       "category": "controle-acces",
+       "description": "Solutions de vidéosurveillance et contrôle d'accès innovantes.",
+-      "logo": "/brands/dahua.svg",
++      "logo": null,
+       "website": "https://www.dahuasecurity.com"
+     },
+     {
+@@ -69,7 +69,7 @@
+       "name": "Hikvision",
+       "category": "controle-acces",
+       "description": "Fournisseur mondial de produits et solutions de sécurité.",
+-      "logo": "/brands/hikvision.svg",
++      "logo": null,
+       "website": "https://www.hikvision.com"
+     },
+     {
+@@ -77,7 +77,7 @@
+       "name": "CDVI",
+       "category": "controle-acces",
+       "description": "Fabricant français de systèmes de contrôle d'accès électroniques.",
+-      "logo": "/brands/cdvi.svg",
++      "logo": null,
+       "website": "https://www.cdvi.com"
+     },
+     {
+@@ -85,7 +85,7 @@
+       "name": "Mul-T-Lock",
+       "category": "serrurerie",
+       "description": "Cylindres haute sécurité et systèmes de clés brevetées.",
+-      "logo": "/brands/multlock.svg",
++      "logo": null,
+       "website": "https://www.mul-t-lock.com"
+     },
+     {
+@@ -93,12 +93,8 @@
+       "name": "ABB",
+       "category": "electricite",
+       "description": "Leader en technologies d'électrification et d'automatisation.",
+-      "logo": "/brands/abb.svg",
++      "logo": null,
+       "website": "https://www.abb.com"
+     }
+   ]
+-}
+-
+-
+-
+-
++}
+\ No newline at end of file
+diff --git a/src/lib/data/homepage.json b/src/lib/data/homepage.json
+index e46af8c..947dbcb 100644
+--- a/src/lib/data/homepage.json
++++ b/src/lib/data/homepage.json
+@@ -4,7 +4,7 @@
+   "hero_subtitle": "Électricité, contrôle d'accès, serrurerie et métallerie depuis 2021. Audit gratuit, intervention 24h/24, devis transparent. Certifiés Qualifélec & IRVE.",
+   "hero_cta_primary": "Demander un devis gratuit",
+   "hero_cta_secondary": "Urgence 24h/24",
+-  "hero_image_url": "/images/hero-homepage.jpg",
++  "hero_image_url": null,
+   "hero_video_url": null,
+   "about_title": "Votre partenaire multi-services de confiance",
+   "about_description": "Depuis 2021, S Connect France accompagne les particuliers et professionnels d'Île-de-France dans tous leurs projets : électricité, contrôle d'accès, serrurerie et métallerie.",
+@@ -35,7 +35,4 @@
+   "cta_button": "Demander un devis",
+   "brands_title": "Les marques que nous installons",
+   "brands_subtitle": "Nos fournisseurs de référence pour votre sécurité et votre confort"
+-}
+-
+-
+-
++}
+\ No newline at end of file
+diff --git a/src/lib/data/media.json b/src/lib/data/media.json
+index 7fca057..e090683 100644
+--- a/src/lib/data/media.json
++++ b/src/lib/data/media.json
+@@ -1,13 +1,8 @@
+ {
+-  "logo": "/images/logo.png",
+-  "logo_white": "/images/logo-white.png",
++  "logo": "/logo.png",
++  "logo_white": "/images/logo_only_white.svg",
+   "favicon": "/favicon.ico",
+-  "hero_image": "/images/hero-homepage.jpg",
+-  "og_image": "/images/og-image.jpg",
++  "hero_image": "/images/hero/hero-cinema-paris-1366.webp",
++  "og_image": "/og-image.jpg",
+   "partners": []
+-}
+-
+-
+-
+-
+-
++}
+\ No newline at end of file
+diff --git a/src/lib/data/testimonials.json b/src/lib/data/testimonials.json
+index b2f7a47..2df4e77 100644
+--- a/src/lib/data/testimonials.json
++++ b/src/lib/data/testimonials.json
+@@ -88,17 +88,6 @@
+       "date": "2024-08-10",
+       "verified": true
+     },
+-    {
+-      "id": "9",
+-      "name": "Entreprise ABC",
+-      "rating": 5,
+-      "text": "Système de badges pour nos 50 employés. La solution proposée est parfaite, on peut tout gérer depuis une interface web. Support réactif en cas de question.",
+-      "service": "Badges & Digicodes",
+-      "category": "controle-acces",
+-      "location": "La Défense",
+-      "date": "2024-07-28",
+-      "verified": true
+-    },
+     {
+       "id": "10",
+       "name": "Nathalie P.",
+@@ -122,8 +111,4 @@
+       "1": 0
+     }
+   }
+-}
+-
+-
+-
+-
++}
+\ No newline at end of file
+diff --git a/src/lib/indexnow.ts b/src/lib/indexnow.ts
+index fab89ba..eaa73aa 100644
+--- a/src/lib/indexnow.ts
++++ b/src/lib/indexnow.ts
+@@ -20,7 +20,6 @@
+ const DEFAULT_KEY = "13f8c0a4e7b34f2b9c5e6a8d1f7c2e90";
+ const HOST = "sconnectfrance.fr";
+ const ENDPOINT = "https://api.indexnow.org/IndexNow";
+-const GOOGLE_PING = "https://www.google.com/ping?sitemap=";
+ const BING_PING = "https://www.bing.com/ping?sitemap=";
+ 
+ interface PingResult {
+@@ -62,20 +61,12 @@ export async function submitToIndexNow(urls: string[]): Promise<PingResult[]> {
+     });
+   }
+ 
+-  // 2) Google sitemap ping (legacy but still effective)
++  // Le ping sitemap Google (google.com/ping) est arrêté depuis janvier 2024
++  // (404 systématique) — supprimé. L'indexation Google passe par Search
++  // Console + sitemap déclaré.
+   const sitemapUrl = `https://${host}/sitemap.xml`;
+-  try {
+-    const res = await fetch(`${GOOGLE_PING}${encodeURIComponent(sitemapUrl)}`);
+-    results.push({ engine: "google-sitemap", ok: res.ok, status: res.status });
+-  } catch (e) {
+-    results.push({
+-      engine: "google-sitemap",
+-      ok: false,
+-      error: e instanceof Error ? e.message : "unknown",
+-    });
+-  }
+ 
+-  // 3) Bing sitemap ping (belt + suspenders)
++  // 2) Bing sitemap ping (belt + suspenders)
+   try {
+     const res = await fetch(`${BING_PING}${encodeURIComponent(sitemapUrl)}`);
+     results.push({ engine: "bing-sitemap", ok: res.ok, status: res.status });
+diff --git a/src/lib/local-seo/page-factory.tsx b/src/lib/local-seo/page-factory.tsx
+index 5eb56c9..e097e5e 100644
+--- a/src/lib/local-seo/page-factory.tsx
++++ b/src/lib/local-seo/page-factory.tsx
+@@ -163,11 +163,12 @@ function LocalServiceView({ service, c }: { service: LocalService; c: Commune })
+   const otherServices = SERVICES.filter(
+     (s) => s.key !== service.key && (s.metier === service.metier || s.intent === service.intent),
+   ).slice(0, 4);
+-  // Ne lier que vers des communes RÉELLEMENT publiées (la vague active), sinon
+-  // le lien pointe vers une page non générée (404).
++  // Ne lier que vers des communes indexables (enrichies) : lier depuis une
++  // page indexée vers des voisines noindex diluait le crawl (même filtre que
++  // le hub). isIndexable ⊆ isPublished, donc jamais de lien vers un 404.
+   const nearby = c.nearby.filter((n) => {
+     const nc = getCommune(n.slug);
+-    return nc && isPublished(nc);
++    return nc && isIndexableCommune(nc);
+   });
+ 
+   // UNE entité LocalBusiness canonique pour tout le site (déclarée dans
+diff --git a/src/lib/metadata.ts b/src/lib/metadata.ts
+index e135316..0f5abec 100644
+--- a/src/lib/metadata.ts
++++ b/src/lib/metadata.ts
+@@ -54,7 +54,10 @@ export function buildMetadata({
+       canonical: url,
+     },
+     robots: noindex
+-      ? { index: false, follow: false }
++      // follow:true — les ~3 400 pages communes non enrichies doivent
++      // transmettre leurs liens (hub, communes voisines) même sans être
++      // indexées ; follow:false coupait ce maillage.
++      ? { index: false, follow: true }
+       : {
+           index: true,
+           follow: true,
+diff --git a/src/lib/structured-data.ts b/src/lib/structured-data.ts
+index 50a0aff..1f08f65 100644
+--- a/src/lib/structured-data.ts
++++ b/src/lib/structured-data.ts
+@@ -62,33 +62,7 @@ export function generateFAQSchema(faqs: FAQItem[]) {
+   };
+ }
+ 
+-/**
+- * Génère un Review schema
+- */
+-export function generateReviewSchema(review: ReviewSchema, baseUrl: string) {
+-  return {
+-    "@context": "https://schema.org",
+-    "@type": "Review",
+-    "itemReviewed": {
+-      "@type": "LocalBusiness",
+-      "@id": `${baseUrl}/#localbusiness`,
+-      "name": "S Connect France",
+-      "url": baseUrl,
+-    },
+-    "reviewRating": {
+-      "@type": "Rating",
+-      "ratingValue": review.rating,
+-      "bestRating": "5",
+-      "worstRating": "1",
+-    },
+-    "author": {
+-      "@type": "Person",
+-      "name": review.author,
+-    },
+-    "reviewBody": review.text,
+-    "datePublished": review.date,
+-  };
+-}
++
+ 
+ /**
+  * Génère un Service schema
+@@ -141,60 +115,6 @@ export function generateHowToSchema(data: {
+   };
+ }
+ 
+-/**
+- * Génère un AggregateRating schema
+- */
+-export function generateAggregateRatingSchema(data: {
+-  ratingValue: number;
+-  reviewCount: number;
+-  baseUrl: string;
+-}) {
+-  return {
+-    "@context": "https://schema.org",
+-    "@type": "AggregateRating",
+-    "itemReviewed": {
+-      "@type": "LocalBusiness",
+-      "@id": `${data.baseUrl}/#localbusiness`,
+-      "name": "S Connect France",
+-    },
+-    "ratingValue": data.ratingValue.toFixed(1),
+-    "reviewCount": data.reviewCount,
+-    "bestRating": "5",
+-    "worstRating": "1",
+-  };
+-}
+-
+-/**
+- * Génère un Product/Service Offer schema
+- */
+-export function generateOfferSchema(data: {
+-  name: string;
+-  description: string;
+-  price?: string;
+-  priceCurrency?: string;
+-  availability?: string;
+-  baseUrl: string;
+-}) {
+-  return {
+-    "@context": "https://schema.org",
+-    "@type": "Offer",
+-    "itemOffered": {
+-      "@type": "Service",
+-      "name": data.name,
+-      "description": data.description,
+-    },
+-    ...(data.price && {
+-      "price": data.price,
+-      "priceCurrency": data.priceCurrency || "EUR",
+-    }),
+-    "availability": data.availability || "https://schema.org/InStock",
+-    "seller": {
+-      "@type": "LocalBusiness",
+-      "@id": `${data.baseUrl}/#localbusiness`,
+-      "name": "S Connect France",
+-    },
+-  };
+-}
+ 
+ /**
+  * Génère un VideoObject schema
+@@ -203,6 +123,12 @@ export function generateVideoSchema(data: {
+   name: string;
+   description: string;
+   thumbnailUrl: string;
++  /**
++   * ISO 8601 **avec fuseau horaire** — `2026-05-10T09:00:00+02:00`.
++   * Une date nue (`2026-05-10`) est acceptée par Google mais déclenche deux
++   * avertissements dans la Search Console : fuseau manquant et valeur de date
++   * et heure incorrecte.
++   */
+   uploadDate: string;
+   duration?: string;
+   contentUrl: string;
