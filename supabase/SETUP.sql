@@ -238,6 +238,12 @@ BEGIN
 END $$;
 
 -- =================== ROW LEVEL SECURITY + POLICIES ===================
+-- SÉCURITÉ : une policy sans clause TO s'applique au rôle `public`, donc
+-- aussi à la clé `anon` exposée dans le navigateur. Toutes les policies
+-- d'écriture sont donc scopées TO service_role (le code applicatif écrit
+-- exclusivement via createServiceClient()). Les tables privées n'ont
+-- AUCUNE policy pour anon/authenticated : RLS activé sans policy = tout
+-- accès refusé par défaut.
 DO $$
 DECLARE t TEXT;
 BEGIN
@@ -247,26 +253,27 @@ BEGIN
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY;', t);
     EXECUTE format('DROP POLICY IF EXISTS "Public read" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Public read" ON %I FOR SELECT USING (true);', t);
+    EXECUTE format('CREATE POLICY "Public read" ON %I FOR SELECT TO anon, authenticated USING (true);', t);
     EXECUTE format('DROP POLICY IF EXISTS "Service write" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL USING (true) WITH CHECK (true);', t);
+    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL TO service_role USING (true) WITH CHECK (true);', t);
   END LOOP;
 
-  -- Tables privées : accès service role uniquement (API admin)
+  -- Tables privées : accès service role uniquement (API admin).
+  -- Surtout PAS de policy pour anon/authenticated ici.
   FOREACH t IN ARRAY ARRAY['admin_users','submissions','newsletter_subscribers',
     'password_reset_tokens']
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY;', t);
     EXECUTE format('DROP POLICY IF EXISTS "Service write" ON %I;', t);
-    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL USING (true) WITH CHECK (true);', t);
+    EXECUTE format('CREATE POLICY "Service write" ON %I FOR ALL TO service_role USING (true) WITH CHECK (true);', t);
   END LOOP;
 
   -- posts : lecture publique des articles publiés + écriture service
   EXECUTE 'ALTER TABLE posts ENABLE ROW LEVEL SECURITY;';
   EXECUTE 'DROP POLICY IF EXISTS "Public read published" ON posts;';
-  EXECUTE 'CREATE POLICY "Public read published" ON posts FOR SELECT USING (published = true);';
+  EXECUTE 'CREATE POLICY "Public read published" ON posts FOR SELECT TO anon, authenticated USING (published = true);';
   EXECUTE 'DROP POLICY IF EXISTS "Service write" ON posts;';
-  EXECUTE 'CREATE POLICY "Service write" ON posts FOR ALL USING (true) WITH CHECK (true);';
+  EXECUTE 'CREATE POLICY "Service write" ON posts FOR ALL TO service_role USING (true) WITH CHECK (true);';
 END $$;
 
 -- ===================== STOCKAGE DES IMAGES ==========================
@@ -278,15 +285,17 @@ ON CONFLICT (id) DO UPDATE SET public = true;
 DROP POLICY IF EXISTS "sconnectfrance_public_read" ON storage.objects;
 CREATE POLICY "sconnectfrance_public_read" ON storage.objects
   FOR SELECT USING (bucket_id = 'sconnectfrance');
+-- Écritures storage : service_role uniquement (l'upload passe par l'API
+-- admin côté serveur) — sans TO, la clé anon pouvait écraser les images.
 DROP POLICY IF EXISTS "sconnectfrance_service_insert" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_insert" ON storage.objects
-  FOR INSERT WITH CHECK (bucket_id = 'sconnectfrance');
+  FOR INSERT TO service_role WITH CHECK (bucket_id = 'sconnectfrance');
 DROP POLICY IF EXISTS "sconnectfrance_service_update" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_update" ON storage.objects
-  FOR UPDATE USING (bucket_id = 'sconnectfrance');
+  FOR UPDATE TO service_role USING (bucket_id = 'sconnectfrance');
 DROP POLICY IF EXISTS "sconnectfrance_service_delete" ON storage.objects;
 CREATE POLICY "sconnectfrance_service_delete" ON storage.objects
-  FOR DELETE USING (bucket_id = 'sconnectfrance');
+  FOR DELETE TO service_role USING (bucket_id = 'sconnectfrance');
 
 -- =====================================================================
 -- ✓ Terminé. Étapes suivantes (en local, voir docs/GUIDE-GESTION-SITE.md) :
