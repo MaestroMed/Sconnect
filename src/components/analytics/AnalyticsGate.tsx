@@ -1,23 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 /**
- * Gates Vercel Analytics + Speed Insights behind the cookie-consent
- * preference. RGPD-strict: even though both are advertised as
- * "privacy-friendly" (no cookies, IP truncation), they remain third-party
- * traceurs that the CNIL can challenge — better wait for explicit consent.
+ * Charge Google Analytics 4 derrière le consentement cookies.
  *
- * The cookie banner writes `{ necessary, analytics, marketing }` into
- * `cookie-consent` in localStorage. We listen for the custom event
- * `cookie-consent:updated` (dispatched by the banner on save) so the
- * gate flips immediately without a full reload.
+ * Auparavant ce composant montait Vercel Analytics + Speed Insights. Les deux
+ * ont été retirés : la mesure passe désormais par GA4 sur l'ensemble des sites,
+ * ce qui évite la facturation Vercel et permet de comparer les sites entre eux.
  *
- * Mounted in app/layout.tsx in lieu of importing Analytics/SpeedInsights
- * directly.
+ * Le gating reste strict côté RGPD : gtag n'est chargé qu'après un consentement
+ * explicite. Tant qu'il ne l'est pas, `trackEvent` (lib/analytics) teste
+ * `window.gtag` et ne fait rien — aucun appel réseau n'a lieu.
+ *
+ * La bannière écrit `{ necessary, analytics, marketing }` dans `cookie-consent`
+ * (localStorage) et émet `cookie-consent:updated` à l'enregistrement, ce qui
+ * bascule ce composant sans rechargement.
+ *
+ * Monté dans app/layout.tsx.
  */
+const GA_ID = process.env.NEXT_PUBLIC_GA4_ID;
+
 export default function AnalyticsGate() {
   const [allowed, setAllowed] = useState(false);
 
@@ -47,12 +51,22 @@ export default function AnalyticsGate() {
     };
   }, []);
 
-  if (!allowed) return null;
+  if (!allowed || !GA_ID) return null;
 
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="ga4-config" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}
+      </Script>
     </>
   );
 }
