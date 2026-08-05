@@ -124,7 +124,7 @@ SENTRY_PROJECT=
 SENTRY_AUTH_TOKEN=
 ```
 
-Voir `env.example.txt` pour la liste complète.
+Voir `.env.example` pour la liste complète.
 
 ### Déploiement Vercel
 

@@ -23,13 +23,16 @@ interface Certification {
   color: "primary" | "emerald" | "accent" | "orange";
 }
 
+// Pas de prop `logo` tant que les PNG officiels ne sont pas déposés dans
+// /public/images/certifications/ : chaque visiteur payait 4 HEAD 404 avant de
+// retomber sur l'icône. Ré-ajouter `logo: "/images/certifications/<slug>.png"`
+// quand les fichiers seront livrés — le fallback icône reste en place.
 const CERTIFICATIONS: Certification[] = [
   {
     slug: "qualifelec",
     name: "Qualifélec",
     description: "Qualification des entreprises d'électricité",
     icon: Award,
-    logo: "/images/certifications/qualifelec.png",
     color: "primary",
   },
   {
@@ -37,7 +40,6 @@ const CERTIFICATIONS: Certification[] = [
     name: "RGE",
     description: "Reconnu Garant de l'Environnement",
     icon: Shield,
-    logo: "/images/certifications/rge.png",
     color: "emerald",
   },
   {
@@ -45,7 +47,6 @@ const CERTIFICATIONS: Certification[] = [
     name: "IRVE",
     description: "Installation de bornes de recharge VE",
     icon: Zap,
-    logo: "/images/certifications/irve.png",
     color: "accent",
   },
   {
@@ -53,7 +54,6 @@ const CERTIFICATIONS: Certification[] = [
     name: "Garantie Décennale",
     description: "Protection de vos travaux pendant 10 ans",
     icon: CheckCircle2,
-    logo: "/images/certifications/decennale.png",
     color: "orange",
   },
 ];
