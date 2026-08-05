@@ -53,7 +53,7 @@
       "name": "Aiphone",
       "category": "controle-acces",
       "description": "Leader mondial de l'interphonie et de la vidéophonie professionnelle.",
-      "logo": null,
+      "logo": "/brands/aiphone.svg",
       "website": "https://www.aiphone.fr"
     },
     {
@@ -61,7 +61,7 @@
       "name": "Dahua",
       "category": "controle-acces",
       "description": "Solutions de vidéosurveillance et contrôle d'accès innovantes.",
-      "logo": null,
+      "logo": "/brands/dahua.svg",
       "website": "https://www.dahuasecurity.com"
     },
     {
@@ -69,7 +69,7 @@
       "name": "Hikvision",
       "category": "controle-acces",
       "description": "Fournisseur mondial de produits et solutions de sécurité.",
-      "logo": null,
+      "logo": "/brands/hikvision.svg",
       "website": "https://www.hikvision.com"
     },
     {
@@ -93,7 +93,7 @@
       "name": "ABB",
       "category": "electricite",
       "description": "Leader en technologies d'électrification et d'automatisation.",
-      "logo": null,
+      "logo": "/brands/abb.svg",
       "website": "https://www.abb.com"
     }
   ]
