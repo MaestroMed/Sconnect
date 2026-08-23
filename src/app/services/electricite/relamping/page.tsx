@@ -578,6 +578,68 @@ export default function RelampingPage() {
         </div>
       </section>
 
+      {/* ─── Ressources ───
+          Le hub relamping ne liait ni les études de cas, ni le lexique, ni le
+          calculateur. Mesuré sur les 683 pages du build : /etudes-de-cas ne
+          recevait qu'1 lien interne et /lexique-eclairage 3, alors que ce sont
+          les deux pages qui portent le plus de preuve. Un lien contextuel
+          depuis le hub du cœur de métier pèse plus lourd qu'une entrée de
+          footer, et donne au lecteur la suite logique de sa lecture. */}
+      <section className="section-padding">
+        <div className="container-custom max-w-5xl">
+          <SectionTitle
+            badge="Ressources"
+            title="Pour aller plus loin"
+            subtitle="Trois outils que nous utilisons en audit, ouverts à tous."
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                href: "/etudes-de-cas",
+                icon: Building2,
+                title: "Études de cas",
+                desc: "Trois chantiers relamping documentés : surfaces, matériel posé, coût réel, économies constatées et durée d'immobilisation.",
+                cta: "Voir les chantiers chiffrés",
+              },
+              {
+                href: "/calculateur-relamping",
+                icon: Calculator,
+                title: "Calculateur ROI",
+                desc: "Économies annuelles, coût matériel et pose, retour sur investissement. Quatre typologies de bâtiment, résultat en 30 secondes.",
+                cta: "Estimer mon projet",
+              },
+              {
+                href: "/lexique-eclairage",
+                icon: Lightbulb,
+                title: "Lexique éclairage",
+                desc: "Cinquante termes à connaître avant de signer un devis : lux, UGR, IRC, DALI, flicker, IP/IK, NF EN 12464-1.",
+                cta: "Consulter le lexique",
+              },
+            ].map((r) => (
+              <Link
+                key={r.href}
+                href={r.href}
+                className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-primary-400 hover:shadow-lg"
+              >
+                <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary-100 text-primary-700 dark:bg-primary-500/15 dark:text-primary-300">
+                  <r.icon className="h-5 w-5" />
+                </span>
+                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                  {r.title}
+                </h3>
+                <p className="text-foreground-muted leading-relaxed mb-5 flex-1">
+                  {r.desc}
+                </p>
+                <span className="inline-flex items-center gap-1.5 font-semibold text-primary-700 dark:text-primary-300">
+                  {r.cta}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── Final CTA ─── */}
       <section className="relative overflow-hidden py-24 md:py-32 bg-dark-950">
         <Image

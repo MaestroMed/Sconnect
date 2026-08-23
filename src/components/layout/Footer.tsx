@@ -28,10 +28,18 @@ const services = [
   { name: "Métallerie", href: "/services/metallerie" },
 ];
 
+// `/etudes-de-cas` et `/lexique-eclairage` ajoutés ici après mesure du maillage
+// sur les 683 pages du build : ils ne recevaient respectivement que 1 et 3 liens
+// internes, contre 679 pour toute entrée de footer. Or ce sont les deux pages
+// qui portent le plus de preuve (chantiers chiffrés, 50 termes métier) — donc
+// celles qu'un journaliste, un syndic ou un bureau d'études citerait. Les
+// laisser orphelines revenait à cacher les meilleurs actifs du site.
 const quickLinks = [
   { name: "Accueil", href: "/" },
   { name: "Présentation", href: "/presentation" },
   { name: "Réalisations", href: "/realisations" },
+  { name: "Études de cas", href: "/etudes-de-cas" },
+  { name: "Lexique éclairage", href: "/lexique-eclairage" },
   { name: "Actualités", href: "/actualites" },
   { name: "Nos Marques", href: "/marques" },
   { name: "Contact", href: "/contact" },
