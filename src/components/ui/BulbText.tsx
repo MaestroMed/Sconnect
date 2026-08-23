@@ -25,6 +25,30 @@ interface BulbTextProps {
  *
  * No JS animation library = zero HMR module-not-found risk, zero hydration
  * skew, zero RSC/client-boundary concern. SSR-safe (works as a server component).
+ *
+ * ---------------------------------------------------------------------------
+ * TEXTE RENDU UNE SEULE FOIS — ne pas réintroduire de copie `sr-only`.
+ *
+ * La version précédente rendait la chaîne DEUX fois : un `<span class="sr-only">`
+ * pour les lecteurs d'écran, plus les lettres décoratives en `aria-hidden`.
+ * Or `sr-only` (Tailwind) masque *visuellement* — `position:absolute` + `clip` —
+ * mais laisse le texte dans le DOM. Googlebot lisait donc les deux copies et
+ * recopiait le doublon dans l'extrait de résultat. Constaté en SERP sur la home :
+ *
+ *   « Préserver votre habitat à Clichy et en Île-de-France, c'est notre métier
+ *     d'artisan. c'est notre métier d'artisan. »
+ *
+ * BulbText étant monté dans ~48 pages (H1 et H2), le défaut était sitewide.
+ *
+ * Accessibilité conservée, en deux couches :
+ *   1. `role="text"` + `aria-label` — VoiceOver/Safari annoncent la phrase d'un
+ *      seul tenant au lieu d'égrener les lettres.
+ *   2. Les lettres restent de vrais nœuds texte (plus d'`aria-hidden`) : les AT
+ *      qui ignorent `role="text"` (NVDA, JAWS) retombent dessus et lisent le
+ *      contenu normalement. Le découpage par MOT — chaque mot dans son propre
+ *      conteneur `inline-block whitespace-nowrap` — garde l'unité de lecture au
+ *      niveau du mot, pas de la lettre.
+ * ---------------------------------------------------------------------------
  */
 export default function BulbText({ children, className = "" }: BulbTextProps) {
   const words = children.split(" ");
@@ -34,18 +58,15 @@ export default function BulbText({ children, className = "" }: BulbTextProps) {
   let i = 0;
 
   return (
-    <span className={`gradient-text-living ${className}`} style={{ display: "inline" }}>
-      {/* Nom accessible : un vrai nœud texte (sr-only). `aria-label` sur un
-          <span> générique est ignoré par ARIA — combiné aux lettres en
-          aria-hidden, le H1 de l'accueil devenait muet pour les lecteurs
-          d'écran. */}
-      <span className="sr-only">{children}</span>
+    <span
+      className={`gradient-text-living ${className}`}
+      style={{ display: "inline" }}
+      role="text"
+      aria-label={children}
+    >
       {words.map((word, wi) => (
         <Fragment key={`w-${wi}`}>
-          <span
-            className="inline-block whitespace-nowrap"
-            aria-hidden="true"
-          >
+          <span className="inline-block whitespace-nowrap">
             {Array.from(word).map((char) => {
               const idx = i++;
               return (
@@ -53,7 +74,6 @@ export default function BulbText({ children, className = "" }: BulbTextProps) {
                   key={`${wi}-${idx}`}
                   className="bulb-letter"
                   style={{ "--i": idx } as React.CSSProperties}
-                  aria-hidden="true"
                 >
                   {char}
                 </span>
