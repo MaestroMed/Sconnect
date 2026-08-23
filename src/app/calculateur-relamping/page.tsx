@@ -19,7 +19,11 @@ import {
 } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Calculateur relamping LED gratuit — économies, prime, ROI",
+  // « prime » retiré : les fiches CEE éclairage LED (BAT-EQ-127, IND-BA-116,
+  // BAR-EQ-110) sont supprimées depuis l'arrêté du 23/02/2026, effet 25/02/2026.
+  // Promettre une prime en balise title est faux et coûte la crédibilité sur
+  // une requête B2B — l'acheteur qui repère l'erreur ne rappelle pas.
+  title: "Calculateur relamping LED gratuit — économies, coût et ROI",
   description:
     "Estimez en 30 secondes les économies, le coût et le ROI de votre projet relamping LED. 4 typologies (bureau, commerce, copropriété, industriel), calcul des aides post-CEE 2026. Devis ferme sur demande.",
   keywords: [

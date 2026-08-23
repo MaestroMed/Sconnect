@@ -257,14 +257,23 @@ export default function HomePageClient({
             className="max-w-2xl"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/25 text-primary-300 text-sm font-semibold mb-6 backdrop-blur-md">
+              {/* Relamping en tête : c'est le cœur de métier et le poste où la
+                  demande existe déjà (GSC 90 j — ~250 impressions sur les
+                  requêtes relamping, dont des positions 1,5 et 2,0 ; la
+                  serrurerie pèse 1,3 % des impressions du site). L'ordre du
+                  bandeau est le premier signal de positionnement lu par un
+                  visiteur ET repris dans l'extrait Google de la home. */}
               <Zap className="w-4 h-4" />
-              Électricité • Contrôle d&apos;accès • Serrurerie • Métallerie
+              Relamping LED • Électricité • Contrôle d&apos;accès • Métallerie
             </span>
 
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-[1.05] [text-shadow:_0_2px_28px_rgba(0,0,0,0.85),_0_1px_4px_rgba(0,0,0,0.7)]">
               {homepage.hero_title.split(",")[0]},{" "}
               <BulbText>
-                {homepage.hero_title.split(",")[1] || "c'est préserver votre bien-être"}
+                {/* .trim() : la 2e moitié du split conserve l'espace qui suit la
+                    virgule, ce qui produisait « ..France,  c'est.. » (double
+                    espace) dans le texte rendu — donc dans l'extrait Google. */}
+                {homepage.hero_title.split(",")[1]?.trim() || "c'est préserver votre bien-être"}
               </BulbText>
             </h1>
 
