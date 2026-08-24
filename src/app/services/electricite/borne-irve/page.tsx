@@ -35,7 +35,16 @@ import PricingTable from "@/components/marketing/PricingTable";
 import { getPricing } from "@/lib/data/pricing";
 
 export const metadata: Metadata = {
-  title: "Installation borne de recharge IRVE — Paris & IDF | S Connect",
+  // Search Console 90 j : les 7 requêtes qui déclenchent cette page portent
+  // TOUTES l'intention « qui pose », pas « quel acte » —
+  //   installateur borne de recharge courbevoie (12 imp, pos 90,8)
+  //   installateur borne de recharge irve agréé (11, 82,4) · poseur irve (5, 89,0)
+  //   installateur agréé wallbox (6, 90,8) · installateur irve (4, 87,2)
+  //   installateur agréé advenir (4, 91,2) · installateur borne irve (3, 84,3)
+  // Le mot « installateur » n'était ni dans le title ni dans le H1. Même
+  // défaut que /services/metallerie/fabrication-portail (« fabrication » vs
+  // « fabricant ») : la page portait le nom du service, pas celui du métier.
+  title: "Installateur IRVE certifié — borne de recharge Paris & IDF | S Connect",
   description:
     "Installateur IRVE certifié à Clichy. Bornes de recharge véhicule électrique pour maison, copropriété, entreprise. Aides ADVENIR jusqu'à 1 660 €, certification IRVE niveau 2, garantie décennale.",
   keywords: [
@@ -180,7 +189,7 @@ export default function BorneIrvePage() {
               <Battery className="w-8 h-8 text-white" />
             </div>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.6)]">
-              Installation borne de recharge VE
+              Installateur de bornes de recharge
             </h1>
             <p className="text-xl md:text-2xl font-medium mb-6">
               <BulbText>IRVE certifié · Aides ADVENIR · Garantie décennale</BulbText>

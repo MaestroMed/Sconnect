@@ -1,19 +1,42 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Wrench, ChevronRight, Phone, Check, ArrowLeft, Sparkles } from "lucide-react";
+import { Wrench, ChevronRight, Phone, Check, ArrowLeft, Sparkles, HelpCircle, ShieldCheck } from "lucide-react";
 import { AuroraBackdrop, NoiseOverlay } from "@/components/ui/ambient";
 import { image } from "@/lib/image-manifest";
 import BulbText from "@/components/ui/BulbText";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/primitives/Accordion";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+  injectSchema,
+} from "@/lib/structured-data";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
+
+// Search Console, 90 j : cette page est la PREMIERE du site en impressions
+// (296 sur 2 040, soit 14,5 % de toute la visibilite) — et la seule du top 10
+// a 0 clic, en position moyenne 73,7. Les requetes qui la declenchent portent
+// toutes l'intention « fabricant » :
+//   fabricant de portails (101 imp, pos 60,2) · fabricant portail (90, 91,0)
+//   fabricant portail sur mesure (31, 80,6) · fabricants portails (30, 71,4)
+//   fabricants de portails coulissants (15, 56,7) · constructeur portail (6, 82,2)
+// Le title et le H1 disaient « Fabrication de portails » — le nom du service,
+// pas le mot que les gens tapent. Ils cherchent QUI fabrique, pas l'acte.
 export const metadata: Metadata = {
   alternates: { canonical: "/services/metallerie/fabrication-portail" },
-  title: "Fabrication de Portails Sur Mesure | Portails Coulissants & Battants | S Connect France",
-  description: "Fabrication et installation de portails sur mesure en Île-de-France : portails coulissants, battants, motorisés en acier, aluminium ou fer forgé. Conception, fabrication, pose. Devis gratuit.",
-  keywords: ["fabrication portail", "portail sur mesure", "portail coulissant", "portail battant", "portail motorisé", "portail acier", "portail fer forgé"],
+  title: "Fabricant de portails sur mesure en Île-de-France",
+  description: "Fabricant de portails sur mesure en Île-de-France : coulissants, battants, acier, aluminium ou fer forgé. Fabrication en atelier, motorisation conforme NF EN 13241 et EN 12453, pose par nos équipes. Devis gratuit.",
+  keywords: ["fabricant de portails", "fabricant portail sur mesure", "portail sur mesure", "portail coulissant", "portail battant", "portail motorisé", "portail acier", "portail fer forgé", "constructeur portail"],
   openGraph: {
-    title: "Fabrication de Portails Sur Mesure | S Connect France",
-    description: "Conception et fabrication de portails personnalisés. Métallerie en Île-de-France.",
+    title: "Fabricant de portails sur mesure en Île-de-France",
+    description: "Conception, fabrication en atelier et pose de portails sur mesure. Acier, aluminium, fer forgé. Motorisation aux normes.",
     images: ["/og-image.jpg"],
   },
 };
@@ -46,10 +69,81 @@ const types = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Fabriquez-vous vraiment les portails, ou les revendez-vous ?",
+    answer:
+      "Nous les fabriquons. Le débit, la soudure, l'assemblage et le montage à blanc se font dans notre atelier, à partir de vos cotes relevées sur site. C'est ce qui permet d'ajuster une largeur atypique, un dévers de terrain ou un motif particulier — trois choses qu'un portail de catalogue ne sait pas faire.",
+  },
+  {
+    question: "Quel délai entre la prise de cotes et la pose ?",
+    answer:
+      "Comptez 4 à 6 semaines pour un portail acier ou aluminium standard, 6 à 9 semaines pour du fer forgé ouvragé ou une grande largeur nécessitant un renfort. Le thermolaquage représente à lui seul 5 à 10 jours du délai. Une motorisation posée en même temps n'allonge pas le chantier.",
+  },
+  {
+    question: "Acier, aluminium ou fer forgé : lequel choisir ?",
+    answer:
+      "L'acier thermolaqué est le meilleur rapport résistance/prix et accepte toutes les formes — c'est le choix par défaut en grande largeur. L'aluminium ne rouille pas et reste léger, ce qui ménage la motorisation et les gonds, mais il coûte plus cher et fléchit davantage au-delà de 4 m. Le fer forgé est un choix esthétique : plus lourd, plus cher, demande une reprise de peinture tous les 8 à 10 ans.",
+  },
+  {
+    question: "Coulissant ou battant ?",
+    answer:
+      "Le coulissant si vous manquez de recul devant l'entrée ou si le terrain est en pente — il ne balaie aucun espace. Il demande en revanche un dégagement latéral égal à la largeur du passage, et un rail au sol ou une conception autoportante. Le battant coûte moins cher et se pose plus vite, mais il lui faut du plat et du recul.",
+  },
+  {
+    question: "Un portail motorisé doit-il respecter des normes ?",
+    answer:
+      "Oui, et elles sont contraignantes. La NF EN 13241 encadre le produit et impose le marquage CE depuis 2005, au titre de la directive Machines 2006/42/CE. La NF EN 12453 limite l'effort exercé sur un obstacle à 400 N en dynamique et 150 N en statique, et la NF EN 12445 définit les méthodes de mesure. En pratique, cela impose cellules photoélectriques, bords sensibles et feu de signalisation. Un installateur qui ne mesure pas les efforts après pose ne peut pas attester la conformité.",
+  },
+  {
+    question: "Intervenez-vous en copropriété ?",
+    answer:
+      "Oui, c'est même une grande partie de notre activité portail. Nous remettons un dossier exploitable en assemblée générale : relevé de l'existant, chiffrage détaillé, planning et contraintes d'accès pendant les travaux. Nous savons travailler en site occupé, avec maintien du passage véhicules.",
+  },
+  {
+    question: "Que couvre la garantie ?",
+    answer:
+      "Dix ans sur la structure métallique et les soudures. La motorisation suit la garantie constructeur, généralement deux à cinq ans selon la marque. Le thermolaquage est garanti contre l'écaillage et la corrosion perforante selon le label du poudreur.",
+  },
+  {
+    question: "Quelle zone couvrez-vous ?",
+    answer:
+      "Toute l'Île-de-France depuis Clichy (92110). Nous nous déplaçons pour le relevé de cotes sans engagement, et la pose est assurée par nos propres équipes — nous ne sous-traitons pas l'installation.",
+  },
+];
+
+const serviceSchema = generateServiceSchema(
+  {
+    name: "Fabrication de portails sur mesure",
+    description:
+      "Conception, fabrication en atelier et pose de portails sur mesure en acier, aluminium ou fer forgé. Portails coulissants et battants, motorisation conforme NF EN 13241 et NF EN 12453.",
+    provider: "S Connect France",
+    areaServed: ["Île-de-France", "Hauts-de-Seine", "Paris", "Seine-Saint-Denis", "Val-de-Marne", "Yvelines", "Val-d'Oise"],
+  },
+  siteUrl,
+);
+
+const faqSchema = generateFAQSchema(faqs);
+
+// Communes ou la demande portail est deja mesuree en Search Console
+// (/portail-metallique/chatenay-malabry sort a 84 impressions a lui seul).
+const COMMUNES_PORTAIL = [
+  { nom: "Châtenay-Malabry", slug: "chatenay-malabry" },
+  { nom: "Argenteuil", slug: "argenteuil" },
+  { nom: "Nanterre", slug: "nanterre" },
+  { nom: "Colombes", slug: "colombes" },
+  { nom: "Courbevoie", slug: "courbevoie" },
+  { nom: "Asnières-sur-Seine", slug: "asnieres-sur-seine" },
+  { nom: "Boulogne-Billancourt", slug: "boulogne-billancourt" },
+  { nom: "Saint-Denis", slug: "saint-denis" },
+];
+
 export default function FabricationPortailPage() {
   const hero = image("metallerie-portail");
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(serviceSchema)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={injectSchema(faqSchema)} />
       {/* Hero */}
       <section className="relative bg-dark-950 py-16 md:py-24 overflow-hidden">
         <AuroraBackdrop intensity="soft" />
@@ -59,6 +153,18 @@ export default function FabricationPortailPage() {
         <NoiseOverlay opacity={0.05} />
 
         <div className="container-custom relative z-10">
+          {/* Fil d'Ariane : la page n'en avait pas, alors que le composant émet
+              le BreadcrumbList JSON-LD et que la Search Console compte déjà
+              7 fils d'Ariane valides ailleurs sur le site. */}
+          <Breadcrumbs
+            light
+            className="mb-6"
+            items={[
+              { label: "Services", href: "/services" },
+              { label: "Métallerie", href: "/services/metallerie" },
+              { label: "Fabrication de portails" },
+            ]}
+          />
           <Link
             href="/services/metallerie"
             className="inline-flex items-center gap-2 text-orange-300 hover:text-orange-200 mb-6 transition-colors"
@@ -72,14 +178,16 @@ export default function FabricationPortailPage() {
                 <Wrench className="w-8 h-8 text-white" />
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
-                Fabrication de Portails
+                Fabricant de portails
               </h1>
               <p className="text-xl md:text-2xl font-medium mb-6">
-              <BulbText>Sur mesure, Île-de-France</BulbText>
+              <BulbText>Sur mesure, en atelier, Île-de-France</BulbText>
             </p>
               <p className="text-lg text-dark-300 leading-relaxed">
-                Des portails sur mesure conçus et fabriqués selon vos envies.
-                Qualité artisanale et installation professionnelle.
+                Nous ne revendons pas des portails de catalogue : nous les
+                fabriquons, à vos cotes relevées sur site. Acier, aluminium ou
+                fer forgé, coulissant ou battant, motorisation posée aux normes
+                NF&nbsp;EN&nbsp;13241 et EN&nbsp;12453.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/demande-devis" className="btn-primary">
@@ -173,6 +281,135 @@ export default function FabricationPortailPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Normes ───
+          Le contenu normatif est ce qui marche le mieux sur ce site : les pages
+          EI30/EI60, UGR et NF EN 12464-1 sortent en positions 11 à 12, contre
+          37,3 de moyenne. Le portail motorisé a exactement le même profil —
+          une obligation réglementaire mal connue, que l'acheteur cherche. */}
+      <section className="section-padding bg-surface">
+        <div className="container-custom max-w-4xl">
+          <div className="flex items-start gap-4 mb-8">
+            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+              <ShieldCheck className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-3">
+                Ce qu&apos;un portail motorisé doit respecter
+              </h2>
+              <p className="text-foreground-muted leading-relaxed">
+                Un portail motorisé est une machine au sens réglementaire. Le
+                marquage CE est obligatoire depuis 2005 et engage celui qui met
+                l&apos;ensemble en service — c&apos;est-à-dire l&apos;installateur,
+                pas seulement le fabricant du moteur.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                norme: "NF EN 13241",
+                titre: "Le produit",
+                texte:
+                  "Norme produit des portes et portails. Impose le marquage CE au titre de la directive Machines 2006/42/CE : résistance au vent, sécurité mécanique, protection contre le pincement, l'écrasement et le cisaillement.",
+              },
+              {
+                norme: "NF EN 12453",
+                titre: "Les efforts",
+                texte:
+                  "Limite la force exercée sur un obstacle à 400 N en dynamique et 150 N en statique. En pratique : cellules photoélectriques, bords sensibles et feu de signalisation deviennent obligatoires.",
+              },
+              {
+                norme: "NF EN 12445",
+                titre: "La mesure",
+                texte:
+                  "Définit les méthodes d'essai qui vérifient les valeurs ci-dessus. Sans mesure d'effort après pose, personne ne peut attester la conformité de l'installation — seulement l'affirmer.",
+              },
+            ].map((n) => (
+              <div key={n.norme} className="rounded-2xl border border-border bg-surface-muted p-6">
+                <span className="font-mono text-xs tracking-wider text-orange-700 dark:text-orange-400">
+                  {n.norme}
+                </span>
+                <h3 className="font-display font-bold text-lg text-foreground mt-1 mb-2">
+                  {n.titre}
+                </h3>
+                <p className="text-sm text-foreground-muted leading-relaxed">{n.texte}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-foreground-muted leading-relaxed mt-8">
+            Nous mesurons les efforts à la réception du chantier et remettons le
+            relevé avec la déclaration CE. C&apos;est la pièce qu&apos;un syndic
+            ou un assureur demande après un incident — et celle qui manque le
+            plus souvent sur les installations que nous reprenons.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section className="section-padding bg-surface-muted">
+        <div className="container-custom max-w-4xl">
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-3">
+            Questions fréquentes
+          </h2>
+          <p className="text-foreground-muted mb-10">
+            Ce qu&apos;on nous demande le plus souvent au moment du relevé de cotes.
+          </p>
+          <Accordion type="single" collapsible className="space-y-3">
+            {faqs.map((faq, i) => (
+              <AccordionItem key={faq.question} value={`faq-${i}`}>
+                <AccordionTrigger>
+                  <span className="flex items-center gap-3 text-left">
+                    <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300">
+                      <HelpCircle className="h-4 w-4" />
+                    </span>
+                    {faq.question}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="pl-11 leading-relaxed">{faq.answer}</p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* ─── Communes ───
+          La page n'envoyait aucun lien vers les pages ville portail, alors que
+          /portail-metallique/chatenay-malabry capte déjà 84 impressions seule. */}
+      <section className="section-padding bg-surface">
+        <div className="container-custom max-w-4xl">
+          <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-3">
+            Nos portails, commune par commune
+          </h2>
+          <p className="text-foreground-muted mb-8">
+            Contraintes de terrain, accès chantier et délais d&apos;intervention
+            depuis notre atelier de Clichy.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {COMMUNES_PORTAIL.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/portail-metallique/${c.slug}`}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
+              >
+                Portail à {c.nom}
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            ))}
+            <Link
+              href="/portail-metallique"
+              className="inline-flex items-center gap-2 rounded-full bg-orange-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-700"
+            >
+              Toutes les communes
+              <ChevronRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </div>
       </section>
