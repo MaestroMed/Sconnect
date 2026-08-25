@@ -278,6 +278,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      // « vigik » = 5 400 recherches/mois (Semrush FR, KD 29) et le mot
+      // n'existait nulle part sur le site — le plus gros volume inexploité
+      // du domaine, devant « relamping » (1 900). Priorité alignée sur les
+      // autres pages service du même niveau.
+      url: `${baseUrl}/services/controle-acces/vigik`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 
   // Pages services - Serrurerie

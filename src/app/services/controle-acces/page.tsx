@@ -57,6 +57,12 @@ const services = [
     icon: CreditCard,
     description: "Installation de systèmes de contrôle d'accès par badges, digicodes et lecteurs biométriques.",
   },
+  {
+    name: "Badge & centrale VIGIK",
+    slug: "vigik",
+    icon: KeyRound,
+    description: "Installation, dépannage et gestion de systèmes VIGIK : centrale, têtes de lecture, badges résidents et accès prestataires.",
+  },
 ];
 
 export default function ControleAccesPage() {
