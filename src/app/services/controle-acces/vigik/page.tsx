@@ -5,39 +5,42 @@ import ServicePageTemplate from "@/components/services/ServicePageTemplate";
  * VIGIK — page créée le 24/08/2026.
  *
  * POURQUOI : « vigik » pèse 5 400 recherches/mois en France (Semrush FR,
- * difficulté 29, CPC 0,45 €) et le mot n'apparaissait NULLE PART dans le site —
- * ni dans src/, ni dans content/. C'était le plus gros volume inexploité du
- * domaine, devant « relamping » (1 900). La Search Console montrait déjà des
+ * difficulté 29) et le mot n'apparaissait NULLE PART dans le site — ni dans
+ * src/, ni dans content/. C'est le plus gros volume inexploité du domaine,
+ * devant « relamping » (1 900). La Search Console montrait déjà des
  * impressions parasites du type « installation de contrôle d'accès vigik … »
  * captées par des pages qui ne traitent pas le sujet.
  *
- * ANGLE — et c'est délibéré : le CPC de 0,45 € et l'intention informationnelle
- * relevée par Semrush disent que ce volume est majoritairement RÉSIDENTIEL —
- * des occupants qui cherchent ce qu'est un badge, qui en ont perdu un, ou qui
- * veulent en faire ajouter un. La page couvre donc l'exploitation courante
- * (badges, centrale, dépannage) et l'installation.
- *
- * Elle NE prend PAS pour thèse la migration VIGIK+ 2030 côté syndic : cet
- * angle est déjà tenu en Île-de-France par iefandco.com/automatisme/vigik-plus
- * (1 244 mots, H1 « le standard d'accès facteur qui remplace le VIGIK d'ici
- * 2030 »). Les deux sites appartenant au même prestataire, se disputer la même
- * requête ferait perdre les deux. L'échéance 2030 est mentionnée factuellement
- * dans la FAQ — un visiteur a le droit de l'apprendre — mais sans en faire
- * l'argument central de la page.
+ * DEUX INTENTIONS, UNE PAGE. Le volume brut est informationnel et résidentiel
+ * (un occupant qui a perdu son badge, qui veut en faire ajouter un) — d'où le
+ * CPC bas de 0,45 €. La valeur commerciale, elle, est côté gestionnaire : la
+ * migration VIGIK+ avant le 1er janvier 2030 est une dépense votée en
+ * assemblée générale, sur un parc entier. La page sert les deux : exploitation
+ * courante en haut, échéance 2030 et décision de copropriété en bas.
  */
 export const metadata: Metadata = {
   alternates: { canonical: "/services/controle-acces/vigik" },
-  title: "Badge et centrale VIGIK : installation et dépannage en IDF",
-  description: "Installation, dépannage et gestion de systèmes VIGIK en Île-de-France : centrale, têtes de lecture, badges résidents et accès prestataires. Intervention depuis Clichy (92). Devis gratuit.",
-  keywords: ["vigik", "badge vigik", "centrale vigik", "lecteur vigik", "badge immeuble", "contrôle accès copropriété", "dépannage vigik", "badge résident", "vigik+"],
+  title: "VIGIK et migration VIGIK+ 2030 — installation et dépannage IDF",
+  description: "Installation, dépannage et migration VIGIK+ en Île-de-France. L'exploitation du VIGIK historique s'arrête le 1er janvier 2030 : audit du parc, chiffrage pour l'assemblée générale, remplacement des têtes de lecture ou de la centrale. Intervention depuis Clichy (92).",
+  keywords: ["vigik", "badge vigik", "vigik+", "migration vigik 2030", "centrale vigik", "lecteur vigik", "badge immeuble", "contrôle accès copropriété", "dépannage vigik", "badge résident"],
   openGraph: {
-    title: "Badge et centrale VIGIK : installation et dépannage en IDF",
-    description: "Centrale, têtes de lecture, badges résidents et accès prestataires. Installation et dépannage VIGIK en Île-de-France.",
+    title: "VIGIK et migration VIGIK+ 2030 — installation et dépannage IDF",
+    description: "Le VIGIK historique s'arrête le 1er janvier 2030. Audit, chiffrage pour l'AG, migration des têtes de lecture. Installation et dépannage en Île-de-France.",
     images: ["/og-image.jpg"],
   },
 };
 
 const prestations = [
+  {
+    title: "Migration VIGIK+ avant 2030",
+    items: [
+      "Relevé de l'existant : centrale, têtes de lecture, badges en circulation",
+      "Diagnostic de ce qui est conservable",
+      "Chiffrage détaillé pour l'assemblée générale",
+      "Remplacement des têtes de lecture ou de la centrale",
+      "Réencodage des badges résidents si nécessaire",
+    ],
+  },
   {
     title: "Installation et mise en service",
     items: [
@@ -102,9 +105,29 @@ const faqs = [
       "Trois causes couvrent la grande majorité des cas : la pile de sauvegarde de la centrale est morte et la base des autorisations a été perdue, une coupure secteur a laissé l'équipement dans un état incohérent, ou la tête de lecture est hors service. Le diagnostic se fait sur place en une intervention ; la remise en service dépend de la cause, mais une perte de base impose de réencoder les badges résidents.",
   },
   {
-    question: "Faut-il migrer vers VIGIK+ ?",
+    question: "Que se passe-t-il exactement au 1er janvier 2030 ?",
     answer:
-      "À terme oui : l'exploitation du standard historique s'arrête au 1er janvier 2030, décision de La Poste et de l'Association VIGIK. Passé cette date, un immeuble non migré ne pourra plus recevoir les badges des facteurs, livreurs et services d'urgence. Sur des installations récentes, il est parfois possible de conserver la centrale et de ne remplacer que les têtes de lecture — un audit sur site tranche. Nous établissons le constat et le chiffrage ; la décision se prend en assemblée générale.",
+      "L'exploitation du standard VIGIK historique cesse définitivement — c'est une décision de La Poste et de l'Association VIGIK, pas un texte réglementaire, mais l'effet est le même. Passé cette date, les badges des facteurs, livreurs, relevés de compteurs et services d'urgence cesseront de fonctionner sur un immeuble non migré. Concrètement, le courrier ne rentre plus.",
+  },
+  {
+    question: "La migration VIGIK+ est-elle obligatoire ?",
+    answer:
+      "Aucune loi ne l'impose. Mais un immeuble qui ne migre pas se retrouve simplement inaccessible aux services qui en dépendent, ce qui n'est pas une option tenable pour un gestionnaire. La bonne question n'est donc pas s'il faut migrer, mais quand — et à quel coût, ce qui dépend entièrement de l'âge de l'installation existante.",
+  },
+  {
+    question: "Faut-il tout remplacer, ou seulement une partie ?",
+    answer:
+      "Cela dépend de l'installation. Sur un parc récent, il est fréquent de pouvoir conserver la centrale et de ne remplacer que les têtes de lecture — la facture n'a alors rien à voir avec un remplacement complet. Sur une installation ancienne, la centrale suit. Seul un relevé sur site permet de trancher, et c'est la première chose que nous faisons.",
+  },
+  {
+    question: "Les résidents devront-ils changer de badge ?",
+    answer:
+      "Le plus souvent non. La migration concerne l'accès des prestataires, pas celui des occupants. Beaucoup de badges résidents sont déjà au standard DESFire et restent compatibles ; quand ce n'est pas le cas, un réencodage coûte quelques euros par badge. C'est un point qui rassure en assemblée générale, parce que la crainte d'avoir à rééquiper cent logements fait souvent capoter le vote.",
+  },
+  {
+    question: "Comment se vote la migration en copropriété ?",
+    answer:
+      "En assemblée générale, sur proposition du syndic. Selon le montant et la nature des travaux, le vote relève de l'article 24 ou de l'article 25 de la loi de 1965. Nous fournissons le dossier exploitable en AG : état des lieux de l'existant, ce qui est conservable, chiffrage détaillé et planning. Plus le vote est tardif, plus les carnets d'installateurs se remplissent à l'approche de l'échéance.",
   },
   {
     question: "Intervenez-vous sur une installation posée par quelqu'un d'autre ?",
@@ -113,18 +136,80 @@ const faqs = [
   },
 ];
 
+/** Bloc échéance 2030 — rendu entre la FAQ et le CTA final via extraContent. */
+function Migration2030() {
+  return (
+    <section className="section-padding bg-surface">
+      <div className="container-custom max-w-4xl">
+        <div className="rounded-2xl border border-amber-300 bg-amber-50 p-8 dark:border-amber-500/40 dark:bg-amber-500/10">
+          <span className="font-mono text-xs uppercase tracking-[0.14em] text-amber-800 dark:text-amber-300">
+            Échéance — 1<sup>er</sup> janvier 2030
+          </span>
+          <h2 className="font-display mt-2 mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            Le VIGIK historique s&apos;arrête. Pas l&apos;immeuble.
+          </h2>
+          <p className="mb-4 leading-relaxed text-foreground-muted">
+            La Poste et l&apos;Association VIGIK ont fixé la fin d&apos;exploitation
+            du standard historique au 1<sup>er</sup> janvier 2030. Aucune loi ne
+            contraint personne à migrer — mais un immeuble qui ne l&apos;a pas fait
+            cesse simplement d&apos;être accessible aux facteurs, aux livreurs, aux
+            relevés de compteurs et aux services d&apos;urgence. Le courrier ne rentre
+            plus. C&apos;est le genre de sujet qui se règle en assemblée générale
+            longtemps avant l&apos;échéance, ou dans l&apos;urgence après.
+          </p>
+          <p className="mb-6 leading-relaxed text-foreground-muted">
+            La raison technique est simple : les installations historiques
+            reposent sur des badges MIFARE Classic, dont le chiffrement est
+            cassé depuis des années — n&apos;importe quelle boutique équipée les
+            duplique. VIGIK+ repose sur des puces DESFire, qui ferment cette porte.
+          </p>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                t: "Ce qui est souvent conservable",
+                d: "Sur un parc récent, la centrale reste en place et seules les têtes de lecture changent. La facture n'a alors rien à voir avec un remplacement complet.",
+              },
+              {
+                t: "Ce qui ne bouge pas",
+                d: "Les badges résidents, dans la plupart des cas. Beaucoup sont déjà en DESFire ; sinon un réencodage coûte quelques euros par badge.",
+              },
+              {
+                t: "Ce qu'on vous remet",
+                d: "Un état des lieux de l'existant, ce qui est conservable, un chiffrage détaillé et un planning — le dossier exploitable tel quel en AG.",
+              },
+            ].map((c) => (
+              <div key={c.t} className="rounded-xl border border-border bg-surface p-5">
+                <h3 className="font-display mb-2 font-bold text-foreground">{c.t}</h3>
+                <p className="text-sm leading-relaxed text-foreground-muted">{c.d}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-6 text-sm leading-relaxed text-foreground-muted">
+            Le relevé sur site est gratuit et sans engagement. C&apos;est lui qui
+            détermine si vous êtes dans le cas simple ou dans le cas lourd — et il
+            n&apos;y a aucun moyen de le savoir sur plan.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function VigikPage() {
   return (
     <ServicePageTemplate
-      title="Badge et centrale VIGIK"
+      title="VIGIK et migration VIGIK+"
       subtitle="Contrôle d'accès"
-      description="Installation, dépannage et gestion des systèmes VIGIK en Île-de-France : centrale, têtes de lecture, badges résidents et accès prestataires. Nous reprenons aussi les installations posées par un tiers."
+      description="Installation, dépannage et migration des systèmes VIGIK en Île-de-France : centrale, têtes de lecture, badges résidents et accès prestataires. L'exploitation du standard historique s'arrête le 1er janvier 2030 — nous établissons l'état des lieux et le chiffrage pour votre assemblée générale."
       iconName="keyRound"
       category="acces"
       imageSlug="acces-badge"
       parentCategory={{ label: "Contrôle d'accès", href: "/services/controle-acces" }}
       prestations={prestations}
       faqs={faqs}
+      extraContent={<Migration2030 />}
     />
   );
 }
