@@ -58,10 +58,10 @@ const services = [
     description: "Installation de systèmes de contrôle d'accès par badges, digicodes et lecteurs biométriques.",
   },
   {
-    name: "Badge & centrale VIGIK",
+    name: "VIGIK & migration VIGIK+",
     slug: "vigik",
     icon: KeyRound,
-    description: "Installation, dépannage et gestion de systèmes VIGIK : centrale, têtes de lecture, badges résidents et accès prestataires.",
+    description: "Installation, dépannage et migration VIGIK+ avant l’échéance du 1er janvier 2030 : centrale, têtes de lecture, badges résidents.",
   },
 ];
 
