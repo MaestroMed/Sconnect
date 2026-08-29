@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour restaurant (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour restaurants et brasseries : salle, terrasse, bar, cuisine professionnelle. Ambiance 2700-3000K IRC ≥ 90, scénarisation DALI, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour restaurants et brasseries : salle, terrasse, bar, cuisine professionnelle. Ambiance 2700-3000K IRC ≥ 90, scénarisation DALI, conformité NF EN 12464-1 et décret tertiaire 2030. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

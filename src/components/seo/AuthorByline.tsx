@@ -70,17 +70,17 @@ export default function AuthorByline({ variant = "compact", className = "" }: Au
             Mehdi Belkacem
           </Link>
           <p className="text-sm text-foreground-muted mt-0.5">
-            Fondateur de S Connect France (depuis 2021) · Électricien certifié Qualifélec, RGE,
+            Fondateur de S Connect France (depuis 2021) · Électricien,
             IRVE niveau 2 · 12 ans d&apos;expérience terrain en Île-de-France
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-foreground-muted">
+            {/* « Qualifélec mention Éclairage » retiré le 24/08/2026 —
+                absent de l'annuaire Qualifelec pour le SIRET 899 667 596 00014.
+                Ce composant est monté sur toutes les pages signées, donc la
+                mention était répétée à l'échelle du site. */}
             <span className="inline-flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
               Garantie décennale active
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <Award className="w-3.5 h-3.5 text-primary-500" />
-              Qualifélec mention Éclairage
             </span>
           </div>
         </div>

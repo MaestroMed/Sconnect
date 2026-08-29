@@ -52,7 +52,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour école et collège (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour établissements scolaires : salles de classe, amphithéâtres, CDI, gymnase, cantine, circulations. UGR ≤ 19, flicker-free, conformité NF EN 12464-1 et décret tertiaire 2030. Réponse marchés publics. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour établissements scolaires : salles de classe, amphithéâtres, CDI, gymnase, cantine, circulations. UGR ≤ 19, flicker-free, conformité NF EN 12464-1 et décret tertiaire 2030. Réponse marchés publics. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",
@@ -158,8 +158,8 @@ export default function RelampingEcoleCollegePage() {
               </div>
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 Établissement recevant du public : BAES + balisage NF EN 1838 à jour. Pour les
-                collectivités, nous répondons aux marchés publics (CCAP, BPU) avec attestations
-                Qualifélec / RGE.
+                collectivités, nous répondons aux marchés publics (CCAP, BPU) avec attestation
+                de garantie décennale à jour.
               </p>
             </div>
           </div>

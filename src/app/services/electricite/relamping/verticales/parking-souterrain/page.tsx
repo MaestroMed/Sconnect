@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour parking souterrain (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour parkings souterrains de copropriété, bureau et commerce : circulations, places, rampes, locaux techniques. IK10 anti-vandale, IP65, détection de présence + gradation, BAES NF EN 1838, pré-câblage IRVE, conformité décret tertiaire 2030. Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour parkings souterrains de copropriété, bureau et commerce : circulations, places, rampes, locaux techniques. IK10 anti-vandale, IP65, détection de présence + gradation, BAES NF EN 1838, pré-câblage IRVE, conformité décret tertiaire 2030. Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

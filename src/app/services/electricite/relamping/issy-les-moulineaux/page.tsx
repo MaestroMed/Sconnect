@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Issy-les-Moulineaux (92130)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux tech, sièges sociaux et copropriétés à Issy-les-Moulineaux. Conformité NF EN 12464-1 + décret tertiaire + éclairage circadien (HCL). Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour bureaux tech, sièges sociaux et copropriétés à Issy-les-Moulineaux. Conformité NF EN 12464-1 + décret tertiaire + éclairage circadien (HCL). Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Issy-les-Moulineaux", "Boulogne-Billancourt", "Vanves", "Île-de-France"],
     priceRange: "€€€",

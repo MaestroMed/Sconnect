@@ -350,7 +350,7 @@ export default function HomePageClient({
       <RelampingFeatured />
 
       {/* Trust band — certifications visible immediately under the hero.
-          Audit-driven: Qualifélec / RGE / IRVE / Décennale are premium
+          Audit-driven: IRVE / Décennale are premium
           assets in this vertical; they deserve fold-1 placement. */}
       <CertificationsBand background="surface" />
 

@@ -27,7 +27,7 @@ const electriciteSchema = generateServiceSchema(
   {
     name: "Électricité — installation, rénovation, mise aux normes, dépannage, relamping LED",
     description:
-      "Artisan électricien à Clichy et en Île-de-France. Installation et rénovation d'installations basse tension, mise aux normes NF C 15-100, dépannage 24h/24, relamping LED et bornes IRVE. Certifié Qualifélec.",
+      "Artisan électricien à Clichy et en Île-de-France. Installation et rénovation d'installations basse tension, mise aux normes NF C 15-100, dépannage 24h/24, relamping LED et bornes IRVE. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Clichy", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€",

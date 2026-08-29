@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Saint-Denis (93200)",
     description:
-      "Audit, étude et installation relamping LED pour entrepôts logistiques, bureaux tertiaires neufs Pleyel, ERP Stade de France et copropriétés à Saint-Denis. Conformité NF EN 12464-1 et décret tertiaire (DEET). Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour entrepôts logistiques, bureaux tertiaires neufs Pleyel, ERP Stade de France et copropriétés à Saint-Denis. Conformité NF EN 12464-1 et décret tertiaire (DEET). Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Saint-Denis", "Aubervilliers", "Pantin", "Île-de-France"],
     priceRange: "€€€",
@@ -226,7 +226,7 @@ export default function RelampingSaintDenisPage() {
               },
               {
                 title: "Réponse marchés publics",
-                desc: "CCAP, BPU, RC : nous traitons les marchés publics avec rigueur. Décennale, attestations Qualifélec/RGE à jour, RIB fournisseur certifié.",
+                desc: "CCAP, BPU, RC : nous traitons les marchés publics avec rigueur. Décennale à jour, RIB fournisseur certifié.",
               },
               {
                 title: "Couverture DEET 2030",
