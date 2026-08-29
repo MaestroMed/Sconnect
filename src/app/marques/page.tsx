@@ -66,17 +66,10 @@ const brands = [
   },
 ];
 
+// « Qualifelec » et « RGE » retirés le 24/08/2026 — absents des annuaires
+// officiels pour le SIRET 899 667 596 00014. Détail en commentaire dans
+// src/components/marketing/CertificationsBand.tsx.
 const certifications = [
-  {
-    name: "Qualifelec",
-    description: "Qualification professionnelle des entreprises d'électricité",
-    icon: Award,
-  },
-  {
-    name: "RGE",
-    description: "Reconnu Garant de l'Environnement pour les travaux d'économie d'énergie",
-    icon: Shield,
-  },
   {
     name: "IRVE",
     description: "Qualification pour l'installation de bornes de recharge",

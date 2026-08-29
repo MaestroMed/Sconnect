@@ -224,7 +224,7 @@ export default async function RootLayout({
               "@id": `${siteUrl}/#localbusiness`,
               name: "S Connect France",
               description:
-                "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Certifié Qualifélec, RGE.",
+                "Expert en électricité, relamping LED, contrôle d'accès, serrurerie et métallerie en Île-de-France. Garantie décennale sur tous nos travaux.",
               image: `${siteUrl}/og-image.jpg`,
               url: siteUrl,
               telephone: "+33-6-52-82-06-85",

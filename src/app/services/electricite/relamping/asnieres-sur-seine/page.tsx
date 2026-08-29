@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Asnières-sur-Seine (92600)",
     description:
-      "Audit, étude et installation relamping LED pour PME, commerces, copropriétés et locaux administratifs à Asnières-sur-Seine. Conformité NF EN 12464-1 et décret tertiaire. Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour PME, commerces, copropriétés et locaux administratifs à Asnières-sur-Seine. Conformité NF EN 12464-1 et décret tertiaire. Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Asnières-sur-Seine", "Clichy", "Bois-Colombes", "Gennevilliers", "Île-de-France"],
     priceRange: "€€€",

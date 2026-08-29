@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour gymnase et salle de sport (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour gymnases, salles de sport et complexes sportifs : aire de jeu, gradins, vestiaires, circulations. Luminaires IK10 anti-ballon, allumage instantané, uniformité élevée, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour gymnases, salles de sport et complexes sportifs : aire de jeu, gradins, vestiaires, circulations. Luminaires IK10 anti-ballon, allumage instantané, uniformité élevée, conformité NF EN 12464-1 et décret tertiaire 2030. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

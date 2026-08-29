@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Courbevoie (92400)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux tertiaires, tours de La Défense côté Courbevoie, copropriétés et commerces. Conformité NF EN 12464-1 et décret tertiaire (DEET). Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour bureaux tertiaires, tours de La Défense côté Courbevoie, copropriétés et commerces. Conformité NF EN 12464-1 et décret tertiaire (DEET). Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Courbevoie", "La Défense", "Puteaux", "Levallois-Perret", "Île-de-France"],
     priceRange: "€€€",
@@ -231,7 +231,7 @@ export default function RelampingCourbevoiePage() {
               },
               {
                 title: "Garanties pro",
-                desc: "Décennale active, Qualifélec mention Éclairage, RGE, IRVE niveau 2.",
+                desc: "Décennale active, IRVE niveau 2.",
               },
             ].map((b) => (
               <li key={b.title} className="p-5 rounded-2xl bg-surface-elevated border border-border">

@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Nanterre (92000)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux administratifs, université et copropriétés à Nanterre. Conformité NF EN 12464-1 (incl. exigences salles de classe), décret tertiaire (DEET), DALI. Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour bureaux administratifs, université et copropriétés à Nanterre. Conformité NF EN 12464-1 (incl. exigences salles de classe), décret tertiaire (DEET), DALI. Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Nanterre", "Rueil-Malmaison", "Suresnes", "Île-de-France"],
     priceRange: "€€€",
@@ -233,7 +233,7 @@ export default function RelampingNanterrePage() {
               },
               {
                 title: "Garanties pro",
-                desc: "Décennale active, Qualifélec mention Éclairage, RGE, IRVE niveau 2. Dossiers admin sécurisés pour acheteurs publics.",
+                desc: "Décennale active, IRVE niveau 2. Dossiers admin sécurisés pour acheteurs publics.",
               },
             ].map((b) => (
               <li key={b.title} className="p-5 rounded-2xl bg-surface-elevated border border-border">

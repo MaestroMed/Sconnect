@@ -27,21 +27,21 @@ interface Certification {
 // /public/images/certifications/ : chaque visiteur payait 4 HEAD 404 avant de
 // retomber sur l'icône. Ré-ajouter `logo: "/images/certifications/<slug>.png"`
 // quand les fichiers seront livrés — le fallback icône reste en place.
+// RETRAIT DU 24/08/2026 — « Qualifélec » et « RGE » supprimés.
+// Vérification faite le 24/08/2026 sur les annuaires officiels, pour le
+// SIRET 899 667 596 00014 :
+//   - base ADEME des entreprises RGE (tous organismes certificateurs) : 0
+//   - annuaire Qualifelec (data.qualifelec.fr) : 0
+// Contrôles de méthode passés dans les deux cas — un SIRET certifié connu
+// remonte bien, et la base ADEME liste 153 entreprises RGE à Clichy 92110.
+// L'absence est donc réelle, pas un défaut de recherche.
+// Afficher une qualification non détenue relève de la pratique commerciale
+// trompeuse (Code de la consommation, art. L121-2). Les mentions sont
+// retirées jusqu'à obtention effective des qualifications.
+// « IRVE » est conservé : non vérifiable depuis les sources publiques
+// consultées (la qualification peut passer par l'AFNOR), donc non infirmé —
+// à confirmer par le gérant.
 const CERTIFICATIONS: Certification[] = [
-  {
-    slug: "qualifelec",
-    name: "Qualifélec",
-    description: "Qualification des entreprises d'électricité",
-    icon: Award,
-    color: "primary",
-  },
-  {
-    slug: "rge",
-    name: "RGE",
-    description: "Reconnu Garant de l'Environnement",
-    icon: Shield,
-    color: "emerald",
-  },
   {
     slug: "irve",
     name: "IRVE",

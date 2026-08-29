@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour musée et galerie d'art (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour musées, galeries d'art et espaces d'exposition : cimaises, vitrines, circulations, réserves. IRC ≥ 95, rayonnement UV/IR maîtrisé, spots track DALI orientables, accompagnement ABF, conformité NF EN 12464-1. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour musées, galeries d'art et espaces d'exposition : cimaises, vitrines, circulations, réserves. IRC ≥ 95, rayonnement UV/IR maîtrisé, spots track DALI orientables, accompagnement ABF, conformité NF EN 12464-1. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

@@ -44,7 +44,7 @@ import {
 export const metadata: Metadata = {
   title: "Relamping LED Paris & Île-de-France — Audit gratuit | S Connect",
   description:
-    "Spécialiste du relamping LED en Île-de-France. Audit éclairage gratuit, étude personnalisée, installation et maintenance. Jusqu'à 80% d'économies d'énergie, conformité décret tertiaire 2030, certifié Qualifélec & RGE.",
+    "Spécialiste du relamping LED en Île-de-France. Audit éclairage gratuit, étude personnalisée, installation et maintenance. Jusqu'à 80% d'économies d'énergie, conformité décret tertiaire 2030, garantie décennale active.",
   keywords: [
     "relamping LED",
     "relamping LED Paris",
@@ -202,7 +202,7 @@ const faqs = [
   {
     question: "Quelles certifications avez-vous pour le relamping ?",
     answer:
-      "S Connect est certifié Qualifélec (mention Éclairage) et RGE Quali'Eco. Tous nos chantiers bénéficient de notre garantie décennale et de la garantie constructeur sur le matériel (5 ans minimum sur les sources et drivers).",
+      "Tous nos chantiers bénéficient de notre garantie décennale et de la garantie constructeur sur le matériel (5 ans minimum sur les sources et drivers).",
   },
   {
     question: "Que devient l'ancien matériel d'éclairage ?",

@@ -35,17 +35,14 @@ export const metadata: Metadata = {
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sconnectfrance.fr";
 
+// « Qualifélec mention Éclairage » et « RGE Quali'Eco » retirés le 24/08/2026.
+// Vérification sur les annuaires officiels pour le SIRET 899 667 596 00014 :
+// base ADEME des entreprises RGE → 0 résultat ; annuaire Qualifelec → 0
+// résultat. Contrôles de méthode passés dans les deux cas.
+// Cette page est la page auteur : c'est celle qui porte l'E-E-A-T du site et
+// que Google lit pour juger de l'expertise. Une qualification affichée à tort
+// y coûte plus cher qu'ailleurs. À réintroduire dès obtention effective.
 const certifications = [
-  {
-    name: "Qualifélec mention Éclairage",
-    desc: "Qualification professionnelle reconnue par l'État pour les chantiers d'éclairage tertiaire.",
-    icon: Lightbulb,
-  },
-  {
-    name: "RGE Quali'Eco",
-    desc: "Reconnu Garant de l'Environnement pour les chantiers éligibles aux aides énergétiques.",
-    icon: ShieldCheck,
-  },
   {
     name: "IRVE niveau 2",
     desc: "Habilitation pour l'installation de bornes de recharge VE (résidentiel + tertiaire).",

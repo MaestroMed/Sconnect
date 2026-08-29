@@ -56,7 +56,7 @@ const KEY_STATS = [
   { label: "Interventions/an", value: "3 000+", note: "Particuliers + professionnels IDF" },
   { label: "Note moyenne", value: "4,9/5", note: "127 avis vérifiés en interne" },
   { label: "Couverture géographique", value: "92 + 75 + 93 + 94", note: "Île-de-France complète" },
-  { label: "Certifications", value: "Qualifélec, RGE, IRVE n.2", note: "Garantie décennale active" },
+  { label: "Certifications", value: "IRVE niveau 2", note: "Garantie décennale active" },
   { label: "Verticales métier", value: "4", note: "Électricité, contrôle d'accès, serrurerie, métallerie" },
 ];
 
@@ -210,8 +210,8 @@ export default function PressePage() {
             <div className="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300">
               <p>
                 <strong>Mehdi Belkacem</strong> est le fondateur de S Connect France
-                (Clichy, 2021). Électricien certifié <strong>Qualifélec mention Éclairage</strong>,
-                <strong> RGE Quali&apos;Eco</strong>, <strong>IRVE niveau 2</strong> et habilité
+                (Clichy, 2021). Électricien certifié{" "}
+                <strong>IRVE niveau 2</strong> et habilité
                 <strong> B2V/BR/BC</strong>, il s&apos;est spécialisé sur l&apos;éclairage tertiaire
                 (relamping LED, gestion DALI, conformité décret tertiaire) et sur les
                 bornes de recharge IRVE.
@@ -272,7 +272,7 @@ export default function PressePage() {
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed italic">
               « S Connect France est un artisan multi-services basé à Clichy (92) :
               électricité, contrôle d&apos;accès, serrurerie et métallerie. Fondée en 2021
-              par Mehdi Belkacem, l&apos;entreprise est certifiée Qualifélec, RGE et IRVE,
+              par Mehdi Belkacem, l&apos;entreprise est certifiée IRVE,
               et intervient sur toute l&apos;Île-de-France pour des particuliers, copropriétés,
               commerces et industriels. Plus d&apos;infos sur{" "}
               <Link href="/" className="text-primary-600 dark:text-primary-300 not-italic">

@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Puteaux (92800)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux tertiaires (tours de La Défense côté Puteaux : Total, Mozart, T1, Engie), copropriétés haut de gamme et commerces. Conformité NF EN 12464-1 et décret tertiaire. Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour bureaux tertiaires (tours de La Défense côté Puteaux : Total, Mozart, T1, Engie), copropriétés haut de gamme et commerces. Conformité NF EN 12464-1 et décret tertiaire. Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Puteaux", "Courbevoie", "La Défense", "Suresnes", "Île-de-France"],
     priceRange: "€€€",

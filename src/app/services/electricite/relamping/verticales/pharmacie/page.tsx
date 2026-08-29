@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour pharmacie (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour pharmacies et parapharmacies : officine, comptoir, vitrine, back-office préparatoire. IRC ≥ 90, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour pharmacies et parapharmacies : officine, comptoir, vitrine, back-office préparatoire. IRC ≥ 90, conformité NF EN 12464-1 et décret tertiaire 2030. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

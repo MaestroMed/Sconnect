@@ -51,7 +51,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED pour laboratoire et recherche (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour laboratoires, salles blanches et centres de recherche : paillasses, sorbonnes, zones humides, bureaux d'analyse. IRC ≥ 90, flicker-free, 5000-6500K, IP54, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour laboratoires, salles blanches et centres de recherche : paillasses, sorbonnes, zones humides, bureaux d'analyse. IRC ≥ 90, flicker-free, 5000-6500K, IP54, conformité NF EN 12464-1 et décret tertiaire 2030. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",

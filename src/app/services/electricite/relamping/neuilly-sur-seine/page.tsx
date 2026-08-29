@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED à Neuilly-sur-Seine (92200)",
     description:
-      "Audit, étude et installation relamping LED pour bureaux premium, sièges sociaux et copropriétés de Neuilly-sur-Seine. Conformité NF EN 12464-1, décret tertiaire (DEET) et contraintes ABF sur avenues classées. Certifié Qualifélec + RGE + IRVE.",
+      "Audit, étude et installation relamping LED pour bureaux premium, sièges sociaux et copropriétés de Neuilly-sur-Seine. Conformité NF EN 12464-1, décret tertiaire (DEET) et contraintes ABF sur avenues classées. Certifié IRVE niveau 2.",
     provider: "S Connect",
     areaServed: ["Neuilly-sur-Seine", "Levallois-Perret", "Courbevoie", "Île-de-France"],
     priceRange: "€€€",

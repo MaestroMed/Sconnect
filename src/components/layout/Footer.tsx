@@ -267,14 +267,11 @@ export default function Footer() {
         {/* Certifications */}
         <div className="mt-12 pt-8 border-t border-dark-800">
           <div className="flex flex-wrap items-center justify-center gap-8">
-            <div className="flex items-center gap-2 text-dark-400">
-              <Shield className="w-6 h-6 text-primary-500" />
-              <span className="text-sm">Qualifélec</span>
-            </div>
-            <div className="flex items-center gap-2 text-dark-400">
-              <Award className="w-6 h-6 text-accent-500" />
-              <span className="text-sm">RGE</span>
-            </div>
+            {/* « Qualifélec » et « RGE » retirés le 24/08/2026 : vérification
+                sur la base ADEME des entreprises RGE et sur l'annuaire
+                Qualifelec pour le SIRET 899 667 596 00014 — zéro résultat dans
+                les deux, contrôles de méthode passés. Voir CertificationsBand
+                pour le détail. */}
             <div className="flex items-center gap-2 text-dark-400">
               <Shield className="w-6 h-6 text-green-500" />
               <span className="text-sm">Garantie décennale</span>

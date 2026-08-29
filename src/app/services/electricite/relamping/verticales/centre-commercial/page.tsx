@@ -53,7 +53,7 @@ const serviceSchema = generateServiceSchema(
   {
     name: "Relamping LED en centre commercial (Île-de-France)",
     description:
-      "Audit, étude et installation relamping LED pour centres commerciaux et galeries marchandes : galeries, halls, food court, enseignes, parkings souterrains. Pilotage DALI par zone, continuité d'exploitation, conformité NF EN 12464-1 et décret tertiaire 2030. Certifié Qualifélec + RGE.",
+      "Audit, étude et installation relamping LED pour centres commerciaux et galeries marchandes : galeries, halls, food court, enseignes, parkings souterrains. Pilotage DALI par zone, continuité d'exploitation, conformité NF EN 12464-1 et décret tertiaire 2030. Garantie décennale active.",
     provider: "S Connect",
     areaServed: ["Paris", "Hauts-de-Seine", "Île-de-France"],
     priceRange: "€€€",
